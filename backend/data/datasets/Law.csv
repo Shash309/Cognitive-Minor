@@ -1,0 +1,41 @@
+Institute ID,Name,TLR,RPC,GO,OI,Perception,City,State,Score,Rank
+IR-L-U-0238,National Law School of India University,90.31,61.85,85.40,70.80,100.00,Bengaluru,Karnataka,83.83,1
+IR-L-U-0111,National Law University,87.17,37.03,82.44,71.29,93.20,New Delhi,Delhi,77.48,2
+IR-L-N-18,Nalsar University of Law,88.21,37.04,86.76,71.76,73.40,Hyderabad,Telangana,77.05,3
+IR-L-U-0585,The West Bengal National University of Juridical Sciences,86.34,49.44,83.24,69.23,66.99,Kolkata,West Bengal,76.39,4
+IR-L-C-19328,Symbiosis Law School,84.91,19.69,94.23,75.09,66.36,Pune,Maharashtra,74.62,5
+IR-L-U-0108,Jamia Millia Islamia,75.81,42.39,91.02,85.71,51.11,New Delhi,Delhi,73.12,6
+IR-L-U-0573,Indian Institute of Technology Kharagpur,79.09,81.40,70.94,58.19,40.71,Kharagpur,West Bengal,71.47,7
+IR-L-U-0134,Gujarat National Law University,81.14,42.72,75.13,71.80,47.25,Gandhinagar,Gujarat,69.56,8
+IR-L-U-0363,Siksha `O` Anusandhan,71.63,55.15,66.20,73.13,46.23,Bhubaneswar,Odisha,65.40,9
+IR-L-U-0498,Babasaheb Bhimrao Ambedkar University,73.37,32.03,85.42,67.68,26.82,Lucknow,Uttar Pradesh,64.96,10
+IR-L-U-0356,Kalinga Institute of Industrial Technology,84.90,32.77,64.99,76.23,8.48,Bhubaneswar,Odisha,63.60,11
+IR-L-U-0496,Aligarh Muslim University,59.07,38.47,93.85,58.47,48.25,Aligarh,Uttar Pradesh,63.54,12
+IR-L-I-1441,Saveetha Institute of Medical and Technical Sciences,78.48,53.00,53.67,70.56,17.63,Chennai,Tamil Nadu,61.58,13
+IR-L-U-0476,Shanmugha Arts Science Technology and Research Academy,75.42,29.79,69.74,57.33,28.43,Thanjavur,Tamil Nadu,60.65,14
+IR-L-U-0217,Christ University,67.57,25.09,66.42,71.58,48.25,Bengaluru,Karnataka,59.39,15
+IR-L-C-23907,Dr. B. R. Ambedkar College of Law,81.37,0.92,72.84,58.90,19.64,Visakhapatnam,Andhra Pradesh,58.75,16
+IR-L-U-0099,Guru Gobind Singh Indraprastha University,54.55,48.89,81.00,54.49,38.28,New Delhi,Delhi,58.68,17
+IR-L-U-0213,Alliance University,81.84,17.81,48.40,72.54,19.64,Bengaluru,Karnataka,56.72,18
+IR-L-U-0379,Lovely Professional University,78.58,38.88,44.00,75.98,8.48,Phagwara,Punjab,56.71,19
+IR-L-U-0511,Dr. Ram Manohar Lohiya National Law University,58.26,16.82,82.20,50.31,45.18,Lucknow,Uttar Pradesh,55.92,20
+IR-L-U-0285,"National Law Institute University, Bhopal",59.76,22.21,76.56,62.68,29.99,Bhopal,Madhya Pradesh,55.64,21
+IR-L-U-0600,National University of Study and Research in Law,66.82,27.08,60.06,61.36,35.69,Ranchi,Jharkhand,55.52,22
+IR-L-U-0524,University of Lucknow,53.96,19.06,85.93,54.24,37.00,Lucknow,Uttar Pradesh,55.05,23
+IR-L-U-0386,The Rajiv Gandhi National University of Law,65.60,24.00,56.44,73.24,34.34,Patiala,Punjab,54.70,24
+IR-L-U-0500,Banaras Hindu University,57.24,29.87,64.22,45.44,65.72,Varanasi,Uttar Pradesh,54.54,25
+IR-L-U-0358,"National Law University, Cuttack",66.99,16.63,53.70,69.39,48.25,Cuttack,Odisha,54.49,26
+IR-L-U-0677,National Law University and Judicial Academy,76.83,7.44,47.95,62.59,32.94,Kamrup,Assam,53.39,27
+IR-L-U-0564,UPES,59.18,28.89,40.56,71.33,76.51,Dehradun,Uttarakhand,52.92,28
+IR-L-U-0749,"Manipal University, Jaipur",73.14,24.54,47.30,66.20,8.48,Jaipur,Rajasthan,52.23,29
+IR-L-C-22215,Army Institute of Law,55.90,18.08,63.34,71.41,40.71,Mohali,Punjab,52.11,30
+IR-L-U-0886,Maharashtra National Law University Mumbai,60.83,23.22,56.93,59.63,37.00,Mumbai,Maharashtra,51.70,31
+IR-L-U-0063,Chanakya National Law University,65.03,23.97,58.72,56.53,17.63,Patna,Bihar,51.70,31
+IR-L-U-0155,"Amity University Haryana, Gurgaon",70.53,25.35,46.02,58.34,23.38,"Gurugram, Haryana",Haryana,51.68,33
+IR-L-U-0880,"Maharashtra National Law University, Nagpur",67.67,25.30,48.44,64.95,19.64,Nagpur,Maharashtra,51.43,34
+IR-L-U-0103,Indian Law Institute,45.56,36.49,58.26,53.58,66.36,New Delhi,Delhi,50.25,35
+IR-L-U-0012,"ICFAI Foundation for Higher Education, Hyderabad",67.53,33.52,42.82,60.34,10.97,Hyderabad,Telangana,49.87,36
+IR-L-U-0011,Gandhi Institute of Technology and Management,63.72,29.67,43.60,65.51,10.97,Visakhapatnam,Andhra Pradesh,48.49,37
+IR-L-U-0264,National University of Advanced Legal Studies (NUALS),46.92,23.63,66.40,54.67,35.69,Kochi,Kerala,47.96,38
+IR-L-I-1291,Damodaram Sanjivayya National Law University,67.34,2.36,48.14,62.79,23.38,Visakhapatnam,Andhra Pradesh,47.94,39
+IR-L-U-0779,Amity University,73.51,1.98,45.55,62.72,5.84,North Twenty Four Parganas,West Bengal,47.94,39

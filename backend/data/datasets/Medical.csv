@@ -1,0 +1,51 @@
+Institute ID,Name,TLR,RPC,GO,OI,Perception,City,State,Score,Rank
+IR-D-N-15,All India Institute of Medical Sciences Delhi,97.33,94.82,98.44,71.29,100.00,New Delhi,Delhi,94.46,1
+IR-D-U-0079,Post Graduate Institute of Medical Education and Research,91.49,79.94,78.86,67.87,68.37,Chandigarh,Chandigarh,80.83,2
+IR-D-C-45654,Christian Medical College,95.64,47.93,90.10,62.69,77.55,Vellore,Tamil Nadu,75.11,3
+IR-D-U-0236,"National Institute of Mental Health and Neuro Sciences, Bangalore",88.30,57.73,79.84,70.82,50.63,Bengaluru,Karnataka,71.92,4
+IR-D-U-0368,Jawaharlal Institute of Post Graduate Medical Education and Research,86.45,44.84,89.87,67.81,66.00,Puducherry,Pondicherry,70.74,5
+IR-D-N-33,Sanjay Gandhi Postgraduate Institute of Medical Sciences,89.99,54.03,83.52,60.28,41.34,Lucknow,Uttar Pradesh,70.07,6
+IR-D-U-0500,Banaras Hindu University,84.35,55.47,86.50,61.44,41.54,Varanasi,Uttar Pradesh,69.54,7
+IR-D-U-0436,Amrita Vishwa Vidyapeetham,81.87,49.16,88.92,73.89,43.30,Coimbatore,Tamil Nadu,68.81,8
+IR-D-C-7242,"Kasturba Medical College, Manipal",78.85,50.23,81.49,75.60,48.33,Manipal,Karnataka,67.42,9
+IR-D-C-49008,"Madras Medical College and Government General Hospital, Chennai",87.89,14.07,97.01,81.91,59.41,Chennai,Tamil Nadu,64.12,10
+IR-D-I-1110,Dr. D. Y. Patil Vidyapeeth,77.07,46.12,78.08,69.91,45.35,Pune,Maharashtra,64.10,11
+IR-D-I-1441,Saveetha Institute of Medical and Technical Sciences,76.15,68.43,63.45,66.21,10.45,Chennai,Tamil Nadu,63.72,12
+IR-D-U-0266,"Sree Chitra Tirunal Institute for Medical Sciences and Technology, Thiruvananthapuram",82.81,50.96,75.56,56.44,28.01,Thiruvananthapuram,Kerala,63.68,13
+IR-D-U-0691,All India Institute of Medical Sciences Rishikesh,78.16,48.50,77.54,65.35,31.19,Rishikesh,Uttarakhand,63.16,14
+IR-D-U-0688,All India Institute of Medical Sciences Bhubaneswar,81.35,36.04,80.92,66.67,49.00,Khordha,Odisha,62.97,15
+IR-D-U-0689,All India Institute of Medical Sciences Jodhpur,81.68,48.65,73.58,59.79,27.73,Jodhpur,Rajasthan,62.57,16
+IR-D-C-32922,Vardhman Mahavir Medical College & Safdarjung Hospital,87.61,35.66,85.44,53.47,29.36,New Delhi,Delhi,62.36,17
+IR-D-U-0473,S.R.M. Institute of Science and Technology,78.34,47.12,76.96,74.88,14.83,Chennai,Tamil Nadu,62.00,18
+IR-D-U-0523,King George`s Medical University,79.27,37.24,88.09,52.06,41.74,Lucknow,Uttar Pradesh,61.95,19
+IR-D-I-1486,Sri Ramachandra Institute of Higher Education and Research,80.04,34.39,88.29,65.08,31.19,Chennai,Tamil Nadu,61.62,20
+IR-D-U-0363,Siksha `O` Anusandhan,77.84,36.60,80.98,75.12,32.45,Bhubaneswar,Odisha,61.28,21
+IR-D-C-16428,Institute of Post Graduate Medical Education and Research,80.81,28.09,91.16,50.92,44.80,Kolkata,West Bengal,60.47,22
+IR-D-U-0295,Datta Meghe Institute of Higher Education and Research,74.83,54.78,68.48,72.49,3.12,Wardha,Maharashtra,60.14,23
+IR-D-C-6414,Maulana Azad Medical College,82.41,33.18,79.69,52.21,38.01,Delhi,Delhi,59.63,24
+IR-D-U-0356,Kalinga Institute of Industrial Technology,78.89,42.49,70.03,72.86,18.79,Bhubaneswar,Odisha,59.60,25
+IR-D-U-0686,All India Institute of Medical Sciences Patna,78.07,33.17,72.52,60.79,42.91,Patna,Bihar,58.24,26
+IR-D-U-0496,Aligarh Muslim University,76.04,35.05,81.61,61.64,22.73,Aligarh,Uttar Pradesh,58.07,27
+IR-D-C-40453,St. John's Medical College,80.74,29.85,74.67,68.46,30.68,Bengaluru,Karnataka,58.03,28
+IR-D-C-22461,Lady Hardinge Medical College,82.86,26.51,75.06,61.59,38.22,New Delhi,Delhi,57.80,29
+IR-D-C-13844,Armed Force Medical College,72.99,24.10,81.66,70.29,51.90,Pune,Maharashtra,57.68,30
+IR-D-U-0687,All India Institute of Medical Sciences Bhopal,80.09,30.27,77.01,68.77,22.73,Bhopal,Madhya Pradesh,57.66,31
+IR-D-I-1409,University College of Medical Sciences,76.66,37.29,76.39,60.72,21.13,Delhi,Delhi,57.65,32
+IR-D-C-7251,"Kasturba Medical College, Mangalore",76.38,29.45,75.83,73.02,29.10,Mangaluru,Karnataka,57.12,33
+IR-D-U-0106,Institute of Liver and Biliary Sciences,85.00,38.18,57.62,57.58,26.61,New Delhi,Delhi,56.89,34
+IR-D-C-29442,Govt. Medical College & Hospital,79.82,30.06,76.95,59.94,21.77,Chandigarh,Chandigarh,56.53,35
+IR-D-U-0168,Maharishi Markandeshwar (Deemed to be University),74.83,37.12,75.69,69.68,8.29,Ambala,Haryana,56.53,35
+IR-D-U-0107,Jamia Hamdard,70.74,43.86,69.25,60.86,12.09,New Delhi,Delhi,55.53,37
+IR-D-U-0690,All India Institute of Medical Sciences Raipur,83.81,24.95,67.28,71.07,20.80,Raipur,Chhattisgarh,55.27,38
+IR-D-C-35009,"JSS Medical College, Mysore",77.17,19.50,78.58,71.58,31.19,Mysuru,Karnataka,55.00,39
+IR-D-C-29255,Dayanand Medical College,85.61,19.78,78.26,55.15,17.03,Ludhiana,Punjab,54.48,40
+IR-D-C-45515,PSG Institute of Medical Sciences and Research,77.95,15.71,74.17,60.58,41.34,Coimbatore,Tamil Nadu,53.11,41
+IR-D-C-48124,"Government Medical College, Thiruvananthapuram",72.49,16.22,89.15,47.80,30.68,Thiruvananthapuram,Kerala,52.30,42
+IR-D-N-17,Sawai Man Singh Medical College,75.64,16.32,89.63,55.16,8.73,Jaipur,Rajasthan,51.91,43
+IR-D-C-16424,Medical College,68.19,19.13,84.93,52.69,34.15,Kolkata,West Bengal,51.87,44
+IR-D-C-5838,Gujarat Cancer and Research Institute,88.08,12.82,77.07,56.75,4.11,Ahmadabad,Gujarat,51.77,45
+IR-D-C-40345,M. S. Ramaiah Medical College,79.40,12.41,79.02,58.54,25.74,Bengaluru,Karnataka,51.76,46
+IR-D-C-47762,Mahatma Gandhi Medical College and Research Institute,70.42,19.41,74.07,82.24,10.45,Puducherry,Pondicherry,51.02,47
+IR-D-C-30588,Osmania Medical College,77.44,7.58,87.37,55.59,24.56,HYDERABAD,Telangana,50.99,48
+IR-D-C-29209,Christian Medical College,77.33,12.47,74.62,68.89,22.10,Ludhiana,Punjab,50.96,49
+IR-D-C-30767,Pandit Bhagwat Dayal Sharma University of Health Sciences,77.04,16.79,77.72,53.17,17.03,Rohtak,Haryana,50.71,50

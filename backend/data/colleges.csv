@@ -1,0 +1,927 @@
+college_name,state,city,field,ranking,score
+Indian Agricultural Research Institute,Delhi,New Delhi,agriculture_and_allied_sectors,1,87.98
+ICAR - National Dairy Research Institute,Haryana,Karnal,agriculture_and_allied_sectors,2,71.18
+Punjab Agricultural University,Punjab,Ludhiana,agriculture_and_allied_sectors,3,69.63
+Banaras Hindu University,Uttar Pradesh,Varanasi,agriculture_and_allied_sectors,4,68.32
+"Indian Veterinary Research Institute, Izatnagar",Uttar Pradesh,Bareilly,agriculture_and_allied_sectors,5,67.76
+Tamil Nadu Agricultural University,Tamil Nadu,Coimbatore,agriculture_and_allied_sectors,6,64.92
+Chaudhary Charan Singh Haryana Agricultural University,Haryana,Hisar,agriculture_and_allied_sectors,7,63.75
+G.B. Pant Universtiy of Agriculture and Technology,Uttarakhand,Pantnagar,agriculture_and_allied_sectors,8,61.77
+"Central Institute of Fisheries Education, Fishries University",Maharashtra,Mumbai,agriculture_and_allied_sectors,9,61.37
+Sher-e-Kashmir University of Agricultural Science and Technology of Kashmir,Jammu and Kashmir,Srinagar,agriculture_and_allied_sectors,10,61.04
+University of Agricultural Sciences,Karnataka,Bengaluru,agriculture_and_allied_sectors,11,59.13
+"National Institute of Food Technology, Entrepreneurship and Management",Tamil Nadu,Thanjavur,agriculture_and_allied_sectors,12,56.8
+Bidhan Chandra Krishi Vishwavidyalaya,West Bengal,Nadia,agriculture_and_allied_sectors,13,56.67
+Assam Agricultural University,Assam,Jorhat,agriculture_and_allied_sectors,14,55.67
+Odisha University of Agriculture and Technology,Odisha,Khordha,agriculture_and_allied_sectors,15,55.65
+Kerala Agricultural University,Kerala,Thrissur,agriculture_and_allied_sectors,16,55.3
+Tamil Nadu Veterinary and Animal Sciences University,Tamil Nadu,Chennai,agriculture_and_allied_sectors,17,55.19
+Dr. Y.S. Parmar University of Horticulture and Forestry,Himachal Pradesh,Solan,agriculture_and_allied_sectors,18,54.67
+Chaudhary Sarwan Kumar Himachal Pardesh Krishi Vishvavidyalaya,Himachal Pradesh,Kangra,agriculture_and_allied_sectors,19,54.55
+Sher-e-Kashmir University of Agricultural Science and Technology of Jammu,Jammu and Kashmir,Jammu,agriculture_and_allied_sectors,20,53.91
+"National Institute of Food Technology, Enterprenurship and Management",Haryana,Sonipat,agriculture_and_allied_sectors,21,52.37
+Lovely Professional University,Punjab,Phagwara,agriculture_and_allied_sectors,22,51.01
+Anand Agricultural University,Gujarat,Anand,agriculture_and_allied_sectors,23,50.69
+University of Agricultural Sciences,Karnataka,Dharwad,agriculture_and_allied_sectors,24,50.52
+Guru Angad Dev Veterinary and Animal Sciences University,Punjab,Ludhiana,agriculture_and_allied_sectors,24,50.52
+Acharya N G Ranga Agricultural University,Andhra Pradesh,Guntur,agriculture_and_allied_sectors,26,50.24
+Annamalai University,Tamil Nadu,Annamalainagar,agriculture_and_allied_sectors,27,49.92
+West Bengal University of Animal and Fishery Sciences,West Bengal,Kolkata,agriculture_and_allied_sectors,28,48.3
+Dr Rajendra Prasad Central Agricultural University,Bihar,Samastipur,agriculture_and_allied_sectors,29,47.94
+Kerala University of Fisheries and Ocean Studies,Kerala,Kochi,agriculture_and_allied_sectors,30,47.84
+Central Agricultural University,Manipur,Imphal West,agriculture_and_allied_sectors,31,47.53
+Tamil Nadu Dr.J.Jayalalithaa Fisheries University,Tamil Nadu,Nagapattinam,agriculture_and_allied_sectors,32,46.46
+Sri Venkateswara Veterinary University,Andhra Pradesh,Tirupati,agriculture_and_allied_sectors,33,46.41
+Lala lajpat Rai University of Veterinary and Animal Sciences,Haryana,Hisar,agriculture_and_allied_sectors,34,46.17
+Navsari Agricultural University,Gujarat,Navsari,agriculture_and_allied_sectors,35,45.9
+Bihar Agriculture University,Bihar,Bhagalpur,agriculture_and_allied_sectors,36,45.69
+Professor Jayashankar Telangana State Agricultural University,Telangana,Hyderabad,agriculture_and_allied_sectors,37,44.73
+Kalasalingam Academy of Research and Education,Tamil Nadu,Srivilliputhur,agriculture_and_allied_sectors,38,44.63
+Indira Gandhi Krishi Vishwavidyalaya,Chhattisgarh,Raipur,agriculture_and_allied_sectors,39,44.14
+Uttar Banga Krishi Vishwavidyalaya,West Bengal,Cooch Behar,agriculture_and_allied_sectors,40,44.05
+Indian Institute of Technology Roorkee,Uttarakhand,Roorkee,architecture_and_planning,1,84.92
+Indian Institute of Technology Kharagpur,West Bengal,Kharagpur,architecture_and_planning,2,80.71
+National Institute of Technology Calicut,Kerala,Kozhikode,architecture_and_planning,3,79.51
+"Indian Institute of Engineering Science and Technology, Shibpur",West Bengal,Howrah,architecture_and_planning,4,69.71
+School of Planning and Architecture New Delhi,Delhi,New Delhi,architecture_and_planning,5,69.0
+Centre for Environmental Planning and Technology University,Gujarat,Ahmedabad,architecture_and_planning,6,67.23
+Jamia Millia Islamia,Delhi,New Delhi,architecture_and_planning,7,66.21
+National Institute of Technology Tiruchirappalli,Tamil Nadu,Tiruchirappalli,architecture_and_planning,8,65.08
+National Institute of Technology Rourkela,Odisha,Rourkela,architecture_and_planning,9,64.88
+Visvesvaraya National Institute of Technology Nagpur,Maharashtra,Nagpur,architecture_and_planning,10,63.05
+S.R.M. Institute of Science and Technology,Tamil Nadu,Chennai,architecture_and_planning,11,61.83
+School of Planning and Architecture Bhopal,Madhya Pradesh,Bhopal,architecture_and_planning,12,61.75
+Chandigarh University,Punjab,Mohali,architecture_and_planning,13,61.47
+Aligarh Muslim University,Uttar Pradesh,Aligarh,architecture_and_planning,14,61.01
+Malaviya National Institute of Technology,Rajasthan,Jaipur,architecture_and_planning,15,60.79
+School of Planning and Architecture Vijayawada,Andhra Pradesh,Vijayawada,architecture_and_planning,16,60.4
+Maulana Azad National Institute of Technology,Madhya Pradesh,Bhopal,architecture_and_planning,17,60.39
+"College of Engineering, Trivandrum",Kerala,Thiruvananthapuram,architecture_and_planning,18,58.4
+Nirma University,Gujarat,Ahmedabad,architecture_and_planning,19,57.69
+Birla Institute of Technology,Jharkhand,Ranchi,architecture_and_planning,20,57.21
+M. S. Ramaiah Institute of Technology,Karnataka,Bengaluru,architecture_and_planning,21,57.01
+Dr. M. G. R. Educational and Research Institute,Tamil Nadu,Chennai,architecture_and_planning,22,56.31
+BMS College of Architecture,Karnataka,Bengaluru,architecture_and_planning,23,56.04
+Lovely Professional University,Punjab,Phagwara,architecture_and_planning,24,55.86
+Amity University,West Bengal,North Twenty Four Parganas,architecture_and_planning,25,54.71
+Thiagarajar College of Engineering,Tamil Nadu,Madurai,architecture_and_planning,25,54.71
+National Institute of Technology Patna,Bihar,Patna,architecture_and_planning,27,54.19
+"Manipal School of Architecture and Planning, MAHE",Karnataka,Udupi,architecture_and_planning,28,53.21
+Guru Gobind Singh Indraprastha University,Delhi,New Delhi,architecture_and_planning,29,52.73
+"Chandigarh College of Architecture, Sector-12",Chandigarh,Chandigarh,architecture_and_planning,30,52.6
+Shri Mata Vaishno Devi University,Jammu and Kashmir,Katra,architecture_and_planning,31,52.59
+National Institute of Technology Hamirpur,Himachal Pradesh,Hamirpur,architecture_and_planning,32,52.58
+"Manipal University, Jaipur",Rajasthan,Jaipur,architecture_and_planning,33,51.6
+Anna University,Tamil Nadu,Chennai,architecture_and_planning,34,51.16
+Chitkara University,Punjab,Rajpura,architecture_and_planning,35,50.96
+National Institute of Technology Raipur,Chhattisgarh,Raipur,architecture_and_planning,36,50.63
+Anant National University,Gujarat,Ahmedabad,architecture_and_planning,37,49.53
+"BMS School of Architecture, Yelahanka",Karnataka,Bengaluru,architecture_and_planning,38,49.47
+Gandhi Institute of Technology and Management,Andhra Pradesh,Visakhapatnam,architecture_and_planning,39,48.99
+B. S. Abdur Rahman Crescent Institute of Science and Technology,Tamil Nadu,Chennai,architecture_and_planning,40,47.53
+Hindu College,Delhi,Delhi,college,1,74.47
+Miranda House,Delhi,Delhi,college,2,73.22
+St. Stephens's College,Delhi,Delhi,college,3,72.97
+Rama Krishna Mission Vivekananda Centenary College,West Bengal,Kolkata,college,3,72.97
+Atma Ram Sanatan Dharm College,Delhi,New Delhi,college,5,72.59
+St. Xavier`s College,West Bengal,Kolkata,college,6,72.15
+PSGR Krishnammal College for Women,Tamil Nadu,Coimbatore,college,7,72.09
+Loyola College,Tamil Nadu,Chennai,college,8,70.74
+Kirori Mal College,Delhi,Delhi,college,9,69.86
+Lady Shri Ram College for Women,Delhi,New Delhi,college,10,69.49
+PSG College of Arts and Science,Tamil Nadu,Coimbatore,college,11,69.06
+Hans Raj College,Delhi,Delhi,college,12,68.76
+Presidency College,Tamil Nadu,Chennai,college,13,68.36
+Madras Christian College,Tamil Nadu,Chennai,college,14,67.41
+Thiagarajar College,Tamil Nadu,Madurai,college,15,66.82
+Deshbandhu College,Delhi,New Delhi,college,16,66.03
+Ramakrishna Mission Vidyamandira,West Bengal,Howrah,college,17,65.51
+Acharya Narendra Dev College,Delhi,New Delhi,college,18,64.73
+Shri Ram College of Commerce,Delhi,Delhi,college,19,64.56
+Rajagiri College of Social Sciences,Kerala,Ernakulam,college,20,64.22
+Sri Venkateswara College,Delhi,Delhi,college,21,63.98
+"University College, Thiruvananthapuram",Kerala,Thiruvananthapuram,college,22,63.65
+Lady Irwin College,Delhi,Delhi,college,23,63.27
+Ramakrishna Mission Residential College,West Bengal,Kolkata,college,24,62.78
+"St. Joseph's College, Tiruchirappalli",Tamil Nadu,Tiruchirappalli,college,25,62.73
+Deen Dayal Upadhyaya College,Delhi,New Delhi,college,26,62.47
+Bhaskaracharya College of Applied Sciences,Delhi,New Delhi,college,27,61.55
+V.O. Chidambaram College,Tamil Nadu,Thoothukudi,college,28,60.8
+Maitreyi College,Delhi,New Delhi,college,29,59.6
+Stella Maris College for Women,Tamil Nadu,Chennai,college,30,59.51
+Gargi College,Delhi,Delhi,college,31,59.28
+Midnapore College,West Bengal,Midnapore,college,32,58.91
+Bishop Heber College,Tamil Nadu,Tiruchirappalli,college,33,58.61
+Dyal Singh College,Delhi,New Delhi,college,34,58.55
+Pachhunga University College,Mizoram,Aizawl,college,35,58.24
+"St. Xavier's College, Palayamkottai",Tamil Nadu,Palayamkottai,college,36,58.23
+Sri Krishna Arts and Science College,Tamil Nadu,Coimbatore,college,37,58.22
+Shaheed Rajguru College of Applied Sciences for Women,Delhi,Delhi,college,38,58.18
+Jesus & Mary College,Delhi,New Delhi,college,39,57.79
+Sri Guru Gobind Singh College of Commerce,Delhi,Delhi,college,39,57.79
+"Holy Cross College, Tiruchirappalli",Tamil Nadu,Tiruchirappalli,college,41,57.53
+"Nesamony Memorial Christian College, Marthandam, Kanyakumari Dist.",Tamil Nadu,Marthandam,college,42,57.03
+Kamala Nehru College,Delhi,Delhi,college,43,56.95
+Dhanalakshmi Srinivasan College of Arts and Science for Women,Tamil Nadu,Perambalur,college,44,56.91
+Fergusson College (Autonomous),Maharashtra,Pune,college,45,56.77
+"St. Teresa's College, Ernakulam",Kerala,Ernakulam,college,46,56.71
+Sacred Heart College (Autonomous),Tamil Nadu,Tirupattur,college,47,56.43
+Sacred Heart College,Kerala,Kochi,college,48,56.31
+Shivaji College,Delhi,Delhi,college,49,56.11
+"Govt. College for Women, Thiruvananthapuram",Kerala,Thiruvananthapuram,college,49,56.11
+Govt Home Science College,Chandigarh,Chandigarh,college,51,55.92
+Kongunadu Arts and Science College,Tamil Nadu,Coimbatore,college,52,55.91
+"Maharaja's College, Ernakulam",Kerala,Ernakulam,college,53,55.7
+The American College,Tamil Nadu,Madurai,college,54,55.69
+St. Joseph`s College of Commerce,Karnataka,Bengaluru,college,55,55.65
+Sri Ramakrishna College of Arts and Science,Tamil Nadu,Coimbatore,college,56,55.64
+"St. Thomas College, Thrissur",Kerala,Thrissur,college,57,55.59
+St. Aloysius College,Karnataka,Mangaluru,college,58,55.57
+"Jamal Mohamed College, Tiruchirappalli",Tamil Nadu,Tiruchirappalli,college,59,55.46
+Kristu Jayanti College,Karnataka,Bengaluru,college,60,55.35
+"St. Joseph`s College, Devagiri",Kerala,Kozhikode,college,61,55.33
+Bishop Moore College,Kerala,Alappuzha,college,62,55.25
+Ayya Nadar Janaki Ammal College,Tamil Nadu,Sivakasi,college,63,55.13
+"Government Institute of Science, Nagpur",Maharashtra,Nagpur,college,64,54.91
+Ramanujan College,Delhi,New Delhi,college,65,54.85
+Mar Ivanios College,Kerala,Thiruvananthapuram,college,66,54.75
+Women`s Christian College,Tamil Nadu,Chennai,college,67,54.54
+Government Arts College,Tamil Nadu,Coimbatore,college,67,54.54
+"S.B. College, Changanassery",Kerala,Kottayam,college,69,54.51
+Goswami Ganesh Dutta S.D. College,Chandigarh,Chandigarh,college,70,54.5
+Queen Mary`s College,Tamil Nadu,Chennai,college,71,54.49
+Daulat Ram College,Delhi,Delhi,college,72,54.37
+Madras School of Social Work,Tamil Nadu,Chennai,college,73,54.17
+Mar Athanasius College,Kerala,Kothamangalam,college,74,53.94
+Dr. N. G. P. Arts and Science College,Tamil Nadu,Coimbatore,college,75,53.93
+Alagappa Government Arts College,Tamil Nadu,Karaikudi,college,76,53.87
+Kanchi Mamunivar Govt. Institute for Postgraduate Studies and Research,Pondicherry,PUDUCHERRY,college,77,53.8
+A.P.C. Mahalaxmi College for Women,Tamil Nadu,Thoothukkudi,college,78,53.77
+Ethiraj College for Women,Tamil Nadu,Chennai,college,79,53.61
+"Vimala College, Thrissur",Kerala,Thrissur,college,80,53.49
+"S S Jain Subodh P G College, Jaipur",Rajasthan,Jaipur,college,81,53.46
+National College,Tamil Nadu,Tiruchirappalli,college,82,53.14
+Sri Ramakrishna Mission Vidyalaya College of Arts and Science,Tamil Nadu,Coimbatore,college,82,53.14
+Government Victoria College,Kerala,Palakkad,college,84,53.09
+St. Joseph's College,Kerala,Thrissur,college,85,52.95
+Maharaja Agrasen College,Delhi,Delhi,college,86,52.88
+"M S Ramaiah College of Arts, Science, and Commerce",Karnataka,Bengaluru,college,87,52.87
+Scottish Church College,West Bengal,Kolkata,college,88,52.79
+Guru Nanak College,Tamil Nadu,Chennai,college,89,52.6
+St. Xavier`s College,Maharashtra,Mumbai,college,89,52.6
+Bethune College,West Bengal,Kolkata,college,91,52.5
+CMS College Kottayam,Kerala,Kottayam,college,92,52.36
+Keshav Mahavidyalya,Delhi,Delhi,college,93,52.13
+Dr. S. N. S. Rajalakshmi College of Arts and Science,Tamil Nadu,Coimbatore,college,94,52.08
+Virudhunagar Hindu Nadars Senthikumara Nadar College,Tamil Nadu,Virudhunagar,college,95,52.06
+Government Arts College,Tamil Nadu,Kumbakonam,college,96,51.92
+Delhi College of Arts and Commerce,Delhi,South West,college,97,51.91
+Sadakathullah Appa College,Tamil Nadu,Tirunelveli,college,98,51.9
+Shri Shivaji Science College,Maharashtra,Amravati,college,99,51.86
+Scott Christian College,Tamil Nadu,Nagercoil,college,100,51.84
+Saveetha Institute of Medical and Technical Sciences,Tamil Nadu,Chennai,dental,1,81.83
+"Manipal College of Dental Sciences, Manipal",Karnataka,Manipal,dental,2,76.03
+Maulana Azad Institute of Dental Sciences,Delhi,Delhi,dental,3,74.39
+King George`s Medical University,Uttar Pradesh,Lucknow,dental,4,72.36
+Dr. D. Y. Patil Vidyapeeth,Maharashtra,Pune,dental,5,72.25
+A.B.Shetty Memorial Institute of Dental Sciences,Karnataka,Mangaluru,dental,6,70.14
+SRM Dental College,Tamil Nadu,Chennai,dental,7,69.18
+Jamia Millia Islamia,Delhi,New Delhi,dental,8,64.38
+Siksha `O` Anusandhan,Odisha,Bhubaneswar,dental,9,63.26
+Sri Ramachandra Institute of Higher Education and Research,Tamil Nadu,Chennai,dental,10,62.4
+"Manipal College of Dental Sciences, Mangalore",Karnataka,Mangaluru,dental,11,62.07
+JSS Dental College and Hospital,Karnataka,Mysuru,dental,12,60.57
+Meenakshi Academy of Higher Education and Research,Tamil Nadu,Chennai,dental,13,59.07
+Amrita Vishwa Vidyapeetham,Tamil Nadu,Coimbatore,dental,14,58.98
+"Govt. Dental College, Nagpur",Maharashtra,Nagpur,dental,15,58.5
+M.S. Ramaiah University of Applied Sciences,Karnataka,Bengaluru,dental,16,57.98
+Banaras Hindu University,Uttar Pradesh,Varanasi,dental,17,55.69
+Aligarh Muslim University,Uttar Pradesh,Aligarh,dental,18,55.33
+"Government Dental College, Bangalore",Karnataka,Bengaluru,dental,19,54.95
+Dr. M. G. R. Educational and Research Institute,Tamil Nadu,Chennai,dental,20,54.52
+Government Dental College,Kerala,Thiruvananthapuram,dental,21,53.91
+Kalinga Institute of Industrial Technology,Odisha,Bhubaneswar,dental,22,53.89
+Postgraduate Institute of Dental Sciences,Haryana,Rohtak,dental,23,53.78
+Datta Meghe Institute of Higher Education and Research,Maharashtra,Wardha,dental,24,53.64
+"Govt. Dental College, Mumbai",Maharashtra,Mumbai,dental,25,53.54
+Yenepoya Dental College,Karnataka,Mangaluru,dental,26,53.32
+Panjab University,Chandigarh,Chandigarh,dental,27,52.99
+Nair Hospital Dental College,Maharashtra,Mumbai,dental,28,52.92
+KLE Vishwanath Katti Institute of Dental Sciences,Karnataka,Belgaum,dental,29,52.84
+Christian Dental College,Punjab,Ludhiana,dental,30,52.72
+SDM College of Dental Sciences & Hospital,Karnataka,Dharwad,dental,31,52.67
+SRM Kattankulathur Dental College,Tamil Nadu,Chennai,dental,32,52.13
+Chettinad Dental College and Research Institute,Tamil Nadu,Kelambakkam,dental,33,51.71
+Government Dental College,Gujarat,Ahmedabad,dental,34,51.6
+Mahatma Gandhi P.G. Institute of Dental Sciences,Pondicherry,Pondicherry,dental,35,51.39
+"Bharati Vidyapeeth (Deemed to be University) Dental College and Hospital, Pune",Maharashtra,Pune,dental,36,51.06
+Bapuji Dental College & Hospital,Karnataka,Davangere,dental,37,50.86
+Manav Rachna International Institute of Research and Studies,Haryana,Faridabad,dental,38,49.88
+"Adhiparasakthi Dental College and Hospital, Kancheepuram",Tamil Nadu,Melmaruvathur,dental,39,49.44
+Army College of Dental Sciences,Telangana,Secunderabad,dental,40,49.38
+Indian Institute of Technology Madras,Tamil Nadu,Chennai,engineering,1,89.46
+Indian Institute of Technology Delhi,Delhi,New Delhi,engineering,2,86.66
+Indian Institute of Technology Bombay,Maharashtra,Mumbai,engineering,3,83.09
+Indian Institute of Technology Kanpur,Uttar Pradesh,Kanpur,engineering,4,82.79
+Indian Institute of Technology Kharagpur,West Bengal,Kharagpur,engineering,5,76.88
+Indian Institute of Technology Roorkee,Uttarakhand,Roorkee,engineering,6,76.0
+Indian Institute of Technology Guwahati,Assam,Guwahati,engineering,7,71.86
+Indian Institute of Technology Hyderabad,Telangana,Hyderabad,engineering,8,71.55
+National Institute of Technology Tiruchirappalli,Tamil Nadu,Tiruchirappalli,engineering,9,66.88
+Indian Institute of Technology (Banaras Hindu University) Varanasi,Uttar Pradesh,Varanasi,engineering,10,66.69
+Vellore Institute of Technology,Tamil Nadu,Vellore,engineering,11,66.22
+Jadavpur University,West Bengal,Kolkata,engineering,12,65.62
+S.R.M. Institute of Science and Technology,Tamil Nadu,Chennai,engineering,13,65.41
+Anna University,Tamil Nadu,Chennai,engineering,14,65.34
+Indian Institute of Technology (Indian School of Mines) Dhanbad,Jharkhand,Dhanbad,engineering,15,64.83
+Indian Institute of Technology Indore,Madhya Pradesh,Indore,engineering,16,64.72
+"National Institute of Technology Karnataka, Surathkal",Karnataka,Surathkal,engineering,17,64.27
+Indian Institute of Technology Gandhinagar,Gujarat,Gandhinagar,engineering,18,63.42
+National Institute of Technology Rourkela,Odisha,Rourkela,engineering,19,63.38
+"Birla Institute of Technology and Science, Pilani",Rajasthan,Pilani,engineering,20,63.04
+National Institute of Technology Warangal,Telangana,Warangal,engineering,21,61.72
+Indian Institute of Technology Ropar,Punjab,Rupnagar,engineering,22,61.56
+Amrita Vishwa Vidyapeetham,Tamil Nadu,Coimbatore,engineering,23,61.29
+Jamia Millia Islamia,Delhi,New Delhi,engineering,24,61.28
+National Institute of Technology Calicut,Kerala,Kozhikode,engineering,25,61.19
+Siksha `O` Anusandhan,Odisha,Bhubaneswar,engineering,26,60.97
+Delhi Technological University,Delhi,New Delhi,engineering,27,60.78
+Indian Institute of Technology Jodhpur,Rajasthan,Jodhpur,engineering,28,60.61
+Thapar Institute of Engineering and Technology (Deemed-to-be-university),Punjab,Patiala,engineering,29,60.35
+Amity University,Uttar Pradesh,Gautam Budh Nagar,engineering,30,59.91
+Indian Institute of Technology Mandi,Himachal Pradesh,Mandi,engineering,31,59.86
+Chandigarh University,Punjab,Mohali,engineering,32,59.82
+Aligarh Muslim University,Uttar Pradesh,Aligarh,engineering,33,59.16
+Indian Institute of Technology Patna,Bihar,Patna,engineering,34,58.4
+Koneru Lakshmaiah Education Foundation University (K L College of Engineering),Andhra Pradesh,Vaddeswaram,engineering,35,58.24
+Kalasalingam Academy of Research and Education,Tamil Nadu,Srivilliputhur,engineering,36,58.2
+Kalinga Institute of Industrial Technology,Odisha,Bhubaneswar,engineering,37,58.0
+Shanmugha Arts Science Technology and Research Academy,Tamil Nadu,Thanjavur,engineering,38,57.97
+Visvesvaraya National Institute of Technology Nagpur,Maharashtra,Nagpur,engineering,39,57.89
+National Institute of Technology Silchar,Assam,Silchar,engineering,40,57.6
+Institute of Chemical Technology,Maharashtra,Mumbai,engineering,41,56.93
+UPES,Uttarakhand,Dehradun,engineering,42,56.65
+Malaviya National Institute of Technology,Rajasthan,Jaipur,engineering,43,56.35
+National Institute of Technology Durgapur,West Bengal,Durgapur,engineering,44,56.26
+National Institute of Technology Delhi,Delhi,Delhi,engineering,45,55.67
+Sri Sivasubramaniya Nadar College of Engineering,Tamil Nadu,Kalavakkam,engineering,46,55.01
+International Institute of Information Technology Hyderabad,Telangana,Hyderabad,engineering,47,54.29
+Birla Institute of Technology,Jharkhand,Ranchi,engineering,48,54.18
+"Indian Institute of Engineering Science and Technology, Shibpur",West Bengal,Howrah,engineering,49,54.17
+Lovely Professional University,Punjab,Phagwara,engineering,50,54.16
+Indian Institute of Space Science and Technology,Kerala,Thiruvananthapuram,engineering,51,53.13
+Graphic Era University,Uttarakhand,Dehradun,engineering,52,52.96
+Saveetha Institute of Medical and Technical Sciences,Tamil Nadu,Chennai,engineering,53,52.85
+Indian Institute of Technology Bhubaneswar,Odisha,Bhubaneswar,engineering,54,52.54
+National Institute of Technology Patna,Bihar,Patna,engineering,55,52.28
+Manipal Institute of Technology,Karnataka,Manipal,engineering,56,52.12
+Netaji Subhas University of Technology (NSUT),Delhi,Delhi,engineering,57,51.52
+Dr. B R Ambedkar National Institute of Technology Jalandhar,Punjab,Jalandhar,engineering,58,51.11
+Sardar Vallabhbhai National Institute of Technology,Gujarat,SURAT,engineering,59,51.04
+Motilal Nehru National Institute of Technology,Uttar Pradesh,Prayagraj,engineering,60,50.65
+Indian Institute of Technology Tirupati,Andhra Pradesh,YERPEDU,engineering,61,50.58
+Indian Institute of Technology Jammu,Jammu and Kashmir,Jammu,engineering,62,50.53
+Defence Institute of Advanced Technology,Maharashtra,Pune,engineering,63,50.37
+Indian Institute of Technology Palakkad,Kerala,Palakkad,engineering,64,50.24
+"Manipal University, Jaipur",Rajasthan,Jaipur,engineering,64,50.24
+Sathyabama Institute of Science and Technology,Tamil Nadu,Chennai,engineering,66,50.05
+PSG College of Technology,Tamil Nadu,Coimbatore,engineering,67,49.92
+National Institute of Technology Meghalaya,Meghalaya,Shillong,engineering,68,49.82
+Visvesvaraya Technological University,Karnataka,Belgaum,engineering,69,49.8
+University of Hyderabad,Telangana,Hyderabad,engineering,70,49.3
+National Institute of Technology Raipur,Chhattisgarh,Raipur,engineering,71,48.88
+Maulana Azad National Institute of Technology,Madhya Pradesh,Bhopal,engineering,72,48.86
+Indian Institute of Technology Bhilai,Chhattisgarh,Raipur,engineering,73,48.8
+International Institute of Information Technology Bangalore,Karnataka,Bengaluru,engineering,74,48.61
+M. S. Ramaiah Institute of Technology,Karnataka,Bengaluru,engineering,75,48.33
+Sant Longowal Institute of Engineering and Technology,Punjab,Longowal,engineering,76,48.22
+COEP Technological University,Maharashtra,Pune,engineering,77,47.89
+Banasthali Vidyapith,Rajasthan,Banasthali,engineering,78,47.86
+National Institute of Technology Srinagar,Jammu and Kashmir,Srinagar,engineering,79,47.76
+Rajiv Gandhi Institute of Petroleum Technology,Uttar Pradesh,Amethi,engineering,80,47.43
+National Institute of Technology Kurukshetra,Haryana,Kurukshetra,engineering,81,46.79
+National Institute of Technology Agartala,Tripura,Agratala,engineering,82,46.69
+Sri Krishna College of Engineering and Technology,Tamil Nadu,Coimbatore,engineering,83,46.53
+Madan Mohan Malaviya University of Technology,Uttar Pradesh,Gorakhpur,engineering,84,46.39
+Indraprastha Institute of Information Technology,Delhi,New Delhi,engineering,85,46.32
+Vel Tech Rangarajan Dr. Sagunthala R & D Institute of Science and Technology,Tamil Nadu,Chennai,engineering,86,46.23
+Indian Institute of Information Technology Allahabad,Uttar Pradesh,Prayagraj,engineering,87,45.84
+Jawaharlal Nehru Technological University,Telangana,Hyderabad,engineering,88,45.78
+Guru Gobind Singh Indraprastha University,Delhi,New Delhi,engineering,89,45.64
+AU College of Engineering (A),Andhra Pradesh,Visakhapatnam,engineering,90,45.6
+"Vignan's Foundation for Science, Technology and Research",Andhra Pradesh,Guntur,engineering,91,45.43
+Shoolini University of Biotechnology and Management Sciences,Himachal Pradesh,Solan,engineering,92,45.4
+Christ University,Karnataka,Bengaluru,engineering,93,45.02
+Chitkara University,Punjab,Rajpura,engineering,94,44.82
+"Jain University, Bangalore",Karnataka,Bengaluru,engineering,95,44.61
+"C.V. Raman Global University, Odisha",Odisha,Bhubaneswar,engineering,96,44.55
+National Institute of Technology Puducherry,Pondicherry,Karaikal,engineering,97,44.38
+SR University,Telangana,Warangal,engineering,98,44.29
+R.V. College of Engineering,Karnataka,Bengaluru,engineering,99,44.26
+Siddaganga Institute of Technology,Karnataka,Tumkur,engineering,100,43.95
+Indian Institute of Technology Bombay,Maharashtra,Mumbai,innovation,1,
+Indian Institute of Technology Madras,Tamil Nadu,Chennai,innovation,2,
+Indian Institute of Technology Hyderabad,Telangana,Hyderabad,innovation,3,
+"Indian Institute of Science, Bengaluru",Karnataka,Bengaluru,innovation,4,
+Indian Institute of Technology Kanpur,Uttar Pradesh,Kanpur,innovation,5,
+Indian Institute of Technology Roorkee,Uttarakhand,Roorkee,innovation,6,
+Indian Institute of Technology Delhi,Delhi,New Delhi,innovation,7,
+Indian Institute of Technology Mandi,Himachal Pradesh,Mandi,innovation,8,
+Indian Institute of Technology Kharagpur,West Bengal,Kharagpur,innovation,9,
+Anna University,Tamil Nadu,Chennai,innovation,10,
+National Law School of India University,Karnataka,Bengaluru,law,1,83.83
+National Law University,Delhi,New Delhi,law,2,77.48
+Nalsar University of Law,Telangana,Hyderabad,law,3,77.05
+The West Bengal National University of Juridical Sciences,West Bengal,Kolkata,law,4,76.39
+Symbiosis Law School,Maharashtra,Pune,law,5,74.62
+Jamia Millia Islamia,Delhi,New Delhi,law,6,73.12
+Indian Institute of Technology Kharagpur,West Bengal,Kharagpur,law,7,71.47
+Gujarat National Law University,Gujarat,Gandhinagar,law,8,69.56
+Siksha `O` Anusandhan,Odisha,Bhubaneswar,law,9,65.4
+Babasaheb Bhimrao Ambedkar University,Uttar Pradesh,Lucknow,law,10,64.96
+Kalinga Institute of Industrial Technology,Odisha,Bhubaneswar,law,11,63.6
+Aligarh Muslim University,Uttar Pradesh,Aligarh,law,12,63.54
+Saveetha Institute of Medical and Technical Sciences,Tamil Nadu,Chennai,law,13,61.58
+Shanmugha Arts Science Technology and Research Academy,Tamil Nadu,Thanjavur,law,14,60.65
+Christ University,Karnataka,Bengaluru,law,15,59.39
+Dr. B. R. Ambedkar College of Law,Andhra Pradesh,Visakhapatnam,law,16,58.75
+Guru Gobind Singh Indraprastha University,Delhi,New Delhi,law,17,58.68
+Alliance University,Karnataka,Bengaluru,law,18,56.72
+Lovely Professional University,Punjab,Phagwara,law,19,56.71
+Dr. Ram Manohar Lohiya National Law University,Uttar Pradesh,Lucknow,law,20,55.92
+"National Law Institute University, Bhopal",Madhya Pradesh,Bhopal,law,21,55.64
+National University of Study and Research in Law,Jharkhand,Ranchi,law,22,55.52
+University of Lucknow,Uttar Pradesh,Lucknow,law,23,55.05
+The Rajiv Gandhi National University of Law,Punjab,Patiala,law,24,54.7
+Banaras Hindu University,Uttar Pradesh,Varanasi,law,25,54.54
+"National Law University, Cuttack",Odisha,Cuttack,law,26,54.49
+National Law University and Judicial Academy,Assam,Kamrup,law,27,53.39
+UPES,Uttarakhand,Dehradun,law,28,52.92
+"Manipal University, Jaipur",Rajasthan,Jaipur,law,29,52.23
+Army Institute of Law,Punjab,Mohali,law,30,52.11
+Maharashtra National Law University Mumbai,Maharashtra,Mumbai,law,31,51.7
+Chanakya National Law University,Bihar,Patna,law,31,51.7
+"Amity University Haryana, Gurgaon",Haryana,"Gurugram, Haryana",law,33,51.68
+"Maharashtra National Law University, Nagpur",Maharashtra,Nagpur,law,34,51.43
+Indian Law Institute,Delhi,New Delhi,law,35,50.25
+"ICFAI Foundation for Higher Education, Hyderabad",Telangana,Hyderabad,law,36,49.87
+Gandhi Institute of Technology and Management,Andhra Pradesh,Visakhapatnam,law,37,48.49
+National University of Advanced Legal Studies (NUALS),Kerala,Kochi,law,38,47.96
+Damodaram Sanjivayya National Law University,Andhra Pradesh,Visakhapatnam,law,39,47.94
+Amity University,West Bengal,North Twenty Four Parganas,law,39,47.94
+Indian Institute of Management Ahmedabad,Gujarat,Ahmedabad,management,1,83.32
+Indian Institute of Management Bangalore,Karnataka,Bengaluru,management,2,81.16
+Indian Institute of Management Kozhikode,Kerala,Kozhikode,management,3,77.9
+Indian Institute of Technology Delhi,Delhi,New Delhi,management,4,76.25
+Indian Institute of Management Calcutta,West Bengal,Kolkata,management,5,75.07
+Indian Institute of Management Mumbai,Maharashtra,Mumbai,management,6,74.73
+Indian Institute of Management Lucknow,Uttar Pradesh,Lucknow,management,7,74.43
+Indian Institute of Management Indore,Madhya Pradesh,Indore,management,8,73.53
+XLRI - Xavier School of Management,Jharkhand,Jamshedpur,management,9,68.13
+Indian Institute of Technology Bombay,Maharashtra,Mumbai,management,10,67.16
+Management Development Institute,Haryana,Gurugram,management,11,66.85
+Indian Institute of Management Rohtak,Haryana,Rohtak,management,12,66.49
+Symbiosis Institute of Business Management,Maharashtra,Pune,management,13,65.13
+Indian Institute of Management Raipur,Chhattisgarh,Raipur,management,14,64.4
+Indian Institute of Foreign Trade,Delhi,New Delhi,management,15,62.36
+Indian Institute of Technology Madras,Tamil Nadu,Chennai,management,16,61.73
+Indian Institute of Management Ranchi,Jharkhand,Ranchi,management,17,61.27
+Indian Institute of Technology Roorkee,Uttarakhand,Roorkee,management,18,61.21
+Indian Institute of Technology Kharagpur,West Bengal,Kharagpur,management,19,61.03
+S. P. Jain Institute of Management and Research,Maharashtra,Mumbai,management,20,60.97
+SVKM`s Narsee Monjee Institute of Management Studies,Maharashtra,Mumbai,management,21,60.96
+Indian Institute of Management Udaipur,Rajasthan,Udaipur,management,22,60.93
+Indian Institute of Management Kashipur,Uttarakhand,Kashipur,management,23,60.82
+Indian Institute of Management Shillong,Meghalaya,Shillong,management,24,60.49
+Jamia Millia Islamia,Delhi,New Delhi,management,25,60.32
+Indian Institute of Management Visakhapatnam,Andhra Pradesh,Visakhapatnam,management,26,59.2
+Indian Institute of Management Tiruchirappalli,Tamil Nadu,Tiruchirappalli,management,27,57.67
+Amrita Vishwa Vidyapeetham,Tamil Nadu,Coimbatore,management,28,57.4
+Amity University,Uttar Pradesh,Gautam Budh Nagar,management,29,57.23
+Indian Institute of Technology Kanpur,Uttar Pradesh,Kanpur,management,29,57.23
+Indian Institute of Management Nagpur,Maharashtra,Nagpur,management,31,56.94
+MICA,Gujarat,Ahmedabad,management,32,56.62
+Indian Institute of Management Bodh Gaya,Bihar,Gaya,management,33,56.27
+Great Lakes Institute of Management,Tamil Nadu,Chennai,management,34,56.15
+Institute of Management Technology,Uttar Pradesh,Ghaziabad,management,35,56.03
+Chandigarh University,Punjab,Mohali,management,36,55.71
+Goa Institute of Management,Goa,Sanquelim,management,37,55.67
+Lovely Professional University,Punjab,Phagwara,management,38,55.49
+"ICFAI Foundation for Higher Education, Hyderabad",Telangana,Hyderabad,management,39,55.31
+International Management Institute,Delhi,New Delhi,management,40,54.89
+UPES,Uttarakhand,Dehradun,management,41,54.82
+Indian Institute of Management Jammu (IIMJ),Jammu and Kashmir,Jammu,management,42,54.64
+XIM University,Odisha,Bhubaneswar,management,43,54.49
+Thapar Institute of Engineering and Technology (Deemed-to-be-university),Punjab,Patiala,management,44,53.26
+Jaipuria Institute of Management,Uttar Pradesh,Noida,management,45,53.23
+Indian Institute of Technology (Indian School of Mines) Dhanbad,Jharkhand,Dhanbad,management,46,52.78
+Indian Institute of Management Amritsar,Punjab,Amritsar,management,47,52.57
+Banaras Hindu University,Uttar Pradesh,Varanasi,management,48,52.26
+Institute of Rural Management Anand (IRMA),Gujarat,Anand,management,49,51.54
+Indian Institute of Management Sambalpur,Odisha,Sambalpur,management,50,51.47
+National Institute of Technology Tiruchirappalli,Tamil Nadu,Tiruchirappalli,management,51,51.4
+Great Lakes Institute of Management,Haryana,Gurgaon,management,52,51.35
+Fore School of Management,Delhi,New Delhi,management,53,51.08
+Chitkara University,Punjab,Rajpura,management,54,51.02
+Nirma University,Gujarat,Ahmedabad,management,55,51.01
+"International Management Institute, Kolkata",West Bengal,Kolkata,management,56,50.97
+Indian Institute of Management Sirmaur,Himachal Pradesh,Sirmaur,management,57,50.92
+"T. A. Pai Management Institute, Manipal",Karnataka,Manipal,management,58,50.78
+Graphic Era University,Uttarakhand,Dehradun,management,59,50.59
+Christ University,Karnataka,Bengaluru,management,60,50.56
+"International Management Institute, Bhubaneswar",Odisha,Bhubaneswar,management,61,50.38
+Siksha `O` Anusandhan,Odisha,Bhubaneswar,management,62,49.69
+K J Somaiya Institute of Management Studies and Research,Maharashtra,Mumbai,management,63,49.66
+Birla Institute of Management Technology,Uttar Pradesh,Greater Noida,management,64,49.44
+Guru Gobind Singh Indraprastha University,Delhi,New Delhi,management,65,49.4
+Loyola Institute of Business Administration,Tamil Nadu,Chennai,management,66,49.26
+Kalinga Institute of Industrial Technology,Odisha,Bhubaneswar,management,67,49.24
+Malaviya National Institute of Technology,Rajasthan,Jaipur,management,68,49.14
+Anna University,Tamil Nadu,Chennai,management,69,48.92
+Aligarh Muslim University,Uttar Pradesh,Aligarh,management,70,48.68
+Alliance University,Karnataka,Bengaluru,management,71,48.38
+"Jaipuria Institute of Management, Lucknow",Uttar Pradesh,Lucknow,management,72,48.32
+"Manipal University, Jaipur",Rajasthan,Jaipur,management,73,48.1
+Saveetha Institute of Medical and Technical Sciences,Tamil Nadu,Chennai,management,74,47.92
+Jaipuria Institute of Management,Rajasthan,Jaipur,management,75,47.56
+National Institute of Technology Calicut,Kerala,Kozhikode,management,76,47.55
+"Jain University, Bangalore",Karnataka,Bengaluru,management,77,47.47
+Jamia Hamdard,Delhi,New Delhi,management,78,47.39
+Koneru Lakshmaiah Education Foundation University (K L College of Engineering),Andhra Pradesh,Vaddeswaram,management,79,47.27
+PSG College of Technology,Tamil Nadu,Coimbatore,management,80,47.13
+Cochin University of Science and Technology,Kerala,Cochin,management,81,47.08
+Thiagarajar School of Management,Tamil Nadu,Madurai,management,82,47.02
+BML Munjal University,Haryana,Gurgaon,management,83,46.67
+Prin. L.N. Welingkar Institute of Management Development and Research (PGDM),Maharashtra,Mumbai,management,84,46.53
+Atal Bihari Vajpayee Indian Institute of Information Technology and Management,Madhya Pradesh,Gwalior,management,85,46.47
+Babasaheb Bhimrao Ambedkar University,Uttar Pradesh,Lucknow,management,86,46.42
+Jagan Institute of Management Studies Technical Campus,Delhi,Delhi,management,87,46.38
+New Delhi Institute of Management,Delhi,Delhi,management,88,46.29
+Pandit Deendayal Energy University,Gujarat,Gandhinagar,management,89,45.39
+Birla Institute of Technology,Jharkhand,Ranchi,management,90,45.0
+National Institute of Bank Management,Maharashtra,Pune,management,91,44.85
+Panjab University,Chandigarh,Chandigarh,management,92,44.7
+Rajagiri Business School,Kerala,Cochin,management,93,44.33
+Bharathidasan Institute of Management,Tamil Nadu,Tiruchirappalli,management,94,44.17
+Tezpur University,Assam,Tezpur,management,95,43.48
+National Institute of Agricultural Extension Management,Telangana,Hyderabad,management,96,43.17
+Institute of Management Technology,Telangana,Hyderabad,management,97,43.01
+Galgotias University,Uttar Pradesh,Gautam Budh Nagar,management,98,42.9
+Krea University,Andhra Pradesh,Sri City,management,99,42.82
+National Institute of Technology Warangal,Telangana,Warangal,management,100,42.63
+All India Institute of Medical Sciences Delhi,Delhi,New Delhi,medical,1,94.46
+Post Graduate Institute of Medical Education and Research,Chandigarh,Chandigarh,medical,2,80.83
+Christian Medical College,Tamil Nadu,Vellore,medical,3,75.11
+"National Institute of Mental Health and Neuro Sciences, Bangalore",Karnataka,Bengaluru,medical,4,71.92
+Jawaharlal Institute of Post Graduate Medical Education and Research,Pondicherry,Puducherry,medical,5,70.74
+Sanjay Gandhi Postgraduate Institute of Medical Sciences,Uttar Pradesh,Lucknow,medical,6,70.07
+Banaras Hindu University,Uttar Pradesh,Varanasi,medical,7,69.54
+Amrita Vishwa Vidyapeetham,Tamil Nadu,Coimbatore,medical,8,68.81
+"Kasturba Medical College, Manipal",Karnataka,Manipal,medical,9,67.42
+"Madras Medical College and Government General Hospital, Chennai",Tamil Nadu,Chennai,medical,10,64.12
+Dr. D. Y. Patil Vidyapeeth,Maharashtra,Pune,medical,11,64.1
+Saveetha Institute of Medical and Technical Sciences,Tamil Nadu,Chennai,medical,12,63.72
+"Sree Chitra Tirunal Institute for Medical Sciences and Technology, Thiruvananthapuram",Kerala,Thiruvananthapuram,medical,13,63.68
+All India Institute of Medical Sciences Rishikesh,Uttarakhand,Rishikesh,medical,14,63.16
+All India Institute of Medical Sciences Bhubaneswar,Odisha,Khordha,medical,15,62.97
+All India Institute of Medical Sciences Jodhpur,Rajasthan,Jodhpur,medical,16,62.57
+Vardhman Mahavir Medical College & Safdarjung Hospital,Delhi,New Delhi,medical,17,62.36
+S.R.M. Institute of Science and Technology,Tamil Nadu,Chennai,medical,18,62.0
+King George`s Medical University,Uttar Pradesh,Lucknow,medical,19,61.95
+Sri Ramachandra Institute of Higher Education and Research,Tamil Nadu,Chennai,medical,20,61.62
+Siksha `O` Anusandhan,Odisha,Bhubaneswar,medical,21,61.28
+Institute of Post Graduate Medical Education and Research,West Bengal,Kolkata,medical,22,60.47
+Datta Meghe Institute of Higher Education and Research,Maharashtra,Wardha,medical,23,60.14
+Maulana Azad Medical College,Delhi,Delhi,medical,24,59.63
+Kalinga Institute of Industrial Technology,Odisha,Bhubaneswar,medical,25,59.6
+All India Institute of Medical Sciences Patna,Bihar,Patna,medical,26,58.24
+Aligarh Muslim University,Uttar Pradesh,Aligarh,medical,27,58.07
+St. John's Medical College,Karnataka,Bengaluru,medical,28,58.03
+Lady Hardinge Medical College,Delhi,New Delhi,medical,29,57.8
+Armed Force Medical College,Maharashtra,Pune,medical,30,57.68
+All India Institute of Medical Sciences Bhopal,Madhya Pradesh,Bhopal,medical,31,57.66
+University College of Medical Sciences,Delhi,Delhi,medical,32,57.65
+"Kasturba Medical College, Mangalore",Karnataka,Mangaluru,medical,33,57.12
+Institute of Liver and Biliary Sciences,Delhi,New Delhi,medical,34,56.89
+Govt. Medical College & Hospital,Chandigarh,Chandigarh,medical,35,56.53
+Maharishi Markandeshwar (Deemed to be University),Haryana,Ambala,medical,35,56.53
+Jamia Hamdard,Delhi,New Delhi,medical,37,55.53
+All India Institute of Medical Sciences Raipur,Chhattisgarh,Raipur,medical,38,55.27
+"JSS Medical College, Mysore",Karnataka,Mysuru,medical,39,55.0
+Dayanand Medical College,Punjab,Ludhiana,medical,40,54.48
+PSG Institute of Medical Sciences and Research,Tamil Nadu,Coimbatore,medical,41,53.11
+"Government Medical College, Thiruvananthapuram",Kerala,Thiruvananthapuram,medical,42,52.3
+Sawai Man Singh Medical College,Rajasthan,Jaipur,medical,43,51.91
+Medical College,West Bengal,Kolkata,medical,44,51.87
+Gujarat Cancer and Research Institute,Gujarat,Ahmadabad,medical,45,51.77
+M. S. Ramaiah Medical College,Karnataka,Bengaluru,medical,46,51.76
+Mahatma Gandhi Medical College and Research Institute,Pondicherry,Puducherry,medical,47,51.02
+Osmania Medical College,Telangana,HYDERABAD,medical,48,50.99
+Christian Medical College,Punjab,Ludhiana,medical,49,50.96
+Pandit Bhagwat Dayal Sharma University of Health Sciences,Haryana,Rohtak,medical,50,50.71
+Indira Gandhi National Open University (IGNOU),Delhi,New Delhi,open_university,1,
+Netaji Subhash Open University,West Bengal,Kolkata,open_university,2,
+Dr. Babasaheb Ambedkar Open University,Gujarat,Ahmedabad,open_university,3,
+Indian Institute of Technology Madras,Tamil Nadu,Chennai,overall,1,86.42
+"Indian Institute of Science, Bengaluru",Karnataka,Bengaluru,overall,2,83.28
+Indian Institute of Technology Bombay,Maharashtra,Mumbai,overall,3,81.37
+Indian Institute of Technology Delhi,Delhi,New Delhi,overall,4,80.31
+Indian Institute of Technology Kanpur,Uttar Pradesh,Kanpur,overall,5,77.56
+Indian Institute of Technology Kharagpur,West Bengal,Kharagpur,overall,6,74.77
+All India Institute of Medical Sciences Delhi,Delhi,New Delhi,overall,7,74.27
+Indian Institute of Technology Roorkee,Uttarakhand,Roorkee,overall,8,71.52
+Indian Institute of Technology Guwahati,Assam,Guwahati,overall,9,69.04
+Jawaharlal Nehru University,Delhi,New Delhi,overall,10,68.53
+Banaras Hindu University,Uttar Pradesh,Varanasi,overall,11,67.56
+Indian Institute of Technology Hyderabad,Telangana,Hyderabad,overall,12,66.69
+Jamia Millia Islamia,Delhi,New Delhi,overall,13,66.0
+"Manipal Academy of Higher Education, Manipal",Karnataka,Manipal,overall,14,64.94
+University of Delhi,Delhi,Delhi,overall,15,64.81
+Aligarh Muslim University,Uttar Pradesh,Aligarh,overall,16,64.17
+Jadavpur University,West Bengal,Kolkata,overall,17,63.84
+Amrita Vishwa Vidyapeetham,Tamil Nadu,Coimbatore,overall,18,63.81
+Vellore Institute of Technology,Tamil Nadu,Vellore,overall,19,62.97
+Anna University,Tamil Nadu,Chennai,overall,20,62.77
+S.R.M. Institute of Science and Technology,Tamil Nadu,Chennai,overall,21,62.07
+Saveetha Institute of Medical and Technical Sciences,Tamil Nadu,Chennai,overall,22,61.79
+"Birla Institute of Technology and Science, Pilani",Rajasthan,Pilani,overall,23,60.87
+Siksha `O` Anusandhan,Odisha,Bhubaneswar,overall,24,60.73
+University of Hyderabad,Telangana,Hyderabad,overall,25,60.55
+Calcutta University,West Bengal,Kolkata,overall,26,60.25
+Homi Bhabha National Institute,Maharashtra,Mumbai,overall,27,60.13
+Kalinga Institute of Industrial Technology,Odisha,Bhubaneswar,overall,28,59.94
+Indian Institute of Technology Gandhinagar,Gujarat,Gandhinagar,overall,29,58.77
+Indian Institute of Technology (Banaras Hindu University) Varanasi,Uttar Pradesh,Varanasi,overall,30,58.69
+National Institute of Technology Tiruchirappalli,Tamil Nadu,Tiruchirappalli,overall,31,58.6
+Chandigarh University,Punjab,Mohali,overall,32,58.3
+Indian Institute of Technology Indore,Madhya Pradesh,Indore,overall,33,57.31
+National Institute of Technology Rourkela,Odisha,Rourkela,overall,34,57.04
+Indian Institute of Technology (Indian School of Mines) Dhanbad,Jharkhand,Dhanbad,overall,35,56.97
+JSS Academy of Higher Education and Research,Karnataka,Mysuru,overall,36,55.79
+Savitribai Phule Pune University,Maharashtra,Pune,overall,37,55.69
+Kerala University,Kerala,Thiruvananthapuram,overall,38,55.61
+Jawaharlal Institute of Post Graduate Medical Education and Research,Pondicherry,Puducherry,overall,39,55.51
+Koneru Lakshmaiah Education Foundation University (K L College of Engineering),Andhra Pradesh,Vaddeswaram,overall,40,55.47
+Andhra University,Andhra Pradesh,Visakhapatnam,overall,41,54.97
+Indian Institute of Science Education and Research Pune,Maharashtra,Pune,overall,42,54.86
+Thapar Institute of Engineering and Technology (Deemed-to-be-university),Punjab,Patiala,overall,43,54.83
+Bharathiar University,Tamil Nadu,Coimbatore,overall,44,54.81
+Lovely Professional University,Punjab,Phagwara,overall,45,54.58
+"National Institute of Technology Karnataka, Surathkal",Karnataka,Surathkal,overall,46,54.44
+Shanmugha Arts Science Technology and Research Academy,Tamil Nadu,Thanjavur,overall,47,54.14
+Indian Institute of Technology Ropar,Punjab,Rupnagar,overall,48,54.12
+Amity University,Uttar Pradesh,Gautam Budh Nagar,overall,49,54.04
+Kalasalingam Academy of Research and Education,Tamil Nadu,Srivilliputhur,overall,50,54.02
+Cochin University of Science and Technology,Kerala,Cochin,overall,51,53.99
+Symbiosis International,Maharashtra,Pune,overall,52,53.93
+National Institute of Technology Warangal,Telangana,Warangal,overall,53,53.74
+National Institute of Technology Calicut,Kerala,Kozhikode,overall,54,53.66
+Bharathidasan University,Tamil Nadu,Tiruchirappalli,overall,55,53.47
+Institute of Chemical Technology,Maharashtra,Mumbai,overall,56,53.38
+Gauhati University,Assam,Guwahati,overall,57,53.28
+Babasaheb Bhimrao Ambedkar University,Uttar Pradesh,Lucknow,overall,58,53.26
+UPES,Uttarakhand,Dehradun,overall,59,53.05
+Panjab University,Chandigarh,Chandigarh,overall,60,52.99
+Indian Institute of Science Education and Research Kolkata,West Bengal,Mohanpur,overall,61,52.91
+Jamia Hamdard,Delhi,New Delhi,overall,62,52.83
+Dr. D. Y. Patil Vidyapeeth,Maharashtra,Pune,overall,63,52.72
+Indian Institute of Science Education and Research Mohali,Punjab,Mohali,overall,64,52.58
+University of Madras,Tamil Nadu,Chennai,overall,64,52.58
+Delhi Technological University,Delhi,New Delhi,overall,66,52.38
+Mahatma Gandhi University,Kerala,Kottayam,overall,67,52.3
+Indian Institute of Technology Jodhpur,Rajasthan,Jodhpur,overall,68,52.24
+University of Kashmir,Jammu and Kashmir,Srinagar,overall,69,52.14
+Osmania University,Telangana,Hyderabad,overall,70,52.02
+Datta Meghe Institute of Higher Education and Research,Maharashtra,Wardha,overall,71,51.75
+Indian Institute of Technology Mandi,Himachal Pradesh,Mandi,overall,72,51.68
+Indian Institute of Technology Patna,Bihar,Patna,overall,73,51.24
+All India Institute of Medical Sciences Rishikesh,Uttarakhand,Rishikesh,overall,74,51.22
+"Indian Statistical Institute, Kolkata",West Bengal,Kolkata,overall,75,51.1
+Alagappa University,Tamil Nadu,Karaikudi,overall,76,51.07
+Visvesvaraya National Institute of Technology Nagpur,Maharashtra,Nagpur,overall,77,51.03
+Indian Institute of Science Education and Research Bhopal,Madhya Pradesh,Bhopal,overall,78,50.94
+Graphic Era University,Uttarakhand,Dehradun,overall,79,50.58
+Punjab Agricultural University,Punjab,Ludhiana,overall,80,50.55
+Sri Sivasubramaniya Nadar College of Engineering,Tamil Nadu,Kalavakkam,overall,81,50.43
+Malaviya National Institute of Technology,Rajasthan,Jaipur,overall,82,50.41
+All India Institute of Medical Sciences Jodhpur,Rajasthan,Jodhpur,overall,83,49.94
+SVKM`s Narsee Monjee Institute of Management Studies,Maharashtra,Mumbai,overall,84,49.59
+Sathyabama Institute of Science and Technology,Tamil Nadu,Chennai,overall,85,49.52
+Mysore University,Karnataka,Mysuru,overall,86,49.45
+University of Jammu,Jammu and Kashmir,Jammu,overall,87,49.4
+King George`s Medical University,Uttar Pradesh,Lucknow,overall,88,48.98
+Shoolini University of Biotechnology and Management Sciences,Himachal Pradesh,Solan,overall,89,48.95
+Christ University,Karnataka,Bengaluru,overall,90,48.66
+Bharath Institute of Higher Education and Research,Tamil Nadu,Chennai,overall,91,48.64
+National Institute of Technology Silchar,Assam,Silchar,overall,92,48.55
+National Institute of Technology Durgapur,West Bengal,Durgapur,overall,93,48.29
+Gujarat University,Gujarat,Ahmedabad,overall,94,48.16
+Shiv Nadar University,Uttar Pradesh,Gautam Buddha Nagar,overall,95,48.12
+Sri Ramachandra Institute of Higher Education and Research,Tamil Nadu,Chennai,overall,96,48.1
+Acharya Nagarjuna University,Andhra Pradesh,Guntur,overall,97,47.73
+Tata Institute of Social Sciences,Maharashtra,Mumbai,overall,98,47.56
+All India Institute of Medical Sciences Patna,Bihar,Patna,overall,99,47.55
+Periyar University,Tamil Nadu,Salem,overall,100,47.43
+Jamia Hamdard,Delhi,New Delhi,pharmacy,1,84.01
+National Institute of Pharmaceutical Education and Research Hyderabad,Telangana,Hyderabad,pharmacy,2,80.29
+"Birla Institute of Technology and Science, Pilani",Rajasthan,Pilani,pharmacy,3,78.95
+JSS College of Pharmacy,Tamil Nadu,Ooty,pharmacy,4,77.13
+Institute of Chemical Technology,Maharashtra,Mumbai,pharmacy,5,74.69
+JSS College of Pharmacy,Karnataka,Mysore,pharmacy,6,72.89
+Panjab University,Chandigarh,Chandigarh,pharmacy,7,72.76
+"Manipal College of Pharmaceutical Sciences, Manipal",Karnataka,Udupi,pharmacy,8,72.27
+National Institute of Pharmaceutical Education and Research Mohali,Punjab,Mohali,pharmacy,9,70.86
+SVKM`s Narsee Monjee Institute of Management Studies,Maharashtra,Mumbai,pharmacy,10,69.94
+S.R.M. Institute of Science and Technology,Tamil Nadu,Chennai,pharmacy,11,68.9
+National Institute of Pharmaceutical Education and Research Guwahati,Assam,Guwahati,pharmacy,12,68.82
+Amrita Vishwa Vidyapeetham,Tamil Nadu,Coimbatore,pharmacy,13,68.07
+National Institute of Pharmaceutical Education and Research Raebareli,Uttar Pradesh,Lucknow,pharmacy,14,65.53
+National Institute of Pharmaceutical Education and Research Ahmedabad,Gujarat,Gandhinagar,pharmacy,15,64.89
+Delhi Pharmaceutical Sciences and Research University,Delhi,Delhi,pharmacy,16,64.73
+Lovely Professional University,Punjab,Phagwara,pharmacy,16,64.73
+Jadavpur University,West Bengal,Kolkata,pharmacy,18,64.14
+Chitkara University,Punjab,Rajpura,pharmacy,19,64.05
+Chandigarh University,Punjab,Mohali,pharmacy,20,64.01
+Babasaheb Bhimrao Ambedkar University,Uttar Pradesh,Lucknow,pharmacy,21,61.78
+Amity University,Uttar Pradesh,Gautam Budh Nagar,pharmacy,22,61.07
+Central University of Punjab,Punjab,Bathinda,pharmacy,23,60.92
+National Institute of Pharmaceutical Education and Research Kolkata,West Bengal,Kolkata,pharmacy,24,58.76
+I. S. F. College of Pharmacy,Punjab,Moga,pharmacy,25,58.27
+Maharishi Markandeshwar (Deemed to be University),Haryana,Ambala,pharmacy,26,58.24
+Annamalai University,Tamil Nadu,Annamalainagar,pharmacy,27,58.19
+Banasthali Vidyapith,Rajasthan,Banasthali,pharmacy,28,57.77
+Central University of Rajasthan,Rajasthan,Kishangarh,pharmacy,29,57.65
+Shoolini University of Biotechnology and Management Sciences,Himachal Pradesh,Solan,pharmacy,30,57.07
+Sri Ramachandra Institute of Higher Education and Research,Tamil Nadu,Chennai,pharmacy,31,56.98
+Birla Institute of Technology,Jharkhand,Ranchi,pharmacy,32,56.75
+National Institute Of Pharmaceutical Education And Research Hajipur,Bihar,Hajipur,pharmacy,33,56.4
+"AU College of Pharmaceutical Sciences, Andhra University",Andhra Pradesh,Visakhapatnam,pharmacy,34,56.11
+"Poona College of Pharmacy, Pune",Maharashtra,Pune,pharmacy,35,55.86
+Dr D Y Patil Institute of Pharmaceutical Sciences and Research,Maharashtra,Pune,pharmacy,36,55.24
+Nirma University,Gujarat,Ahmedabad,pharmacy,37,55.22
+Maharshi Dayanand University,Haryana,Rohtak,pharmacy,38,54.53
+SVKM`s Dr. Bhanuben Nanavati College of Pharmacy,Maharashtra,Mumbai,pharmacy,39,54.18
+Noida Institute of Engineering and Technology (Pharmacy Institute),Uttar Pradesh,Greater Noida,pharmacy,40,53.55
+N.G.S.M. Institute of Pharmaceutical Sciences,Karnataka,Mangaluru,pharmacy,41,53.35
+"KLE College of Pharmacy, Belgaum",Karnataka,Belgaum,pharmacy,42,52.66
+Dibrugarh University,Assam,Dibrugarh,pharmacy,43,52.16
+Maharaja Sayajirao University of Baroda,Gujarat,Vadodara,pharmacy,44,51.93
+Integral University,Uttar Pradesh,Lucknow,pharmacy,45,51.44
+Punjabi University,Punjab,Patiala,pharmacy,46,51.33
+Parul University,Gujarat,Vadodara,pharmacy,47,51.3
+Gandhi Institute of Technology and Management,Andhra Pradesh,Visakhapatnam,pharmacy,48,51.03
+Suresh Gyan Vihar University,Rajasthan,Jaipur,pharmacy,49,50.81
+Galgotias University,Uttar Pradesh,Gautam Budh Nagar,pharmacy,50,50.73
+Rashtrasant Tukadoji Maharaj Nagpur University,Maharashtra,Nagpur,pharmacy,51,50.22
+L. M. College of Pharmacy,Gujarat,Ahmedabad,pharmacy,52,50.02
+G. L. A. University,Uttar Pradesh,Mathura,pharmacy,53,49.74
+Guru Ghasidas Vishwavidyalaya,Chhattisgarh,BILASPUR (Chhattisgarh),pharmacy,54,49.65
+Guru Jambheshwar University of Science and Technology,Haryana,Hisar,pharmacy,55,48.98
+R. C. Patel Institute of Pharmaceutical Education and Research,Maharashtra,Shirpur,pharmacy,56,48.75
+Amar Shaheed Baba Ajit Singh Jujhar Singh Memorial College,Punjab,Bela,pharmacy,57,48.51
+PSG College of Pharmacy,Tamil Nadu,Coimbatore,pharmacy,58,48.08
+Mohan Lal Sukhadia University,Rajasthan,Udaipur,pharmacy,59,47.03
+Sri Padmavathi Mahila Visvavidyalayam,Andhra Pradesh,Tirupati,pharmacy,60,46.63
+Smt. Kishoritai Bhoyar College of Pharmacy,Maharashtra,Nagpur,pharmacy,61,46.37
+"Kumaun University, Nainital",Uttarakhand,Nainital,pharmacy,62,46.34
+Acharya Nagarjuna University College of Pharmaceutical Sciences,Andhra Pradesh,Guntur,pharmacy,63,46.1
+Vels Institute of Science Technology and Advanced Studies (VISTAS),Tamil Nadu,Chennai,pharmacy,64,46.0
+Nandha College of Pharmacy,Tamil Nadu,Erode,pharmacy,65,45.5
+Chandigarh College of Pharmacy,Punjab,Landran,pharmacy,66,45.3
+Krishna Vishwa Vidyapeeth,Maharashtra,Karad,pharmacy,67,45.13
+M.S. Ramaiah University of Applied Sciences,Karnataka,Bengaluru,pharmacy,68,45.02
+Sharda University,Uttar Pradesh,Greater Noida,pharmacy,69,44.75
+Gujarat Technological University,Gujarat,Ahmedabad,pharmacy,70,44.33
+Anurag University,Telangana,Hyderabad,pharmacy,71,44.22
+Dr. Vishwanath Karad MIT World Peace University,Maharashtra,Pune,pharmacy,72,43.74
+Bombay College of Pharmacy,Maharashtra,Mumbai,pharmacy,73,43.72
+Guru Nanak Institute of Pharmaceutical Science and Technology,West Bengal,Kolkata,pharmacy,74,43.66
+Bundelkhand University,Uttar Pradesh,Jhansi,pharmacy,74,43.66
+Y. B. Chavan College of Pharmacy,Maharashtra,Aurangabad,pharmacy,76,43.49
+KIET Group of Institutions: KIET Group of Pharmacy,Uttar Pradesh,Ghaziabad,pharmacy,77,43.42
+"College of Pharmacy, Madras Medical College",Tamil Nadu,Chennai,pharmacy,78,43.36
+Sri Venkateswara College of Pharmacy,Andhra Pradesh,Chittoor,pharmacy,79,42.77
+Bharati Vidyapeeth College of Pharmacy,Maharashtra,Kolhapur,pharmacy,80,42.5
+DIT University,Uttarakhand,Dehradun,pharmacy,81,42.48
+Arulmigu Kalasalingam College of Pharmacy,Tamil Nadu,Srivilliputtur,pharmacy,82,41.58
+Sri Adichunchanagiri College of Pharmacy,Karnataka,B G Nagar,pharmacy,83,41.54
+B. S. Abdur Rahman Crescent Institute of Science and Technology,Tamil Nadu,Chennai,pharmacy,84,41.48
+"Sam Higginbottom Institute of Agriculture, Technology and Sciences",Uttar Pradesh,Prayagraj,pharmacy,85,41.45
+Acharya & B M Reddy College of Pharmacy,Karnataka,Bengaluru,pharmacy,86,41.35
+Vishnu Institute of Pharmaceutical Education and Research,Telangana,Narsapur,pharmacy,87,41.19
+Kakatiya University,Telangana,"Hanamkonda, Warangal",pharmacy,88,41.15
+Vinayaka Mission's Research Foundation,Tamil Nadu,Salem,pharmacy,89,41.01
+Ramanbhai Patel College of Pharmacy,Gujarat,Anand,pharmacy,90,40.9
+"Uka Tarsadia University, Bardoli",Gujarat,Bardoli,pharmacy,91,40.87
+Shri Vishnu College of Pharmacy,Andhra Pradesh,Bhimavaram,pharmacy,92,40.72
+Goa College of Pharmacy,Goa,Panaji,pharmacy,93,40.69
+Dr. B. C. Roy College of Pharmacy and Allied Health Sciences,West Bengal,Durgapur,pharmacy,94,40.67
+CMR College of Pharmacy,Telangana,Rangareddy,pharmacy,95,40.51
+P. E. Society`s Modern College of Pharmacy,Maharashtra,Pune,pharmacy,96,40.3
+Principal K.M. Kundnani College of Pharmacy,Maharashtra,Mumbai,pharmacy,97,40.23
+Krupanidhi College of Pharmacy,Karnataka,Bengaluru,pharmacy,98,40.1
+AISSMS College of Pharmacy,Maharashtra,Pune,pharmacy,99,39.97
+"College of Pharmacy, Pandit Bhagwat Dayal Sharma University of Health Sciences",Haryana,Rohtak,pharmacy,100,39.54
+"Indian Institute of Science, Bengaluru",Karnataka,Bengaluru,research_institutions,1,84.98
+Indian Institute of Technology Madras,Tamil Nadu,Chennai,research_institutions,2,83.29
+Indian Institute of Technology Delhi,Delhi,New Delhi,research_institutions,3,81.08
+Indian Institute of Technology Bombay,Maharashtra,Mumbai,research_institutions,4,77.75
+Indian Institute of Technology Kharagpur,West Bengal,Kharagpur,research_institutions,5,72.65
+Homi Bhabha National Institute,Maharashtra,Mumbai,research_institutions,6,70.11
+Indian Institute of Technology Kanpur,Uttar Pradesh,Kanpur,research_institutions,7,70.04
+All India Institute of Medical Sciences Delhi,Delhi,New Delhi,research_institutions,8,67.43
+Indian Institute of Technology Roorkee,Uttarakhand,Roorkee,research_institutions,9,66.78
+Indian Institute of Technology Guwahati,Assam,Guwahati,research_institutions,10,64.94
+Academy of Scientific and Innovative Research,Uttar Pradesh,Ghaziabad,research_institutions,11,64.2
+Tata Institute of Fundamental Research,Maharashtra,Mumbai,research_institutions,12,60.54
+Vellore Institute of Technology,Tamil Nadu,Vellore,research_institutions,13,60.28
+University of Delhi,Delhi,Delhi,research_institutions,14,60.07
+Indian Institute of Technology Hyderabad,Telangana,Hyderabad,research_institutions,15,59.96
+Banaras Hindu University,Uttar Pradesh,Varanasi,research_institutions,16,58.52
+Anna University,Tamil Nadu,Chennai,research_institutions,17,58.39
+Jawaharlal Nehru University,Delhi,New Delhi,research_institutions,18,56.43
+Jamia Millia Islamia,Delhi,New Delhi,research_institutions,19,56.12
+Saveetha Institute of Medical and Technical Sciences,Tamil Nadu,Chennai,research_institutions,20,55.85
+Jadavpur University,West Bengal,Kolkata,research_institutions,21,54.85
+Indian Institute of Technology (Indian School of Mines) Dhanbad,Jharkhand,Dhanbad,research_institutions,22,54.77
+"Manipal Academy of Higher Education, Manipal",Karnataka,Manipal,research_institutions,23,54.31
+S.R.M. Institute of Science and Technology,Tamil Nadu,Chennai,research_institutions,24,53.34
+Aligarh Muslim University,Uttar Pradesh,Aligarh,research_institutions,25,53.29
+"Birla Institute of Technology and Science, Pilani",Rajasthan,Pilani,research_institutions,26,53.06
+Indian Institute of Technology Indore,Madhya Pradesh,Indore,research_institutions,27,52.7
+University of Hyderabad,Telangana,Hyderabad,research_institutions,28,51.9
+Indian Institute of Science Education and Research Pune,Maharashtra,Pune,research_institutions,29,51.53
+National Institute of Technology Rourkela,Odisha,Rourkela,research_institutions,30,51.16
+National Institute of Technology Tiruchirappalli,Tamil Nadu,Tiruchirappalli,research_institutions,31,50.94
+Indian Institute of Technology Gandhinagar,Gujarat,Gandhinagar,research_institutions,32,50.78
+Amrita Vishwa Vidyapeetham,Tamil Nadu,Coimbatore,research_institutions,33,50.38
+Jawaharlal Nehru Centre for Advanced Scientific Research,Karnataka,Bengaluru,research_institutions,34,50.06
+Panjab University,Chandigarh,Chandigarh,research_institutions,35,49.73
+Calcutta University,West Bengal,Kolkata,research_institutions,36,48.57
+Indian Agricultural Research Institute,Delhi,New Delhi,research_institutions,37,48.55
+Indian Institute of Science Education and Research Kolkata,West Bengal,Mohanpur,research_institutions,38,47.31
+Thapar Institute of Engineering and Technology (Deemed-to-be-university),Punjab,Patiala,research_institutions,39,47.3
+Institute of Chemical Technology,Maharashtra,Mumbai,research_institutions,40,46.83
+Bharathiar University,Tamil Nadu,Coimbatore,research_institutions,41,46.79
+"National Institute of Technology Karnataka, Surathkal",Karnataka,Surathkal,research_institutions,42,45.41
+"National Institute of Mental Health and Neuro Sciences, Bangalore",Karnataka,Bengaluru,research_institutions,43,45.18
+Lovely Professional University,Punjab,Phagwara,research_institutions,44,45.01
+Indian Institute of Technology Ropar,Punjab,Rupnagar,research_institutions,45,44.99
+Kalinga Institute of Industrial Technology,Odisha,Bhubaneswar,research_institutions,46,44.64
+Amity University,Uttar Pradesh,Gautam Budh Nagar,research_institutions,47,44.57
+Bharathidasan University,Tamil Nadu,Tiruchirappalli,research_institutions,48,44.41
+Indian Institute of Science Education and Research Mohali,Punjab,Mohali,research_institutions,49,44.09
+Siksha `O` Anusandhan,Odisha,Bhubaneswar,research_institutions,50,43.87
+Symbiosis Skills and Professional University (Formerly Symbiosis Skill and Open University),Maharashtra,Pune,skill_university,1,
+Shri Vishwakarma Skill University,Haryana,Palwal,skill_university,2,
+Bhartiya Skill Development University,Rajasthan,Rajasthan,skill_university,3,
+Anna University,Tamil Nadu,Chennai,state_public_university,1,78.14
+Jadavpur University,West Bengal,Kolkata,state_public_university,2,77.74
+Savitribai Phule Pune University,Maharashtra,Pune,state_public_university,3,70.26
+Calcutta University,West Bengal,Kolkata,state_public_university,4,68.96
+Panjab University,Chandigarh,Chandigarh,state_public_university,5,67.43
+Osmania University,Telangana,Hyderabad,state_public_university,6,67.2
+Andhra University,Andhra Pradesh,Visakhapatnam,state_public_university,7,65.96
+Bharathiar University,Tamil Nadu,Coimbatore,state_public_university,8,65.27
+Kerala University,Kerala,Thiruvananthapuram,state_public_university,9,65.15
+Cochin University of Science and Technology,Kerala,Cochin,state_public_university,10,63.21
+Mahatma Gandhi University,Kerala,Kottayam,state_public_university,11,63.04
+University of Madras,Tamil Nadu,Chennai,state_public_university,12,62.89
+Gauhati University,Assam,Guwahati,state_public_university,13,62.04
+University of Kashmir,Jammu and Kashmir,Srinagar,state_public_university,14,61.66
+Delhi Technological University,Delhi,New Delhi,state_public_university,15,61.35
+Bharathidasan University,Tamil Nadu,Tiruchirappalli,state_public_university,16,61.33
+Alagappa University,Tamil Nadu,Karaikudi,state_public_university,17,60.15
+Mumbai University,Maharashtra,Mumbai,state_public_university,18,58.75
+Mysore University,Karnataka,Mysuru,state_public_university,19,58.29
+Acharya Nagarjuna University,Andhra Pradesh,Guntur,state_public_university,20,58.28
+Guru Gobind Singh Indraprastha University,Delhi,New Delhi,state_public_university,21,57.33
+Visvesvaraya Technological University,Karnataka,Belgaum,state_public_university,22,57.18
+University of Jammu,Jammu and Kashmir,Jammu,state_public_university,23,55.79
+Bangalore University,Karnataka,Bengaluru,state_public_university,24,55.59
+Periyar University,Tamil Nadu,Salem,state_public_university,25,55.34
+Madurai Kamaraj University,Tamil Nadu,Madurai,state_public_university,26,54.66
+King George`s Medical University,Uttar Pradesh,Lucknow,state_public_university,27,54.38
+Dibrugarh University,Assam,Dibrugarh,state_public_university,28,54.01
+Gujarat University,Gujarat,Ahmedabad,state_public_university,29,53.99
+Punjab Agricultural University,Punjab,Ludhiana,state_public_university,30,53.94
+Annamalai University,Tamil Nadu,Annamalainagar,state_public_university,31,53.77
+University of Lucknow,Uttar Pradesh,Lucknow,state_public_university,32,53.54
+COEP Technological University,Maharashtra,Pune,state_public_university,33,53.37
+Netaji Subhas University of Technology (NSUT),Delhi,Delhi,state_public_university,34,52.6
+Maharshi Dayanand University,Haryana,Rohtak,state_public_university,35,52.45
+University of Burdwan,West Bengal,Bardhaman,state_public_university,36,51.44
+"Manonmaniam Sundaranar University, Tirunelveli",Tamil Nadu,Tirunelveli,state_public_university,37,51.2
+G.B. Pant Universtiy of Agriculture and Technology,Uttarakhand,Pantnagar,state_public_university,38,51.1
+Sri Venkateswara University,Andhra Pradesh,Tirupati,state_public_university,39,51.04
+Madan Mohan Malaviya University of Technology,Uttar Pradesh,Gorakhpur,state_public_university,40,50.58
+Kurukshetra University,Haryana,Kurukshetra,state_public_university,41,50.47
+Utkal University,Odisha,Bhubaneswar,state_public_university,42,50.27
+Calicut University,Kerala,Malappuram,state_public_university,43,50.26
+University of Agricultural Sciences,Karnataka,Bengaluru,state_public_university,44,50.19
+Indraprastha Institute of Information Technology,Delhi,New Delhi,state_public_university,45,49.79
+Dr. Babasaheb Ambedkar Marathwada University,Maharashtra,Aurangabad,state_public_university,46,49.54
+Guru Jambheshwar University of Science and Technology,Haryana,Hisar,state_public_university,47,49.53
+Chaudhary Charan Singh Haryana Agricultural University,Haryana,Hisar,state_public_university,48,48.91
+Tamil Nadu Agricultural University,Tamil Nadu,Coimbatore,state_public_university,49,48.41
+Devi Ahilya Vishwavidyalaya,Madhya Pradesh,Indore,state_public_university,50,48.35
+"Indian Institute of Science, Bengaluru",Karnataka,Bengaluru,university,1,83.29
+Jawaharlal Nehru University,Delhi,New Delhi,university,2,69.8
+Jamia Millia Islamia,Delhi,New Delhi,university,3,68.11
+"Manipal Academy of Higher Education, Manipal",Karnataka,Manipal,university,4,67.18
+Banaras Hindu University,Uttar Pradesh,Varanasi,university,5,66.05
+University of Delhi,Delhi,Delhi,university,6,65.9
+Amrita Vishwa Vidyapeetham,Tamil Nadu,Coimbatore,university,7,65.73
+Aligarh Muslim University,Uttar Pradesh,Aligarh,university,8,65.57
+Jadavpur University,West Bengal,Kolkata,university,9,65.39
+Vellore Institute of Technology,Tamil Nadu,Vellore,university,10,64.79
+Saveetha Institute of Medical and Technical Sciences,Tamil Nadu,Chennai,university,11,64.62
+S.R.M. Institute of Science and Technology,Tamil Nadu,Chennai,university,12,64.56
+Anna University,Tamil Nadu,Chennai,university,13,63.85
+Siksha `O` Anusandhan,Odisha,Bhubaneswar,university,14,62.61
+Kalinga Institute of Industrial Technology,Odisha,Bhubaneswar,university,15,62.53
+Homi Bhabha National Institute,Maharashtra,Mumbai,university,16,62.31
+University of Hyderabad,Telangana,Hyderabad,university,17,62.18
+Calcutta University,West Bengal,Kolkata,university,18,61.1
+"Birla Institute of Technology and Science, Pilani",Rajasthan,Pilani,university,19,60.03
+Chandigarh University,Punjab,Mohali,university,20,59.96
+Kerala University,Kerala,Thiruvananthapuram,university,21,58.48
+Koneru Lakshmaiah Education Foundation University (K L College of Engineering),Andhra Pradesh,Vaddeswaram,university,22,57.98
+Savitribai Phule Pune University,Maharashtra,Pune,university,23,57.96
+JSS Academy of Higher Education and Research,Karnataka,Mysuru,university,24,57.74
+Andhra University,Andhra Pradesh,Visakhapatnam,university,25,57.67
+Bharathiar University,Tamil Nadu,Coimbatore,university,26,57.26
+Lovely Professional University,Punjab,Phagwara,university,27,56.92
+Shanmugha Arts Science Technology and Research Academy,Tamil Nadu,Thanjavur,university,28,56.81
+Thapar Institute of Engineering and Technology (Deemed-to-be-university),Punjab,Patiala,university,29,56.72
+Kalasalingam Academy of Research and Education,Tamil Nadu,Srivilliputhur,university,30,56.71
+Symbiosis International,Maharashtra,Pune,university,31,56.41
+Amity University,Uttar Pradesh,Gautam Budh Nagar,university,32,56.14
+Babasaheb Bhimrao Ambedkar University,Uttar Pradesh,Lucknow,university,33,56.03
+Cochin University of Science and Technology,Kerala,Cochin,university,34,55.95
+Institute of Chemical Technology,Maharashtra,Mumbai,university,35,55.67
+Bharathidasan University,Tamil Nadu,Tiruchirappalli,university,36,55.6
+Mahatma Gandhi University,Kerala,Kottayam,university,37,55.18
+Panjab University,Chandigarh,Chandigarh,university,38,55.11
+University of Madras,Tamil Nadu,Chennai,university,39,55.03
+Gauhati University,Assam,Guwahati,university,40,54.86
+Jamia Hamdard,Delhi,New Delhi,university,40,54.86
+Datta Meghe Institute of Higher Education and Research,Maharashtra,Wardha,university,42,54.71
+Osmania University,Telangana,Hyderabad,university,43,54.69
+Dr. D. Y. Patil Vidyapeeth,Maharashtra,Pune,university,44,54.59
+University of Kashmir,Jammu and Kashmir,Srinagar,university,45,54.43
+UPES,Uttarakhand,Dehradun,university,46,54.02
+Alagappa University,Tamil Nadu,Karaikudi,university,47,53.84
+Delhi Technological University,Delhi,New Delhi,university,48,53.31
+SVKM`s Narsee Monjee Institute of Management Studies,Maharashtra,Mumbai,university,49,52.43
+University of Jammu,Jammu and Kashmir,Jammu,university,50,52.33
+Sathyabama Institute of Science and Technology,Tamil Nadu,Chennai,university,51,52.16
+Graphic Era University,Uttarakhand,Dehradun,university,52,52.01
+King George`s Medical University,Uttar Pradesh,Lucknow,university,53,51.1
+Mysore University,Karnataka,Mysuru,university,54,51.04
+Sri Ramachandra Institute of Higher Education and Research,Tamil Nadu,Chennai,university,55,50.86
+Periyar University,Tamil Nadu,Salem,university,56,50.36
+Punjab Agricultural University,Punjab,Ludhiana,university,57,50.32
+Tata Institute of Social Sciences,Maharashtra,Mumbai,university,58,50.2
+Acharya Nagarjuna University,Andhra Pradesh,Guntur,university,59,50.06
+Christ University,Karnataka,Bengaluru,university,60,49.87
+Mumbai University,Maharashtra,Mumbai,university,61,49.86
+Shiv Nadar University,Uttar Pradesh,Gautam Buddha Nagar,university,62,49.8
+Madurai Kamaraj University,Tamil Nadu,Madurai,university,63,49.72
+"Manipal University, Jaipur",Rajasthan,Jaipur,university,64,49.5
+"Jain University, Bangalore",Karnataka,Bengaluru,university,65,49.47
+NITTE,Karnataka,Mangaluru,university,66,49.45
+Banasthali Vidyapith,Rajasthan,Banasthali,university,67,49.38
+Sri Balaji Vidyapeeth Mahatma Gandhi Medical College,Pondicherry,Puducherry,university,68,49.14
+Tezpur University,Assam,Tezpur,university,69,49.01
+Shoolini University of Biotechnology and Management Sciences,Himachal Pradesh,Solan,university,70,48.82
+Maharishi Markandeshwar (Deemed to be University),Haryana,Ambala,university,71,48.67
+"Vignan's Foundation for Science, Technology and Research",Andhra Pradesh,Guntur,university,72,48.45
+Bharath Institute of Higher Education and Research,Tamil Nadu,Chennai,university,73,48.36
+International Institute of Information Technology Hyderabad,Telangana,Hyderabad,university,74,48.32
+Visvesvaraya Technological University,Karnataka,Belgaum,university,75,48.1
+Gujarat University,Gujarat,Ahmedabad,university,76,48.04
+Mizoram University,Mizoram,Aizawl,university,77,48.03
+Bharati Vidyapeeth,Maharashtra,Pune,university,78,47.94
+Chettinad Academy of Research and Education,Tamil Nadu,"Kelambakkam, Chengalpattu District",university,79,47.8
+Guru Gobind Singh Indraprastha University,Delhi,New Delhi,university,80,47.66
+Bangalore University,Karnataka,Bengaluru,university,81,47.45
+Birla Institute of Technology,Jharkhand,Ranchi,university,82,47.31
+Central University of Punjab,Punjab,Bathinda,university,83,47.11
+Tamil Nadu Agricultural University,Tamil Nadu,Coimbatore,university,84,47.03
+Sant Longowal Institute of Engineering and Technology,Punjab,Longowal,university,85,46.9
+Sharda University,Uttar Pradesh,Greater Noida,university,86,46.88
+Sri Venkateswara University,Andhra Pradesh,Tirupati,university,87,46.65
+G.B. Pant Universtiy of Agriculture and Technology,Uttarakhand,Pantnagar,university,88,46.64
+Calicut University,Kerala,Malappuram,university,89,46.63
+University of Agricultural Sciences,Karnataka,Bengaluru,university,90,46.47
+Chitkara University,Punjab,Rajpura,university,90,46.47
+Manav Rachna International Institute of Research and Studies,Haryana,Faridabad,university,92,46.46
+"Manonmaniam Sundaranar University, Tirunelveli",Tamil Nadu,Tirunelveli,university,93,46.34
+Madan Mohan Malaviya University of Technology,Uttar Pradesh,Gorakhpur,university,94,46.33
+Yenepoya University,Karnataka,Mangaluru,university,95,46.31
+Vel Tech Rangarajan Dr. Sagunthala R & D Institute of Science and Technology,Tamil Nadu,Chennai,university,96,46.22
+University of Lucknow,Uttar Pradesh,Lucknow,university,97,45.89
+Avinashilingam Institute for Home Science and Higher Education for Women,Tamil Nadu,Coimbatore,university,98,45.78
+Central University of Tamil Nadu,Tamil Nadu,Tiruvarur,university,99,45.73
+Netaji Subhas University of Technology (NSUT),Delhi,Delhi,university,100,45.51

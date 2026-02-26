@@ -1,0 +1,41 @@
+Institute ID,Name,TLR,RPC,GO,OI,Perception,City,State,Score,Rank
+IR-G-U-0101,Indian Agricultural Research Institute,89.80,92.79,82.81,73.74,92.71,New Delhi,Delhi,87.98,1
+IR-G-U-0171,ICAR - National Dairy Research Institute,78.54,60.44,87.07,62.65,58.08,Karnal,Haryana,71.18,2
+IR-G-U-0381,Punjab Agricultural University,87.98,67.49,51.84,49.96,76.16,Ludhiana,Punjab,69.63,3
+IR-G-U-0500,Banaras Hindu University,67.94,74.30,71.04,58.96,55.38,Varanasi,Uttar Pradesh,68.32,4
+IR-G-U-0518,"Indian Veterinary Research Institute, Izatnagar",87.23,54.71,77.21,56.30,41.12,Bareilly,Uttar Pradesh,67.76,5
+IR-G-U-0485,Tamil Nadu Agricultural University,83.47,42.55,58.01,55.06,100.00,Coimbatore,Tamil Nadu,64.92,6
+IR-G-U-0159,Chaudhary Charan Singh Haryana Agricultural University,93.80,35.16,66.87,50.24,66.70,Hisar,Haryana,63.75,7
+IR-G-U-0554,G.B. Pant Universtiy of Agriculture and Technology,70.89,43.52,76.23,51.20,70.74,Pantnagar,Uttarakhand,61.77,8
+IR-G-U-0293,"Central Institute of Fisheries Education, Fishries University",74.76,42.17,82.18,75.00,23.49,Mumbai,Maharashtra,61.37,9
+IR-G-U-0200,Sher-e-Kashmir University of Agricultural Science and Technology of Kashmir,77.79,49.66,77.14,46.36,27.30,Srinagar,Jammu and Kashmir,61.04,10
+IR-G-U-0248,University of Agricultural Sciences,84.43,28.65,67.62,58.72,58.08,Bengaluru,Karnataka,59.13,11
+IR-G-C-45375,"National Institute of Food Technology, Entrepreneurship and Management",69.00,49.03,54.68,57.26,47.19,Thanjavur,Tamil Nadu,56.80,12
+IR-G-U-0568,Bidhan Chandra Krishi Vishwavidyalaya,76.17,37.10,78.20,29.45,41.12,Nadia,West Bengal,56.67,13
+IR-G-U-0048,Assam Agricultural University,88.75,20.14,62.59,56.58,48.31,Jorhat,Assam,55.67,14
+IR-G-U-0360,Odisha University of Agriculture and Technology,79.36,27.12,69.90,56.10,41.12,Khordha,Odisha,55.65,15
+IR-G-U-0257,Kerala Agricultural University,83.95,27.77,57.50,47.40,55.38,Thrissur,Kerala,55.30,16
+IR-G-U-0487,Tamil Nadu Veterinary and Animal Sciences University,78.36,28.01,61.79,55.68,53.48,Chennai,Tamil Nadu,55.19,17
+IR-G-U-0181,Dr. Y.S. Parmar University of Horticulture and Forestry,75.60,30.21,73.79,50.89,30.79,Solan,Himachal Pradesh,54.67,18
+IR-G-U-0179,Chaudhary Sarwan Kumar Himachal Pardesh Krishi Vishvavidyalaya,78.93,28.03,71.95,48.31,32.43,Kangra,Himachal Pradesh,54.55,19
+IR-G-U-0199,Sher-e-Kashmir University of Agricultural Science and Technology of Jammu,76.00,32.95,66.76,55.30,23.49,Jammu,Jammu and Kashmir,53.91,20
+IR-G-S-8898,"National Institute of Food Technology, Enterprenurship and Management",53.92,45.47,66.09,66.01,27.30,Sonipat,Haryana,52.37,21
+IR-G-U-0379,Lovely Professional University,53.08,53.13,49.77,72.72,19.29,Phagwara,Punjab,51.01,22
+IR-G-U-0123,Anand Agricultural University,77.11,16.90,73.32,41.31,37.00,Anand,Gujarat,50.69,23
+IR-G-U-0246,University of Agricultural Sciences,73.15,13.74,75.64,53.48,39.79,Dharwad,Karnataka,50.52,24
+IR-G-U-0375,Guru Angad Dev Veterinary and Animal Sciences University,76.47,34.20,48.40,45.61,30.79,Ludhiana,Punjab,50.52,24
+IR-G-U-0004,Acharya N G Ranga Agricultural University,80.65,14.45,61.73,53.89,39.79,Guntur,Andhra Pradesh,50.24,26
+IR-G-U-0443,Annamalai University,64.34,26.05,66.43,47.96,47.19,Annamalainagar,Tamil Nadu,49.92,27
+IR-G-U-0591,West Bengal University of Animal and Fishery Sciences,71.90,22.66,73.21,15.91,37.00,Kolkata,West Bengal,48.30,28
+IR-G-U-0075,Dr Rajendra Prasad Central Agricultural University,74.79,19.88,58.79,60.83,17.03,Samastipur,Bihar,47.94,29
+IR-G-U-0259,Kerala University of Fisheries and Ocean Studies,61.71,43.53,52.69,50.76,6.48,Kochi,Kerala,47.84,30
+IR-G-U-0336,Central Agricultural University,71.42,26.45,51.98,54.06,23.49,Imphal West,Manipur,47.53,31
+IR-G-U-0665,Tamil Nadu Dr.J.Jayalalithaa Fisheries University,66.51,21.18,54.64,49.87,42.41,Nagapattinam,Tamil Nadu,46.46,32
+IR-G-U-0039,Sri Venkateswara Veterinary University,70.75,6.34,75.52,52.71,29.08,Tirupati,Andhra Pradesh,46.41,33
+IR-G-U-0165,Lala lajpat Rai University of Veterinary and Animal Sciences,82.21,22.03,45.90,37.90,19.29,Hisar,Haryana,46.17,34
+IR-G-U-0145,Navsari Agricultural University,83.56,8.93,59.36,45.78,17.03,Navsari,Gujarat,45.90,35
+IR-G-U-0060,Bihar Agriculture University,74.50,14.63,56.16,51.82,25.44,Bhagalpur,Bihar,45.69,36
+IR-G-U-0784,Professor Jayashankar Telangana State Agricultural University,79.61,10.44,47.99,53.87,27.30,Hyderabad,Telangana,44.73,37
+IR-G-U-0458,Kalasalingam Academy of Research and Education,63.77,22.54,38.37,85.32,25.44,Srivilliputhur,Tamil Nadu,44.63,38
+IR-G-U-0087,Indira Gandhi Krishi Vishwavidyalaya,62.83,13.22,74.41,47.43,17.03,Raipur,Chhattisgarh,44.14,39
+IR-G-U-0587,Uttar Banga Krishi Vishwavidyalaya,80.72,13.98,52.66,27.53,23.49,Cooch Behar,West Bengal,44.05,40

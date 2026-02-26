@@ -1,0 +1,51 @@
+Institute ID,Name,TLR,RPC,GO,OI,Perception,City,State,Score,Rank
+IR-O-U-0439,Anna University,71.25,89.07,75.55,49.40,100.00,Chennai,Tamil Nadu,78.14,1
+IR-O-U-0575,Jadavpur University,73.70,76.39,94.88,50.74,86.62,Kolkata,West Bengal,77.74,2
+IR-O-U-0323,Savitribai Phule Pune University,73.46,58.24,94.60,54.66,63.62,Pune,Maharashtra,70.26,3
+IR-O-U-0570,Calcutta University,69.07,59.41,97.26,50.50,59.21,Kolkata,West Bengal,68.96,4
+IR-O-U-0078,Panjab University,61.27,63.18,79.18,73.50,69.13,Chandigarh,Chandigarh,67.43,5
+IR-O-U-0027,Osmania University,74.48,53.97,90.01,59.23,47.40,Hyderabad,Telangana,67.20,6
+IR-O-U-0006,Andhra University,75.14,46.38,89.86,69.03,46.38,Visakhapatnam,Andhra Pradesh,65.96,7
+IR-O-U-0447,Bharathiar University,63.05,62.32,82.22,55.27,56.80,Coimbatore,Tamil Nadu,65.27,8
+IR-O-U-0260,Kerala University,73.02,43.68,100.00,63.53,37.96,Thiruvananthapuram,Kerala,65.15,9
+IR-O-U-0253,Cochin University of Science and Technology,69.81,54.56,77.25,57.98,46.48,Cochin,Kerala,63.21,10
+IR-O-U-0262,Mahatma Gandhi University,70.82,60.22,74.29,51.26,37.25,Kottayam,Kerala,63.04,11
+IR-O-I-1357,University of Madras,69.19,56.81,69.33,55.36,56.80,Chennai,Tamil Nadu,62.89,12
+IR-O-U-0052,Gauhati University,73.18,39.84,93.15,64.58,30.47,Guwahati,Assam,62.04,13
+IR-O-U-0196,University of Kashmir,76.23,46.13,83.94,51.14,30.53,Srinagar,Jammu and Kashmir,61.66,14
+IR-O-U-0098,Delhi Technological University,61.77,55.48,69.84,65.40,56.65,New Delhi,Delhi,61.35,15
+IR-O-U-0448,Bharathidasan University,63.73,53.54,84.29,54.06,38.77,Tiruchirappalli,Tamil Nadu,61.33,16
+IR-O-U-0435,Alagappa University,64.24,52.96,77.25,52.30,43.06,Karaikudi,Tamil Nadu,60.15,17
+IR-O-U-0318,Mumbai University,69.95,30.10,91.04,55.92,49.35,Mumbai,Maharashtra,58.75,18
+IR-O-U-0235,Mysore University,78.29,29.69,83.71,61.60,29.87,Mysuru,Karnataka,58.29,19
+IR-O-U-0003,Acharya Nagarjuna University,69.87,33.44,87.48,69.75,28.25,Guntur,Andhra Pradesh,58.28,20
+IR-O-U-0099,Guru Gobind Singh Indraprastha University,63.88,42.71,70.32,58.93,54.13,New Delhi,Delhi,57.33,21
+IR-O-U-0249,Visvesvaraya Technological University,65.23,58.97,63.85,50.88,20.65,Belgaum,Karnataka,57.18,22
+IR-O-U-0195,University of Jammu,70.60,33.90,78.57,53.05,34.25,Jammu,Jammu and Kashmir,55.79,23
+IR-O-U-0215,Bangalore University,66.97,27.70,80.32,60.99,50.28,Bengaluru,Karnataka,55.59,24
+IR-O-U-0470,Periyar University,60.79,43.59,72.88,60.20,34.25,Salem,Tamil Nadu,55.34,25
+IR-O-U-0463,Madurai Kamaraj University,67.12,34.01,75.87,52.19,39.32,Madurai,Tamil Nadu,54.66,26
+IR-O-U-0523,King George`s Medical University,64.40,41.41,63.85,59.41,39.31,Lucknow,Uttar Pradesh,54.38,27
+IR-O-U-0051,Dibrugarh University,72.86,30.03,79.45,51.88,20.65,Dibrugarh,Assam,54.01,28
+IR-O-U-0136,Gujarat University,66.72,32.81,86.42,61.16,7.25,Ahmedabad,Gujarat,53.99,29
+IR-O-U-0381,Punjab Agricultural University,65.97,47.65,67.48,50.42,13.06,Ludhiana,Punjab,53.94,30
+IR-O-U-0443,Annamalai University,62.53,43.62,68.84,43.98,37.64,Annamalainagar,Tamil Nadu,53.77,31
+IR-O-U-0524,University of Lucknow,54.51,22.01,91.67,70.14,52.48,Lucknow,Uttar Pradesh,53.54,32
+IR-O-C-41593,COEP Technological University,62.05,36.48,63.22,53.20,58.47,Pune,Maharashtra,53.37,33
+IR-O-C-6379,Netaji Subhas University of Technology (NSUT),68.00,33.69,70.43,56.28,23.72,Delhi,Delhi,52.60,34
+IR-O-I-1280,Maharshi Dayanand University,54.22,36.71,83.22,53.32,31.96,Rohtak,Haryana,52.45,35
+IR-O-U-0569,University of Burdwan,52.57,38.58,81.63,51.13,26.65,Bardhaman,West Bengal,51.44,36
+IR-O-U-0464,"Manonmaniam Sundaranar University, Tirunelveli",62.15,37.74,69.81,50.53,22.25,Tirunelveli,Tamil Nadu,51.20,37
+IR-O-U-0554,G.B. Pant Universtiy of Agriculture and Technology,57.46,42.32,73.49,53.40,11.25,Pantnagar,Uttarakhand,51.10,38
+IR-O-U-0037,Sri Venkateswara University,66.02,23.87,78.47,56.40,27.45,Tirupati,Andhra Pradesh,51.04,39
+IR-O-U-0739,Madan Mohan Malaviya University of Technology,65.26,26.55,65.20,77.71,22.25,Gorakhpur,Uttar Pradesh,50.58,40
+IR-O-U-0164,Kurukshetra University,55.20,25.15,80.85,60.75,41.25,Kurukshetra,Haryana,50.47,41
+IR-O-U-0366,Utkal University,57.92,22.78,84.79,55.58,35.25,Bhubaneswar,Odisha,50.27,42
+IR-O-U-0251,Calicut University,72.15,24.52,65.06,57.58,24.90,Malappuram,Kerala,50.26,43
+IR-O-U-0248,University of Agricultural Sciences,70.31,20.96,79.39,60.68,8.65,Bengaluru,Karnataka,50.19,44
+IR-O-U-0105,Indraprastha Institute of Information Technology,52.77,43.54,65.49,54.69,23.25,New Delhi,Delhi,49.79,45
+IR-O-U-0298,Dr. Babasaheb Ambedkar Marathwada University,49.03,30.46,85.95,58.99,25.96,Aurangabad,Maharashtra,49.54,46
+IR-O-U-0162,Guru Jambheshwar University of Science and Technology,61.62,27.38,67.00,50.52,43.82,Hisar,Haryana,49.53,47
+IR-O-U-0159,Chaudhary Charan Singh Haryana Agricultural University,71.35,26.86,65.83,52.23,10.62,Hisar,Haryana,48.91,48
+IR-O-U-0485,Tamil Nadu Agricultural University,59.13,28.77,76.57,56.68,10.62,Coimbatore,Tamil Nadu,48.41,49
+IR-O-U-0270,Devi Ahilya Vishwavidyalaya,54.39,13.19,94.87,60.52,30.53,Indore,Madhya Pradesh,48.35,50

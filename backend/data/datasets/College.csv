@@ -1,0 +1,101 @@
+Institute ID,Name,TLR,RPC,GO,OI,Perception,City,State,Score,Rank
+IR-C-C-6377,Hindu College,63.91,59.88,90.57,77.68,95.21,Delhi,Delhi,74.47,1
+IR-C-C-6355,Miranda House,63.31,64.01,87.63,77.22,86.65,Delhi,Delhi,73.22,2
+IR-C-C-22470,St. Stephens's College,71.94,36.27,88.46,73.84,92.47,Delhi,Delhi,72.97,3
+IR-C-I-1317,Rama Krishna Mission Vivekananda Centenary College,72.30,65.33,100.00,53.69,38.75,Kolkata,West Bengal,72.97,3
+IR-C-C-22462,Atma Ram Sanatan Dharm College,64.86,94.84,78.35,73.45,54.87,New Delhi,Delhi,72.59,5
+IR-C-C-11881,St. Xavier`s College,66.78,67.75,88.22,57.23,74.99,Kolkata,West Bengal,72.15,6
+IR-C-C-41046,PSGR Krishnammal College for Women,73.19,55.22,81.67,66.27,74.81,Coimbatore,Tamil Nadu,72.09,7
+IR-C-C-44006,Loyola College,62.47,100.00,64.52,46.51,99.70,Chennai,Tamil Nadu,70.74,8
+IR-C-C-6385,Kirori Mal College,62.96,76.99,81.58,73.33,53.99,Delhi,Delhi,69.86,9
+IR-C-C-6415,Lady Shri Ram College for Women,60.27,29.01,93.87,75.59,100.00,New Delhi,Delhi,69.49,10
+IR-C-C-41124,PSG College of Arts and Science,67.40,67.37,71.92,53.35,86.79,Coimbatore,Tamil Nadu,69.06,11
+IR-C-C-6425,Hans Raj College,56.38,80.11,75.67,78.59,74.09,Delhi,Delhi,68.76,12
+IR-C-C-43921,Presidency College,69.75,70.00,68.28,52.76,76.06,Chennai,Tamil Nadu,68.36,13
+IR-C-C-43965,Madras Christian College,67.70,70.49,66.10,57.37,74.99,Chennai,Tamil Nadu,67.41,14
+IR-C-C-36513,Thiagarajar College,68.38,79.31,75.35,53.46,33.76,Madurai,Tamil Nadu,66.82,15
+IR-C-C-6409,Deshbandhu College,59.84,77.62,85.37,67.74,23.41,New Delhi,Delhi,66.03,16
+IR-C-C-11926,Ramakrishna Mission Vidyamandira,70.80,59.09,87.42,29.50,35.18,Howrah,West Bengal,65.51,17
+IR-C-C-6380,Acharya Narendra Dev College,68.47,76.19,64.52,63.11,34.71,New Delhi,Delhi,64.73,18
+IR-C-C-6419,Shri Ram College of Commerce,58.44,15.01,94.30,78.42,75.35,Delhi,Delhi,64.56,19
+IR-C-C-11691,Rajagiri College of Social Sciences,74.17,63.26,71.77,54.54,16.73,Ernakulam,Kerala,64.22,20
+IR-C-C-6369,Sri Venkateswara College,56.05,75.80,78.15,74.19,32.29,Delhi,Delhi,63.98,21
+IR-C-C-43671,"University College, Thiruvananthapuram",73.69,56.71,73.94,54.44,17.45,Thiruvananthapuram,Kerala,63.65,22
+IR-C-C-27608,Lady Irwin College,71.49,36.50,73.70,59.87,47.93,Delhi,Delhi,63.27,23
+IR-C-C-42814,Ramakrishna Mission Residential College,68.47,48.96,86.60,31.71,32.29,Kolkata,West Bengal,62.78,24
+IR-C-C-35860,"St. Joseph's College, Tiruchirappalli",63.84,61.55,75.46,48.61,42.43,Tiruchirappalli,Tamil Nadu,62.73,25
+IR-C-C-6361,Deen Dayal Upadhyaya College,58.60,73.09,66.57,71.91,42.43,New Delhi,Delhi,62.47,26
+IR-C-C-6387,Bhaskaracharya College of Applied Sciences,65.34,82.02,64.32,52.07,18.16,New Delhi,Delhi,61.55,27
+IR-C-C-41157,V.O. Chidambaram College,62.25,65.44,77.46,57.48,9.63,Thoothukudi,Tamil Nadu,60.80,28
+IR-C-C-6391,Maitreyi College,62.28,44.10,79.13,70.91,12.13,New Delhi,Delhi,59.60,29
+IR-C-C-43931,Stella Maris College for Women,57.60,57.09,64.05,61.58,57.40,Chennai,Tamil Nadu,59.51,30
+IR-C-C-6429,Gargi College,64.31,36.91,68.16,72.38,37.45,Delhi,Delhi,59.28,31
+IR-C-C-19103,Midnapore College,67.67,55.58,60.51,59.70,24.03,Midnapore,West Bengal,58.91,32
+IR-C-C-35825,Bishop Heber College,58.63,53.63,73.04,48.58,40.02,Tiruchirappalli,Tamil Nadu,58.61,33
+IR-C-C-6432,Dyal Singh College,63.15,46.50,70.69,70.38,16.00,New Delhi,Delhi,58.55,34
+IR-C-C-8308,Pachhunga University College,59.99,80.46,63.87,56.86,5.09,Aizawl,Mizoram,58.24,35
+IR-C-C-41173,"St. Xavier's College, Palayamkottai",63.11,63.95,64.34,51.53,21.52,Palayamkottai,Tamil Nadu,58.23,36
+IR-C-C-41126,Sri Krishna Arts and Science College,64.19,18.36,87.28,59.65,20.21,Coimbatore,Tamil Nadu,58.22,37
+IR-C-C-6426,Shaheed Rajguru College of Applied Sciences for Women,61.80,60.95,68.26,69.40,3.13,Delhi,Delhi,58.18,38
+IR-C-C-6420,Jesus & Mary College,64.79,11.91,80.52,68.66,30.76,New Delhi,Delhi,57.79,39
+IR-C-C-6413,Sri Guru Gobind Singh College of Commerce,62.76,7.07,93.04,67.70,16.00,Delhi,Delhi,57.79,39
+IR-C-C-35787,"Holy Cross College, Tiruchirappalli",64.71,34.29,75.78,54.72,20.87,Tiruchirappalli,Tamil Nadu,57.53,41
+IR-C-C-41154,"Nesamony Memorial Christian College, Marthandam, Kanyakumari Dist.",68.06,65.42,57.20,55.80,1.07,Marthandam,Tamil Nadu,57.03,42
+IR-C-C-6417,Kamala Nehru College,57.16,16.09,87.54,76.50,21.52,Delhi,Delhi,56.95,43
+IR-C-C-35868,Dhanalakshmi Srinivasan College of Arts and Science for Women,73.26,11.56,71.24,62.47,18.16,Perambalur,Tamil Nadu,56.91,44
+IR-C-I-1385,Fergusson College (Autonomous),48.85,30.42,73.22,51.37,92.35,Pune,Maharashtra,56.77,45
+IR-C-C-11582,"St. Teresa's College, Ernakulam",69.75,15.25,79.87,56.67,8.76,Ernakulam,Kerala,56.71,46
+IR-C-C-36411,Sacred Heart College (Autonomous),56.78,87.70,56.29,53.71,11.32,Tirupattur,Tamil Nadu,56.43,47
+IR-C-C-11708,Sacred Heart College,62.29,44.40,73.24,54.57,9.63,Kochi,Kerala,56.31,48
+IR-C-C-6366,Shivaji College,56.65,52.51,76.04,60.49,5.09,Delhi,Delhi,56.11,49
+IR-C-C-43705,"Govt. College for Women, Thiruvananthapuram",68.72,44.04,61.99,52.99,12.13,Thiruvananthapuram,Kerala,56.11,49
+IR-C-C-29284,Govt Home Science College,65.39,10.70,81.21,63.35,15.25,Chandigarh,Chandigarh,55.92,51
+IR-C-C-41106,Kongunadu Arts and Science College,47.30,82.32,69.75,42.28,29.71,Coimbatore,Tamil Nadu,55.91,52
+IR-C-C-11697,"Maharaja's College, Ernakulam",70.45,32.16,62.74,56.51,13.72,Ernakulam,Kerala,55.70,53
+IR-C-C-36547,The American College,67.64,43.74,58.12,45.83,29.71,Madurai,Tamil Nadu,55.69,54
+IR-C-C-20830,St. Joseph`s College of Commerce,60.78,1.67,87.59,65.49,26.40,Bengaluru,Karnataka,55.65,55
+IR-C-C-41100,Sri Ramakrishna College of Arts and Science,66.48,17.53,74.70,55.30,22.16,Coimbatore,Tamil Nadu,55.64,56
+IR-C-C-8169,"St. Thomas College, Thrissur",59.80,39.80,78.35,54.13,6.97,Thrissur,Kerala,55.59,57
+IR-C-C-16897,St. Aloysius College,63.88,22.58,67.05,70.64,28.09,Mangaluru,Karnataka,55.57,58
+IR-C-C-35832,"Jamal Mohamed College, Tiruchirappalli",62.92,43.06,66.77,50.46,20.87,Tiruchirappalli,Tamil Nadu,55.46,59
+IR-C-C-20653,Kristu Jayanti College,63.69,36.04,63.79,69.93,15.25,Bengaluru,Karnataka,55.35,60
+IR-C-C-8010,"St. Joseph`s College, Devagiri",66.88,32.16,68.62,53.18,12.93,Kozhikode,Kerala,55.33,61
+IR-C-C-43711,Bishop Moore College,61.37,66.82,59.78,55.27,2.11,Alappuzha,Kerala,55.25,62
+IR-C-C-36579,Ayya Nadar Janaki Ammal College,60.92,44.15,66.55,49.77,25.23,Sivakasi,Tamil Nadu,55.13,63
+IR-C-C-18938,"Government Institute of Science, Nagpur",63.25,33.41,69.01,54.04,19.53,Nagpur,Maharashtra,54.91,64
+IR-C-C-6431,Ramanujan College,55.81,35.13,80.63,60.55,10.48,New Delhi,Delhi,54.85,65
+IR-C-C-43767,Mar Ivanios College,56.75,67.87,63.40,53.23,6.97,Thiruvananthapuram,Kerala,54.75,66
+IR-C-C-43946,Women`s Christian College,59.53,27.61,69.85,59.96,31.28,Chennai,Tamil Nadu,54.54,67
+IR-C-C-41035,Government Arts College,63.26,23.60,71.05,54.84,24.63,Coimbatore,Tamil Nadu,54.54,67
+IR-C-C-11831,"S.B. College, Changanassery",57.14,70.00,65.17,47.48,1.07,Kottayam,Kerala,54.51,69
+IR-C-I-1373,Goswami Ganesh Dutta S.D. College,46.83,36.48,83.08,73.77,21.52,Chandigarh,Chandigarh,54.50,70
+IR-C-N-6,Queen Mary`s College,58.17,32.65,72.64,58.23,23.41,Chennai,Tamil Nadu,54.49,71
+IR-C-C-6367,Daulat Ram College,53.45,25.42,68.59,73.42,46.88,Delhi,Delhi,54.37,72
+IR-C-C-43964,Madras School of Social Work,66.93,2.70,79.20,53.71,18.16,Chennai,Tamil Nadu,54.17,73
+IR-C-C-11815,Mar Athanasius College,64.27,39.18,66.72,54.61,2.11,Kothamangalam,Kerala,53.94,74
+IR-C-C-41054,Dr. N. G. P. Arts and Science College,59.04,35.03,71.33,52.82,19.53,Coimbatore,Tamil Nadu,53.93,75
+IR-C-C-28526,Alagappa Government Arts College,55.04,38.45,70.71,47.86,36.10,Karaikudi,Tamil Nadu,53.87,76
+IR-C-C-6502,Kanchi Mamunivar Govt. Institute for Postgraduate Studies and Research,50.98,63.39,77.83,39.25,5.09,PUDUCHERRY,Pondicherry,53.80,77
+IR-C-C-41140,A.P.C. Mahalaxmi College for Women,64.91,14.86,77.14,58.80,4.12,Thoothukkudi,Tamil Nadu,53.77,78
+IR-C-C-43902,Ethiraj College for Women,62.28,16.42,63.93,53.65,48.95,Chennai,Tamil Nadu,53.61,79
+IR-C-C-8008,"Vimala College, Thrissur",67.42,19.13,70.74,57.46,2.11,Thrissur,Kerala,53.49,80
+IR-C-C-39206,"S S Jain Subodh P G College, Jaipur",72.86,18.08,53.28,80.83,2.11,Jaipur,Rajasthan,53.46,81
+IR-C-C-35878,National College,60.65,51.58,60.01,42.60,18.85,Tiruchirappalli,Tamil Nadu,53.14,82
+IR-C-I-1293,Sri Ramakrishna Mission Vidyalaya College of Arts and Science,54.63,94.60,61.32,8.08,9.63,Coimbatore,Tamil Nadu,53.14,82
+IR-C-C-8209,Government Victoria College,61.34,31.62,72.57,47.08,9.63,Palakkad,Kerala,53.09,84
+IR-C-I-1322,St. Joseph's College,57.60,20.23,80.61,58.39,8.76,Thrissur,Kerala,52.95,85
+IR-C-C-6412,Maharaja Agrasen College,62.24,30.49,65.26,63.19,7.87,Delhi,Delhi,52.88,86
+IR-C-C-20729,"M S Ramaiah College of Arts, Science, and Commerce",48.84,23.13,81.32,61.49,33.76,Bengaluru,Karnataka,52.87,87
+IR-C-C-11964,Scottish Church College,62.92,45.60,56.96,47.99,17.45,Kolkata,West Bengal,52.79,88
+IR-C-C-43998,Guru Nanak College,65.60,24.89,63.68,52.61,14.49,Chennai,Tamil Nadu,52.60,89
+IR-C-C-33555,St. Xavier`s College,47.83,30.15,74.17,59.44,44.72,Mumbai,Maharashtra,52.60,89
+IR-C-C-11991,Bethune College,62.22,24.47,64.73,44.34,33.27,Kolkata,West Bengal,52.50,91
+IR-C-C-11771,CMS College Kottayam,64.63,41.75,59.23,53.35,1.07,Kottayam,Kerala,52.36,92
+IR-C-C-6381,Keshav Mahavidyalya,64.21,35.74,61.51,57.07,0.00,Delhi,Delhi,52.13,93
+IR-C-C-41042,Dr. S. N. S. Rajalakshmi College of Arts and Science,70.11,2.13,66.61,64.67,6.04,Coimbatore,Tamil Nadu,52.08,94
+IR-C-C-36502,Virudhunagar Hindu Nadars Senthikumara Nadar College,58.97,52.77,59.71,45.68,10.48,Virudhunagar,Tamil Nadu,52.06,95
+IR-C-C-35848,Government Arts College,58.16,29.32,74.85,53.40,2.11,Kumbakonam,Tamil Nadu,51.92,96
+IR-C-C-6376,Delhi College of Arts and Commerce,48.21,13.00,79.55,66.32,41.64,South West,Delhi,51.91,97
+IR-C-C-41191,Sadakathullah Appa College,59.79,18.47,77.37,50.94,7.87,Tirunelveli,Tamil Nadu,51.90,98
+IR-C-C-43229,Shri Shivaji Science College,57.36,30.83,79.59,41.88,2.11,Amravati,Maharashtra,51.86,99
+IR-C-C-41189,Scott Christian College,68.39,25.68,57.83,51.25,10.48,Nagercoil,Tamil Nadu,51.84,100

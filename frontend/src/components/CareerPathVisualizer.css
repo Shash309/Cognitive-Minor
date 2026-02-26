@@ -1,0 +1,318 @@
+/* --- Main Container & Header --- */
+.visualizer-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.5s ease-out;
+    background-color: transparent;
+}
+
+.visualizer-header {
+    text-align: center;
+    padding: 0 0 1.5rem 0;
+}
+
+.visualizer-header h2 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.visualizer-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+/* --- Wrapper --- */
+.visualizer-wrapper {
+    flex-grow: 1;
+    height: 75vh;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    background: rgba(15, 23, 42, 0.4);
+}
+
+/* --- MindMap Node Styles --- */
+.mindmap-node {
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    width: fit-content;
+    min-width: 160px;
+}
+
+.mindmap-node:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Highlighting path */
+.mindmap-node.active-path {
+    border: 3px solid #fff !important;
+    box-shadow: 0 0 20px #fff, 0 0 40px rgba(255, 255, 255, 0.3);
+    transform: scale(1.08);
+    z-index: 10;
+}
+
+.mindmap-node.active-path .node-label {
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.node-icon {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* --- Category Color Themes --- */
+/* Vibrant gradients for a systematic look */
+.school {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: #fff;
+}
+
+.high-school {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: #fff;
+}
+
+.college {
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+    color: #fff;
+}
+
+.postgrad {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fff;
+}
+
+.career {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+}
+
+/* --- Side Panel --- */
+.side-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 340px;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.95);
+    border-left: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    z-index: 20;
+    padding: 40px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.panel-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+/* Side Panel Indicators */
+.panel-indicator.school {
+    background: #3b82f6;
+}
+
+.panel-indicator.high-school {
+    background: #8b5cf6;
+}
+
+.panel-indicator.college {
+    background: #06b6d4;
+}
+
+.panel-indicator.postgrad {
+    background: #f59e0b;
+}
+
+.panel-indicator.career {
+    background: #10b981;
+}
+
+.panel-stats {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.stat span {
+    color: var(--text-main);
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.close-button:hover {
+    color: var(--text-main);
+}
+
+/* --- Roadmap Timeline (Bottom) --- */
+.roadmap-timeline {
+    margin-top: 2rem;
+    padding: 1.5rem 2.5rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    animation: slideInUp 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.roadmap-timeline h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.roadmap-timeline h3 i {
+    color: #3b82f6;
+}
+
+.timeline-steps {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+}
+
+.timeline-step {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.step-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+/* Reuse category colors for timeline circles */
+.step-circle.school {
+    background: var(--school-grad, linear-gradient(135deg, #3b82f6, #2563eb));
+}
+
+.step-circle.high-school {
+    background: var(--high-school-grad, linear-gradient(135deg, #8b5cf6, #7c3aed));
+}
+
+.step-circle.college {
+    background: var(--college-grad, linear-gradient(135deg, #06b6d4, #0891b2));
+}
+
+.step-circle.postgrad {
+    background: var(--postgrad-grad, linear-gradient(135deg, #f59e0b, #d97706));
+}
+
+.step-circle.career {
+    background: var(--career-grad, linear-gradient(135deg, #10b981, #059669));
+}
+
+.step-info {
+    margin: 0 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.step-label {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+.step-category {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.step-connector {
+    margin: 0 10px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* --- Edge Animation Override (prominent dotted line) --- */
+.react-flow__edge-path {
+    transition: stroke-dashoffset 2s linear infinite;
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+    stroke-dasharray: 10, 5;
+    animation: dashdraw 0.5s linear infinite;
+}
+
+@keyframes dashdraw {
+    from {
+        stroke-dashoffset: 15;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}

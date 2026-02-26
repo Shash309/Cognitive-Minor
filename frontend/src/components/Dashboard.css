@@ -1,0 +1,335 @@
+/* Dashboard Shell */
+.app-shell {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--bg-core);
+  color: var(--text-main);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Sidebar Shell */
+.sidebar-shell {
+  width: 280px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(2, 6, 23, 0.9);
+  /* Dark semi-transparent */
+  backdrop-filter: blur(12px);
+  border-right: 1px solid var(--glass-border);
+  flex-shrink: 0;
+  z-index: 20;
+}
+
+/* Sidebar Header */
+.sidebar-header {
+  height: 80px;
+  /* Fixed height match */
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.5rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.sidebar-logo-icon {
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+  padding: 1.5rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+}
+
+.sidebar-nav li {
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 12px 16px;
+  border-radius: 12px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.sidebar-nav a:hover {
+  background: var(--glass-highlight);
+  color: var(--text-main);
+  transform: translateX(4px);
+}
+
+.sidebar-nav a.active {
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.15), transparent);
+  color: var(--primary);
+  border-left: 3px solid var(--primary);
+  font-weight: 600;
+}
+
+.sidebar-nav a i {
+  width: 20px;
+  text-align: center;
+}
+
+/* Main Content Shell */
+.main-shell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.05), transparent 40%);
+}
+
+/* Header Shell */
+.header-shell {
+  height: 80px;
+  /* Exact match to sidebar header */
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+  /* Spacious padding */
+  border-bottom: 1px solid var(--glass-border);
+  background: rgba(2, 6, 23, 0.9);
+  /* Match sidebar for unified look */
+  backdrop-filter: blur(12px);
+  z-index: 10;
+}
+
+
+.header-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* Center vertically */
+  height: 100%;
+  padding-left: 1rem;
+  gap: 1.5rem;
+  /* Space between date and time */
+}
+
+.header-date {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--text-main);
+  letter-spacing: 0.5px;
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+.header-time {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  line-height: 1;
+  border-left: 1px solid var(--glass-border);
+  padding-left: 1.5rem;
+}
+
+
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  height: 100%;
+}
+
+.btn-icon {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+  position: relative;
+}
+
+.btn-icon:hover {
+  background: var(--glass-highlight);
+  color: var(--text-main);
+  border-color: var(--primary);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: var(--error);
+  color: white;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+  border: 2px solid var(--bg-core);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 6px 12px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+}
+
+.avatar-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+/* Content Shell */
+.content-shell {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+/* Features/Home Styles */
+.home-view {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.home-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-top: 2rem;
+}
+
+.home-header h1 {
+  font-size: 2.5rem;
+  background: linear-gradient(to right, #fff, var(--text-secondary));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.feature-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 2rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+}
+
+.card-icon {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+
+.card-content h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-content p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+/* Notifications Panel */
+.notifications-panel {
+  position: absolute;
+  top: 90px;
+  right: 3rem;
+  width: 380px;
+  background: #1e293b;
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  overflow: hidden;
+}
+
+.notifications-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notifications-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  padding: 1rem;
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  gap: 1rem;
+}
+
+.notification-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+}

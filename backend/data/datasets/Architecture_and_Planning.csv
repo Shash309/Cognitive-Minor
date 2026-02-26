@@ -1,0 +1,41 @@
+Institute ID,Name,TLR,RPC,GO,OI,Perception,City,State,Score,Rank
+IR-A-U-0560,Indian Institute of Technology Roorkee,81.72,93.02,93.38,74.46,75.00,Roorkee,Uttarakhand,84.92,1
+IR-A-U-0573,Indian Institute of Technology Kharagpur,76.48,84.65,90.85,67.60,82.56,Kharagpur,West Bengal,80.71,2
+IR-A-U-0263,National Institute of Technology Calicut,93.63,59.49,81.67,71.86,66.45,Kozhikode,Kerala,79.51,3
+IR-A-U-0584,"Indian Institute of Engineering Science and Technology, Shibpur",76.13,56.74,73.60,69.03,62.91,Howrah,West Bengal,69.71,4
+IR-A-U-0116,School of Planning and Architecture New Delhi,78.60,29.07,70.28,76.93,100.00,New Delhi,Delhi,69.00,5
+IR-A-U-0127,Centre for Environmental Planning and Technology University,74.51,42.69,77.85,66.09,67.12,Ahmedabad,Gujarat,67.23,6
+IR-A-U-0108,Jamia Millia Islamia,67.35,42.15,89.89,86.29,42.34,New Delhi,Delhi,66.21,7
+IR-A-U-0467,National Institute of Technology Tiruchirappalli,56.91,53.29,81.39,74.56,79.20,Tiruchirappalli,Tamil Nadu,65.08,8
+IR-A-U-0357,National Institute of Technology Rourkela,62.25,72.51,72.92,65.46,43.53,Rourkela,Odisha,64.88,9
+IR-A-U-0334,Visvesvaraya National Institute of Technology Nagpur,61.28,51.38,86.86,65.37,43.53,Nagpur,Maharashtra,63.05,10
+IR-A-U-0473,S.R.M. Institute of Science and Technology,66.46,51.79,74.90,56.79,42.34,Chennai,Tamil Nadu,61.83,11
+IR-A-U-0626,School of Planning and Architecture Bhopal,71.34,23.24,75.80,75.80,58.23,Bhopal,Madhya Pradesh,61.75,12
+IR-A-U-0747,Chandigarh University,73.20,39.39,69.77,75.53,28.06,Mohali,Punjab,61.47,13
+IR-A-U-0496,Aligarh Muslim University,55.56,77.47,72.25,47.41,41.11,Aligarh,Uttar Pradesh,61.01,14
+IR-A-U-0410,Malaviya National Institute of Technology,55.38,63.59,82.22,70.26,24.51,Jaipur,Rajasthan,60.79,15
+IR-A-U-0627,School of Planning and Architecture Vijayawada,62.32,26.75,81.64,67.64,70.33,Vijayawada,Andhra Pradesh,60.40,16
+IR-A-U-0284,Maulana Azad National Institute of Technology,65.46,34.89,80.11,70.96,41.11,Bhopal,Madhya Pradesh,60.39,17
+IR-A-C-43708,"College of Engineering, Trivandrum",56.16,33.09,88.84,63.36,52.01,Thiruvananthapuram,Kerala,58.40,18
+IR-A-U-0146,Nirma University,63.94,41.46,71.79,60.24,34.37,Ahmedabad,Gujarat,57.69,19
+IR-A-U-0202,Birla Institute of Technology,65.75,38.23,60.92,60.78,50.04,Ranchi,Jharkhand,57.21,20
+IR-A-C-1331,M. S. Ramaiah Institute of Technology,64.43,26.67,76.60,57.94,47.98,Bengaluru,Karnataka,57.01,21
+IR-A-U-0461,Dr. M. G. R. Educational and Research Institute,68.15,19.70,74.66,68.93,32.88,Chennai,Tamil Nadu,56.31,22
+IR-A-C-57952,BMS College of Architecture,63.77,11.91,79.35,59.89,62.91,Bengaluru,Karnataka,56.04,23
+IR-A-U-0379,Lovely Professional University,67.28,38.89,65.97,63.48,16.35,Phagwara,Punjab,55.86,24
+IR-A-U-0779,Amity University,72.63,1.73,76.79,75.05,24.51,North Twenty Four Parganas,West Bengal,54.71,25
+IR-A-C-26794,Thiagarajar College of Engineering,61.14,30.94,73.06,51.06,43.53,Madurai,Tamil Nadu,54.71,25
+IR-A-U-0072,National Institute of Technology Patna,52.05,61.84,57.60,59.04,35.81,Patna,Bihar,54.19,27
+IR-A-C-46330,"Manipal School of Architecture and Planning, MAHE",65.03,0.50,66.77,67.25,70.33,Udupi,Karnataka,53.21,28
+IR-A-U-0099,Guru Gobind Singh Indraprastha University,50.28,29.46,83.78,58.63,41.11,New Delhi,Delhi,52.73,29
+IR-A-C-29341,"Chandigarh College of Architecture, Sector-12",63.22,33.11,46.32,70.76,43.53,Chandigarh,Chandigarh,52.60,30
+IR-A-U-0201,Shri Mata Vaishno Devi University,68.94,34.09,58.19,53.90,11.58,Katra,Jammu and Kashmir,52.59,31
+IR-A-U-0189,National Institute of Technology Hamirpur,44.50,43.74,76.60,67.27,39.85,Hamirpur,Himachal Pradesh,52.58,32
+IR-A-U-0749,"Manipal University, Jaipur",50.57,46.73,72.41,59.14,16.35,Jaipur,Rajasthan,51.60,33
+IR-A-U-0439,Anna University,46.29,40.92,50.17,52.28,92.00,Chennai,Tamil Nadu,51.16,34
+IR-A-U-0373,Chitkara University,56.97,30.14,71.96,56.92,20.63,Rajpura,Punjab,50.96,35
+IR-A-U-0092,National Institute of Technology Raipur,53.48,42.83,60.59,62.90,22.62,Raipur,Chhattisgarh,50.63,36
+IR-A-U-0830,Anant National University,67.74,6.79,70.98,59.84,8.97,Ahmedabad,Gujarat,49.53,37
+IR-A-C-47256,"BMS School of Architecture, Yelahanka",58.23,24.39,68.57,55.33,20.63,Bengaluru,Karnataka,49.47,38
+IR-A-U-0011,Gandhi Institute of Technology and Management,58.15,35.60,51.19,50.83,32.88,Visakhapatnam,Andhra Pradesh,48.99,39
+IR-A-U-0445,B. S. Abdur Rahman Crescent Institute of Science and Technology,57.00,27.27,59.70,47.06,26.33,Chennai,Tamil Nadu,47.53,40
