@@ -24,7 +24,7 @@
 
 /* Main Content Card */
 .quiz-main-content {
-  background: rgba(30, 41, 59, 0.7);
+  background: rgba(255, 255, 255, 0.85);
   /* Darker, more opaque background */
   backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
@@ -38,7 +38,7 @@
 /* Progress Bar */
 .quiz-progress-bar {
   height: 8px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.05);
   border-radius: 4px;
   margin-bottom: 2rem;
   position: relative;
@@ -67,7 +67,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.05);
   border: 1px solid var(--glass-border);
   display: flex;
   align-items: center;
@@ -121,7 +121,7 @@
 }
 
 .option-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.03);
   border: 1px solid var(--glass-border);
   color: var(--text-secondary);
   padding: 1.25rem;
@@ -140,7 +140,7 @@
 }
 
 .option-card:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.05);
   transform: translateY(-4px);
   border-color: var(--text-muted);
   color: var(--text-main);
@@ -192,7 +192,7 @@
 }
 
 .btn-back:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.03);
   color: var(--text-main);
   border-color: var(--text-muted);
 }

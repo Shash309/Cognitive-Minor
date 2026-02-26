@@ -9,9 +9,31 @@ const LandingPage = ({ onLogin }) => {
   const handleAuth = (e, type) => {
     e.preventDefault();
     const form = e.target;
-    // Simple mock auth logic for UI demo
-    const email = form.email ? form.email.value : '';
-    onLogin(email || (type === 'login' ? 'Explorer' : 'New User'));
+    
+    // Auth logic using localStorage user registry
+    const email = form.email.value;
+    const password = form.password.value;
+    const name = form.name ? form.name.value : 'User';
+
+    // Fetch existing users from localStorage
+    const users = JSON.parse(localStorage.getItem('career_app_users') || '{}');
+
+    if (type === 'register') {
+      if (users[email]) {
+        alert(t('User already exists. Please sign in.'));
+        return;
+      }
+      users[email] = { name, email, password };
+      localStorage.setItem('career_app_users', JSON.stringify(users));
+      onLogin({ email, name });
+    } else { // login
+      const user = users[email];
+      if (!user || user.password !== password) {
+        alert(t('Invalid credentials. Please try again.'));
+        return;
+      }
+      onLogin({ email, name: user.name });
+    }
   };
 
   return (

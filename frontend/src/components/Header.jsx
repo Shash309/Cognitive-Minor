@@ -1,5 +1,4 @@
-// frontend/src/components/Header.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { changeLanguage } from '../features/i18n';
@@ -11,68 +10,112 @@ const formatUsername = (user) => {
   return username.charAt(0).toUpperCase() + username.slice(1);
 };
 
+const getInitial = (user) => {
+  const name = formatUsername(user);
+  return name.charAt(0).toUpperCase();
+};
+
 const Header = ({ user, onLogout, unreadCount = 0, onNotificationClick }) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const menuRef = useRef(null);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
+  // Close user menu on outside click
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setShowUserMenu(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
+
   const handleLangChange = (e) => {
     changeLanguage(e.target.value);
   };
 
+  const dateStr = currentTime.toLocaleDateString(undefined, { weekday: 'short', month: 'long', day: 'numeric' });
+  const timeStr = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
   return (
     <header className="header-shell">
+      {/* Left: Date & Time - Very Subtle */}
       <div className="header-left">
-        <span className="header-date">
-          {currentTime.toLocaleDateString(undefined, { weekday: 'short', month: 'long', day: 'numeric' })}
-        </span>
-        <span className="header-time">
-          {currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-        </span>
+        <div className="header-datetime">
+          <span className="header-date">{dateStr}</span>
+          <span className="header-time-separator">|</span>
+          <span className="header-time">{timeStr}</span>
+        </div>
       </div>
 
+      {/* Center: (Removed, handled in Home view) */}
+      <div className="header-center"></div>
+
+      {/* Right: Controls */}
       <div className="header-right">
-        <select
-          value={i18n.language || 'en'}
-          onChange={handleLangChange}
-          style={{
-            background: 'rgba(255,255,255,0.05)',
-            border: '1px solid var(--glass-border)',
-            color: 'var(--text-main)',
-            padding: '6px 10px',
-            borderRadius: '8px',
-            outline: 'none',
-            cursor: 'pointer'
-          }}
-        >
-          <option value="en" style={{ color: '#000' }}>English</option>
-          <option value="hi" style={{ color: '#000' }}>हिंदी</option>
-          <option value="ur" style={{ color: '#000' }}>اردو</option>
-        </select>
-
-        <button className="btn-icon" onClick={onNotificationClick}>
-          <i className="fas fa-bell"></i>
-          {unreadCount > 0 && <span className="notification-badge">{unreadCount}</span>}
-        </button>
-
-        <div className="user-profile">
-          <div className="avatar-circle">
-            {formatUsername(user).charAt(0)}
-          </div>
-          <span className="user-name">{formatUsername(user)}</span>
+        {/* Language Selector */}
+        <div className="lang-wrapper">
+          <select
+            value={i18n.language || 'en'}
+            onChange={handleLangChange}
+            className="lang-select-minimal"
+          >
+            <option value="en">English</option>
+            <option value="hi">हिंदी</option>
+            <option value="ur">اردو</option>
+          </select>
         </div>
 
-        <button onClick={onLogout} className="btn-icon" title="Logout" style={{ borderColor: 'var(--error)', color: 'var(--error)' }}>
-          <i className="fas fa-sign-out-alt"></i>
+        {/* Notification Bell */}
+        <button className="icon-btn-refined" onClick={onNotificationClick} title="Notifications">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+          </svg>
+          {unreadCount > 0 && <span className="notif-dot" />}
         </button>
+
+        {/* User Pill */}
+        <div className="user-menu-wrapper" ref={menuRef}>
+          <button
+            className="user-pill-refined"
+            onClick={() => setShowUserMenu(!showUserMenu)}
+          >
+            <div className="pill-avatar">{getInitial(user)}</div>
+            <span className="pill-name">{formatUsername(user)}</span>
+          </button>
+
+          {showUserMenu && (
+            <div className="user-dropdown-refined">
+              <div className="dropdown-header">
+                <div className="dropdown-avatar-lg">{getInitial(user)}</div>
+                <div className="dropdown-user-details">
+                  <p className="dropdown-name">{formatUsername(user)}</p>
+                  <p className="dropdown-email">{typeof user === 'object' ? user.email : user}</p>
+                </div>
+              </div>
+              <div className="dropdown-menu-items">
+                <button className="dropdown-menu-btn" onClick={onLogout}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                  </svg>
+                  Sign Out
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </header>
-
-
   );
 };
 
