@@ -5,133 +5,147 @@
 </p>
 
 <p align="center">
-  <a href="#"><img alt="Python" src="https://img.shields.io/badge/python-3.10%2B-blue"/></a>
-  <a href="#"><img alt="License" src="https://img.shields.io/badge/license-MIT-green"/></a>
-  <a href="#"><img alt="Status" src="https://img.shields.io/badge/status-Active-brightgreen"/></a>
+  <img alt="Python" src="https://img.shields.io/badge/python-3.10%2B-blue"/>
+  <img alt="React" src="https://img.shields.io/badge/react-19-blue"/>
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-green"/>
+  <img alt="Status" src="https://img.shields.io/badge/status-Active-brightgreen"/>
 </p>
 
-CAPE is an explainable career recommendation engine and path visualizer that maps student profiles (skills, education, interests) to ranked career suggestions and interactive educational roadmaps.
+**CAPE (Career Path Explorer)** is an advanced, AI-driven career recommendation engine and path visualizer. It seamlessly maps student profiles—comprising skills, education, and psychological traits—to ranked career suggestions and generates interactive educational roadmaps to guide them toward their goals.
 
 ---
 
-## 🚀 Highlights
-- **Explainable AI**: Random Forest model with feature importance insights.
-- **Interactive Career Journey**: A modern, mind-map styled visualizer with **Path Tracing**.
-- **Roadmap Timeline**: Step-by-step guidance generated dynamically based on selected career goals.
-- **End-to-End Pipeline**: Includes data preprocessing, feature engineering, and model training.
-- **Modern UI**: Bento-box inspired React frontend with smooth animations and vibrant aesthetics.
+## ✨ Core Features & Modules
 
----
+CAPE provides an end-to-end career guidance ecosystem equipped with cutting-edge ML pipelines and an engaging modern interface.
 
-## 🖼️ Latest Improvements: Visualizer 2.0
+### 🧠 ML-Powered Recommendation Engine
+At the heart of CAPE lies a sophisticated prediction engine that fuses multiple models:
+- **Natural Language Processing (NLP)**: Uses `SentenceTransformer (all-MiniLM-L6-v2)` to generate embeddings from text-based quiz responses.
+- **Classification Model**: Integrates TF-IDF features with embeddings to classify responses using a trained Random Forest model (`career_1200_model.pkl`).
+- **Fusion Scoring**: Merges ML-derived text analysis with psychometric models to accurately rank and align matching careers (Data Scientist, Software Engineer, Manager, Designer, etc.).
 
-<div align="center" style="display:flex;flex-wrap:wrap;gap:18px;justify-content:center;max-width:1200px;margin:0 auto;">
+### 📊 Psychological Assessment
+CAPE performs dynamic psychometric evaluations based on the widely recognized **Big Five Personality Traits** (Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism) along with custom cognitive vectors:
+- **Trait Vectors**: Evaluates Decision-Making Style, Stress Tolerance, Risk Tolerance, and Analytical vs. Intuitive thinking.
+- **Skill Gap Analysis**: Compares a user’s current traits against the baseline requirements of selected careers, identifying areas (e.g., Extraversion, Leadership) where the user can focus their growth.
+- **Radar Charts**: Beautifully visualizes dominant psychological profiles in the dashboard.
 
-  <figure style="width:100%;max-width:800px;margin:0;text-align:center;font-family:system-ui,Segoe UI,Helvetica,Arial,sans-serif;">
-    <a href="./screenshots/Visualizer.png" style="display:block;text-decoration:none;color:inherit;">
-      <img src="./screenshots/Visualizer.png" alt="Improved Visualizer"
-        style="width:100%;height:auto;border-radius:12px;border:1px solid #e9eef2;box-shadow:0 12px 40px rgba(12,20,32,0.1);transition:transform .18s ease;display:block;" />
-    </a>
-    <figcaption style="font-size:14px;color:#556;line-height:1.2;margin-top:12px;font-weight:600;">
-      Visualizer 2.0 — Interactive Path Mapping with Roadmap Timeline
-    </figcaption>
-  </figure>
-
-</div>
-
-The visualizer now features:
-- **Directional Path Tracing**: Click any stage to highlight the entire journey from root to career.
+### 🗺️ Visualizer 2.0: Interactive Career Journey
+Navigate through careers natively using a mind-map styled interface powered by **React Flow** and **ELK.js**.
+- **Directional Path Tracing**: Click on any educational or career stage to highlight the entire journey from root to destination.
 - **Animated Dotted Connections**: Visual guidance showing the flow of progression.
 - **Path Glow**: Selected nodes emit a high-intensity glow for clear focus.
-- **Dynamic Timeline**: A step-by-step roadmap at the bottom providing clear milestones.
+
+### 🛤️ Roadmap Timeline & Skill Builder
+Once a career path is chosen, CAPE dynamically generates a step-by-step **Roadmap Timeline** outlining specific milestones (e.g., getting a degree, building a portfolio, completing an internship). 
+Coupled with the **Skill Builder** module, users receive actionable, targeted recommendations on what hard and soft skills are required to succeed at every stage.
+
+### 🎓 College Explorer
+A dedicated interface integrating a customized database (`colleges.csv`) to help users search and filter relevant colleges that offer the degrees necessary for their chosen career paths.
+
+### 💎 Stunning Modern UI
+- **3D Interactive Backgrounds**: Uses **Vanta.js** and **Three.js** to render beautiful, immersive fluid 3D backgrounds.
+- **Fluid Animations**: State transitions and component mounting are naturally animated using **Framer Motion**.
+- **Bento-Box Inspiration**: Features an accessible, card-based layout providing a premium User Experience tailored for responsiveness.
 
 ---
 
-## 📁 Project Structure
+## 🛠️ Technology Stack
+
+**Frontend (Client-Side)**
+- **Framework**: React 19 + Vite
+- **Styling & UI**: Modern Vanilla CSS, Framer Motion (Animations), react-icons
+- **Visualization**: React Flow, ELK.js (Layout Algorithms), Three.js, Vanta.js
+- **Routing**: React Router DOM
+- **Internationalization**: i18next
+
+**Backend (Server & ML)**
+- **Framework**: Python 3.10+, Flask, Flask-CORS
+- **Machine Learning**: Scikit-Learn, Sentence-Transformers, PyTorch
+- **Data Manipulation**: Pandas, NumPy
+- **Storage**: Lightweight JSON databases for rapid stateless architecture.
+
+---
+
+## 📁 Project Architecture
+
+The repository is modularly split into a Python API layer and a React UI layer:
 
 ```
-.vscode/                     - editor settings
-backend/                     - Python backend (Flask)
-  ├── data/                  - datasets (colleges.csv, specialized datasets)
-  ├── models/                - trained .pkl artifacts (Random Forest, Vectorizers)
-  ├── scripts/               - utility scripts (merging, testing, shape checking)
-  ├── app.py                 - Flask API entry point
-  └── requirements.txt       - Backend dependencies
-frontend/                    - Vite/React app (UI)
+.vscode/                     - Editor settings (formatting, extensions)
+backend/                     - Python API (Flask) & ML Pipeline
+  ├── data/                  - DB storage, user responses, psych_profiles, and collages.csv
+  ├── models/                - Serialized `.pkl` trained ML models (Random Forest, Vectorizers)
+  ├── scripts/               - Automation scripts for merging datasets and sanity checks
+  ├── app.py                 - Core Flask Router, ML Inference, and Fusion Engine logic
+  └── requirements.txt       - Python backend dependencies
+frontend/                    - Vite-powered React UI Application
   ├── src/
-  │   ├── components/        - UI components (Visualizer, Dashboard, etc.)
-  │   └── assets/            - styling and images
-  ├── package.json
-  └── README.md
-screenshots/                 - documentation images
+  │   ├── assets/            - Global styles (variables, base resets), Images/SVGs
+  │   ├── components/        - UI Modules (Visualizer, Dashboard, Assessment, Landing Page)
+  │   ├── App.jsx            - Core entrypoint and Routes definition
+  │   └── main.jsx           - DOM rendering and Context providers
+  ├── package.json           - NPM dependencies and build scripts
+  └── vite.config.js         - Bundler configurations
+screenshots/                 - Documentation assets and UI highlights
 ```
 
 ---
 
 ## ⚙️ Quickstart (Windows)
 
-### 1. Backend Setup
-1. Create & activate venv:
+Start both servers to experience CAPE locally. 
+
+### 1. Backend Setup (Flask + ML Models)
+1. Open up a terminal and navigate to the project root:
+2. Create & activate a virtual environment:
    ```powershell
    python -m venv .venv
    .\.venv\Scripts\Activate.ps1
    ```
-2. Install dependencies:
+3. Install ML and Backend dependencies:
    ```powershell
    pip install -r backend/requirements.txt
    ```
-3. Start Flask server:
+4. Start the Flask server:
    ```powershell
    python backend/app.py
    ```
+*The API will start on `http://127.0.0.1:5000`.*
 
-### 2. Frontend Setup
-1. Install & build:
+### 2. Frontend Setup (React + Vite)
+1. Open a **new** terminal window and navigate into the `frontend` directory:
    ```powershell
    cd frontend
+   ```
+2. Install Node.js dependencies:
+   ```powershell
    npm install
    ```
-2. Start Dev server:
+3. Boot the development server:
    ```powershell
    npm run dev
    ```
+*The app will automatically open in your browser, typically at `http://localhost:5173`.*
 
 ---
 
-## 🤝 Contributing
+## 🤝 Core Contributors
 
-- Contributions are welcome — please open an issue or PR.
-- Follow the established design language for UI components.
+<div align="center" style="display:flex;gap:40px;flex-wrap:nowrap;justify-content:center;margin:20px 0;">
 
-### ✨ Core Contributors
-
-<div align="center" style="display:flex;gap:28px;flex-wrap:nowrap;align-items:flex-start;justify-content:center;margin:16px 0;">
-
-  <a href="https://github.com/vansh070605" style="text-decoration:none;color:inherit;text-align:center;">
+  <a href="https://github.com/Shash309" style="text-decoration:none;color:inherit;text-align:center;">
     <figure style="margin:0;">
-      <img src="https://github.com/vansh070605.png" width="80" height="80" alt="Vansh Agrawal" style="border-radius:50%;box-shadow:0 6px 18px rgba(11,22,39,0.08);display:block;" />
-      <figcaption style="font-weight:600;color:#0b63d6;margin-top:8px;font-size:14px;">Vansh Agrawal</figcaption>
-    </figure>
-  </a>
-
-  <a href="https://github.com/VanshRajput-dev" style="text-decoration:none;color:inherit;text-align:center;">
-    <figure style="margin:0;">
-      <img src="https://github.com/VanshRajput-dev.png" width="80" height="80" alt="Vansh.C" style="border-radius:50%;box-shadow:0 6px 18px rgba(11,22,39,0.08);display:block;" />
-      <figcaption style="font-weight:600;color:#0b63d6;margin-top:8px;font-size:14px;">Vansh.C</figcaption>
+      <img src="https://github.com/Shash309.png" width="90" height="90" alt="Shashwat Sharma" style="border-radius:50%;box-shadow:0 6px 20px rgba(11,22,39,0.12);display:block;border:2px solid #e9eef2;" />
+      <figcaption style="font-weight:700;color:#0b63d6;margin-top:10px;font-size:15px;letter-spacing:0.5px;">Shashwat Sharma</figcaption>
     </figure>
   </a>
 
   <a href="https://github.com/SwAsTiK6937" style="text-decoration:none;color:inherit;text-align:center;">
     <figure style="margin:0;">
-      <img src="https://github.com/SwAsTiK6937.png" width="80" height="80" alt="Swastik Pandey" style="border-radius:50%;box-shadow:0 6px 18px rgba(11,22,39,0.08);display:block;" />
-      <figcaption style="font-weight:600;color:#0b63d6;margin-top:8px;font-size:14px;">Swastik Pandey</figcaption>
-    </figure>
-  </a>
-
-  <a href="https://github.com/Shash309" style="text-decoration:none;color:inherit;text-align:center;">
-    <figure style="margin:0;">
-      <img src="https://github.com/Shash309.png" width="80" height="80" alt="Shashwat Sharma" style="border-radius:50%;box-shadow:0 6px 18px rgba(11,22,39,0.08);display:block;" />
-      <figcaption style="font-weight:600;color:#0b63d6;margin-top:8px;font-size:14px;">Shashwat Sharma</figcaption>
+      <img src="https://github.com/SwAsTiK6937.png" width="90" height="90" alt="Swastik Pandey" style="border-radius:50%;box-shadow:0 6px 20px rgba(11,22,39,0.12);display:block;border:2px solid #e9eef2;" />
+      <figcaption style="font-weight:700;color:#0b63d6;margin-top:10px;font-size:15px;letter-spacing:0.5px;">Swastik Pandey</figcaption>
     </figure>
   </a>
 
@@ -140,4 +154,4 @@ screenshots/                 - documentation images
 ---
 
 ## 📜 License
-Licensed under MIT.
+This project is licensed under the **MIT License**.

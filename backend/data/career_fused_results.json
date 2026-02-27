@@ -61,8 +61,8 @@
       "Design & Creative": 37.5,
       "Teacher": 37.0,
       "Civil Servant": 35.5,
-      "Doctor": 35.0,
       "Manager": 35.0,
+      "Doctor": 35.0,
       "Psychologist": 34.5,
       "Software Engineer": 33.5,
       "Designer": 32.0,
@@ -96,7 +96,7 @@
       "Balanced": 0.5,
       "Engineer": 0.5
     },
-    "last_updated": "2026-02-27T20:57:45.213227Z"
+    "last_updated": "2026-02-27T21:31:32.566458Z"
   },
   "test@gmail.com": {
     "quiz_scores": {},
