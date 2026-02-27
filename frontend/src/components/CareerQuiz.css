@@ -224,6 +224,59 @@
   animation: scaleIn 0.5s ease;
 }
 
+.quiz-explanation {
+  max-width: 640px;
+  margin: 0 auto 2rem;
+  text-align: left;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.quiz-explanation h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-main);
+}
+
+.quiz-explanation-highlight {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.quiz-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.quiz-badge {
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--text-secondary);
+}
+
+.quiz-badge.trait {
+  border: 1px solid rgba(185, 28, 28, 0.12);
+  color: var(--primary);
+  background: rgba(185, 28, 28, 0.03);
+}
+
+.quiz-badge.skill {
+  border: 1px solid var(--glass-border);
+}
+
+.quiz-contrib-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
 @keyframes scaleIn {
   from {
     transform: scale(0.9);

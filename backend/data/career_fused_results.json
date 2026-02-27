@@ -36,11 +36,74 @@
     "last_updated": "2026-02-27T15:28:13.253628Z"
   },
   "swastik3370@gmail.com": {
+    "quiz_scores": {
+      "Business & Finance": 6,
+      "Design & Creative": 25,
+      "Engineering": 58,
+      "Healthcare": 7,
+      "Research & Academics": 3
+    },
+    "psych_scores": {
+      "Data Scientist": 58,
+      "Researcher": 51,
+      "Software Engineer": 67,
+      "Manager": 70,
+      "Entrepreneur": 50,
+      "Designer": 64,
+      "Psychologist": 69,
+      "Civil Servant": 71,
+      "Doctor": 70,
+      "Teacher": 74,
+      "Artist": 57
+    },
+    "final_scores": {
+      "Engineering": 54.0,
+      "Design & Creative": 37.5,
+      "Teacher": 37.0,
+      "Civil Servant": 35.5,
+      "Doctor": 35.0,
+      "Manager": 35.0,
+      "Psychologist": 34.5,
+      "Software Engineer": 33.5,
+      "Designer": 32.0,
+      "Data Scientist": 29.0,
+      "Artist": 28.5,
+      "Healthcare": 28.5,
+      "Business & Finance": 28.0,
+      "Research & Academics": 26.5,
+      "Researcher": 25.5,
+      "Entrepreneur": 25.0
+    },
+    "academic_percent": 90.0,
+    "skills_vector": {
+      "Computer Science": 0.5,
+      "Physics": 0.5,
+      "Coding": 0.5,
+      "Solving Puzzles": 0.5,
+      "Designing": 0.5,
+      "Experiments": 0.5,
+      "Communication": 0.5,
+      "Analysis": 0.5,
+      "Leadership": 0.5,
+      "Teamwork": 0.5,
+      "Both": 0.5,
+      "Classroom": 0.5,
+      "Corporate Office": 0.5,
+      "Outdoors": 0.5,
+      "Startup": 0.5,
+      "Yes": 0.5,
+      "Flexible": 0.5,
+      "Balanced": 0.5,
+      "Engineer": 0.5
+    },
+    "last_updated": "2026-02-27T20:57:45.213227Z"
+  },
+  "test@gmail.com": {
     "quiz_scores": {},
     "psych_scores": {},
     "final_scores": {},
     "academic_percent": null,
     "skills_vector": {},
-    "last_updated": "2026-02-27T09:15:38.863011Z"
+    "last_updated": "2026-02-27T20:38:30.423807Z"
   }
 }

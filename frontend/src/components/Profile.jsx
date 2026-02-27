@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 import './Profile.css';
 
 const Profile = () => {
   const { user } = useOutletContext() || {};
+  const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
   const [quizHistory, setQuizHistory] = useState([]);
   const [psychHistory, setPsychHistory] = useState([]);
@@ -228,8 +229,10 @@ const Profile = () => {
                     <button
                       type="button"
                       className="profile-details-btn"
-                      // Placeholder; can later open a detailed modal with full ranking.
-                      onClick={() => {}}
+                      onClick={() =>
+                        attempt.id &&
+                        navigate(`/dashboard/quiz-result/${encodeURIComponent(attempt.id)}`)
+                      }
                     >
                       View Details
                     </button>

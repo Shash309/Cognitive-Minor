@@ -385,7 +385,20 @@
             }
           ]
         }
-      ]
+      ],
+      "psych_scores": {
+        "Data Scientist": 58,
+        "Researcher": 51,
+        "Software Engineer": 67,
+        "Manager": 70,
+        "Entrepreneur": 50,
+        "Designer": 64,
+        "Psychologist": 69,
+        "Civil Servant": 71,
+        "Doctor": 70,
+        "Teacher": 74,
+        "Artist": 57
+      }
     }
   ],
   "shash@gmail.com": [

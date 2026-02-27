@@ -91,11 +91,38 @@ const CareerQuiz = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [animation, setAnimation] = useState('slide-in');
+    const [psychRequiredMessage, setPsychRequiredMessage] = useState('');
 
     const totalSteps = questions.length + 1; // +1 for academic background step
     const isAcademicStep = currentQuestionIndex === questions.length;
     const currentQuestion = !isAcademicStep ? questions[currentQuestionIndex] : null;
     const progress = ((currentQuestionIndex + 1) / totalSteps) * 100;
+
+    // Enforce psychological assessment prerequisite
+    useEffect(() => {
+        const checkPsychStatus = async () => {
+            if (!user?.email) return;
+            try {
+                const apiBase = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000';
+                const res = await fetch(
+                    `${apiBase}/api/psych-status?user_email=${encodeURIComponent(user.email)}`
+                );
+                const data = await res.json();
+                if (!res.ok || data.error) {
+                    throw new Error(data.error || 'Unable to check psychological status.');
+                }
+                if (!data.completed) {
+                    setPsychRequiredMessage(
+                        'You must complete the Psychological Assessment before accessing the AI Career Quiz.'
+                    );
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        checkPsychStatus();
+    }, [user?.email]);
 
     const translateOption = (option) => {
         const key = optionKeyMap[option];
@@ -235,12 +262,100 @@ const CareerQuiz = () => {
         setResult(null);
     };
 
+    if (psychRequiredMessage) {
+        const apiBase = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000';
+        // Redirect handled by Dashboard routing; here we simply show the guard message.
+        return (
+            <div className="career-quiz-container">
+                <div className="quiz-main-content">
+                    <div className="quiz-card">
+                        <div className="question-content">
+                            <h2 className="question-text">
+                                {psychRequiredMessage}
+                            </h2>
+                            <p className="multi-select-note">
+                                Please complete the Psychological Assessment first from the sidebar.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     if (result && Array.isArray(result.career_rankings)) {
+        const top = result.top_recommendation;
+        const topTraits = top?.top_traits || [];
+        const matchedSkills = top?.quiz_signals?.matched_skills || [];
+        const mlProb = top?.quiz_signals?.ml_probability;
+        const confidenceScore = top?.confidence_score;
+        const alsoCloseCareer = top?.also_close_career;
+
         return (
             <div className="career-quiz-container show-results">
                 <div className="quiz-results">
                     <h3>{t('quiz.yourRecommendationTitle')}</h3>
                     <p><strong>{t('quiz.recommendedPath')}</strong></p>
+
+                    {top && (
+                        <div className="quiz-explanation">
+                            <h4>Why this career?</h4>
+                            <p>
+                                {top.explanation}
+                            </p>
+                            <div className="quiz-contrib-row">
+                                {typeof top.quiz_component === 'number' && (
+                                    <span>
+                                        Quiz alignment:{' '}
+                                        <span className="quiz-explanation-highlight">
+                                            {Math.round(top.quiz_component)}%
+                                        </span>
+                                    </span>
+                                )}
+                                {typeof top.psych_component === 'number' && (
+                                    <span>
+                                        Psychological alignment:{' '}
+                                        <span className="quiz-explanation-highlight">
+                                            {Math.round(top.psych_component)}%
+                                        </span>
+                                    </span>
+                                )}
+                                {typeof mlProb === 'number' && (
+                                    <span>
+                                        Model confidence:{' '}
+                                        <span className="quiz-explanation-highlight">
+                                            {Math.round(mlProb * 100)}%
+                                        </span>
+                                    </span>
+                                )}
+                            </div>
+                            {(topTraits.length > 0 || matchedSkills.length > 0) && (
+                                <div className="quiz-badge-row">
+                                    {topTraits.map(trait => (
+                                        <span key={trait.trait} className="quiz-badge trait">
+                                            {trait.trait.replace(/_/g, ' ')} · {Math.round(trait.user_score)}%
+                                        </span>
+                                    ))}
+                                    {matchedSkills.map(skill => (
+                                        <span key={skill} className="quiz-badge skill">
+                                            {skill}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
+                            {typeof confidenceScore === 'number' && (
+                                <div style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                                    Confidence gap vs next career:{' '}
+                                    <span className="quiz-explanation-highlight">
+                                        {confidenceScore.toFixed(1)} pts
+                                    </span>
+                                    {alsoCloseCareer && confidenceScore < 10 && (
+                                        <> – also close to {alsoCloseCareer}</>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    )}
 
                     <div className="career-cards">
                         {result.career_rankings.map((item) => (

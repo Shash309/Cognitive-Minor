@@ -1,7 +1,9 @@
 import os
 import json
 import warnings
+import math
 from datetime import datetime
+from uuid import uuid4
 
 import joblib
 import pandas as pd
@@ -46,6 +48,17 @@ psych_db = _load_json_db(PSYCH_PATH)
 quiz_db = _load_json_db(QUIZ_HISTORY_PATH)
 fused_results_db = _load_json_db(CAREER_FUSED_RESULTS_PATH)
 users_db = _load_json_db(USERS_PATH)
+
+
+def _safe_number(val, default=None):
+    """Convert value to finite float or return default."""
+    try:
+        f = float(val)
+    except (TypeError, ValueError):
+        return default
+    if math.isnan(f) or math.isinf(f):
+        return default
+    return f
 
 # ================== Load Quiz ML Model ==================
 try:
@@ -394,7 +407,27 @@ def _get_latest_psych_scores(email: str | None):
     latest = history[0] if history else None
     if not latest:
         return None
-    return latest.get("psych_scores")
+    scores = latest.get("psych_scores")
+    # Backwards compatibility: compute and persist psych_scores if missing
+    if scores is None:
+        profile = latest.get("profile")
+        if isinstance(profile, dict):
+            scores = _compute_psych_career_scores(profile)
+            latest["psych_scores"] = scores
+            psych_db[email] = history
+            _save_json_db(PSYCH_PATH, psych_db)
+    return scores
+
+
+def has_completed_psych(user_email: str | None) -> bool:
+    """
+    Return True if the user has at least one completed psychological assessment
+    stored in psych_db; False otherwise.
+    """
+    if not user_email:
+        return False
+    history = psych_db.get(user_email) or []
+    return len(history) > 0
 
 
 def _psych_alignment_for_career(profile: dict, career: str) -> float:
@@ -411,14 +444,21 @@ def _psych_alignment_for_career(profile: dict, career: str) -> float:
     score = 0.0
     for trait, weight in weights.items():
         if trait == "introversion":
-            base = 100.0 - profile.get("extraversion", 50.0)
+            base = 100.0 - _safe_number(profile.get("extraversion", 50.0), 50.0)
         else:
-            base = profile.get(trait, 50.0)
+            base = _safe_number(profile.get(trait, 50.0), 50.0)
         centered = (base - 50.0) / 50.0  # -1 .. 1
         score += weight * centered
 
     normalized = (score / total_weight + 1.0) / 2.0  # 0..1
-    return max(0.0, min(100.0, normalized * 100.0))
+    if normalized is None or math.isnan(normalized) or math.isinf(normalized):
+        normalized = 0.5
+
+    # Map to 0–100 and slightly increase spread around 50 so psychological
+    # differences have a visible impact in fusion and UI.
+    alignment = max(0.0, min(100.0, normalized * 100.0))
+    alignment = 50.0 + (alignment - 50.0) * 1.2
+    return max(0.0, min(100.0, alignment))
 
 
 def _compute_psych_career_scores(profile: dict) -> dict:
@@ -427,7 +467,11 @@ def _compute_psych_career_scores(profile: dict) -> dict:
     """
     scores: dict[str, float] = {}
     for career in CAREER_TRAIT_WEIGHTS.keys():
-        scores[career] = round(_psych_alignment_for_career(profile, career))
+        val = _psych_alignment_for_career(profile, career)
+        scores[career] = round(max(0.0, min(100.0, _safe_number(val, 50.0))))
+    # Temporary debug: show a small sample in logs for verification
+    sample = {k: scores[k] for k in list(scores.keys())[:3]}
+    print("DEBUG_PSYCH_SCORES_SAMPLE", sample)
     return scores
 
 
@@ -444,8 +488,18 @@ def _fuse_career_scores(quiz_scores, psych_scores, academic_percent=None, skills
       - If both present => base weights QUIZ_FUSION_WEIGHT / PSYCH_FUSION_WEIGHT,
         normalized to sum to 1.
     """
+    quiz_scores = quiz_scores or {}
     have_quiz = bool(quiz_scores)
     have_psych = bool(psych_scores)
+
+    # Debug logging for inputs (truncated)
+    print(
+        "DEBUG_FUSION_INPUT",
+        "quiz_len",
+        len(quiz_scores) if isinstance(quiz_scores, dict) else 0,
+        "psych_len",
+        len(psych_scores) if isinstance(psych_scores, dict) else 0,
+    )
 
     if not have_quiz and not have_psych:
         return {"career_rankings": []}
@@ -467,8 +521,11 @@ def _fuse_career_scores(quiz_scores, psych_scores, academic_percent=None, skills
 
     rankings = []
     for career in careers:
-        q = float(quiz_scores.get(career)) if have_quiz and career in quiz_scores else None
-        p = float(psych_scores.get(career)) if have_psych and career in psych_scores else None
+        raw_q = quiz_scores.get(career) if have_quiz else None
+        raw_p = psych_scores.get(career) if (have_psych and isinstance(psych_scores, dict)) else None
+
+        q = _safe_number(raw_q, None)
+        p = _safe_number(raw_p, 50.0) if have_psych else None
 
         if q is None and p is None:
             continue
@@ -478,7 +535,15 @@ def _fuse_career_scores(quiz_scores, psych_scores, academic_percent=None, skills
         elif not have_psych:
             final_score = q
         else:
-            final_score = (w_q * q if q is not None else 0.0) + (w_p * p if p is not None else 0.0)
+            final_score = (w_q * (q or 0.0)) + (w_p * (p or 0.0))
+
+        final_score = _safe_number(final_score, 0.0)
+
+        quiz_contrib = (w_q * (q or 0.0)) if have_quiz else 0.0
+        psych_contrib = (w_p * (p or 0.0)) if have_psych else 0.0
+
+        quiz_contrib = _safe_number(quiz_contrib, 0.0)
+        psych_contrib = _safe_number(psych_contrib, 0.0)
 
         rankings.append(
             {
@@ -486,6 +551,8 @@ def _fuse_career_scores(quiz_scores, psych_scores, academic_percent=None, skills
                 "final_score": float(final_score),
                 "quiz_component": q,
                 "psych_component": p,
+                "quiz_contribution": float(quiz_contrib),
+                "psych_contribution": float(psych_contrib),
             }
         )
 
@@ -644,10 +711,237 @@ def _compute_career_alignment(profile: dict, email: str | None):
     return results
 
 
+def _get_latest_psych_profile(email: str | None):
+    """Return latest raw psychological trait profile (0–100 per trait) for a user."""
+    if not email:
+        return None
+    history = psych_db.get(email) or []
+    latest = history[0] if history else None
+    if not latest:
+        return None
+    return latest.get("profile")
+
+
+def _get_expected_skills_for_career(career: str) -> list[str]:
+    """
+    Return list of expected skill keys used when interpreting quiz-based signals.
+    Mirrors the heuristic mapping used inside _compute_career_alignment.
+    """
+    mapping = {
+        "Data Scientist": ["analysis", "maths", "programming", "research"],
+        "Researcher": ["research", "reading", "analysis"],
+        "Software Engineer": ["programming", "coding", "problemSolving"],
+        "Manager": ["leadership", "communication", "organizingEvents"],
+        "Entrepreneur": ["entrepreneur", "leadership", "risk"],
+        "Designer": ["design", "designThinking", "creativity"],
+        "Psychologist": ["psychology", "helpingOthers", "reading"],
+        "Civil Servant": ["politicalScience", "history", "reading"],
+        "Doctor": ["biology", "chemistry"],
+        "Teacher": ["presentation", "communication"],
+        "Artist": ["fineArts", "drawing"],
+    }
+    return mapping.get(career, [])
+
+
+def _prettify_skill_key(key: str) -> str:
+    """Convert internal skill keys like 'problemSolving' into human-readable labels."""
+    import re
+
+    # Insert spaces before capitals, then title-case
+    spaced = re.sub(r"(?<!^)([A-Z])", r" \1", key)
+    return spaced.replace("_", " ").strip().title()
+
+
+def _top_traits_for_career(psych_profile: dict | None, career: str):
+    """
+    For a given career, return top 3 psychological traits driving alignment,
+    based on CAREER_TRAIT_WEIGHTS and the user's trait scores.
+    """
+    if not psych_profile:
+        return []
+    weights = CAREER_TRAIT_WEIGHTS.get(career) or {}
+    if not weights:
+        return []
+
+    items = []
+    for trait, weight in weights.items():
+        if trait == "introversion":
+            trait_name = "extraversion"
+            score = 100.0 - float(psych_profile.get("extraversion", 50.0))
+        else:
+            trait_name = trait
+            score = float(psych_profile.get(trait_name, 50.0))
+        items.append(
+            {
+                "trait": trait_name,
+                "weight": float(weight),
+                "user_score": score,
+            }
+        )
+
+    items.sort(key=lambda x: abs(x["weight"]), reverse=True)
+    return items[:3]
+
+
+def _quiz_signals_for_career(
+    career: str,
+    quiz_scores: dict | None,
+    academic_percent: float | None,
+    skills_vector: dict | None,
+):
+    """Derive simple, interpretable quiz-based signals for a career."""
+    quiz_scores = quiz_scores or {}
+    skills_vector = skills_vector or {}
+
+    ml_probability = None
+    top_quiz_careers = []
+
+    if isinstance(quiz_scores, dict) and quiz_scores:
+        # Scores are 0–100; convert to 0–1 probability for the selected career
+        score_items = [
+            (c, float(v))
+            for c, v in quiz_scores.items()
+            if isinstance(v, (int, float, str))
+        ]
+        score_items.sort(key=lambda kv: kv[1], reverse=True)
+        top_quiz_careers = score_items[:3]
+        for c, v in score_items:
+            if c == career:
+                ml_probability = max(0.0, min(1.0, v / 100.0))
+                break
+
+    # Extract top matching skills for this career
+    expected = _get_expected_skills_for_career(career)
+    skill_items = []
+    for key in expected:
+        val = skills_vector.get(key)
+        if val is None:
+            continue
+        try:
+            score = float(val)
+        except (TypeError, ValueError):
+            continue
+        skill_items.append((key, score))
+
+    skill_items.sort(key=lambda kv: kv[1], reverse=True)
+    matched_skills = [_prettify_skill_key(k) for k, _ in skill_items[:3]]
+
+    return {
+        "ml_probability": ml_probability,
+        "academic_percent": academic_percent,
+        "matched_skills": matched_skills,
+        "top_quiz_careers": [{"career": c, "score": s} for c, s in top_quiz_careers],
+    }
+
+
+def _generate_explanation(
+    career: str,
+    final_score: float,
+    quiz_component,
+    psych_component,
+    quiz_contribution,
+    psych_contribution,
+    top_traits: list,
+    quiz_signals: dict,
+    confidence_score: float | None,
+    alt_career: str | None,
+):
+    """
+    Construct a human-readable explanation string grounded in actual numbers.
+    """
+    parts = []
+
+    if quiz_component is not None or psych_component is not None:
+        q_part = (
+            f"{round(quiz_component)}% from your AI Career Quiz"
+            if quiz_component is not None
+            else None
+        )
+        p_part = (
+            f"{round(psych_component)}% from your psychological profile"
+            if psych_component is not None
+            else None
+        )
+        if q_part and p_part:
+            parts.append(
+                f"This career was recommended with an overall alignment of {round(final_score)}%, "
+                f"combining {q_part} and {p_part}."
+            )
+        elif q_part:
+            parts.append(
+                f"This career was recommended primarily based on your AI Career Quiz alignment of {round(quiz_component)}%."
+            )
+        elif p_part:
+            parts.append(
+                f"This career was recommended primarily based on your psychological profile alignment of {round(psych_component)}%."
+            )
+
+    if top_traits:
+        trait_bits = [
+            f"{_prettify_skill_key(t['trait'])} ({round(t['user_score'])}%)"
+            for t in top_traits
+        ]
+        parts.append(
+            "Your psychological profile shows strong levels in "
+            + ", ".join(trait_bits)
+            + f", which are especially important for {career}."
+        )
+
+    if quiz_signals:
+        ml_prob = quiz_signals.get("ml_probability")
+        acad = quiz_signals.get("academic_percent")
+        matched_skills = quiz_signals.get("matched_skills") or []
+        skill_text = ""
+        if matched_skills:
+            skill_text = (
+                " and key skills such as " + ", ".join(matched_skills)
+            )
+        if ml_prob is not None and acad is not None:
+            parts.append(
+                f"The quiz model shows about {round(ml_prob * 100)}% confidence in this path,"
+                f" and your academic performance around {round(acad)}%{skill_text} further supports this recommendation."
+            )
+        elif ml_prob is not None:
+            parts.append(
+                f"The quiz model shows about {round(ml_prob * 100)}% confidence in this path{skill_text}."
+            )
+        elif acad is not None and skill_text:
+            parts.append(
+                f"Your academic performance around {round(acad)}%{skill_text} also supports this recommendation."
+            )
+
+    if confidence_score is not None and alt_career:
+        if confidence_score < 5.0:
+            parts.append(
+                f"Your profile also closely matches {alt_career}, with a very similar overall score."
+            )
+        elif confidence_score < 10.0:
+            parts.append(
+                f"There is also a moderate alignment with {alt_career}, which could be considered as an adjacent option."
+            )
+
+    return " ".join(parts).strip()
+
+
 # ================== ML Routes ==================
 @app.route("/health", methods=["GET"])
 def health():
     return jsonify({"status": "ok"})
+
+
+@app.route("/api/psych-status", methods=["GET"])
+def psych_status():
+    """
+    Lightweight status endpoint used by the frontend to gate access
+    to the AI Career Quiz. Returns whether the user has completed
+    at least one psychological assessment.
+    """
+    user_email = request.args.get("user_email")
+    if not user_email:
+        return jsonify({"error": "user_email is required"}), 400
+
+    completed = has_completed_psych(user_email)
+    return jsonify({"completed": completed}), 200
 
 
 @app.route("/api/psych-assessment", methods=["GET"])
@@ -890,6 +1184,7 @@ def quiz_submit():
                 )[0]
             attempts.append(
                 {
+                    "id": existing.get("id") or legacy_ts,
                     "timestamp": legacy_ts,
                     "quiz_scores": legacy_quiz_scores,
                     "academic_percent": existing.get("academic_percent"),
@@ -903,14 +1198,26 @@ def quiz_submit():
         if isinstance(quiz_scores, dict) and quiz_scores:
             top_career = max(quiz_scores.items(), key=lambda kv: float(kv[1]))[0]
 
+        attempt_id = str(uuid4())
+        now_ts = datetime.utcnow().isoformat() + "Z"
+        # Confidence: best quiz score in this attempt (0–100)
+        confidence = None
+        if isinstance(quiz_scores, dict) and quiz_scores:
+            try:
+                confidence = max(float(v) for v in quiz_scores.values())
+            except (TypeError, ValueError):
+                confidence = None
+
         attempts.insert(
             0,
             {
-                "timestamp": datetime.utcnow().isoformat() + "Z",
+                "id": attempt_id,
+                "timestamp": now_ts,
                 "quiz_scores": quiz_scores,
                 "academic_percent": academic_percent,
                 "stream": stream,
                 "top_career": top_career,
+                "confidence": confidence,
             },
         )
 
@@ -961,6 +1268,7 @@ def career_results():
 
     quiz_scores, academic_percent, skills_vector = _get_quiz_context(user_email)
     psych_scores = _get_latest_psych_scores(user_email)
+    psych_profile = _get_latest_psych_profile(user_email)
 
     fusion_result = _fuse_career_scores(quiz_scores, psych_scores, academic_percent, skills_vector)
     _update_fused_results(
@@ -972,15 +1280,178 @@ def career_results():
         skills_vector=skills_vector,
     )
 
+    rankings = fusion_result.get("career_rankings") or []
+    top_recommendation = None
+
+    if rankings:
+        top = rankings[0]
+        career = top.get("career")
+        final_score = float(top.get("final_score", 0.0))
+        quiz_component = top.get("quiz_component")
+        psych_component = top.get("psych_component")
+        quiz_contribution = top.get("quiz_contribution")
+        psych_contribution = top.get("psych_contribution")
+
+        # Confidence score based on gap between top 1 and top 2
+        confidence_score = None
+        alt_career = None
+        if len(rankings) > 1:
+            second = rankings[1]
+            gap = float(top.get("final_score", 0.0)) - float(second.get("final_score", 0.0))
+            confidence_score = max(0.0, gap)
+            alt_career = second.get("career")
+
+        top_traits = _top_traits_for_career(psych_profile, career)
+        quiz_signals = _quiz_signals_for_career(
+            career, quiz_scores, academic_percent, skills_vector
+        )
+
+        explanation = _generate_explanation(
+            career=career,
+            final_score=final_score,
+            quiz_component=quiz_component,
+            psych_component=psych_component,
+            quiz_contribution=quiz_contribution,
+            psych_contribution=psych_contribution,
+            top_traits=top_traits,
+            quiz_signals=quiz_signals,
+            confidence_score=confidence_score,
+            alt_career=alt_career,
+        )
+
+        top_recommendation = {
+            "career": career,
+            "final_score": final_score,
+            "quiz_component": quiz_component,
+            "psych_component": psych_component,
+            "quiz_contribution": quiz_contribution,
+            "psych_contribution": psych_contribution,
+            "top_traits": top_traits,
+            "quiz_signals": quiz_signals,
+            "academic_percent": academic_percent,
+            "confidence_score": confidence_score,
+            "also_close_career": alt_career,
+            "explanation": explanation,
+        }
+
     return jsonify(
         {
-            "career_rankings": fusion_result.get("career_rankings"),
+            "career_rankings": rankings,
             "quiz_scores": quiz_scores,
             "psych_scores": psych_scores,
             "academic_percent": academic_percent,
             "skills_vector": skills_vector,
+            "top_recommendation": top_recommendation,
         }
     )
+
+
+@app.route("/api/quiz-attempt", methods=["GET"])
+def get_quiz_attempt():
+    """
+    Return full details for a specific AI Career Quiz attempt, including
+    per-attempt quiz scores plus a fresh fused ranking and explanation.
+    """
+    user_email = request.args.get("user_email")
+    attempt_id = request.args.get("attempt_id")
+
+    if not user_email:
+        return jsonify({"error": "user_email is required"}), 400
+    if not attempt_id:
+        return jsonify({"error": "attempt_id is required"}), 400
+
+    snapshot = quiz_db.get(user_email) or {}
+    attempts = snapshot.get("attempts") or []
+
+    # Support both UUID-based id and legacy timestamp-only identifiers
+    target = None
+    for a in attempts:
+        if a.get("id") == attempt_id or a.get("timestamp") == attempt_id:
+            target = a
+            break
+
+    if not target:
+        return jsonify({"error": "Attempt not found"}), 404
+
+    quiz_scores = target.get("quiz_scores") or {}
+    academic_percent = target.get("academic_percent")
+    stream = target.get("stream")
+    confidence = target.get("confidence")
+
+    psych_scores = _get_latest_psych_scores(user_email)
+    psych_profile = _get_latest_psych_profile(user_email)
+
+    # For attempt-level detail we fuse this attempt's quiz scores with latest psych.
+    fusion_result = _fuse_career_scores(quiz_scores, psych_scores, academic_percent, None)
+    rankings = fusion_result.get("career_rankings") or []
+
+    top_recommendation = None
+    if rankings:
+        top = rankings[0]
+        career = top.get("career")
+        final_score = float(top.get("final_score", 0.0))
+        quiz_component = top.get("quiz_component")
+        psych_component = top.get("psych_component")
+        quiz_contribution = top.get("quiz_contribution")
+        psych_contribution = top.get("psych_contribution")
+
+        # Confidence vs second best within this attempt's fused scores
+        confidence_score = None
+        alt_career = None
+        if len(rankings) > 1:
+            second = rankings[1]
+            gap = float(top.get("final_score", 0.0)) - float(second.get("final_score", 0.0))
+            confidence_score = max(0.0, gap)
+            alt_career = second.get("career")
+
+        top_traits = _top_traits_for_career(psych_profile, career)
+        quiz_signals = _quiz_signals_for_career(
+            career, quiz_scores, academic_percent, None
+        )
+
+        explanation = _generate_explanation(
+            career=career,
+            final_score=final_score,
+            quiz_component=quiz_component,
+            psych_component=psych_component,
+            quiz_contribution=quiz_contribution,
+            psych_contribution=psych_contribution,
+            top_traits=top_traits,
+            quiz_signals=quiz_signals,
+            confidence_score=confidence_score,
+            alt_career=alt_career,
+        )
+
+        top_recommendation = {
+            "career": career,
+            "final_score": final_score,
+            "quiz_component": quiz_component,
+            "psych_component": psych_component,
+            "quiz_contribution": quiz_contribution,
+            "psych_contribution": psych_contribution,
+            "top_traits": top_traits,
+            "quiz_signals": quiz_signals,
+            "academic_percent": academic_percent,
+            "confidence_score": confidence_score,
+            "also_close_career": alt_career,
+            "explanation": explanation,
+        }
+
+    return jsonify(
+        {
+            "attempt": {
+                "id": target.get("id"),
+                "timestamp": target.get("timestamp"),
+                "quiz_scores": quiz_scores,
+                "academic_percent": academic_percent,
+                "stream": stream,
+                "top_career": target.get("top_career"),
+                "confidence": confidence,
+            },
+            "career_rankings": rankings,
+            "top_recommendation": top_recommendation,
+        }
+    ), 200
 
 
 @app.route("/api/quiz-history", methods=["GET"])
@@ -998,6 +1469,12 @@ def get_quiz_history():
         return a.get("timestamp") or ""
 
     attempts_sorted = sorted(attempts, key=_ts, reverse=True)
+
+    # Ensure each attempt has a stable id for frontend navigation
+    for attempt in attempts_sorted:
+        if not attempt.get("id"):
+            # Fallback: use timestamp as identifier if missing
+            attempt["id"] = attempt.get("timestamp") or datetime.utcnow().isoformat() + "Z"
 
     return jsonify(
         {

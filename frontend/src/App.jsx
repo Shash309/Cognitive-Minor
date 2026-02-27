@@ -10,6 +10,7 @@ import SkillBuilder from './components/SkillBuilder';
 import CareerPathVisualizer from './components/CareerPathVisualizer';
 import TimelineTracker from './components/TimelineTracker';
 import Profile from './components/Profile';
+import QuizResultDetails from './components/QuizResultDetails';
 import './App.css';
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
             <Route index element={<Home user={user} />} />
             <Route path="colleges" element={<CollegeExplorer />} />
             <Route path="quiz" element={<CareerQuiz />} />
+            <Route path="quiz-result/:attemptId" element={<QuizResultDetails />} />
             <Route path="psychology" element={<PsychAssessment />} />
             <Route path="profile" element={<Profile />} />
             <Route path="skills" element={<SkillBuilder />} />

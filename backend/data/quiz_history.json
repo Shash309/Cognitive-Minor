@@ -72,5 +72,74 @@
         "top_career": "Business & Finance"
       }
     ]
+  },
+  "swastik3370@gmail.com": {
+    "last_taken": "2026-02-27T20:30:58.523800Z",
+    "academic_percent": 90.0,
+    "skills": {
+      "Computer Science": 0.5,
+      "Physics": 0.5,
+      "Coding": 0.5,
+      "Solving Puzzles": 0.5,
+      "Designing": 0.5,
+      "Experiments": 0.5,
+      "Communication": 0.5,
+      "Analysis": 0.5,
+      "Leadership": 0.5,
+      "Teamwork": 0.5,
+      "Both": 0.5,
+      "Classroom": 0.5,
+      "Corporate Office": 0.5,
+      "Outdoors": 0.5,
+      "Startup": 0.5,
+      "Yes": 0.5,
+      "Flexible": 0.5,
+      "Balanced": 0.5,
+      "Engineer": 0.5
+    },
+    "skills_vector": {
+      "Computer Science": 0.5,
+      "Physics": 0.5,
+      "Coding": 0.5,
+      "Solving Puzzles": 0.5,
+      "Designing": 0.5,
+      "Experiments": 0.5,
+      "Communication": 0.5,
+      "Analysis": 0.5,
+      "Leadership": 0.5,
+      "Teamwork": 0.5,
+      "Both": 0.5,
+      "Classroom": 0.5,
+      "Corporate Office": 0.5,
+      "Outdoors": 0.5,
+      "Startup": 0.5,
+      "Yes": 0.5,
+      "Flexible": 0.5,
+      "Balanced": 0.5,
+      "Engineer": 0.5
+    },
+    "quiz_scores": {
+      "Business & Finance": 6,
+      "Design & Creative": 25,
+      "Engineering": 58,
+      "Healthcare": 7,
+      "Research & Academics": 3
+    },
+    "stream": "Science",
+    "attempts": [
+      {
+        "timestamp": "2026-02-27T20:30:58.523800Z",
+        "quiz_scores": {
+          "Business & Finance": 6,
+          "Design & Creative": 25,
+          "Engineering": 58,
+          "Healthcare": 7,
+          "Research & Academics": 3
+        },
+        "academic_percent": 90.0,
+        "stream": "Science",
+        "top_career": "Engineering"
+      }
+    ]
   }
 }
