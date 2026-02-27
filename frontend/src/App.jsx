@@ -5,9 +5,11 @@ import Dashboard from './components/Dashboard';
 import Home from './components/Home';
 import CollegeExplorer from './components/CollegeExplorer';
 import CareerQuiz from './components/CareerQuiz';
+import PsychAssessment from './components/PsychAssessment';
 import SkillBuilder from './components/SkillBuilder';
 import CareerPathVisualizer from './components/CareerPathVisualizer';
 import TimelineTracker from './components/TimelineTracker';
+import Profile from './components/Profile';
 import './App.css';
 
 function App() {
@@ -47,6 +49,8 @@ function App() {
             <Route index element={<Home user={user} />} />
             <Route path="colleges" element={<CollegeExplorer />} />
             <Route path="quiz" element={<CareerQuiz />} />
+            <Route path="psychology" element={<PsychAssessment />} />
+            <Route path="profile" element={<Profile />} />
             <Route path="skills" element={<SkillBuilder />} />
             <Route path="visualizer" element={<CareerPathVisualizer />} />
             <Route path="timeline" element={<TimelineTracker />} />

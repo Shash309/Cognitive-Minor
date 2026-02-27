@@ -44,6 +44,11 @@ const Sidebar = () => {
               <i className="fas fa-calendar-alt"></i> {t('common.timelineTracker', 'Timeline Tracker')}
             </NavLink>
           </li>
+          <li>
+            <NavLink to="/dashboard/psychology" className={({ isActive }) => (isActive ? 'active' : '')}>
+              <i className="fas fa-brain"></i> {t('common.psychologicalAnalysis', 'Psychological Analysis')}
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </>

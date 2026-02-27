@@ -1,0 +1,1121 @@
+{
+  "swastik3370@gmail.com": [
+    {
+      "completed_at": "2026-02-26T20:25:19.515255Z",
+      "profile": {
+        "openness": 50.0,
+        "creativity_preference": 62.5,
+        "conscientiousness": 75.0,
+        "structure_preference": 62.5,
+        "extraversion": 75.0,
+        "individual_contributor": 37.5,
+        "agreeableness": 87.5,
+        "leadership_index": 50.0,
+        "neuroticism": 50.0,
+        "stress_tolerance": 50.0,
+        "analytical_thinking": 58.333333333333336,
+        "intuitive_preference": 50.0,
+        "risk_tolerance": 50.0,
+        "intrinsic_motivation": 50.0,
+        "extrinsic_motivation": 50.0
+      },
+      "decision_style": "Flexible / context-dependent",
+      "dominant_traits": [
+        {
+          "name": "agreeableness",
+          "display_name": "Agreeableness",
+          "score": 87.5
+        },
+        {
+          "name": "conscientiousness",
+          "display_name": "Conscientiousness",
+          "score": 75.0
+        },
+        {
+          "name": "extraversion",
+          "display_name": "Extraversion",
+          "score": 75.0
+        },
+        {
+          "name": "creativity_preference",
+          "display_name": "Creativity preference",
+          "score": 62.5
+        },
+        {
+          "name": "structure_preference",
+          "display_name": "Structure preference",
+          "score": 62.5
+        },
+        {
+          "name": "analytical_thinking",
+          "display_name": "Analytical thinking",
+          "score": 58.333333333333336
+        },
+        {
+          "name": "openness",
+          "display_name": "Openness to Experience",
+          "score": 50.0
+        },
+        {
+          "name": "leadership_index",
+          "display_name": "Leadership tendency",
+          "score": 50.0
+        },
+        {
+          "name": "neuroticism",
+          "display_name": "Neuroticism",
+          "score": 50.0
+        },
+        {
+          "name": "stress_tolerance",
+          "display_name": "Stress tolerance",
+          "score": 50.0
+        },
+        {
+          "name": "intuitive_preference",
+          "display_name": "Intuitive decision-making",
+          "score": 50.0
+        },
+        {
+          "name": "risk_tolerance",
+          "display_name": "Risk tolerance",
+          "score": 50.0
+        },
+        {
+          "name": "intrinsic_motivation",
+          "display_name": "Intrinsic motivation",
+          "score": 50.0
+        },
+        {
+          "name": "extrinsic_motivation",
+          "display_name": "Extrinsic motivation",
+          "score": 50.0
+        },
+        {
+          "name": "individual_contributor",
+          "display_name": "Individual contributor preference",
+          "score": 37.5
+        }
+      ],
+      "career_matches": [
+        {
+          "career": "Teacher",
+          "overall_score": 69.9375,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 69.79166666666666,
+          "skill_gaps": [
+            {
+              "name": "intrinsic_motivation",
+              "display_name": "Intrinsic Motivation",
+              "current": 50.0,
+              "desired": 80.0
+            }
+          ],
+          "top_traits": [
+            {
+              "name": "agreeableness",
+              "display_name": "Agreeableness",
+              "importance": 0.1875,
+              "score": 87.5
+            },
+            {
+              "name": "extraversion",
+              "display_name": "Extraversion",
+              "importance": 0.05,
+              "score": 75.0
+            },
+            {
+              "name": "intrinsic_motivation",
+              "display_name": "Intrinsic Motivation",
+              "importance": 0.0,
+              "score": 50.0
+            }
+          ]
+        },
+        {
+          "career": "Civil Servant",
+          "overall_score": 69.25,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 67.5,
+          "skill_gaps": [
+            {
+              "name": "stress_tolerance",
+              "display_name": "Stress Tolerance",
+              "current": 50.0,
+              "desired": 79.0
+            },
+            {
+              "name": "leadership_index",
+              "display_name": "Leadership Index",
+              "current": 50.0,
+              "desired": 77.0
+            }
+          ]
+        },
+        {
+          "career": "Manager",
+          "overall_score": 69.0735294117647,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 66.91176470588235,
+          "skill_gaps": [
+            {
+              "name": "leadership_index",
+              "display_name": "Leadership Index",
+              "current": 50.0,
+              "desired": 82.0
+            }
+          ]
+        },
+        {
+          "career": "Doctor",
+          "overall_score": 68.921875,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 66.40625,
+          "skill_gaps": [
+            {
+              "name": "stress_tolerance",
+              "display_name": "Stress Tolerance",
+              "current": 50.0,
+              "desired": 80.0
+            },
+            {
+              "name": "intrinsic_motivation",
+              "display_name": "Intrinsic Motivation",
+              "current": 50.0,
+              "desired": 77.0
+            }
+          ]
+        },
+        {
+          "career": "Psychologist",
+          "overall_score": 68.83333333333333,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 66.11111111111111,
+          "skill_gaps": [
+            {
+              "name": "openness",
+              "display_name": "Openness",
+              "current": 50.0,
+              "desired": 79.0
+            },
+            {
+              "name": "intrinsic_motivation",
+              "display_name": "Intrinsic Motivation",
+              "current": 50.0,
+              "desired": 78.0
+            },
+            {
+              "name": "analytical_thinking",
+              "display_name": "Analytical Thinking",
+              "current": 58.333333333333336,
+              "desired": 77.0
+            }
+          ]
+        },
+        {
+          "career": "Software Engineer",
+          "overall_score": 68.140625,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 63.802083333333336,
+          "skill_gaps": [
+            {
+              "name": "analytical_thinking",
+              "display_name": "Analytical Thinking",
+              "current": 58.333333333333336,
+              "desired": 82.0
+            },
+            {
+              "name": "structure_preference",
+              "display_name": "Structure Preference",
+              "current": 62.5,
+              "desired": 78.0
+            },
+            {
+              "name": "risk_tolerance",
+              "display_name": "Risk Tolerance",
+              "current": 50.0,
+              "desired": 76.0
+            }
+          ]
+        },
+        {
+          "career": "Designer",
+          "overall_score": 67.48214285714286,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 61.60714285714286,
+          "skill_gaps": [
+            {
+              "name": "creativity_preference",
+              "display_name": "Creativity Preference",
+              "current": 62.5,
+              "desired": 82.0
+            },
+            {
+              "name": "openness",
+              "display_name": "Openness",
+              "current": 50.0,
+              "desired": 80.0
+            }
+          ]
+        },
+        {
+          "career": "Data Scientist",
+          "overall_score": 65.97368421052632,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 56.57894736842105,
+          "skill_gaps": [
+            {
+              "name": "analytical_thinking",
+              "display_name": "Analytical Thinking",
+              "current": 58.333333333333336,
+              "desired": 84.0
+            },
+            {
+              "name": "openness",
+              "display_name": "Openness",
+              "current": 50.0,
+              "desired": 79.0
+            },
+            {
+              "name": "risk_tolerance",
+              "display_name": "Risk Tolerance",
+              "current": 50.0,
+              "desired": 77.0
+            }
+          ]
+        },
+        {
+          "career": "Artist",
+          "overall_score": 65.75,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 55.833333333333336,
+          "skill_gaps": [
+            {
+              "name": "creativity_preference",
+              "display_name": "Creativity Preference",
+              "current": 62.5,
+              "desired": 82.0
+            },
+            {
+              "name": "openness",
+              "display_name": "Openness",
+              "current": 50.0,
+              "desired": 81.0
+            },
+            {
+              "name": "risk_tolerance",
+              "display_name": "Risk Tolerance",
+              "current": 50.0,
+              "desired": 77.0
+            }
+          ]
+        },
+        {
+          "career": "Researcher",
+          "overall_score": 64.15625,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 50.520833333333336,
+          "skill_gaps": [
+            {
+              "name": "analytical_thinking",
+              "display_name": "Analytical Thinking",
+              "current": 58.333333333333336,
+              "desired": 82.0
+            },
+            {
+              "name": "openness",
+              "display_name": "Openness",
+              "current": 50.0,
+              "desired": 80.0
+            },
+            {
+              "name": "extraversion",
+              "display_name": "Extraversion",
+              "current": 25.0,
+              "desired": 77.0
+            },
+            {
+              "name": "stress_tolerance",
+              "display_name": "Stress Tolerance",
+              "current": 50.0,
+              "desired": 77.0
+            }
+          ]
+        },
+        {
+          "career": "Entrepreneur",
+          "overall_score": 64.0,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 50.0,
+          "skill_gaps": [
+            {
+              "name": "risk_tolerance",
+              "display_name": "Risk Tolerance",
+              "current": 50.0,
+              "desired": 81.0
+            },
+            {
+              "name": "openness",
+              "display_name": "Openness",
+              "current": 50.0,
+              "desired": 79.0
+            },
+            {
+              "name": "leadership_index",
+              "display_name": "Leadership Index",
+              "current": 50.0,
+              "desired": 79.0
+            },
+            {
+              "name": "stress_tolerance",
+              "display_name": "Stress Tolerance",
+              "current": 50.0,
+              "desired": 78.0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "shash@gmail.com": [
+    {
+      "completed_at": "2026-02-26T20:53:41.463524Z",
+      "profile": {
+        "openness": 41.66666666666667,
+        "creativity_preference": 100.0,
+        "conscientiousness": 50.0,
+        "structure_preference": 87.5,
+        "extraversion": 50.0,
+        "individual_contributor": 50.0,
+        "agreeableness": 62.5,
+        "leadership_index": 75.0,
+        "neuroticism": 87.5,
+        "stress_tolerance": 50.0,
+        "analytical_thinking": 58.333333333333336,
+        "intuitive_preference": 100.0,
+        "risk_tolerance": 87.5,
+        "intrinsic_motivation": 50.0,
+        "extrinsic_motivation": 75.0
+      },
+      "decision_style": "Flexible / context-dependent",
+      "dominant_traits": [
+        {
+          "name": "creativity_preference",
+          "display_name": "Creativity preference",
+          "score": 100.0
+        },
+        {
+          "name": "intuitive_preference",
+          "display_name": "Intuitive decision-making",
+          "score": 100.0
+        },
+        {
+          "name": "structure_preference",
+          "display_name": "Structure preference",
+          "score": 87.5
+        },
+        {
+          "name": "neuroticism",
+          "display_name": "Neuroticism",
+          "score": 87.5
+        },
+        {
+          "name": "risk_tolerance",
+          "display_name": "Risk tolerance",
+          "score": 87.5
+        },
+        {
+          "name": "leadership_index",
+          "display_name": "Leadership tendency",
+          "score": 75.0
+        },
+        {
+          "name": "extrinsic_motivation",
+          "display_name": "Extrinsic motivation",
+          "score": 75.0
+        },
+        {
+          "name": "agreeableness",
+          "display_name": "Agreeableness",
+          "score": 62.5
+        },
+        {
+          "name": "analytical_thinking",
+          "display_name": "Analytical thinking",
+          "score": 58.333333333333336
+        },
+        {
+          "name": "conscientiousness",
+          "display_name": "Conscientiousness",
+          "score": 50.0
+        },
+        {
+          "name": "extraversion",
+          "display_name": "Extraversion",
+          "score": 50.0
+        },
+        {
+          "name": "individual_contributor",
+          "display_name": "Individual contributor preference",
+          "score": 50.0
+        },
+        {
+          "name": "stress_tolerance",
+          "display_name": "Stress tolerance",
+          "score": 50.0
+        },
+        {
+          "name": "intrinsic_motivation",
+          "display_name": "Intrinsic motivation",
+          "score": 50.0
+        },
+        {
+          "name": "openness",
+          "display_name": "Openness to Experience",
+          "score": 41.66666666666667
+        }
+      ],
+      "career_matches": [
+        {
+          "career": "Artist",
+          "overall_score": 71.5,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 75.0,
+          "skill_gaps": [
+            {
+              "name": "openness",
+              "display_name": "Openness",
+              "current": 41.66666666666667,
+              "desired": 81.0
+            }
+          ],
+          "top_traits": [
+            {
+              "name": "creativity_preference",
+              "display_name": "Creativity Preference",
+              "importance": 0.35,
+              "score": 100.0
+            },
+            {
+              "name": "risk_tolerance",
+              "display_name": "Risk Tolerance",
+              "importance": 0.07500000000000001,
+              "score": 87.5
+            },
+            {
+              "name": "openness",
+              "display_name": "Openness",
+              "importance": 0.04999999999999997,
+              "score": 41.66666666666667
+            }
+          ]
+        },
+        {
+          "career": "Designer",
+          "overall_score": 71.14285714285714,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 73.80952380952381,
+          "skill_gaps": [
+            {
+              "name": "openness",
+              "display_name": "Openness",
+              "current": 41.66666666666667,
+              "desired": 80.0
+            },
+            {
+              "name": "agreeableness",
+              "display_name": "Agreeableness",
+              "current": 62.5,
+              "desired": 77.0
+            }
+          ]
+        },
+        {
+          "career": "Entrepreneur",
+          "overall_score": 69.1470588235294,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 67.15686274509804,
+          "skill_gaps": [
+            {
+              "name": "openness",
+              "display_name": "Openness",
+              "current": 41.66666666666667,
+              "desired": 79.0
+            },
+            {
+              "name": "stress_tolerance",
+              "display_name": "Stress Tolerance",
+              "current": 50.0,
+              "desired": 78.0
+            }
+          ]
+        },
+        {
+          "career": "Software Engineer",
+          "overall_score": 67.90625,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 63.020833333333336,
+          "skill_gaps": [
+            {
+              "name": "analytical_thinking",
+              "display_name": "Analytical Thinking",
+              "current": 58.333333333333336,
+              "desired": 82.0
+            },
+            {
+              "name": "conscientiousness",
+              "display_name": "Conscientiousness",
+              "current": 50.0,
+              "desired": 80.0
+            }
+          ]
+        },
+        {
+          "career": "Manager",
+          "overall_score": 67.75,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 62.5,
+          "skill_gaps": [
+            {
+              "name": "extraversion",
+              "display_name": "Extraversion",
+              "current": 50.0,
+              "desired": 80.0
+            },
+            {
+              "name": "agreeableness",
+              "display_name": "Agreeableness",
+              "current": 62.5,
+              "desired": 78.0
+            },
+            {
+              "name": "conscientiousness",
+              "display_name": "Conscientiousness",
+              "current": 50.0,
+              "desired": 77.0
+            }
+          ]
+        },
+        {
+          "career": "Data Scientist",
+          "overall_score": 65.84210526315789,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 56.14035087719298,
+          "skill_gaps": [
+            {
+              "name": "analytical_thinking",
+              "display_name": "Analytical Thinking",
+              "current": 58.333333333333336,
+              "desired": 84.0
+            },
+            {
+              "name": "openness",
+              "display_name": "Openness",
+              "current": 41.66666666666667,
+              "desired": 79.0
+            },
+            {
+              "name": "conscientiousness",
+              "display_name": "Conscientiousness",
+              "current": 50.0,
+              "desired": 78.0
+            }
+          ]
+        },
+        {
+          "career": "Civil Servant",
+          "overall_score": 65.75,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 55.833333333333336,
+          "skill_gaps": [
+            {
+              "name": "conscientiousness",
+              "display_name": "Conscientiousness",
+              "current": 50.0,
+              "desired": 81.0
+            },
+            {
+              "name": "stress_tolerance",
+              "display_name": "Stress Tolerance",
+              "current": 50.0,
+              "desired": 79.0
+            },
+            {
+              "name": "agreeableness",
+              "display_name": "Agreeableness",
+              "current": 62.5,
+              "desired": 78.0
+            }
+          ]
+        },
+        {
+          "career": "Teacher",
+          "overall_score": 65.5625,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 55.208333333333336,
+          "skill_gaps": [
+            {
+              "name": "agreeableness",
+              "display_name": "Agreeableness",
+              "current": 62.5,
+              "desired": 80.0
+            },
+            {
+              "name": "intrinsic_motivation",
+              "display_name": "Intrinsic Motivation",
+              "current": 50.0,
+              "desired": 80.0
+            },
+            {
+              "name": "extraversion",
+              "display_name": "Extraversion",
+              "current": 50.0,
+              "desired": 77.0
+            }
+          ]
+        },
+        {
+          "career": "Psychologist",
+          "overall_score": 65.16666666666666,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 53.888888888888886,
+          "skill_gaps": [
+            {
+              "name": "agreeableness",
+              "display_name": "Agreeableness",
+              "current": 62.5,
+              "desired": 81.0
+            },
+            {
+              "name": "openness",
+              "display_name": "Openness",
+              "current": 41.66666666666667,
+              "desired": 79.0
+            },
+            {
+              "name": "intrinsic_motivation",
+              "display_name": "Intrinsic Motivation",
+              "current": 50.0,
+              "desired": 78.0
+            },
+            {
+              "name": "analytical_thinking",
+              "display_name": "Analytical Thinking",
+              "current": 58.333333333333336,
+              "desired": 77.0
+            }
+          ]
+        },
+        {
+          "career": "Doctor",
+          "overall_score": 64.703125,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 52.34375,
+          "skill_gaps": [
+            {
+              "name": "conscientiousness",
+              "display_name": "Conscientiousness",
+              "current": 50.0,
+              "desired": 81.0
+            },
+            {
+              "name": "stress_tolerance",
+              "display_name": "Stress Tolerance",
+              "current": 50.0,
+              "desired": 80.0
+            },
+            {
+              "name": "agreeableness",
+              "display_name": "Agreeableness",
+              "current": 62.5,
+              "desired": 78.0
+            },
+            {
+              "name": "intrinsic_motivation",
+              "display_name": "Intrinsic Motivation",
+              "current": 50.0,
+              "desired": 77.0
+            }
+          ]
+        },
+        {
+          "career": "Researcher",
+          "overall_score": 64.3125,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 51.04166666666667,
+          "skill_gaps": [
+            {
+              "name": "analytical_thinking",
+              "display_name": "Analytical Thinking",
+              "current": 58.333333333333336,
+              "desired": 82.0
+            },
+            {
+              "name": "openness",
+              "display_name": "Openness",
+              "current": 41.66666666666667,
+              "desired": 80.0
+            },
+            {
+              "name": "extraversion",
+              "display_name": "Extraversion",
+              "current": 50.0,
+              "desired": 77.0
+            },
+            {
+              "name": "stress_tolerance",
+              "display_name": "Stress Tolerance",
+              "current": 50.0,
+              "desired": 77.0
+            }
+          ]
+        }
+      ],
+      "stability_index": 0.9576630856213253,
+      "stability_label": "Highly Stable",
+      "retake_reason": null
+    },
+    {
+      "completed_at": "2026-02-26T20:33:04.916376Z",
+      "profile": {
+        "openness": 66.66666666666666,
+        "creativity_preference": 50.0,
+        "conscientiousness": 12.5,
+        "structure_preference": 75.0,
+        "extraversion": 50.0,
+        "individual_contributor": 50.0,
+        "agreeableness": 75.0,
+        "leadership_index": 25.0,
+        "neuroticism": 50.0,
+        "stress_tolerance": 75.0,
+        "analytical_thinking": 75.0,
+        "intuitive_preference": 100.0,
+        "risk_tolerance": 50.0,
+        "intrinsic_motivation": 75.0,
+        "extrinsic_motivation": 100.0
+      },
+      "decision_style": "Balanced analytical & intuitive",
+      "dominant_traits": [
+        {
+          "name": "intuitive_preference",
+          "display_name": "Intuitive decision-making",
+          "score": 100.0
+        },
+        {
+          "name": "extrinsic_motivation",
+          "display_name": "Extrinsic motivation",
+          "score": 100.0
+        },
+        {
+          "name": "structure_preference",
+          "display_name": "Structure preference",
+          "score": 75.0
+        },
+        {
+          "name": "agreeableness",
+          "display_name": "Agreeableness",
+          "score": 75.0
+        },
+        {
+          "name": "stress_tolerance",
+          "display_name": "Stress tolerance",
+          "score": 75.0
+        },
+        {
+          "name": "analytical_thinking",
+          "display_name": "Analytical thinking",
+          "score": 75.0
+        },
+        {
+          "name": "intrinsic_motivation",
+          "display_name": "Intrinsic motivation",
+          "score": 75.0
+        },
+        {
+          "name": "openness",
+          "display_name": "Openness to Experience",
+          "score": 66.66666666666666
+        },
+        {
+          "name": "creativity_preference",
+          "display_name": "Creativity preference",
+          "score": 50.0
+        },
+        {
+          "name": "extraversion",
+          "display_name": "Extraversion",
+          "score": 50.0
+        },
+        {
+          "name": "individual_contributor",
+          "display_name": "Individual contributor preference",
+          "score": 50.0
+        },
+        {
+          "name": "neuroticism",
+          "display_name": "Neuroticism",
+          "score": 50.0
+        },
+        {
+          "name": "risk_tolerance",
+          "display_name": "Risk tolerance",
+          "score": 50.0
+        },
+        {
+          "name": "leadership_index",
+          "display_name": "Leadership tendency",
+          "score": 25.0
+        },
+        {
+          "name": "conscientiousness",
+          "display_name": "Conscientiousness",
+          "score": 12.5
+        }
+      ],
+      "career_matches": [
+        {
+          "career": "Psychologist",
+          "overall_score": 70.83333333333333,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 72.77777777777777,
+          "skill_gaps": [],
+          "top_traits": [
+            {
+              "name": "agreeableness",
+              "display_name": "Agreeableness",
+              "importance": 0.15,
+              "score": 75.0
+            },
+            {
+              "name": "intrinsic_motivation",
+              "display_name": "Intrinsic Motivation",
+              "importance": 0.075,
+              "score": 75.0
+            },
+            {
+              "name": "openness",
+              "display_name": "Openness",
+              "importance": 0.06666666666666664,
+              "score": 66.66666666666666
+            }
+          ]
+        },
+        {
+          "career": "Teacher",
+          "overall_score": 70.25,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 70.83333333333334,
+          "skill_gaps": [
+            {
+              "name": "extraversion",
+              "display_name": "Extraversion",
+              "current": 50.0,
+              "desired": 77.0
+            }
+          ]
+        },
+        {
+          "career": "Researcher",
+          "overall_score": 69.78125,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 69.27083333333333,
+          "skill_gaps": [
+            {
+              "name": "extraversion",
+              "display_name": "Extraversion",
+              "current": 50.0,
+              "desired": 77.0
+            }
+          ]
+        },
+        {
+          "career": "Designer",
+          "overall_score": 66.85714285714286,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 59.523809523809526,
+          "skill_gaps": [
+            {
+              "name": "creativity_preference",
+              "display_name": "Creativity Preference",
+              "current": 50.0,
+              "desired": 82.0
+            }
+          ]
+        },
+        {
+          "career": "Data Scientist",
+          "overall_score": 66.82894736842105,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 59.42982456140351,
+          "skill_gaps": [
+            {
+              "name": "conscientiousness",
+              "display_name": "Conscientiousness",
+              "current": 12.5,
+              "desired": 78.0
+            },
+            {
+              "name": "risk_tolerance",
+              "display_name": "Risk Tolerance",
+              "current": 50.0,
+              "desired": 77.0
+            }
+          ]
+        },
+        {
+          "career": "Artist",
+          "overall_score": 66.0,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 56.666666666666664,
+          "skill_gaps": [
+            {
+              "name": "creativity_preference",
+              "display_name": "Creativity Preference",
+              "current": 50.0,
+              "desired": 82.0
+            },
+            {
+              "name": "risk_tolerance",
+              "display_name": "Risk Tolerance",
+              "current": 50.0,
+              "desired": 77.0
+            }
+          ]
+        },
+        {
+          "career": "Software Engineer",
+          "overall_score": 65.171875,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 53.90625,
+          "skill_gaps": [
+            {
+              "name": "conscientiousness",
+              "display_name": "Conscientiousness",
+              "current": 12.5,
+              "desired": 80.0
+            },
+            {
+              "name": "risk_tolerance",
+              "display_name": "Risk Tolerance",
+              "current": 50.0,
+              "desired": 76.0
+            }
+          ]
+        },
+        {
+          "career": "Entrepreneur",
+          "overall_score": 64.73529411764706,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 52.450980392156865,
+          "skill_gaps": [
+            {
+              "name": "risk_tolerance",
+              "display_name": "Risk Tolerance",
+              "current": 50.0,
+              "desired": 81.0
+            },
+            {
+              "name": "leadership_index",
+              "display_name": "Leadership Index",
+              "current": 25.0,
+              "desired": 79.0
+            }
+          ]
+        },
+        {
+          "career": "Doctor",
+          "overall_score": 64.46875,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 51.5625,
+          "skill_gaps": [
+            {
+              "name": "conscientiousness",
+              "display_name": "Conscientiousness",
+              "current": 12.5,
+              "desired": 81.0
+            }
+          ]
+        },
+        {
+          "career": "Civil Servant",
+          "overall_score": 62.0,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 43.333333333333336,
+          "skill_gaps": [
+            {
+              "name": "conscientiousness",
+              "display_name": "Conscientiousness",
+              "current": 12.5,
+              "desired": 81.0
+            },
+            {
+              "name": "leadership_index",
+              "display_name": "Leadership Index",
+              "current": 25.0,
+              "desired": 77.0
+            }
+          ]
+        },
+        {
+          "career": "Manager",
+          "overall_score": 60.911764705882355,
+          "academic_component": 70.0,
+          "skills_component": 70.0,
+          "psych_component": 39.70588235294118,
+          "skill_gaps": [
+            {
+              "name": "leadership_index",
+              "display_name": "Leadership Index",
+              "current": 25.0,
+              "desired": 82.0
+            },
+            {
+              "name": "extraversion",
+              "display_name": "Extraversion",
+              "current": 50.0,
+              "desired": 80.0
+            },
+            {
+              "name": "conscientiousness",
+              "display_name": "Conscientiousness",
+              "current": 12.5,
+              "desired": 77.0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

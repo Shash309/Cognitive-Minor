@@ -1,19 +1,65 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './CareerQuiz.css';
 import { useTranslation } from 'react-i18next';
+import { useOutletContext } from 'react-router-dom';
 
 // FINAL: All questions with their full list of options
+// selectionType: "single" | "multiple" strictly controls behaviour
 const questions = [
-    { id: 'Q1', text: 'What are your favorite subjects?', type: 'multi-select', options: ['Accountancy', 'Biology', 'Business Studies', 'Chemistry', 'Computer Science', 'Design', 'Economics', 'Fine Arts', 'History', 'Maths', 'Physics', 'Political Science', 'Psychology'] },
-    { id: 'Q2', text: 'Which activities do you enjoy most?', type: 'multi-select', options: ['Coding', 'Debating', 'Designing', 'Drawing', 'Experiments', 'Helping Others', 'Organizing Events', 'Public Speaking', 'Reading', 'Research', 'Solving Puzzles', 'Sports', 'Writing'] },
-    { id: 'Q3', text: 'What do you consider your strongest skills?', type: 'multi-select', options: ['Analysis', 'Communication', 'Creativity', 'Design Thinking', 'Financial Analysis', 'Leadership', 'Presentation', 'Problem Solving', 'Programming', 'Research', 'Teamwork', 'Writing'] },
-    { id: 'Q4', text: 'Which work style suits you better?', type: 'multi-select', options: ['Practical', 'Theoretical', 'Both'] },
-    { id: 'Q5', text: 'What type of workplace do you prefer?', type: 'multi-select', options: ['Classroom', 'Corporate Office', 'Creative Studio', 'Government Office', 'NGO', 'Outdoors', 'Research Lab', 'Startup'] },
-    { id: 'Q6', text: 'Are you ready for competitive exams?', type: 'multi-select', options: ['Yes', 'No', 'Maybe'] },
-    { id: 'Q7', text: 'Where would you prefer to study/work?', type: 'multi-select', options: ['India', 'Abroad', 'Flexible'] },
-    { id: 'Q8', text: 'What career values matter most to you?', type: 'multi-select', options: ['Job Security', 'Creativity & Freedom', 'Balanced'] },
-    { id: 'Q9', text: 'What is your long-term career goal?', type: 'multi-select', options: ['Artist', 'Civil Servant', 'Data Scientist', 'Designer', 'Doctor', 'Engineer', 'Entrepreneur', 'Lawyer', 'Manager', 'Scientist', 'Teacher'] },
-    { id: 'Q10', text: 'What is your academic background (with %)?', type: 'multi-select', options: ['Arts-41%', 'Arts-42%', 'Arts-43%', 'Arts-44%', 'Arts-45%', 'Arts-46%', 'Arts-47%', 'Arts-48%', 'Arts-49%', 'Arts-50%', 'Arts-51%', 'Arts-54%', 'Arts-55%', 'Arts-56%', 'Arts-57%', 'Arts-58%', 'Arts-59%', 'Arts-60%', 'Arts-61%', 'Arts-62%', 'Arts-63%', 'Arts-64%', 'Arts-65%', 'Arts-66%', 'Arts-67%', 'Arts-68%', 'Arts-69%', 'Arts-70%', 'Arts-71%', 'Arts-72%', 'Arts-73%', 'Arts-74%', 'Arts-75%', 'Arts-76%', 'Arts-77%', 'Arts-78%', 'Arts-79%', 'Arts-81%', 'Arts-82%', 'Arts-83%', 'Arts-84%', 'Arts-85%', 'Arts-86%', 'Arts-87%', 'Arts-88%', 'Arts-89%', 'Arts-90%', 'Arts-91%', 'Arts-92%', 'Commerce-45%', 'Commerce-46%', 'Commerce-47%', 'Commerce-48%', 'Commerce-49%', 'Commerce-50%', 'Commerce-51%', 'Commerce-52%', 'Commerce-53%', 'Commerce-54%', 'Commerce-55%', 'Commerce-56%', 'Commerce-57%', 'Commerce-58%', 'Commerce-59%', 'Commerce-60%', 'Commerce-61%', 'Commerce-62%', 'Commerce-63%', 'Commerce-64%', 'Commerce-65%', 'Commerce-66%', 'Commerce-67%', 'Commerce-68%', 'Commerce-69%', 'Commerce-70%', 'Commerce-71%', 'Commerce-72%', 'Commerce-73%', 'Commerce-74%', 'Commerce-75%', 'Commerce-76%', 'Commerce-77%', 'Commerce-78%', 'Commerce-79%', 'Commerce-80%', 'Commerce-81%', 'Commerce-82%', 'Commerce-83%', 'Commerce-84%', 'Commerce-85%', 'Commerce-86%', 'Commerce-87%', 'Commerce-88%', 'Commerce-89%', 'Commerce-90%', 'Commerce-91%', 'Commerce-92%', 'Commerce-93%', 'Commerce-94%', 'Commerce-95%', 'Science-50%', 'Science-51%', 'Science-52%', 'Science-53%', 'Science-54%', 'Science-55%', 'Science-56%', 'Science-57%', 'Science-58%', 'Science-59%', 'Science-60%', 'Science-61%', 'Science-62%', 'Science-63%', 'Science-64%', 'Science-65%', 'Science-66%', 'Science-67%', 'Science-68%', 'Science-69%', 'Science-70%', 'Science-71%', 'Science-72%', 'Science-73%', 'Science-74%', 'Science-75%', 'Science-76%', 'Science-77%', 'Science-78%', 'Science-79%', 'Science-80%', 'Science-81%', 'Science-82%', 'Science-83%', 'Science-84%', 'Science-85%', 'Science-86%', 'Science-87%', 'Science-88%', 'Science-89%', 'Science-90%', 'Science-91%', 'Science-92%', 'Science-93%', 'Science-94%', 'Science-95%', 'Science-96%', 'Science-97%', 'Science-98%', 'Science-99%', 'Vocational-43%', 'Vocational-44%', 'Vocational-45%', 'Vocational-46%', 'Vocational-47%', 'Vocational-50%', 'Vocational-52%', 'Vocational-53%', 'Vocational-55%', 'Vocational-56%', 'Vocational-57%', 'Vocational-58%', 'Vocational-60%', 'Vocational-61%', 'Vocational-62%', 'Vocational-65%', 'Vocational-68%', 'Vocational-69%', 'Vocational-70%', 'Vocational-71%', 'Vocational-72%', 'Vocational-73%', 'Vocational-74%', 'Vocational-75%', 'Vocational-76%', 'Vocational-78%', 'Vocational-79%', 'Vocational-83%', 'Vocational-88%', 'Vocational-89%'] },
+    {
+        id: 'Q1',
+        question: 'What are your favorite subjects?',
+        selectionType: 'multiple',
+        options: ['Accountancy', 'Biology', 'Business Studies', 'Chemistry', 'Computer Science', 'Design', 'Economics', 'Fine Arts', 'History', 'Maths', 'Physics', 'Political Science', 'Psychology'],
+    },
+    {
+        id: 'Q2',
+        question: 'Which activities do you enjoy most?',
+        selectionType: 'multiple',
+        options: ['Coding', 'Debating', 'Designing', 'Drawing', 'Experiments', 'Helping Others', 'Organizing Events', 'Public Speaking', 'Reading', 'Research', 'Solving Puzzles', 'Sports', 'Writing'],
+    },
+    {
+        id: 'Q3',
+        question: 'What do you consider your strongest skills?',
+        selectionType: 'multiple',
+        options: ['Analysis', 'Communication', 'Creativity', 'Design Thinking', 'Financial Analysis', 'Leadership', 'Presentation', 'Problem Solving', 'Programming', 'Research', 'Teamwork', 'Writing'],
+    },
+    {
+        id: 'Q4',
+        question: 'Which work style suits you better?',
+        selectionType: 'single',
+        options: ['Practical', 'Theoretical', 'Both'],
+    },
+    {
+        id: 'Q5',
+        question: 'What type of workplace do you prefer?',
+        selectionType: 'multiple',
+        options: ['Classroom', 'Corporate Office', 'Creative Studio', 'Government Office', 'NGO', 'Outdoors', 'Research Lab', 'Startup'],
+    },
+    {
+        id: 'Q6',
+        question: 'Are you ready for competitive exams?',
+        selectionType: 'single',
+        options: ['Yes', 'No', 'Maybe'],
+    },
+    {
+        id: 'Q7',
+        question: 'Where would you prefer to study/work?',
+        selectionType: 'single',
+        options: ['India', 'Abroad', 'Flexible'],
+    },
+    {
+        id: 'Q8',
+        question: 'What career values matter most to you?',
+        selectionType: 'multiple',
+        options: ['Job Security', 'Creativity & Freedom', 'Balanced'],
+    },
+    {
+        id: 'Q9',
+        question: 'What is your long-term career goal?',
+        selectionType: 'single',
+        options: ['Artist', 'Civil Servant', 'Data Scientist', 'Designer', 'Doctor', 'Engineer', 'Entrepreneur', 'Lawyer', 'Manager', 'Scientist', 'Teacher'],
+    },
 ];
 
 
@@ -31,37 +77,52 @@ const optionKeyMap = {
 
 const CareerQuiz = () => {
     const { t } = useTranslation();
+    const { user } = useOutletContext() || {};
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answers, setAnswers] = useState(() => {
         const initialAnswers = {};
         questions.forEach(q => { initialAnswers[q.id] = []; });
         return initialAnswers;
     });
+    const [stream, setStream] = useState('');
+    const [academicPercentInput, setAcademicPercentInput] = useState('');
+    const [academicError, setAcademicError] = useState('');
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [animation, setAnimation] = useState('slide-in');
 
-    const currentQuestion = questions[currentQuestionIndex];
-    const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+    const totalSteps = questions.length + 1; // +1 for academic background step
+    const isAcademicStep = currentQuestionIndex === questions.length;
+    const currentQuestion = !isAcademicStep ? questions[currentQuestionIndex] : null;
+    const progress = ((currentQuestionIndex + 1) / totalSteps) * 100;
 
     const translateOption = (option) => {
         const key = optionKeyMap[option];
         return key ? t(`quiz.options.${key}`, option) : option;
     };
 
-    const handleSelectionChange = (questionId, option) => {
+    const handleSelectionChange = (questionId, option, selectionType) => {
         setAnswers(prevAnswers => {
-            const currentSelection = prevAnswers[questionId];
-            const newSelection = currentSelection.includes(option)
-                ? currentSelection.filter(item => item !== option)
-                : [...currentSelection, option];
+            const currentSelection = prevAnswers[questionId] || [];
+            let newSelection;
+
+            if (selectionType === 'single') {
+                // Only allow one selection; clicking again deselects
+                newSelection = currentSelection.includes(option) ? [] : [option];
+            } else {
+                // Multiple selection toggle
+                newSelection = currentSelection.includes(option)
+                    ? currentSelection.filter(item => item !== option)
+                    : [...currentSelection, option];
+            }
+
             return { ...prevAnswers, [questionId]: newSelection };
         });
     };
 
     const handleNext = () => {
-        if (currentQuestionIndex < questions.length - 1) {
+        if (currentQuestionIndex < totalSteps - 1) {
             setAnimation('slide-out');
             setTimeout(() => {
                 setCurrentQuestionIndex(prev => prev + 1);
@@ -84,35 +145,79 @@ const CareerQuiz = () => {
         e.preventDefault();
         setLoading(true);
         setError("");
+        setAcademicError("");
 
         try {
             // Convert structured answers into a single descriptive string for the NLP model
             // Example: "Favorite subjects: Math, Physics. Skills: Analysis. ..."
-            const answersText = Object.entries(answers)
+            // Validate academic background inputs
+            const trimmedStream = (stream || '').trim();
+            const percentValue = parseFloat(academicPercentInput);
+            if (!trimmedStream) {
+                throw new Error('Please select your academic stream.');
+            }
+            if (Number.isNaN(percentValue) || percentValue < 0 || percentValue > 100) {
+                setAcademicError('Please enter a valid percentage between 0 and 100.');
+                throw new Error('Invalid academic percentage.');
+            }
+
+            const academicPercent = percentValue;
+
+            // Convert structured answers into a single descriptive string for the NLP model
+            const answersTextParts = Object.entries(answers)
                 .map(([key, value]) => {
-                    // key is like "Q1", "Q2". value is array or string.
-                    // Find the question text
                     const question = questions.find(q => q.id === key);
-                    const qText = question ? question.text : key;
+                    const qText = question ? question.question : key;
                     const valText = Array.isArray(value) ? value.join(", ") : value;
                     return `${qText}: ${valText}`;
-                })
-                .join(". ");
+                });
 
-            console.log("Sending text to backend:", answersText);
+            answersTextParts.push(`Academic stream: ${trimmedStream}`);
+            answersTextParts.push(`Academic percentage: ${academicPercent}`);
 
-            const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000'}/predict`, {
+            const answersText = answersTextParts.join(". ");
+
+            const apiBase = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000';
+
+            const res = await fetch(`${apiBase}/api/quiz/submit`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ features: answersText }),
+                body: JSON.stringify({
+                    features: answersText,
+                    answers_text: answersText,
+                    structured_answers: answers,
+                    user_email: user?.email || null,
+                    academic_percent: academicPercent,
+                    stream: trimmedStream,
+                }),
             });
 
             const data = await res.json();
             if (data.error) throw new Error(data.error);
-            setResult({ recommendation: data.career });
+
+            // Prefer unified fused results from the dedicated endpoint when we have a user
+            if (user?.email) {
+                const fusedRes = await fetch(
+                    `${apiBase}/api/career-results?user_email=${encodeURIComponent(user.email)}`
+                );
+                const fusedData = await fusedRes.json();
+                if (fusedData.error) {
+                    throw new Error(fusedData.error);
+                }
+                setResult(fusedData);
+            } else {
+                // Fallback for anonymous users: use fusion included in submit response (if any)
+                setResult({
+                    career_rankings: data.career_rankings || [],
+                    quiz_scores: data.quiz_scores || {},
+                    psych_scores: data.psych_scores || {},
+                });
+            }
         } catch (err) {
             console.error(err);
-            setError(err.message || "Something went wrong. Please try again.");
+            if (!academicError) {
+                setError(err.message || "Something went wrong. Please try again.");
+            }
         } finally {
             setLoading(false);
         }
@@ -123,16 +228,57 @@ const CareerQuiz = () => {
         const initialAnswers = {};
         questions.forEach(q => { initialAnswers[q.id] = []; });
         setAnswers(initialAnswers);
+        setStream('');
+        setAcademicPercentInput('');
+        setAcademicError('');
         setCurrentQuestionIndex(0);
         setResult(null);
     };
 
-    if (result) {
+    if (result && Array.isArray(result.career_rankings)) {
         return (
             <div className="career-quiz-container show-results">
                 <div className="quiz-results">
                     <h3>{t('quiz.yourRecommendationTitle')}</h3>
-                    <p><strong>{t('quiz.recommendedPath')}</strong> {result.recommendation}</p>
+                    <p><strong>{t('quiz.recommendedPath')}</strong></p>
+
+                    <div className="career-cards">
+                        {result.career_rankings.map((item) => (
+                            <div key={item.career} className="career-card">
+                                <div className="career-header">
+                                    <h4>{item.career}</h4>
+                                    <span className="career-score">
+                                        {Math.round(item.final_score)}%
+                                    </span>
+                                </div>
+                                <div className="career-components">
+                                    <div>
+                                        <span>Quiz contribution</span>
+                                        <div className="bar">
+                                            <div
+                                                className="fill academic"
+                                                style={{
+                                                    width: `${Math.round(item.quiz_component || 0)}%`,
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span>Psychological contribution</span>
+                                        <div className="bar">
+                                            <div
+                                                className="fill psych"
+                                                style={{
+                                                    width: `${Math.round(item.psych_component || 0)}%`,
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
                     <button onClick={handleReset} className="btn-nav btn-retake">
                         <i className="fas fa-redo"></i> {t('quiz.retakeQuiz')}
                     </button>
@@ -149,27 +295,101 @@ const CareerQuiz = () => {
                 </div>
 
                 <div className="quiz-top-nav">
-                    {questions.map((q, index) => (
-                        <div key={q.id} className={`nav-item-top ${currentQuestionIndex === index ? 'active' : ''} ${answers[q.id]?.length > 0 ? 'answered' : ''}`}>
-                            {answers[q.id]?.length > 0 ? <i className="fas fa-check-circle"></i> : index + 1}
+                    {[...questions, { id: 'ACADEMIC' }].map((q, index) => (
+                        <div
+                            key={q.id}
+                            className={`nav-item-top ${currentQuestionIndex === index ? 'active' : ''} ${
+                                index < questions.length
+                                    ? (answers[q.id]?.length > 0 ? 'answered' : '')
+                                    : (stream && academicPercentInput ? 'answered' : '')
+                            }`}
+                        >
+                            {index < questions.length
+                                ? (answers[q.id]?.length > 0 ? <i className="fas fa-check-circle"></i> : index + 1)
+                                : (stream && academicPercentInput ? <i className="fas fa-check-circle"></i> : totalSteps)}
                         </div>
                     ))}
                 </div>
 
                 <div className="quiz-card" key={currentQuestionIndex}>
                     <div className={`question-content ${animation}`}>
-                        <h2 className="question-text">{t(`quiz.questions.${currentQuestion.id}.text`, currentQuestion.text)}</h2>
-                        <div className="options-grid">
-                            {currentQuestion.options.map(option => (
-                                <button
-                                    key={option}
-                                    className={`option-card ${answers[currentQuestion.id]?.includes(option) ? 'selected' : ''}`}
-                                    onClick={() => handleSelectionChange(currentQuestion.id, option)}
-                                >
-                                    {translateOption(option)}
-                                </button>
-                            ))}
-                        </div>
+                        {!isAcademicStep && (
+                            <>
+                                <h2 className="question-text">
+                                    {t(`quiz.questions.${currentQuestion.id}.text`, currentQuestion.question)}
+                                </h2>
+                                {currentQuestion.selectionType === 'multiple' && (
+                                    <p className="multi-select-note">
+                                        You can select multiple options.
+                                    </p>
+                                )}
+                                <div className="options-grid">
+                                    {currentQuestion.options.map(option => (
+                                        <button
+                                            key={option}
+                                            className={`option-card ${answers[currentQuestion.id]?.includes(option) ? 'selected' : ''}`}
+                                            onClick={() =>
+                                                handleSelectionChange(
+                                                    currentQuestion.id,
+                                                    option,
+                                                    currentQuestion.selectionType
+                                                )
+                                            }
+                                        >
+                                            {translateOption(option)}
+                                        </button>
+                                    ))}
+                                </div>
+                            </>
+                        )}
+                        {isAcademicStep && (
+                            <>
+                                <h2 className="question-text">
+                                    What is your academic background?
+                                </h2>
+                                <div className="academic-section">
+                                    <h3>Part A – Stream selection</h3>
+                                    <p className="single-select-note">
+                                        Choose your primary stream (single selection).
+                                    </p>
+                                    <div className="options-grid">
+                                        {['Arts', 'Science', 'Commerce'].map(option => (
+                                            <button
+                                                key={option}
+                                                className={`option-card ${stream === option ? 'selected' : ''}`}
+                                                onClick={() =>
+                                                    setStream(prev =>
+                                                        prev === option ? '' : option
+                                                    )
+                                                }
+                                            >
+                                                {option}
+                                            </button>
+                                        ))}
+                                    </div>
+
+                                    <h3>Part B – Percentage</h3>
+                                    <label className="academic-percent-label">
+                                        Enter your percentage in previous class
+                                    </label>
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        max="100"
+                                        step="0.1"
+                                        value={academicPercentInput}
+                                        onChange={e => {
+                                            setAcademicPercentInput(e.target.value);
+                                            setAcademicError('');
+                                        }}
+                                        className={`academic-percent-input ${academicError ? 'has-error' : ''}`}
+                                    />
+                                    {academicError && (
+                                        <p className="error-message">{academicError}</p>
+                                    )}
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
 
@@ -177,7 +397,7 @@ const CareerQuiz = () => {
                     <button onClick={handleBack} className="btn-nav btn-back" disabled={currentQuestionIndex === 0}>
                         <i className="fas fa-arrow-left"></i> {t('quiz.back')}
                     </button>
-                    {currentQuestionIndex < questions.length - 1 ? (
+                    {currentQuestionIndex < totalSteps - 1 ? (
                         <button onClick={handleNext} className="btn-nav btn-next">
                             {t('quiz.next')} <i className="fas fa-arrow-right"></i>
                         </button>

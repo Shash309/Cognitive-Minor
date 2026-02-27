@@ -1,0 +1,76 @@
+{
+  "shash@gmail.com": {
+    "last_taken": "2026-02-27T05:59:53.894327Z",
+    "academic_percent": 75.0,
+    "skills": {
+      "Computer Science": 0.5,
+      "Coding": 0.5,
+      "Designing": 0.5,
+      "Research": 1.0,
+      "Analysis": 0.5,
+      "Communication": 0.5,
+      "Creativity": 0.5,
+      "Both": 0.5,
+      "Corporate Office": 0.5,
+      "Creative Studio": 0.5,
+      "Startup": 0.5,
+      "Yes": 0.5,
+      "Flexible": 0.5,
+      "Creativity & Freedom": 0.5,
+      "Data Scientist": 0.5
+    },
+    "skills_vector": {
+      "Computer Science": 0.5,
+      "Coding": 0.5,
+      "Designing": 0.5,
+      "Research": 1.0,
+      "Analysis": 0.5,
+      "Communication": 0.5,
+      "Creativity": 0.5,
+      "Both": 0.5,
+      "Corporate Office": 0.5,
+      "Creative Studio": 0.5,
+      "Startup": 0.5,
+      "Yes": 0.5,
+      "Flexible": 0.5,
+      "Creativity & Freedom": 0.5,
+      "Data Scientist": 0.5
+    },
+    "quiz_scores": {
+      "Business & Finance": 17,
+      "Design & Creative": 34,
+      "Engineering": 38,
+      "Healthcare": 2,
+      "Research & Academics": 8
+    },
+    "stream": "Science",
+    "attempts": [
+      {
+        "timestamp": "2026-02-27T05:59:53.894327Z",
+        "quiz_scores": {
+          "Business & Finance": 17,
+          "Design & Creative": 34,
+          "Engineering": 38,
+          "Healthcare": 2,
+          "Research & Academics": 8
+        },
+        "academic_percent": 75.0,
+        "stream": "Science",
+        "top_career": "Engineering"
+      },
+      {
+        "timestamp": "2026-02-27T05:50:02.318983Z",
+        "quiz_scores": {
+          "Business & Finance": 43,
+          "Design & Creative": 14,
+          "Engineering": 31,
+          "Healthcare": 5,
+          "Research & Academics": 7
+        },
+        "academic_percent": 91.0,
+        "stream": "Commerce",
+        "top_career": "Business & Finance"
+      }
+    ]
+  }
+}

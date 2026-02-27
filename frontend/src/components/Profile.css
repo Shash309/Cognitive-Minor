@@ -1,0 +1,250 @@
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profile-header-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .profile-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.profile-card {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+  padding: 20px 22px;
+}
+
+.profile-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.profile-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.profile-card-accent {
+  height: 3px;
+  width: 40px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e11d48, #fb7185);
+  margin-top: 4px;
+}
+
+.profile-avatar-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #fee2e2;
+  color: #b91c1c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-right: 16px;
+}
+
+.profile-personal-body {
+  display: flex;
+  align-items: center;
+}
+
+.profile-personal-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 24px;
+}
+
+.profile-field-label {
+  font-size: 0.75rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.profile-field-value {
+  font-size: 0.95rem;
+  color: #111827;
+  font-weight: 500;
+}
+
+.profile-edit-btn {
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 999px;
+}
+
+.profile-edit-btn:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.career-main-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.career-score-highlight {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #e11d48;
+}
+
+.career-progress-bar {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  overflow: hidden;
+  margin: 10px 0 14px;
+}
+
+.career-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e11d48, #fb7185);
+}
+
+.career-breakdown-row {
+  display: flex;
+  gap: 16px;
+  font-size: 0.8rem;
+  color: #4b5563;
+}
+
+.career-breakdown-row span strong {
+  color: #111827;
+}
+
+.profile-card-full {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+  padding: 20px 22px;
+}
+
+.profile-section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.profile-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.profile-history-item {
+  border-radius: 10px;
+  border: 1px solid #f3f4f6;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  background: #ffffff;
+  transition: box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+}
+
+.profile-history-item:hover {
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  transform: translateY(-1px);
+  border-color: #fecaca;
+}
+
+.profile-history-date {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 0.7rem;
+  color: #9ca3af;
+}
+
+.profile-history-title {
+  font-weight: 600;
+  color: #111827;
+}
+
+.profile-tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  margin-right: 6px;
+}
+
+.profile-tag-red {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.profile-tag-gray {
+  background: #e5e7eb;
+  color: #4b5563;
+}
+
+.profile-mini-label {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.profile-mini-value {
+  font-size: 0.85rem;
+  color: #111827;
+  font-weight: 500;
+}
+
+.profile-history-footer {
+  margin-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-details-btn {
+  border-radius: 999px;
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.profile-details-btn:hover {
+  background: #fee2e2;
+}
+
+.profile-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}

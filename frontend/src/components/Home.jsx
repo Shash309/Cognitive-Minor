@@ -43,6 +43,13 @@ const Home = ({ user }) => {
             title: t('common.timelineTracker'),
             description: t('dashboard.timelineTrackerDesc', 'Stay updated on all important admission and scholarship dates.'),
         },
+        {
+            key: 'psychology',
+            path: '/dashboard/psychology',
+            icon: 'fas fa-brain',
+            title: t('common.psychologicalAnalysis', 'Psychological Analysis'),
+            description: t('dashboard.psychologicalAnalysisDesc', 'Understand your cognitive profile and how it aligns with different careers.'),
+        },
     ];
 
     const containerVariants = {

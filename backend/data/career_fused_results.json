@@ -1,0 +1,46 @@
+{
+  "shash@gmail.com": {
+    "quiz_scores": {
+      "Business & Finance": 17,
+      "Design & Creative": 34,
+      "Engineering": 38,
+      "Healthcare": 2,
+      "Research & Academics": 8
+    },
+    "psych_scores": {},
+    "final_scores": {
+      "Engineering": 38.0,
+      "Design & Creative": 34.0,
+      "Business & Finance": 17.0,
+      "Research & Academics": 8.0,
+      "Healthcare": 2.0
+    },
+    "academic_percent": 75.0,
+    "skills_vector": {
+      "Computer Science": 0.5,
+      "Coding": 0.5,
+      "Designing": 0.5,
+      "Research": 1.0,
+      "Analysis": 0.5,
+      "Communication": 0.5,
+      "Creativity": 0.5,
+      "Both": 0.5,
+      "Corporate Office": 0.5,
+      "Creative Studio": 0.5,
+      "Startup": 0.5,
+      "Yes": 0.5,
+      "Flexible": 0.5,
+      "Creativity & Freedom": 0.5,
+      "Data Scientist": 0.5
+    },
+    "last_updated": "2026-02-27T15:28:13.253628Z"
+  },
+  "swastik3370@gmail.com": {
+    "quiz_scores": {},
+    "psych_scores": {},
+    "final_scores": {},
+    "academic_percent": null,
+    "skills_vector": {},
+    "last_updated": "2026-02-27T09:15:38.863011Z"
+  }
+}
