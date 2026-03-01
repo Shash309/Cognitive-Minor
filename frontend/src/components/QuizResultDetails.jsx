@@ -69,7 +69,7 @@ const QuizResultDetails = () => {
     );
   }
 
-  const { attempt, career_rankings, top_recommendation } = data;
+  const { attempt, career_rankings, top_recommendation, voice_insight } = data;
   const top = top_recommendation;
   const rankings = career_rankings || [];
 
@@ -93,6 +93,26 @@ const QuizResultDetails = () => {
             </p>
           )}
 
+          {voice_insight && (
+            <div className="voice-insight-section">
+              <h4><i className="fas fa-microphone-alt" /> Voice Insight</h4>
+              {voice_insight.transcript && (
+                <p className="voice-transcript-preview">{voice_insight.transcript}</p>
+              )}
+              <div className="voice-insight-metrics">
+                {typeof voice_insight.motivation_score === 'number' && (
+                  <span>Motivation: <span className="quiz-explanation-highlight voice-highlight">{Math.round(voice_insight.motivation_score)}%</span></span>
+                )}
+                {typeof voice_insight.confidence_score === 'number' && (
+                  <span>Confidence: <span className="quiz-explanation-highlight voice-highlight">{Math.round(voice_insight.confidence_score)}%</span></span>
+                )}
+                {voice_insight.top_voice_career && (
+                  <span>Top (voice): <span className="quiz-explanation-highlight voice-highlight">{voice_insight.top_voice_career}</span></span>
+                )}
+              </div>
+            </div>
+          )}
+
           {top && (
             <div className="quiz-explanation">
               <h4>Why this career?</h4>
@@ -111,6 +131,14 @@ const QuizResultDetails = () => {
                     Psychological alignment:{' '}
                     <span className="quiz-explanation-highlight">
                       {Math.round(top.psych_component)}%
+                    </span>
+                  </span>
+                )}
+                {typeof top.voice_component === 'number' && (
+                  <span>
+                    Voice:{' '}
+                    <span className="quiz-explanation-highlight voice-highlight">
+                      {Math.round(top.voice_component)}%
                     </span>
                   </span>
                 )}

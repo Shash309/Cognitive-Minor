@@ -49,6 +49,11 @@ const Sidebar = () => {
               <i className="fas fa-brain"></i> {t('common.psychologicalAnalysis', 'Psychological Analysis')}
             </NavLink>
           </li>
+          <li>
+            <NavLink to="/dashboard/voice" className={({ isActive }) => (isActive ? 'active' : '')}>
+              <i className="fas fa-microphone-alt"></i> {t('common.voiceInsight', 'Voice Insight')}
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </>

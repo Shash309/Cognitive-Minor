@@ -11,6 +11,7 @@ import CareerPathVisualizer from './components/CareerPathVisualizer';
 import TimelineTracker from './components/TimelineTracker';
 import Profile from './components/Profile';
 import QuizResultDetails from './components/QuizResultDetails';
+import VoiceInsight from './components/VoiceInsight';
 import './App.css';
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
             <Route path="quiz" element={<CareerQuiz />} />
             <Route path="quiz-result/:attemptId" element={<QuizResultDetails />} />
             <Route path="psychology" element={<PsychAssessment />} />
+            <Route path="voice" element={<VoiceInsight />} />
             <Route path="profile" element={<Profile />} />
             <Route path="skills" element={<SkillBuilder />} />
             <Route path="visualizer" element={<CareerPathVisualizer />} />

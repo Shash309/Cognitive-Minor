@@ -8,5 +8,10 @@
     "email": "swastik3370@gmail.com",
     "created_at": "2026-02-27T20:30:58.521798Z",
     "last_login": "2026-02-27T20:30:58.521798Z"
+  },
+  "test@gmail.com": {
+    "email": "test@gmail.com",
+    "created_at": "2026-02-28T07:05:46.108967Z",
+    "last_login": "2026-02-28T07:05:46.108967Z"
   }
 }

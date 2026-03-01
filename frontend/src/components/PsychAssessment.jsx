@@ -387,6 +387,26 @@ const PsychAssessment = () => {
               </div>
             </section>
 
+            {fusion?.voice_insight && (
+              <div className="voice-insight-section">
+                  <h4><i className="fas fa-microphone-alt" /> Voice Insight</h4>
+                  {fusion.voice_insight.transcript && (
+                    <p className="voice-transcript-preview">{fusion.voice_insight.transcript}</p>
+                  )}
+                  <div className="voice-insight-metrics">
+                    {typeof fusion.voice_insight.motivation_score === 'number' && (
+                      <span>Motivation: <span className="voice-highlight">{Math.round(fusion.voice_insight.motivation_score)}%</span></span>
+                    )}
+                    {typeof fusion.voice_insight.confidence_score === 'number' && (
+                      <span>Confidence: <span className="voice-highlight">{Math.round(fusion.voice_insight.confidence_score)}%</span></span>
+                    )}
+                    {fusion.voice_insight.top_voice_career && (
+                      <span>Top (voice): <span className="voice-highlight">{fusion.voice_insight.top_voice_career}</span></span>
+                    )}
+                  </div>
+              </div>
+            )}
+
             <section className="psych-panel">
               <h3>{t('psych.careerRecommendations', 'Career recommendations')}</h3>
               <div className="career-cards">
@@ -425,6 +445,19 @@ const PsychAssessment = () => {
                             />
                           </div>
                         </div>
+                        {typeof item.voice_component === 'number' && (
+                          <div>
+                            <span>Voice</span>
+                            <div className="bar">
+                              <div
+                                className="fill voice"
+                                style={{
+                                  width: `${Math.round(item.voice_component || 0)}%`,
+                                }}
+                              />
+                            </div>
+                          </div>
+                        )}
                       </div>
                       {Array.isArray(psychDetail?.skill_gaps) &&
                         psychDetail.skill_gaps.length > 0 && (

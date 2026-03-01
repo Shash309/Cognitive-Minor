@@ -374,6 +374,54 @@
   background: var(--primary);
 }
 
+.career-components .fill.voice {
+  background: #dc2626;
+}
+
+/* Voice Insight Section */
+.voice-insight-section {
+  background: rgba(220, 38, 38, 0.06);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.voice-insight-section h4 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  color: var(--text-main);
+}
+
+.voice-insight-section h4 i {
+  margin-right: 0.5rem;
+  color: #dc2626;
+}
+
+.voice-transcript-preview {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0 0 0.75rem;
+  line-height: 1.5;
+  max-height: 4.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.voice-insight-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.voice-insight-metrics .quiz-explanation-highlight,
+.voice-highlight {
+  color: #dc2626;
+}
+
 .career-gaps {
   margin-top: 0.35rem;
   font-size: 0.8rem;

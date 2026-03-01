@@ -26,6 +26,7 @@ PSYCH_PATH = os.path.join(DATA_DIR, "psych_profiles.json")
 QUIZ_HISTORY_PATH = os.path.join(DATA_DIR, "quiz_history.json")
 CAREER_FUSED_RESULTS_PATH = os.path.join(DATA_DIR, "career_fused_results.json")
 USERS_PATH = os.path.join(DATA_DIR, "users.json")
+VOICE_HISTORY_PATH = os.path.join(DATA_DIR, "voice_history.json")
 
 
 def _load_json_db(path):
@@ -48,6 +49,7 @@ psych_db = _load_json_db(PSYCH_PATH)
 quiz_db = _load_json_db(QUIZ_HISTORY_PATH)
 fused_results_db = _load_json_db(CAREER_FUSED_RESULTS_PATH)
 users_db = _load_json_db(USERS_PATH)
+voice_db = _load_json_db(VOICE_HISTORY_PATH)
 
 
 def _safe_number(val, default=None):
@@ -195,9 +197,46 @@ CAREER_TRAIT_WEIGHTS = {
     },
 }
 
+# ================== Voice Insight: Career Keyword Map ==================
+# Keys must match CAREER_TRAIT_WEIGHTS for fusion alignment
+CAREER_KEYWORD_MAP = {
+    "Data Scientist": ["data", "analytics", "machine learning", "python", "statistics", "research", "algorithm", "coding", "programming", "analysis", "science"],
+    "Researcher": ["research", "study", "academic", "papers", "discovery", "experiments", "science", "reading", "analysis", "investigate"],
+    "Software Engineer": ["software", "coding", "programming", "developer", "engineer", "tech", "computer", "build", "code", "apps", "technology"],
+    "Manager": ["manage", "lead", "team", "business", "leadership", "organize", "strategy", "corporate", "people"],
+    "Entrepreneur": ["startup", "business", "own", "found", "entrepreneur", "risk", "innovate", "create", "venture"],
+    "Designer": ["design", "creative", "art", "visual", "ui", "ux", "creativity", "aesthetic", "drawing"],
+    "Psychologist": ["psychology", "help", "people", "mental", "counsel", "understand", "therapy", "behavior", "mind"],
+    "Civil Servant": ["government", "public", "service", "policy", "civil", "administration", "society", "law"],
+    "Doctor": ["doctor", "medical", "health", "patient", "medicine", "hospital", "clinical", "biology", "heal"],
+    "Teacher": ["teach", "education", "students", "learning", "school", "share", "explain", "classroom"],
+    "Artist": ["art", "creative", "paint", "music", "draw", "express", "artist", "design", "imagination"],
+}
+
+# Motivation / intent words (strong positive)
+MOTIVATION_WORDS = [
+    "passion", "love", "dream", "want", "excited", "driven", "determined", "inspired",
+    "motivated", "goal", "achieve", "purpose", "meaning", "fulfill", "impact", "change",
+]
+
+# Positive sentiment words
+POSITIVE_WORDS = [
+    "love", "passion", "excited", "great", "amazing", "wonderful", "inspired", "fulfilling",
+    "meaningful", "rewarding", "enjoy", "happy", "proud", "confident", "motivated",
+]
+
+# Negative sentiment words
+NEGATIVE_WORDS = [
+    "hate", "boring", "stressful", "difficult", "worried", "uncertain", "confused",
+]
+
 # ================== Fusion Weights (Configurable) ==================
 QUIZ_FUSION_WEIGHT = 0.5
 PSYCH_FUSION_WEIGHT = 0.5
+# When voice exists: 0.4 quiz, 0.3 psych, 0.3 voice
+QUIZ_FUSION_WEIGHT_3 = 0.4
+PSYCH_FUSION_WEIGHT_3 = 0.3
+VOICE_FUSION_WEIGHT = 0.3
 
 
 def _apply_stream_boost(quiz_scores: dict | None, stream: str | None):
@@ -245,6 +284,122 @@ def _touch_user_profile(email: str | None, name: str | None = None):
 
     users_db[email] = profile
     _save_json_db(USERS_PATH, users_db)
+
+
+# ================== Voice Insight: Speech-to-Text & NLP ==================
+def _transcribe_audio(audio_bytes: bytes, format_hint: str = "webm") -> str:
+    """Convert audio to text using SpeechRecognition. Returns empty string on failure."""
+    try:
+        import speech_recognition as sr
+        from io import BytesIO
+        from pydub import AudioSegment
+
+        if not audio_bytes or len(audio_bytes) < 1000:
+            return ""
+
+        with BytesIO(audio_bytes) as bio:
+            bio.seek(0)
+            try:
+                audio = AudioSegment.from_file(bio, format=format_hint if format_hint else "webm")
+            except Exception:
+                try:
+                    audio = AudioSegment.from_file(bio, format="ogg")
+                except Exception:
+                    return ""
+
+        audio = audio.set_frame_rate(16000).set_channels(1)
+        raw_data = audio.raw_data
+        sample_width = audio.sample_width
+        frame_rate = audio.frame_rate
+
+        recognizer = sr.Recognizer()
+        audio_data = sr.AudioData(raw_data, frame_rate, sample_width)
+
+        try:
+            text = recognizer.recognize_google(audio_data, language="en-IN")
+            return (text or "").strip()
+        except sr.UnknownValueError:
+            return ""
+        except sr.RequestError:
+            return ""
+    except Exception as e:
+        print("Voice transcribe error:", e)
+        return ""
+
+
+def _analyze_voice_text(text: str) -> dict:
+    """Compute sentiment, motivation, confidence from transcribed text."""
+    text_lower = (text or "").lower().strip()
+    words = text_lower.split()
+    unique_words = set(words)
+
+    # Sentiment: -1 to 1
+    pos_count = sum(1 for w in unique_words if w in POSITIVE_WORDS)
+    neg_count = sum(1 for w in unique_words if w in NEGATIVE_WORDS)
+    total = pos_count + neg_count
+    if total == 0:
+        sentiment = 0.5
+    else:
+        sentiment = (pos_count - neg_count) / max(total, 1)
+        sentiment = max(-1.0, min(1.0, 0.5 + sentiment * 0.5))
+
+    # Motivation: 0–100 from intent word frequency
+    mot_count = sum(1 for w in words if w in MOTIVATION_WORDS)
+    motivation_score = min(100.0, 30.0 + (mot_count / max(len(words), 1)) * 100)
+
+    # Confidence: length + vocabulary richness
+
+    vocab_ratio = len(unique_words) / max(len(words), 1) if words else 0
+    confidence_score = min(100.0, 40.0 + len(words) * 0.5 + vocab_ratio * 30)
+
+    return {
+        "sentiment": _safe_number(sentiment, 0.5),
+        "motivation_score": _safe_number(motivation_score, 50.0),
+        "confidence_score": _safe_number(confidence_score, 50.0),
+    }
+
+
+def _compute_voice_career_scores(transcribed_text: str, sentiment: float, confidence: float) -> dict:
+    """Compute 0–100 career alignment scores from voice transcript."""
+    text_lower = (transcribed_text or "").lower()
+    words = set(text_lower.split())
+
+    scores = {}
+    for career, keywords in CAREER_KEYWORD_MAP.items():
+        matches = sum(1 for kw in keywords if kw in text_lower)
+        raw = min(100.0, (matches / max(len(keywords), 1)) * 100) if keywords else 50.0
+        factor = 0.7 + 0.3 * max(0, min(1, sentiment))
+        factor *= 0.9 + 0.1 * (confidence / 100.0)
+        scores[career] = round(max(0.0, min(100.0, _safe_number(raw * factor, 50.0))))
+
+    return scores
+
+
+def _get_latest_voice_scores(email: str | None):
+    """Return latest voice career scores for a user."""
+    if not email:
+        return None
+    history = voice_db.get(email) or []
+    latest = history[0] if history else None
+    if not latest:
+        return None
+    return latest.get("voice_scores")
+
+
+def _save_voice_entry(email: str, transcript: str, voice_scores: dict, metadata: dict):
+    """Append voice entry and keep max 10."""
+    if not email:
+        return
+    history = voice_db.get(email) or []
+    entry = {
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "transcript": transcript,
+        "voice_scores": voice_scores,
+        **metadata,
+    }
+    history.insert(0, entry)
+    voice_db[email] = history[:10]
+    _save_json_db(VOICE_HISTORY_PATH, voice_db)
 
 
 def _compute_psych_profile(responses: dict) -> dict:
@@ -475,86 +630,78 @@ def _compute_psych_career_scores(profile: dict) -> dict:
     return scores
 
 
-def _fuse_career_scores(quiz_scores, psych_scores, academic_percent=None, skills_vector=None):
+def _fuse_career_scores(quiz_scores, psych_scores, academic_percent=None, skills_vector=None, voice_scores=None):
     """
-    Fusion Engine: combine quiz_scores and psych_scores into final unified rankings.
+    Fusion Engine: combine quiz, psych, and optionally voice scores.
 
-    Final score per career:
-        final = w_q * quiz_score + w_p * psych_score
-
-    Where:
-      - If only quiz_scores present => w_q = 1, w_p = 0
-      - If only psych_scores present => w_q = 0, w_p = 1
-      - If both present => base weights QUIZ_FUSION_WEIGHT / PSYCH_FUSION_WEIGHT,
-        normalized to sum to 1.
+    When voice exists: final = 0.4*quiz + 0.3*psych + 0.3*voice
+    When voice missing: final = 0.5*quiz + 0.5*psych (original)
     """
     quiz_scores = quiz_scores or {}
+    psych_scores = psych_scores or {}
+    voice_scores = voice_scores or {}
     have_quiz = bool(quiz_scores)
     have_psych = bool(psych_scores)
+    have_voice = bool(voice_scores)
 
-    # Debug logging for inputs (truncated)
-    print(
-        "DEBUG_FUSION_INPUT",
-        "quiz_len",
-        len(quiz_scores) if isinstance(quiz_scores, dict) else 0,
-        "psych_len",
-        len(psych_scores) if isinstance(psych_scores, dict) else 0,
-    )
-
-    if not have_quiz and not have_psych:
+    if not have_quiz and not have_psych and not have_voice:
         return {"career_rankings": []}
 
-    if have_quiz and not have_psych:
-        w_q, w_p = 1.0, 0.0
-    elif have_psych and not have_quiz:
-        w_q, w_p = 0.0, 1.0
+    if have_voice:
+        total = QUIZ_FUSION_WEIGHT_3 + PSYCH_FUSION_WEIGHT_3 + VOICE_FUSION_WEIGHT
+        w_q = QUIZ_FUSION_WEIGHT_3 / total
+        w_p = PSYCH_FUSION_WEIGHT_3 / total
+        w_v = VOICE_FUSION_WEIGHT / total
     else:
         total = float(QUIZ_FUSION_WEIGHT + PSYCH_FUSION_WEIGHT) or 1.0
         w_q = QUIZ_FUSION_WEIGHT / total
         w_p = PSYCH_FUSION_WEIGHT / total
+        w_v = 0.0
 
     careers = set()
     if isinstance(quiz_scores, dict):
         careers.update(quiz_scores.keys())
     if isinstance(psych_scores, dict):
         careers.update(psych_scores.keys())
+    if isinstance(voice_scores, dict):
+        careers.update(voice_scores.keys())
 
     rankings = []
     for career in careers:
         raw_q = quiz_scores.get(career) if have_quiz else None
-        raw_p = psych_scores.get(career) if (have_psych and isinstance(psych_scores, dict)) else None
+        raw_p = psych_scores.get(career) if have_psych else None
+        raw_v = voice_scores.get(career) if have_voice else None
 
         q = _safe_number(raw_q, None)
         p = _safe_number(raw_p, 50.0) if have_psych else None
+        v = _safe_number(raw_v, 50.0) if have_voice else None
 
-        if q is None and p is None:
+        if q is None and p is None and v is None:
             continue
 
-        if not have_quiz:
-            final_score = p
-        elif not have_psych:
-            final_score = q
-        else:
-            final_score = (w_q * (q or 0.0)) + (w_p * (p or 0.0))
-
+        final_score = (w_q * (q or 0.0)) + (w_p * (p or 0.0)) + (w_v * (v or 0.0))
         final_score = _safe_number(final_score, 0.0)
 
         quiz_contrib = (w_q * (q or 0.0)) if have_quiz else 0.0
         psych_contrib = (w_p * (p or 0.0)) if have_psych else 0.0
+        voice_contrib = (w_v * (v or 0.0)) if have_voice else 0.0
 
         quiz_contrib = _safe_number(quiz_contrib, 0.0)
         psych_contrib = _safe_number(psych_contrib, 0.0)
+        voice_contrib = _safe_number(voice_contrib, 0.0)
 
-        rankings.append(
-            {
-                "career": career,
-                "final_score": float(final_score),
-                "quiz_component": q,
-                "psych_component": p,
-                "quiz_contribution": float(quiz_contrib),
-                "psych_contribution": float(psych_contrib),
-            }
-        )
+        item = {
+            "career": career,
+            "final_score": float(final_score),
+            "quiz_component": q,
+            "psych_component": p,
+            "quiz_contribution": float(quiz_contrib),
+            "psych_contribution": float(psych_contrib),
+        }
+        if have_voice:
+            item["voice_component"] = v
+            item["voice_contribution"] = float(voice_contrib)
+        rankings.append(item)
 
     rankings.sort(key=lambda x: x["final_score"], reverse=True)
 
@@ -570,6 +717,7 @@ def _update_fused_results(
     fusion_result: dict,
     academic_percent=None,
     skills_vector=None,
+    voice_scores=None,
 ):
     if not email:
         return
@@ -580,6 +728,7 @@ def _update_fused_results(
     fused_results_db[email] = {
         "quiz_scores": quiz_scores or {},
         "psych_scores": psych_scores or {},
+        "voice_scores": voice_scores or {},
         "final_scores": final_scores,
         "academic_percent": academic_percent,
         "skills_vector": skills_vector or {},
@@ -944,6 +1093,171 @@ def psych_status():
     return jsonify({"completed": completed}), 200
 
 
+@app.route("/api/voice-analysis", methods=["POST"])
+def voice_analysis():
+    """
+    Accept audio file, transcribe to text, analyze NLP signals,
+    compute voice career scores, store in history, and update fusion.
+    """
+    payload = None
+    if request.is_json:
+        payload = request.get_json(silent=True) or {}
+
+    user_email = request.form.get("user_email") or (payload or {}).get("user_email")
+    if not user_email:
+        return jsonify({"error": "user_email is required"}), 400
+
+    transcript_in = request.form.get("transcript")
+    if transcript_in is None and payload:
+        transcript_in = payload.get("transcript")
+
+    audio_file = request.files.get("audio")
+
+    # Debug logging (never silent)
+    try:
+        print(
+            "[voice-analysis] user_email=",
+            user_email,
+            "| has_transcript=",
+            bool(transcript_in and str(transcript_in).strip()),
+            "| transcript_len=",
+            len(str(transcript_in or "")),
+            "| has_audio=",
+            bool(audio_file and audio_file.filename),
+            "| audio_mimetype=",
+            getattr(audio_file, "mimetype", None),
+            "| audio_filename=",
+            getattr(audio_file, "filename", None),
+        )
+    except Exception:
+        pass
+
+    transcribed_text = None
+    stt_used = False
+
+    if transcript_in and isinstance(transcript_in, str) and transcript_in.strip():
+        transcribed_text = transcript_in.strip()
+    else:
+        if not audio_file or audio_file.filename == "":
+            return jsonify({"error": "Either transcript or audio file is required"}), 400
+
+        audio_bytes = audio_file.read() or b""
+        try:
+            print(
+                "[voice-analysis] audio_size_bytes=",
+                len(audio_bytes),
+                "| audio_mimetype=",
+                getattr(audio_file, "mimetype", None),
+            )
+        except Exception:
+            pass
+
+        if len(audio_bytes) < 5000:
+            return jsonify({"error": "Recording too short. Please record at least 5 seconds."}), 400
+
+        format_hint = "webm" if "webm" in (audio_file.filename or "").lower() else "webm"
+        try:
+            transcribed_text = _transcribe_audio(audio_bytes, format_hint)
+            stt_used = True
+        except Exception as e:
+            print("[voice-analysis] STT exception:", repr(e))
+            return (
+                jsonify(
+                    {
+                        "error": "Could not transcribe audio. Please ensure clear speech and try again.",
+                        "transcribed_text": "",
+                        "transcript_preview": (transcript_in or "").strip() if isinstance(transcript_in, str) else "",
+                        "debug": {
+                            "stt_exception": type(e).__name__,
+                            "audio_size_bytes": len(audio_bytes),
+                            "audio_mimetype": getattr(audio_file, "mimetype", None),
+                        },
+                    }
+                ),
+                400,
+            )
+
+    if not transcribed_text or not str(transcribed_text).strip():
+        return (
+            jsonify(
+                {
+                    "error": "Transcript empty. Please try again.",
+                    "transcribed_text": "",
+                    "transcript_preview": (transcript_in or "").strip() if isinstance(transcript_in, str) else "",
+                }
+            ),
+            400,
+        )
+
+    # Minimum word validation (prevents short/empty captures and NaN downstream)
+    word_count = len(str(transcribed_text).strip().split())
+    try:
+        print("[voice-analysis] transcript_word_count=", word_count)
+    except Exception:
+        pass
+    if word_count < 10:
+        return (
+            jsonify(
+                {
+                    "error": "Transcript too short. Please speak at least 10 words.",
+                    "transcribed_text": str(transcribed_text).strip(),
+                }
+            ),
+            400,
+        )
+
+    try:
+        analysis = _analyze_voice_text(transcribed_text)
+    except Exception as e:
+        print("Voice NLP error:", e)
+        analysis = {"sentiment": 0.5, "motivation_score": 50.0, "confidence_score": 50.0}
+
+    sentiment = _safe_number(analysis.get("sentiment", 0.5), 0.5)
+    confidence = _safe_number(analysis.get("confidence_score", 50.0), 50.0)
+    voice_scores = _compute_voice_career_scores(transcribed_text, sentiment, confidence)
+
+    top_voice_career = None
+    if voice_scores:
+        top_voice_career = max(voice_scores.items(), key=lambda kv: kv[1])[0]
+
+    _save_voice_entry(
+        user_email,
+        transcript=transcribed_text,
+        voice_scores=voice_scores,
+        metadata={
+            "sentiment": sentiment,
+            "motivation_score": analysis.get("motivation_score"),
+            "confidence_score": confidence,
+        },
+    )
+
+    quiz_scores, academic_percent, skills_vector = _get_quiz_context(user_email)
+    psych_scores = _get_latest_psych_scores(user_email)
+    fusion_result = _fuse_career_scores(
+        quiz_scores, psych_scores, academic_percent, skills_vector, voice_scores
+    )
+    _update_fused_results(
+        user_email,
+        quiz_scores=quiz_scores,
+        psych_scores=psych_scores,
+        fusion_result=fusion_result,
+        academic_percent=academic_percent,
+        skills_vector=skills_vector,
+        voice_scores=voice_scores,
+    )
+
+    return jsonify({
+        "transcribed_text": transcribed_text,
+        "sentiment": sentiment,
+        "motivation_score": _safe_number(analysis.get("motivation_score"), 50.0),
+        "confidence_score": confidence,
+        "keyword_alignment": voice_scores,
+        "top_voice_career": top_voice_career,
+        "voice_scores": voice_scores,
+        "stt_used": stt_used,
+    }), 200
+
+
 @app.route("/api/psych-assessment", methods=["GET"])
 def get_psych_assessment():
     """Return latest psychological profile and history for a user."""
@@ -1014,9 +1328,11 @@ def post_psych_assessment():
     psych_db[user_email] = user_history[:10]
     _save_json_db(PSYCH_PATH, psych_db)
 
-    # Compute/update fused career scores for this user
     quiz_scores, academic_percent, skills_vector = _get_quiz_context(user_email)
-    fusion_result = _fuse_career_scores(quiz_scores, psych_scores, academic_percent, skills_vector)
+    voice_scores = _get_latest_voice_scores(user_email)
+    fusion_result = _fuse_career_scores(
+        quiz_scores, psych_scores, academic_percent, skills_vector, voice_scores
+    )
     _update_fused_results(
         user_email,
         quiz_scores=quiz_scores,
@@ -1024,6 +1340,7 @@ def post_psych_assessment():
         fusion_result=fusion_result,
         academic_percent=academic_percent,
         skills_vector=skills_vector,
+        voice_scores=voice_scores,
     )
 
     response = {
@@ -1236,9 +1553,11 @@ def quiz_submit():
         quiz_db[user_email] = snapshot
         _save_json_db(QUIZ_HISTORY_PATH, quiz_db)
 
-    # Compute fused scores using latest psychological data (if any)
     psych_scores = _get_latest_psych_scores(user_email)
-    fusion_result = _fuse_career_scores(quiz_scores, psych_scores, academic_percent, skills_vector)
+    voice_scores = _get_latest_voice_scores(user_email)
+    fusion_result = _fuse_career_scores(
+        quiz_scores, psych_scores, academic_percent, skills_vector, voice_scores
+    )
     _update_fused_results(
         user_email,
         quiz_scores=quiz_scores,
@@ -1246,6 +1565,7 @@ def quiz_submit():
         fusion_result=fusion_result,
         academic_percent=academic_percent,
         skills_vector=skills_vector,
+        voice_scores=voice_scores,
     )
 
     return jsonify(
@@ -1269,8 +1589,11 @@ def career_results():
     quiz_scores, academic_percent, skills_vector = _get_quiz_context(user_email)
     psych_scores = _get_latest_psych_scores(user_email)
     psych_profile = _get_latest_psych_profile(user_email)
+    voice_scores = _get_latest_voice_scores(user_email)
 
-    fusion_result = _fuse_career_scores(quiz_scores, psych_scores, academic_percent, skills_vector)
+    fusion_result = _fuse_career_scores(
+        quiz_scores, psych_scores, academic_percent, skills_vector, voice_scores
+    )
     _update_fused_results(
         user_email,
         quiz_scores=quiz_scores,
@@ -1278,6 +1601,7 @@ def career_results():
         fusion_result=fusion_result,
         academic_percent=academic_percent,
         skills_vector=skills_vector,
+        voice_scores=voice_scores,
     )
 
     rankings = fusion_result.get("career_rankings") or []
@@ -1289,8 +1613,10 @@ def career_results():
         final_score = float(top.get("final_score", 0.0))
         quiz_component = top.get("quiz_component")
         psych_component = top.get("psych_component")
+        voice_component = top.get("voice_component")
         quiz_contribution = top.get("quiz_contribution")
         psych_contribution = top.get("psych_contribution")
+        voice_contribution = top.get("voice_contribution")
 
         # Confidence score based on gap between top 1 and top 2
         confidence_score = None
@@ -1324,8 +1650,10 @@ def career_results():
             "final_score": final_score,
             "quiz_component": quiz_component,
             "psych_component": psych_component,
+            "voice_component": voice_component,
             "quiz_contribution": quiz_contribution,
             "psych_contribution": psych_contribution,
+            "voice_contribution": voice_contribution,
             "top_traits": top_traits,
             "quiz_signals": quiz_signals,
             "academic_percent": academic_percent,
@@ -1334,14 +1662,28 @@ def career_results():
             "explanation": explanation,
         }
 
+    voice_insight = None
+    if voice_scores:
+        history = voice_db.get(user_email) or []
+        latest = history[0] if history else None
+        if latest:
+            voice_insight = {
+                "transcript": latest.get("transcript", "")[:200] + ("..." if len(latest.get("transcript", "")) > 200 else ""),
+                "motivation_score": latest.get("motivation_score"),
+                "confidence_score": latest.get("confidence_score"),
+                "top_voice_career": max(voice_scores.items(), key=lambda kv: kv[1])[0] if voice_scores else None,
+            }
+
     return jsonify(
         {
             "career_rankings": rankings,
             "quiz_scores": quiz_scores,
             "psych_scores": psych_scores,
+            "voice_scores": voice_scores,
             "academic_percent": academic_percent,
             "skills_vector": skills_vector,
             "top_recommendation": top_recommendation,
+            "voice_insight": voice_insight,
         }
     )
 
@@ -1380,9 +1722,11 @@ def get_quiz_attempt():
 
     psych_scores = _get_latest_psych_scores(user_email)
     psych_profile = _get_latest_psych_profile(user_email)
+    voice_scores = _get_latest_voice_scores(user_email)
 
-    # For attempt-level detail we fuse this attempt's quiz scores with latest psych.
-    fusion_result = _fuse_career_scores(quiz_scores, psych_scores, academic_percent, None)
+    fusion_result = _fuse_career_scores(
+        quiz_scores, psych_scores, academic_percent, None, voice_scores
+    )
     rankings = fusion_result.get("career_rankings") or []
 
     top_recommendation = None
@@ -1392,8 +1736,10 @@ def get_quiz_attempt():
         final_score = float(top.get("final_score", 0.0))
         quiz_component = top.get("quiz_component")
         psych_component = top.get("psych_component")
+        voice_component = top.get("voice_component")
         quiz_contribution = top.get("quiz_contribution")
         psych_contribution = top.get("psych_contribution")
+        voice_contribution = top.get("voice_contribution")
 
         # Confidence vs second best within this attempt's fused scores
         confidence_score = None
@@ -1427,8 +1773,10 @@ def get_quiz_attempt():
             "final_score": final_score,
             "quiz_component": quiz_component,
             "psych_component": psych_component,
+            "voice_component": voice_component,
             "quiz_contribution": quiz_contribution,
             "psych_contribution": psych_contribution,
+            "voice_contribution": voice_contribution,
             "top_traits": top_traits,
             "quiz_signals": quiz_signals,
             "academic_percent": academic_percent,
@@ -1436,6 +1784,18 @@ def get_quiz_attempt():
             "also_close_career": alt_career,
             "explanation": explanation,
         }
+
+    voice_insight = None
+    if voice_scores:
+        history = voice_db.get(user_email) or []
+        latest = history[0] if history else None
+        if latest:
+            voice_insight = {
+                "transcript": latest.get("transcript", "")[:200] + ("..." if len(latest.get("transcript", "")) > 200 else ""),
+                "motivation_score": latest.get("motivation_score"),
+                "confidence_score": latest.get("confidence_score"),
+                "top_voice_career": max(voice_scores.items(), key=lambda kv: kv[1])[0] if voice_scores else None,
+            }
 
     return jsonify(
         {
@@ -1450,6 +1810,7 @@ def get_quiz_attempt():
             },
             "career_rankings": rankings,
             "top_recommendation": top_recommendation,
+            "voice_insight": voice_insight,
         }
     ), 200
 
@@ -1503,10 +1864,12 @@ def get_profile():
 
     fused = fused_results_db.get(user_email)
     if not fused:
-        # lazily compute fused if needed
         quiz_scores, academic_percent, skills_vector = _get_quiz_context(user_email)
         psych_scores = _get_latest_psych_scores(user_email)
-        fusion_result = _fuse_career_scores(quiz_scores, psych_scores, academic_percent, skills_vector)
+        voice_scores = _get_latest_voice_scores(user_email)
+        fusion_result = _fuse_career_scores(
+            quiz_scores, psych_scores, academic_percent, skills_vector, voice_scores
+        )
         _update_fused_results(
             user_email,
             quiz_scores=quiz_scores,
@@ -1514,6 +1877,7 @@ def get_profile():
             fusion_result=fusion_result,
             academic_percent=academic_percent,
             skills_vector=skills_vector,
+            voice_scores=voice_scores,
         )
         fused = fused_results_db.get(user_email)
 
@@ -1532,10 +1896,12 @@ def get_profile():
                 )
             career_rankings.sort(key=lambda x: x["final_score"], reverse=True)
         else:
-            # In case we only have career_rankings from the last fusion result
             quiz_scores, academic_percent, skills_vector = _get_quiz_context(user_email)
             psych_scores = _get_latest_psych_scores(user_email)
-            fusion_result = _fuse_career_scores(quiz_scores, psych_scores, academic_percent, skills_vector)
+            voice_scores = _get_latest_voice_scores(user_email)
+            fusion_result = _fuse_career_scores(
+                quiz_scores, psych_scores, academic_percent, skills_vector, voice_scores
+            )
             career_rankings = fusion_result.get("career_rankings") or []
 
         fused_rankings = career_rankings

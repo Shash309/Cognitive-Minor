@@ -19,6 +19,7 @@ const resources = {
         learnMore: 'Learn More',
         visitWebsite: 'Visit Website',
         viewDetails: 'View Details',
+        voiceInsight: 'Voice Insight',
       },
       landing: {
         createAccount: 'Create Account',
@@ -136,6 +137,7 @@ const resources = {
         learnMore: 'और जानें',
         visitWebsite: 'वेबसाइट देखें',
         viewDetails: 'विवरण देखें',
+        voiceInsight: 'वॉयस इनसाइट',
       },
       landing: {
         createAccount: 'खाता बनाएं',
@@ -253,6 +255,7 @@ const resources = {
         learnMore: 'مزید جانیں',
         visitWebsite: 'ویب سائٹ دیکھیں',
         viewDetails: 'تفصیلات دیکھیں',
+        voiceInsight: 'وائس انسائٹ',
       },
       landing: {
         createAccount: 'اکاؤنٹ بنائیں',

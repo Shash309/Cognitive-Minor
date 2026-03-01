@@ -7,13 +7,36 @@
       "Healthcare": 2,
       "Research & Academics": 8
     },
-    "psych_scores": {},
+    "psych_scores": {
+      "Data Scientist": 57,
+      "Researcher": 51,
+      "Software Engineer": 66,
+      "Manager": 65,
+      "Entrepreneur": 71,
+      "Designer": 79,
+      "Psychologist": 55,
+      "Civil Servant": 57,
+      "Doctor": 53,
+      "Teacher": 56,
+      "Artist": 80
+    },
     "final_scores": {
-      "Engineering": 38.0,
-      "Design & Creative": 34.0,
-      "Business & Finance": 17.0,
-      "Research & Academics": 8.0,
-      "Healthcare": 2.0
+      "Engineering": 44.0,
+      "Design & Creative": 42.0,
+      "Artist": 40.0,
+      "Designer": 39.5,
+      "Entrepreneur": 35.5,
+      "Business & Finance": 33.5,
+      "Software Engineer": 33.0,
+      "Manager": 32.5,
+      "Research & Academics": 29.0,
+      "Data Scientist": 28.5,
+      "Civil Servant": 28.5,
+      "Teacher": 28.0,
+      "Psychologist": 27.5,
+      "Doctor": 26.5,
+      "Healthcare": 26.0,
+      "Researcher": 25.5
     },
     "academic_percent": 75.0,
     "skills_vector": {
@@ -33,7 +56,7 @@
       "Creativity & Freedom": 0.5,
       "Data Scientist": 0.5
     },
-    "last_updated": "2026-02-27T15:28:13.253628Z"
+    "last_updated": "2026-02-28T04:09:47.022599Z"
   },
   "swastik3370@gmail.com": {
     "quiz_scores": {
@@ -67,8 +90,8 @@
       "Software Engineer": 33.5,
       "Designer": 32.0,
       "Data Scientist": 29.0,
-      "Artist": 28.5,
       "Healthcare": 28.5,
+      "Artist": 28.5,
       "Business & Finance": 28.0,
       "Research & Academics": 26.5,
       "Researcher": 25.5,
@@ -96,14 +119,80 @@
       "Balanced": 0.5,
       "Engineer": 0.5
     },
-    "last_updated": "2026-02-27T21:31:32.566458Z"
+    "last_updated": "2026-02-28T06:02:06.095488Z"
   },
   "test@gmail.com": {
-    "quiz_scores": {},
-    "psych_scores": {},
-    "final_scores": {},
-    "academic_percent": null,
-    "skills_vector": {},
-    "last_updated": "2026-02-27T20:38:30.423807Z"
+    "quiz_scores": {
+      "Business & Finance": 14,
+      "Design & Creative": 30,
+      "Engineering": 48,
+      "Healthcare": 3,
+      "Research & Academics": 5
+    },
+    "psych_scores": {
+      "Data Scientist": 67,
+      "Researcher": 58,
+      "Software Engineer": 75,
+      "Manager": 50,
+      "Entrepreneur": 49,
+      "Designer": 50,
+      "Psychologist": 38,
+      "Civil Servant": 37,
+      "Doctor": 30,
+      "Teacher": 21,
+      "Artist": 59
+    },
+    "voice_scores": {
+      "Data Scientist": 0,
+      "Researcher": 0,
+      "Software Engineer": 9,
+      "Manager": 44,
+      "Entrepreneur": 33,
+      "Designer": 11,
+      "Psychologist": 11,
+      "Civil Servant": 0,
+      "Doctor": 0,
+      "Teacher": 0,
+      "Artist": 0
+    },
+    "final_scores": {
+      "Engineering": 49.2,
+      "Design & Creative": 42.0,
+      "Business & Finance": 35.6,
+      "Research & Academics": 32.0,
+      "Healthcare": 31.2,
+      "Manager": 28.2,
+      "Software Engineer": 25.2,
+      "Entrepreneur": 24.6,
+      "Data Scientist": 20.099999999999998,
+      "Designer": 18.3,
+      "Artist": 17.7,
+      "Researcher": 17.4,
+      "Psychologist": 14.7,
+      "Civil Servant": 11.1,
+      "Doctor": 9.0,
+      "Teacher": 6.3
+    },
+    "academic_percent": 68.4,
+    "skills_vector": {
+      "Computer Science": 0.5,
+      "Debating": 0.5,
+      "Coding": 0.5,
+      "Helping Others": 0.5,
+      "Organizing Events": 0.5,
+      "Research": 1.0,
+      "Communication": 0.5,
+      "Leadership": 0.5,
+      "Problem Solving": 0.5,
+      "Practical": 0.5,
+      "Corporate Office": 0.5,
+      "Research Lab": 0.5,
+      "Startup": 0.5,
+      "No": 0.5,
+      "Abroad": 0.5,
+      "Job Security": 0.5,
+      "Scientist": 0.5
+    },
+    "last_updated": "2026-03-01T20:52:54.661928Z"
   }
 }

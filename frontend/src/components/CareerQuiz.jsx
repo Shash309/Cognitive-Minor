@@ -297,6 +297,26 @@ const CareerQuiz = () => {
                     <h3>{t('quiz.yourRecommendationTitle')}</h3>
                     <p><strong>{t('quiz.recommendedPath')}</strong></p>
 
+                    {result.voice_insight && (
+                        <div className="voice-insight-section">
+                            <h4><i className="fas fa-microphone-alt" /> Voice Insight</h4>
+                            {result.voice_insight.transcript && (
+                                <p className="voice-transcript-preview">{result.voice_insight.transcript}</p>
+                            )}
+                            <div className="voice-insight-metrics">
+                                {typeof result.voice_insight.motivation_score === 'number' && (
+                                    <span>Motivation: <span className="quiz-explanation-highlight">{Math.round(result.voice_insight.motivation_score)}%</span></span>
+                                )}
+                                {typeof result.voice_insight.confidence_score === 'number' && (
+                                    <span>Confidence: <span className="quiz-explanation-highlight">{Math.round(result.voice_insight.confidence_score)}%</span></span>
+                                )}
+                                {result.voice_insight.top_voice_career && (
+                                    <span>Top (voice): <span className="quiz-explanation-highlight">{result.voice_insight.top_voice_career}</span></span>
+                                )}
+                            </div>
+                        </div>
+                    )}
+
                     {top && (
                         <div className="quiz-explanation">
                             <h4>Why this career?</h4>
@@ -306,7 +326,7 @@ const CareerQuiz = () => {
                             <div className="quiz-contrib-row">
                                 {typeof top.quiz_component === 'number' && (
                                     <span>
-                                        Quiz alignment:{' '}
+                                        Quiz:{' '}
                                         <span className="quiz-explanation-highlight">
                                             {Math.round(top.quiz_component)}%
                                         </span>
@@ -314,9 +334,17 @@ const CareerQuiz = () => {
                                 )}
                                 {typeof top.psych_component === 'number' && (
                                     <span>
-                                        Psychological alignment:{' '}
+                                        Psych:{' '}
                                         <span className="quiz-explanation-highlight">
                                             {Math.round(top.psych_component)}%
+                                        </span>
+                                    </span>
+                                )}
+                                {typeof top.voice_component === 'number' && (
+                                    <span>
+                                        Voice:{' '}
+                                        <span className="quiz-explanation-highlight voice-highlight">
+                                            {Math.round(top.voice_component)}%
                                         </span>
                                     </span>
                                 )}
@@ -368,7 +396,7 @@ const CareerQuiz = () => {
                                 </div>
                                 <div className="career-components">
                                     <div>
-                                        <span>Quiz contribution</span>
+                                        <span>Quiz</span>
                                         <div className="bar">
                                             <div
                                                 className="fill academic"
@@ -379,7 +407,7 @@ const CareerQuiz = () => {
                                         </div>
                                     </div>
                                     <div>
-                                        <span>Psychological contribution</span>
+                                        <span>Psychological</span>
                                         <div className="bar">
                                             <div
                                                 className="fill psych"
@@ -389,6 +417,19 @@ const CareerQuiz = () => {
                                             />
                                         </div>
                                     </div>
+                                    {typeof item.voice_component === 'number' && (
+                                        <div>
+                                            <span>Voice</span>
+                                            <div className="bar">
+                                                <div
+                                                    className="fill voice"
+                                                    style={{
+                                                        width: `${Math.round(item.voice_component || 0)}%`,
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         ))}
