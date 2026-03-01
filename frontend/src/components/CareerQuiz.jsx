@@ -373,11 +373,11 @@ const CareerQuiz = () => {
                             )}
                             {typeof confidenceScore === 'number' && (
                                 <div style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                                    Confidence gap vs next career:{' '}
+                                    Confidence index:{' '}
                                     <span className="quiz-explanation-highlight">
-                                        {confidenceScore.toFixed(1)} pts
+                                        {Math.round(confidenceScore)}%
                                     </span>
-                                    {alsoCloseCareer && confidenceScore < 10 && (
+                                    {alsoCloseCareer && confidenceScore < 60 && (
                                         <> – also close to {alsoCloseCareer}</>
                                     )}
                                 </div>

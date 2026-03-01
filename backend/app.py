@@ -49,6 +49,9 @@ psych_db = _load_json_db(PSYCH_PATH)
 quiz_db = _load_json_db(QUIZ_HISTORY_PATH)
 fused_results_db = _load_json_db(CAREER_FUSED_RESULTS_PATH)
 users_db = _load_json_db(USERS_PATH)
+
+# Unified decision engine
+from career_intelligence_engine import compute_final_decision
 voice_db = _load_json_db(VOICE_HISTORY_PATH)
 
 
@@ -632,82 +635,19 @@ def _compute_psych_career_scores(profile: dict) -> dict:
 
 def _fuse_career_scores(quiz_scores, psych_scores, academic_percent=None, skills_vector=None, voice_scores=None):
     """
-    Fusion Engine: combine quiz, psych, and optionally voice scores.
+    Backwards-compatible wrapper around the unified career_intelligence_engine.
 
-    When voice exists: final = 0.4*quiz + 0.3*psych + 0.3*voice
-    When voice missing: final = 0.5*quiz + 0.5*psych (original)
+    All backend routes should go through this helper so that quiz / psych / voice
+    are always combined by a single mathematically-structured engine.
     """
-    quiz_scores = quiz_scores or {}
-    psych_scores = psych_scores or {}
-    voice_scores = voice_scores or {}
-    have_quiz = bool(quiz_scores)
-    have_psych = bool(psych_scores)
-    have_voice = bool(voice_scores)
-
-    if not have_quiz and not have_psych and not have_voice:
-        return {"career_rankings": []}
-
-    if have_voice:
-        total = QUIZ_FUSION_WEIGHT_3 + PSYCH_FUSION_WEIGHT_3 + VOICE_FUSION_WEIGHT
-        w_q = QUIZ_FUSION_WEIGHT_3 / total
-        w_p = PSYCH_FUSION_WEIGHT_3 / total
-        w_v = VOICE_FUSION_WEIGHT / total
-    else:
-        total = float(QUIZ_FUSION_WEIGHT + PSYCH_FUSION_WEIGHT) or 1.0
-        w_q = QUIZ_FUSION_WEIGHT / total
-        w_p = PSYCH_FUSION_WEIGHT / total
-        w_v = 0.0
-
-    careers = set()
-    if isinstance(quiz_scores, dict):
-        careers.update(quiz_scores.keys())
-    if isinstance(psych_scores, dict):
-        careers.update(psych_scores.keys())
-    if isinstance(voice_scores, dict):
-        careers.update(voice_scores.keys())
-
-    rankings = []
-    for career in careers:
-        raw_q = quiz_scores.get(career) if have_quiz else None
-        raw_p = psych_scores.get(career) if have_psych else None
-        raw_v = voice_scores.get(career) if have_voice else None
-
-        q = _safe_number(raw_q, None)
-        p = _safe_number(raw_p, 50.0) if have_psych else None
-        v = _safe_number(raw_v, 50.0) if have_voice else None
-
-        if q is None and p is None and v is None:
-            continue
-
-        final_score = (w_q * (q or 0.0)) + (w_p * (p or 0.0)) + (w_v * (v or 0.0))
-        final_score = _safe_number(final_score, 0.0)
-
-        quiz_contrib = (w_q * (q or 0.0)) if have_quiz else 0.0
-        psych_contrib = (w_p * (p or 0.0)) if have_psych else 0.0
-        voice_contrib = (w_v * (v or 0.0)) if have_voice else 0.0
-
-        quiz_contrib = _safe_number(quiz_contrib, 0.0)
-        psych_contrib = _safe_number(psych_contrib, 0.0)
-        voice_contrib = _safe_number(voice_contrib, 0.0)
-
-        item = {
-            "career": career,
-            "final_score": float(final_score),
-            "quiz_component": q,
-            "psych_component": p,
-            "quiz_contribution": float(quiz_contrib),
-            "psych_contribution": float(psych_contrib),
-        }
-        if have_voice:
-            item["voice_component"] = v
-            item["voice_contribution"] = float(voice_contrib)
-        rankings.append(item)
-
-    rankings.sort(key=lambda x: x["final_score"], reverse=True)
-
-    return {
-        "career_rankings": rankings,
-    }
+    # academic_percent and skills_vector are currently handled outside the engine
+    # (e.g., via _quiz_signals_for_career). They are passed through unchanged.
+    engine_result = compute_final_decision(
+        quiz_scores=quiz_scores,
+        psych_scores=psych_scores,
+        voice_scores=voice_scores,
+    )
+    return engine_result
 
 
 def _update_fused_results(
@@ -994,13 +934,16 @@ def _generate_explanation(
     quiz_signals: dict,
     confidence_score: float | None,
     alt_career: str | None,
+    voice_component=None,
+    voice_contribution=None,
+    signal_weights: dict | None = None,
 ):
     """
     Construct a human-readable explanation string grounded in actual numbers.
     """
     parts = []
 
-    if quiz_component is not None or psych_component is not None:
+    if quiz_component is not None or psych_component is not None or voice_component is not None:
         q_part = (
             f"{round(quiz_component)}% from your AI Career Quiz"
             if quiz_component is not None
@@ -1011,18 +954,16 @@ def _generate_explanation(
             if psych_component is not None
             else None
         )
-        if q_part and p_part:
+        v_part = (
+            f"{round(voice_component)}% from your voice response"
+            if voice_component is not None
+            else None
+        )
+        numeric_bits = [b for b in [q_part, p_part, v_part] if b]
+        if numeric_bits:
             parts.append(
                 f"This career was recommended with an overall alignment of {round(final_score)}%, "
-                f"combining {q_part} and {p_part}."
-            )
-        elif q_part:
-            parts.append(
-                f"This career was recommended primarily based on your AI Career Quiz alignment of {round(quiz_component)}%."
-            )
-        elif p_part:
-            parts.append(
-                f"This career was recommended primarily based on your psychological profile alignment of {round(psych_component)}%."
+                f"combining " + ", ".join(numeric_bits) + "."
             )
 
     if top_traits:
@@ -1618,13 +1559,12 @@ def career_results():
         psych_contribution = top.get("psych_contribution")
         voice_contribution = top.get("voice_contribution")
 
-        # Confidence score based on gap between top 1 and top 2
-        confidence_score = None
+        # Confidence score derived from unified engine
+        confidence_score = fusion_result.get("confidence_score")
         alt_career = None
         if len(rankings) > 1:
             second = rankings[1]
             gap = float(top.get("final_score", 0.0)) - float(second.get("final_score", 0.0))
-            confidence_score = max(0.0, gap)
             alt_career = second.get("career")
 
         top_traits = _top_traits_for_career(psych_profile, career)
@@ -1741,13 +1681,12 @@ def get_quiz_attempt():
         psych_contribution = top.get("psych_contribution")
         voice_contribution = top.get("voice_contribution")
 
-        # Confidence vs second best within this attempt's fused scores
-        confidence_score = None
+        # Confidence index from unified engine
+        confidence_score = fusion_result.get("confidence_score")
         alt_career = None
         if len(rankings) > 1:
             second = rankings[1]
             gap = float(top.get("final_score", 0.0)) - float(second.get("final_score", 0.0))
-            confidence_score = max(0.0, gap)
             alt_career = second.get("career")
 
         top_traits = _top_traits_for_career(psych_profile, career)

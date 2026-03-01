@@ -143,35 +143,35 @@
       "Artist": 59
     },
     "voice_scores": {
-      "Data Scientist": 0,
+      "Data Scientist": 9,
       "Researcher": 0,
-      "Software Engineer": 9,
-      "Manager": 44,
-      "Entrepreneur": 33,
-      "Designer": 11,
+      "Software Engineer": 27,
+      "Manager": 0,
+      "Entrepreneur": 0,
+      "Designer": 22,
       "Psychologist": 11,
-      "Civil Servant": 0,
+      "Civil Servant": 12,
       "Doctor": 0,
       "Teacher": 0,
-      "Artist": 0
+      "Artist": 11
     },
     "final_scores": {
-      "Engineering": 49.2,
-      "Design & Creative": 42.0,
-      "Business & Finance": 35.6,
-      "Research & Academics": 32.0,
-      "Healthcare": 31.2,
-      "Manager": 28.2,
-      "Software Engineer": 25.2,
-      "Entrepreneur": 24.6,
-      "Data Scientist": 20.099999999999998,
-      "Designer": 18.3,
-      "Artist": 17.7,
-      "Researcher": 17.4,
-      "Psychologist": 14.7,
-      "Civil Servant": 11.1,
-      "Doctor": 9.0,
-      "Teacher": 6.3
+      "Software Engineer": 52.14486275708437,
+      "Engineering": 49.19453828690898,
+      "Data Scientist": 44.702779228348874,
+      "Artist": 42.58855646181251,
+      "Designer": 42.54099493292122,
+      "Design & Creative": 41.945382869089826,
+      "Researcher": 39.32735693725846,
+      "Manager": 36.68034809450218,
+      "Entrepreneur": 36.349471989157635,
+      "Psychologist": 35.640158249577276,
+      "Civil Servant": 35.5756751823427,
+      "Business & Finance": 35.501689164361686,
+      "Research & Academics": 31.87711145545211,
+      "Healthcare": 31.071649742361096,
+      "Doctor": 30.062825987611475,
+      "Teacher": 27.084941039510664
     },
     "academic_percent": 68.4,
     "skills_vector": {
@@ -193,6 +193,6 @@
       "Job Security": 0.5,
       "Scientist": 0.5
     },
-    "last_updated": "2026-03-01T20:52:54.661928Z"
+    "last_updated": "2026-03-01T21:20:50.883059Z"
   }
 }
