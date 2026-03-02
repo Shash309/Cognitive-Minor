@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './CareerQuiz.css';
 import { useTranslation } from 'react-i18next';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 
 // FINAL: All questions with their full list of options
 // selectionType: "single" | "multiple" strictly controls behaviour
@@ -78,6 +78,7 @@ const optionKeyMap = {
 const CareerQuiz = () => {
     const { t } = useTranslation();
     const { user } = useOutletContext() || {};
+    const navigate = useNavigate();
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answers, setAnswers] = useState(() => {
         const initialAnswers = {};
@@ -232,6 +233,11 @@ const CareerQuiz = () => {
                     throw new Error(fusedData.error);
                 }
                 setResult(fusedData);
+                // After full onboarding completion, send user to Profile to view results
+                navigate('/dashboard/profile', {
+                    replace: true,
+                    state: { highlightLatestResult: true },
+                });
             } else {
                 // Fallback for anonymous users: use fusion included in submit response (if any)
                 setResult({

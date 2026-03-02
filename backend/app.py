@@ -27,6 +27,8 @@ QUIZ_HISTORY_PATH = os.path.join(DATA_DIR, "quiz_history.json")
 CAREER_FUSED_RESULTS_PATH = os.path.join(DATA_DIR, "career_fused_results.json")
 USERS_PATH = os.path.join(DATA_DIR, "users.json")
 VOICE_HISTORY_PATH = os.path.join(DATA_DIR, "voice_history.json")
+USER_PROGRESS_PATH = os.path.join(DATA_DIR, "user_progress.json")
+CAREER_SESSIONS_PATH = os.path.join(DATA_DIR, "career_sessions.json")
 
 
 def _load_json_db(path):
@@ -49,10 +51,100 @@ psych_db = _load_json_db(PSYCH_PATH)
 quiz_db = _load_json_db(QUIZ_HISTORY_PATH)
 fused_results_db = _load_json_db(CAREER_FUSED_RESULTS_PATH)
 users_db = _load_json_db(USERS_PATH)
+voice_db = _load_json_db(VOICE_HISTORY_PATH)
+user_progress_db = _load_json_db(USER_PROGRESS_PATH)
+career_sessions_db = _load_json_db(CAREER_SESSIONS_PATH)
 
 # Unified decision engine
 from career_intelligence_engine import compute_final_decision
-voice_db = _load_json_db(VOICE_HISTORY_PATH)
+
+
+def _default_progress_state():
+    return {
+        "psych_completed": False,
+        "voice_completed": False,
+        "quiz_completed": False,
+        "last_completed_step": None,
+    }
+
+
+def _get_or_init_progress(email: str | None):
+    if not email:
+        return _default_progress_state()
+    progress = user_progress_db.get(email)
+    if not isinstance(progress, dict):
+        progress = _default_progress_state()
+        user_progress_db[email] = progress
+        _save_json_db(USER_PROGRESS_PATH, user_progress_db)
+    else:
+        # ensure all keys exist
+        base = _default_progress_state()
+        base.update({k: progress.get(k, base[k]) for k in base.keys()})
+        progress = base
+        user_progress_db[email] = progress
+        _save_json_db(USER_PROGRESS_PATH, user_progress_db)
+    return progress
+
+
+def _mark_step_completed(email: str | None, step: str):
+    if not email:
+        return
+    progress = _get_or_init_progress(email)
+    if step == "psych":
+        progress["psych_completed"] = True
+    elif step == "voice":
+        progress["voice_completed"] = True
+    elif step == "quiz":
+        progress["quiz_completed"] = True
+    progress["last_completed_step"] = step
+    user_progress_db[email] = progress
+    _save_json_db(USER_PROGRESS_PATH, user_progress_db)
+    try:
+        print("[user-progress] updated", email, progress)
+    except Exception:
+        pass
+
+
+def _reset_progress(email: str | None):
+    if not email:
+        return
+    progress = _default_progress_state()
+    user_progress_db[email] = progress
+    _save_json_db(USER_PROGRESS_PATH, user_progress_db)
+
+
+def _record_career_session(
+    email: str | None,
+    fusion_result: dict,
+    psych_id: str | None,
+    voice_id: str | None,
+    quiz_id: str | None,
+):
+    if not email:
+        return
+    rankings = fusion_result.get("career_rankings") or []
+    final_scores = {
+        item["career"]: float(item.get("final_score", 0.0)) for item in rankings
+    }
+    top_career = rankings[0]["career"] if rankings else None
+    confidence_score = fusion_result.get("confidence_score")
+    weights = fusion_result.get("weights") or {}
+
+    session_entry = {
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "psych_id": psych_id,
+        "voice_id": voice_id,
+        "quiz_id": quiz_id,
+        "final_scores": final_scores,
+        "top_career": top_career,
+        "confidence_score": confidence_score,
+        "weights": weights,
+    }
+
+    history = career_sessions_db.get(email) or []
+    history.insert(0, session_entry)
+    career_sessions_db[email] = history[:20]
+    _save_json_db(CAREER_SESSIONS_PATH, career_sessions_db)
 
 
 def _safe_number(val, default=None):
@@ -1187,6 +1279,8 @@ def voice_analysis():
         voice_scores=voice_scores,
     )
 
+    _mark_step_completed(user_email, "voice")
+
     return jsonify({
         "transcribed_text": transcribed_text,
         "sentiment": sentiment,
@@ -1283,6 +1377,8 @@ def post_psych_assessment():
         skills_vector=skills_vector,
         voice_scores=voice_scores,
     )
+
+    _mark_step_completed(user_email, "psych")
 
     response = {
         "profile": profile,
@@ -1388,6 +1484,19 @@ def quiz_submit():
     academic_percent = data.get("academic_percent")
     stream = data.get("stream")
     user_name = data.get("user_name")
+
+    # Enforce onboarding order: psych + voice must be completed before quiz
+    if user_email:
+        progress = _get_or_init_progress(user_email)
+        if not progress.get("psych_completed") or not progress.get("voice_completed"):
+            return (
+                jsonify(
+                    {
+                        "error": "Quiz is locked. Please complete the Psychological Assessment and Voice Insight first.",
+                    }
+                ),
+                403,
+            )
 
     try:
         quiz_scores = _compute_quiz_career_scores(text_input)
@@ -1509,6 +1618,22 @@ def quiz_submit():
         voice_scores=voice_scores,
     )
 
+    if user_email:
+        _mark_step_completed(user_email, "quiz")
+        # Link latest psych / voice / quiz artefacts into a career session
+        psych_history = psych_db.get(user_email) or []
+        voice_history = voice_db.get(user_email) or []
+        latest_psych_id = psych_history[0].get("completed_at") if psych_history else None
+        latest_voice_id = voice_history[0].get("timestamp") if voice_history else None
+        latest_quiz_id = attempts[0].get("id") if attempts else None
+        _record_career_session(
+            user_email,
+            fusion_result=fusion_result,
+            psych_id=latest_psych_id,
+            voice_id=latest_voice_id,
+            quiz_id=latest_quiz_id,
+        )
+
     return jsonify(
         {
             "stored": bool(user_email),
@@ -1526,6 +1651,18 @@ def career_results():
     user_email = request.args.get("user_email")
     if not user_email:
         return jsonify({"error": "user_email is required"}), 400
+
+    # Enforce that quiz must have been completed before exposing full fused results
+    progress = _get_or_init_progress(user_email)
+    if not progress.get("quiz_completed"):
+        return (
+            jsonify(
+                {
+                    "error": "Results are locked until you complete the AI Career Quiz.",
+                }
+            ),
+            403,
+        )
 
     quiz_scores, academic_percent, skills_vector = _get_quiz_context(user_email)
     psych_scores = _get_latest_psych_scores(user_email)
@@ -1654,6 +1791,18 @@ def get_quiz_attempt():
 
     if not target:
         return jsonify({"error": "Attempt not found"}), 404
+
+    # Ensure user has completed quiz stage before exposing detailed attempt view
+    progress = _get_or_init_progress(user_email)
+    if not progress.get("quiz_completed"):
+        return (
+            jsonify(
+                {
+                    "error": "Quiz details are locked until the onboarding flow is completed.",
+                }
+            ),
+            403,
+        )
 
     quiz_scores = target.get("quiz_scores") or {}
     academic_percent = target.get("academic_percent")
@@ -1800,6 +1949,8 @@ def get_profile():
 
     psych_history = psych_db.get(user_email) or []
     latest_psych = psych_history[0] if psych_history else None
+    voice_history = voice_db.get(user_email) or []
+    session_history = career_sessions_db.get(user_email) or []
 
     fused = fused_results_db.get(user_email)
     if not fused:
@@ -1849,10 +2000,12 @@ def get_profile():
     return jsonify(
         {
             "user": user,
-            "latest_quiz": latest_quiz,
-            "latest_psych": latest_psych,
-            "fused_top": top_fused,
-            "fused_rankings": fused_rankings,
+        "latest_quiz": latest_quiz,
+        "latest_psych": latest_psych,
+        "voice_history": voice_history,
+        "career_sessions": session_history,
+        "fused_top": top_fused,
+        "fused_rankings": fused_rankings,
         }
     ), 200
 
@@ -1945,6 +2098,28 @@ def recommend():
         colleges_list.append(college_info)
 
     return jsonify(colleges_list), 200
+
+
+@app.route("/api/user-progress", methods=["GET"])
+def get_user_progress():
+    user_email = request.args.get("user_email")
+    if not user_email:
+        return jsonify({"error": "user_email is required"}), 400
+    # Always reload from disk to avoid stale state in long-lived processes
+    global user_progress_db
+    user_progress_db = _load_json_db(USER_PROGRESS_PATH)
+    progress = _get_or_init_progress(user_email)
+    return jsonify(progress), 200
+
+
+@app.route("/api/reset-progress", methods=["POST"])
+def reset_progress():
+    data = request.json or {}
+    user_email = data.get("user_email")
+    if not user_email:
+        return jsonify({"error": "user_email is required"}), 400
+    _reset_progress(user_email)
+    return jsonify({"ok": True}), 200
 
 # ================== Run ==================
 if __name__ == "__main__":

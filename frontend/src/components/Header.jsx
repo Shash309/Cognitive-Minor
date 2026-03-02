@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { changeLanguage } from '../features/i18n';
+import { useTheme } from '../features/theme/ThemeContext.jsx';
 
 const formatUsername = (user) => {
   if (!user) return 'User';
@@ -22,6 +23,7 @@ const Header = ({ user, onLogout, unreadCount = 0, onNotificationClick }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [showUserMenu, setShowUserMenu] = useState(false);
   const menuRef = useRef(null);
+  const { theme, resolvedTheme, setTheme } = useTheme();
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -117,6 +119,30 @@ const Header = ({ user, onLogout, unreadCount = 0, onNotificationClick }) => {
                   </svg>
                   View Profile
                 </button>
+                <div className="dropdown-subsection-label">Theme</div>
+                <div className="dropdown-theme-group">
+                  <button
+                    type="button"
+                    className={`dropdown-menu-btn ${theme === 'light' ? 'active' : ''}`}
+                    onClick={() => setTheme('light')}
+                  >
+                    ☀ Light
+                  </button>
+                  <button
+                    type="button"
+                    className={`dropdown-menu-btn ${theme === 'dark' ? 'active' : ''}`}
+                    onClick={() => setTheme('dark')}
+                  >
+                    🌙 Dark
+                  </button>
+                  <button
+                    type="button"
+                    className={`dropdown-menu-btn ${theme === 'auto' ? 'active' : ''}`}
+                    onClick={() => setTheme('auto')}
+                  >
+                    🕒 Auto ({resolvedTheme === 'dark' ? 'Dark' : 'Light'})
+                  </button>
+                </div>
                 <hr className="dropdown-divider" />
                 <button className="dropdown-menu-btn" onClick={onLogout}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

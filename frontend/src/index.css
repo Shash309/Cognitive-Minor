@@ -1,15 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;600;700&display=swap');
 
 :root {
-  /* Core Palette (Modern Light Red Theme) */
-  --bg-core: #fafafa;        /* Off White */
-  --bg-deeper: #ffffff;      /* Pure White */
-  
+  /* Theme tokens (light by default) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f6fa;
+  --text-primary: #1e1e1e;
+  --text-secondary-core: #555555;
+  --accent: #c5161d;
+
+  /* Derived tokens used across app */
+  --bg-core: var(--bg-secondary);
+  --bg-deeper: var(--bg-primary);
+
   /* Brand Colors */
   --primary: #b91c1c;        /* Red 700 */
   --primary-hover: #991b1b;  /* Red 800 */
   --secondary: #ef4444;      /* Red 500 */
-  --accent: #f87171;         /* Red 400 */
   --success: #10b981;        /* Emerald 500 */
   --warning: #f59e0b;        /* Amber 500 */
   --error: #dc2626;          /* Red 600 */
@@ -21,12 +27,32 @@
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
 
   /* Typography */
-  --text-main: #1f2937;      /* Gray 800 - primary text */
-  --text-secondary: #4b5563; /* Gray 600 - secondary text */
+  --text-main: var(--text-primary);
+  --text-secondary: var(--text-secondary-core);
   --text-muted: #6b7280;     /* Gray 500 - muted labels/metadata */
   
   --font-heading: 'Poppins', sans-serif;
   --font-body: 'Inter', sans-serif;
+}
+
+.theme-dark {
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --text-primary: #f5f5f5;
+  --text-secondary-core: #aaaaaa;
+  --accent: #ff4d4d;
+
+  --bg-core: var(--bg-secondary);
+  --bg-deeper: #111111;
+
+  --glass-bg: rgba(18, 18, 18, 0.9);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.04);
+  --glass-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+
+  --text-main: var(--text-primary);
+  --text-secondary: var(--text-secondary-core);
+  --text-muted: #888888;
 }
 
 * {
@@ -42,6 +68,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
   /* subtle mesh gradient background */
   background-image: 
     radial-gradient(circle at 15% 50%, rgba(185, 28, 28, 0.05), transparent 25%),

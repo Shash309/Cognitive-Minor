@@ -11,6 +11,8 @@ import CareerPathVisualizer from './components/CareerPathVisualizer';
 import TimelineTracker from './components/TimelineTracker';
 import Profile from './components/Profile';
 import QuizResultDetails from './components/QuizResultDetails';
+import Results from './components/Results';
+import ProtectedRoute from './components/ProtectedRoute';
 import VoiceInsight from './components/VoiceInsight';
 import './App.css';
 
@@ -44,16 +46,38 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={!isLoggedIn ? <LandingPage onLogin={handleLogin} /> : <Navigate to="/dashboard" replace />} />
-          <Route path="/login" element={!isLoggedIn ? <LandingPage onLogin={handleLogin} /> : <Navigate to="/dashboard" replace />} />
+          <Route path="/" element={!isLoggedIn ? <LandingPage onLogin={handleLogin} /> : <Navigate to="/dashboard/psychology" replace />} />
+          <Route path="/login" element={!isLoggedIn ? <LandingPage onLogin={handleLogin} /> : <Navigate to="/dashboard/psychology" replace />} />
 
           <Route path="/dashboard" element={isLoggedIn ? <Dashboard user={user} onLogout={handleLogout} /> : <Navigate to="/" replace />}>
             <Route index element={<Home user={user} />} />
             <Route path="colleges" element={<CollegeExplorer />} />
-            <Route path="quiz" element={<CareerQuiz />} />
+            <Route
+              path="quiz"
+              element={
+                <ProtectedRoute requirePsych requireVoice>
+                  <CareerQuiz />
+                </ProtectedRoute>
+              }
+            />
             <Route path="quiz-result/:attemptId" element={<QuizResultDetails />} />
             <Route path="psychology" element={<PsychAssessment />} />
-            <Route path="voice" element={<VoiceInsight />} />
+            <Route
+              path="voice"
+              element={
+                <ProtectedRoute requirePsych>
+                  <VoiceInsight />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="results"
+              element={
+                <ProtectedRoute requirePsych requireVoice requireQuiz>
+                  <Results />
+                </ProtectedRoute>
+              }
+            />
             <Route path="profile" element={<Profile />} />
             <Route path="skills" element={<SkillBuilder />} />
             <Route path="visualizer" element={<CareerPathVisualizer />} />

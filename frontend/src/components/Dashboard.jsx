@@ -36,6 +36,7 @@ const Dashboard = ({ user, onLogout }) => {
   const [unreadCount, setUnreadCount] = useState(0);
   const [showNotifications, setShowNotifications] = useState(false);
   const location = useLocation();
+  const [progress, setProgress] = useState(null);
 
   const fetchNotifications = useCallback(() => {
     const eventsData = [
@@ -51,13 +52,36 @@ const Dashboard = ({ user, onLogout }) => {
 
   useEffect(() => { fetchNotifications(); }, [fetchNotifications]);
 
+  const refreshProgress = useCallback(async () => {
+    if (!user?.email) return;
+    try {
+      const apiBase = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000';
+      const res = await fetch(
+        `${apiBase}/api/user-progress?user_email=${encodeURIComponent(user.email)}`
+      );
+      const json = await res.json();
+      if (!res.ok || json.error) {
+        return;
+      }
+      console.log('Progress state:', json);
+      setProgress(json);
+    } catch {
+      // non-fatal
+    }
+  }, [user?.email]);
+
+  // Progress is fetched only to drive sidebar lock state; no routing side‑effects here.
+  useEffect(() => {
+    refreshProgress();
+  }, [refreshProgress]);
+
   const handleClearNotifications = () => { setUnreadCount(0); };
 
   return (
     <div className="app-shell">
       {/* Fixed Sidebar */}
       <div className="sidebar-shell">
-        <Sidebar />
+        <Sidebar progress={progress} />
       </div>
 
       {/* Main Content Area */}
@@ -84,7 +108,7 @@ const Dashboard = ({ user, onLogout }) => {
               transition={{ duration: 0.25, ease: "easeOut" }}
               style={{ minHeight: '100%', padding: '2.5rem' }}
             >
-              <Outlet context={{ user }} />
+              <Outlet context={{ user, progress, refreshProgress }} />
             </motion.div>
           </AnimatePresence>
         </div>

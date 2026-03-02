@@ -158,7 +158,7 @@ const RadarChart = ({ profile }) => {
 
 const PsychAssessment = () => {
   const { t } = useTranslation();
-  const { user } = useOutletContext() || {};
+  const { user, refreshProgress } = useOutletContext() || {};
   const [answers, setAnswers] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -298,6 +298,11 @@ const PsychAssessment = () => {
         if (!fusedData.error) {
           setFusion(fusedData);
         }
+      }
+
+      // Ensure onboarding progress is refreshed so Voice unlocks immediately
+      if (typeof refreshProgress === 'function') {
+        await refreshProgress();
       }
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.');

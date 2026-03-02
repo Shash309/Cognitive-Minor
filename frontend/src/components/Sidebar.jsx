@@ -2,8 +2,15 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 
-const Sidebar = () => {
+const Sidebar = ({ progress }) => {
   const { t } = useTranslation();
+
+  const psychDone = progress?.psych_completed;
+  const voiceDone = progress?.voice_completed;
+  const quizDone = progress?.quiz_completed;
+
+  const lockVoice = !psychDone;
+  const lockQuiz = !psychDone || !voiceDone;
 
   return (
     <>
@@ -25,9 +32,16 @@ const Sidebar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/quiz" className={({ isActive }) => (isActive ? 'active' : '')}>
-              <i className="fas fa-tasks"></i> {t('common.aiCareerQuiz', 'AI Career Quiz')}
-            </NavLink>
+            {lockQuiz ? (
+              <div className="sidebar-item-locked" title="Complete previous steps to unlock the AI Career Quiz.">
+                <i className="fas fa-tasks"></i> {t('common.aiCareerQuiz', 'AI Career Quiz')}{' '}
+                <i className="fas fa-lock"></i>
+              </div>
+            ) : (
+              <NavLink to="/dashboard/quiz" className={({ isActive }) => (isActive ? 'active' : '')}>
+                <i className="fas fa-tasks"></i> {t('common.aiCareerQuiz', 'AI Career Quiz')}
+              </NavLink>
+            )}
           </li>
           <li>
             <NavLink to="/dashboard/skills" className={({ isActive }) => (isActive ? 'active' : '')}>
@@ -50,9 +64,16 @@ const Sidebar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/voice" className={({ isActive }) => (isActive ? 'active' : '')}>
-              <i className="fas fa-microphone-alt"></i> {t('common.voiceInsight', 'Voice Insight')}
-            </NavLink>
+            {lockVoice ? (
+              <div className="sidebar-item-locked" title="Complete the Psychological Assessment to unlock Voice Insight.">
+                <i className="fas fa-microphone-alt"></i> {t('common.voiceInsight', 'Voice Insight')}{' '}
+                <i className="fas fa-lock"></i>
+              </div>
+            ) : (
+              <NavLink to="/dashboard/voice" className={({ isActive }) => (isActive ? 'active' : '')}>
+                <i className="fas fa-microphone-alt"></i> {t('common.voiceInsight', 'Voice Insight')}
+              </NavLink>
+            )}
           </li>
         </ul>
       </nav>

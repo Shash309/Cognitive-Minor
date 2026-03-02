@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { useOutletContext, useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { useOutletContext, useNavigate, useLocation } from 'react-router-dom';
 import './Profile.css';
 
 const Profile = () => {
   const { user } = useOutletContext() || {};
   const navigate = useNavigate();
+  const location = useLocation();
   const [profile, setProfile] = useState(null);
   const [quizHistory, setQuizHistory] = useState([]);
   const [psychHistory, setPsychHistory] = useState([]);
   const [careerSnapshot, setCareerSnapshot] = useState(null);
+  const [voiceHistory, setVoiceHistory] = useState([]);
+  const [sessionHistory, setSessionHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [showResultBanner, setShowResultBanner] = useState(
+    Boolean(location.state && location.state.highlightLatestResult)
+  );
+  const latestSessionRef = useRef(null);
 
   useEffect(() => {
     const load = async () => {
@@ -46,6 +53,12 @@ const Profile = () => {
         if (Array.isArray(psychData.history)) {
           setPsychHistory(psychData.history);
         }
+        if (Array.isArray(profileData.voice_history)) {
+          setVoiceHistory(profileData.voice_history);
+        }
+        if (Array.isArray(profileData.career_sessions)) {
+          setSessionHistory(profileData.career_sessions);
+        }
         if (!fusedData.error && Array.isArray(fusedData.career_rankings)) {
           setCareerSnapshot(fusedData);
         }
@@ -58,6 +71,12 @@ const Profile = () => {
 
     load();
   }, [user?.email]);
+
+  useEffect(() => {
+    if (showResultBanner && latestSessionRef.current) {
+      latestSessionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [showResultBanner, sessionHistory]);
 
   if (!user?.email) {
     return <p>Please sign in to view your profile.</p>;
@@ -97,6 +116,18 @@ const Profile = () => {
 
   return (
     <div className="profile-page">
+      {showResultBanner && (
+        <div className="profile-banner-success">
+          <span>Your Career Decision is Ready.</span>
+          <button
+            type="button"
+            className="profile-banner-close"
+            onClick={() => setShowResultBanner(false)}
+          >
+            ×
+          </button>
+        </div>
+      )}
       <h2 className="profile-header-title">Profile</h2>
 
       <div className="profile-grid">
@@ -298,6 +329,123 @@ const Profile = () => {
                 )}
               </div>
             ))}
+          </div>
+        )}
+      </div>
+
+      {/* Card 5 – Voice Insight History */}
+      <div className="profile-card-full">
+        <div className="profile-card-title">Voice Insight History</div>
+        <div className="profile-card-accent" />
+        {voiceHistory.length === 0 ? (
+          <p className="profile-mini-value" style={{ marginTop: '10px' }}>
+            No voice insights captured yet.
+          </p>
+        ) : (
+          <div className="profile-history-list">
+            {voiceHistory.map((entry) => (
+              <div key={entry.timestamp} className="profile-history-item">
+                <div className="profile-history-date">
+                  {entry.timestamp ? new Date(entry.timestamp).toLocaleString() : 'Unknown'}
+                </div>
+                <div className="profile-history-title">
+                  Transcript
+                </div>
+                <div className="profile-mini-value">
+                  {(entry.transcript || '').slice(0, 140)}
+                  {(entry.transcript || '').length > 140 ? '…' : ''}
+                </div>
+                <div className="profile-history-footer">
+                  <div>
+                    {typeof entry.motivation_score === 'number' && (
+                      <span className="profile-tag profile-tag-red">
+                        Motivation {Math.round(entry.motivation_score)}%
+                      </span>
+                    )}
+                    {typeof entry.confidence_score === 'number' && (
+                      <span className="profile-tag" style={{ marginLeft: '0.5rem' }}>
+                        Confidence {Math.round(entry.confidence_score)}%
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Card 6 – Career Decision Results */}
+      <div className="profile-card-full">
+        <div className="profile-card-title">Career Decision Results</div>
+        <div className="profile-card-accent" />
+        {sessionHistory.length === 0 ? (
+          <p className="profile-mini-value" style={{ marginTop: '10px' }}>
+            No completed career assessment sessions yet.
+          </p>
+        ) : (
+          <div className="profile-history-list">
+            {sessionHistory.map((session, idx) => {
+              const weights = session.weights || {};
+              const wQuiz = typeof weights.quiz === 'number' ? Math.round(weights.quiz * 100) : null;
+              const wPsych = typeof weights.psych === 'number' ? Math.round(weights.psych * 100) : null;
+              const wVoice = typeof weights.voice === 'number' ? Math.round(weights.voice * 100) : null;
+
+              const topCareer = session.top_career;
+              let topScore = null;
+              if (session.final_scores && topCareer && session.final_scores[topCareer] != null) {
+                topScore = Math.round(session.final_scores[topCareer]);
+              }
+
+              return (
+                <div
+                  key={session.timestamp}
+                  className="profile-history-item"
+                  ref={idx === 0 ? latestSessionRef : null}
+                >
+                  <div className="profile-history-date">
+                    {session.timestamp
+                      ? new Date(session.timestamp).toLocaleString()
+                      : 'Unknown'}
+                  </div>
+                  <div className="profile-history-title">
+                    {topCareer || '—'}
+                  </div>
+                  <div className="profile-mini-row">
+                    {topScore != null && (
+                      <span className="profile-mini-label">
+                        Final score:&nbsp;
+                        <span className="profile-mini-value">{topScore}%</span>
+                      </span>
+                    )}
+                  </div>
+                  <div className="profile-mini-row">
+                    {typeof session.confidence_score === 'number' && (
+                      <span className="profile-tag profile-tag-red">
+                        Confidence {Math.round(session.confidence_score)}%
+                      </span>
+                    )}
+                  </div>
+                  <div className="profile-mini-row" style={{ marginTop: '0.35rem' }}>
+                    <span className="profile-mini-label">Signal contributions</span>
+                    <div className="profile-mini-value">
+                      <span>Quiz {wQuiz != null ? `${wQuiz}%` : '—'}</span>{' · '}
+                      <span>Psych {wPsych != null ? `${wPsych}%` : '—'}</span>{' · '}
+                      <span>Voice {wVoice != null ? `${wVoice}%` : '—'}</span>
+                    </div>
+                  </div>
+                  <div className="profile-history-footer" style={{ marginTop: '0.35rem' }}>
+                    <button
+                      type="button"
+                      className="profile-details-btn"
+                      onClick={() => navigate('/dashboard/results')}
+                    >
+                      View Full Results
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         )}
       </div>
