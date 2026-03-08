@@ -191,6 +191,11 @@ const VoiceInsight = () => {
         );
       }
     } catch (err) {
+      try {
+        console.error(err);
+      } catch {
+        // ignore
+      }
       setError('Microphone access denied. Please allow microphone permission.');
     }
   }, [MAX_RECORDING_SECONDS, MIN_RECORDING_SECONDS, _stopRecognition, _stopTick, audioUrl, liveTranscript, recognitionSupported]);

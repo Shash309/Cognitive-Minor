@@ -2,6 +2,16 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useOutletContext, useNavigate, useLocation } from 'react-router-dom';
 import './Profile.css';
 
+const toTitleCase = (value) => {
+  if (!value || typeof value !== 'string') return '';
+  return value
+    .replace(/_/g, ' ')
+    .split(' ')
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
+
 const Profile = () => {
   const { user } = useOutletContext() || {};
   const navigate = useNavigate();
@@ -91,7 +101,10 @@ const Profile = () => {
   }
 
   const personal = profile?.user || {};
-  const fusedTop = careerSnapshot?.career_rankings?.[0] || profile?.fused_top;
+  const fusedTop =
+    careerSnapshot?.top_recommendation ||
+    careerSnapshot?.career_rankings?.[0] ||
+    profile?.fused_top;
 
   const getInitial = () => {
     const name = personal.name || user.name || '';
@@ -113,6 +126,58 @@ const Profile = () => {
 
   const quizComponent = fusedTop?.quiz_component;
   const psychComponent = fusedTop?.psych_component;
+
+  const hasCareerResults =
+    !!careerSnapshot &&
+    Array.isArray(careerSnapshot.career_rankings) &&
+    careerSnapshot.career_rankings.length > 0;
+  const hasPsychHistory = Array.isArray(psychHistory) && psychHistory.length > 0;
+  const hasVoiceHistory = Array.isArray(voiceHistory) && voiceHistory.length > 0;
+  const hasQuizHistory = Array.isArray(quizHistory) && quizHistory.length > 0;
+  const showAiInsight = hasCareerResults && hasPsychHistory && hasVoiceHistory && hasQuizHistory;
+
+  const latestPsychEntry = hasPsychHistory ? psychHistory[0] : null;
+  const decisionStyle =
+    latestPsychEntry?.decision_style || careerSnapshot?.decision_style || null;
+
+  const dominantTraits = Array.isArray(latestPsychEntry?.dominant_traits)
+    ? latestPsychEntry.dominant_traits.slice(0, 3)
+    : [];
+  const dominantTraitNames = dominantTraits
+    .map((t) => t.display_name || toTitleCase(t.name))
+    .filter(Boolean);
+
+  const voiceInsight =
+    careerSnapshot?.voice_insight || (hasVoiceHistory ? voiceHistory[0] : null);
+
+  const levelLabel = (score) => {
+    if (typeof score !== 'number') return null;
+    if (score >= 70) return 'strong';
+    if (score >= 45) return 'moderate';
+    return 'emerging';
+  };
+
+  const motivationLevel = levelLabel(voiceInsight?.motivation_score);
+  const confidenceLevel = levelLabel(voiceInsight?.confidence_score);
+
+  const voiceBits = [];
+  if (confidenceLevel) {
+    voiceBits.push(`${confidenceLevel} vocal confidence`);
+  }
+  if (motivationLevel) {
+    voiceBits.push(`${motivationLevel} motivation when talking about goals`);
+  }
+  if (voiceInsight?.top_voice_career) {
+    voiceBits.push(`signals that align with ${voiceInsight.top_voice_career}`);
+  }
+  const behavioralSummary = voiceBits.length > 0 ? `${voiceBits.join('. ')}.` : '';
+
+  const topRecommendation = careerSnapshot?.top_recommendation;
+  const careerAlignmentExplanation =
+    (topRecommendation && topRecommendation.explanation) ||
+    (fusedTop?.career
+      ? `Your combined quiz, psychological, and voice signals currently align most strongly with ${fusedTop.career}.`
+      : '');
 
   return (
     <div className="profile-page">
@@ -387,13 +452,20 @@ const Profile = () => {
           <div className="profile-history-list">
             {sessionHistory.map((session, idx) => {
               const weights = session.weights || {};
-              const wQuiz = typeof weights.quiz === 'number' ? Math.round(weights.quiz * 100) : null;
-              const wPsych = typeof weights.psych === 'number' ? Math.round(weights.psych * 100) : null;
-              const wVoice = typeof weights.voice === 'number' ? Math.round(weights.voice * 100) : null;
+              const wQuiz =
+                typeof weights.quiz === 'number' ? Math.round(weights.quiz * 100) : null;
+              const wPsych =
+                typeof weights.psych === 'number' ? Math.round(weights.psych * 100) : null;
+              const wVoice =
+                typeof weights.voice === 'number' ? Math.round(weights.voice * 100) : null;
 
               const topCareer = session.top_career;
               let topScore = null;
-              if (session.final_scores && topCareer && session.final_scores[topCareer] != null) {
+              if (
+                session.final_scores &&
+                topCareer &&
+                session.final_scores[topCareer] != null
+              ) {
                 topScore = Math.round(session.final_scores[topCareer]);
               }
 
@@ -449,6 +521,51 @@ const Profile = () => {
           </div>
         )}
       </div>
+
+      {showAiInsight && (
+        <div className="profile-card-full">
+          <div className="profile-card-title">
+            <i className="fas fa-robot" style={{ marginRight: '0.4rem' }} /> AI Insight
+          </div>
+          <div className="profile-card-accent" />
+
+          {decisionStyle && (
+            <div style={{ marginTop: '10px' }}>
+              <span className="profile-mini-label">Decision style</span>
+              <div className="profile-mini-value">{decisionStyle}</div>
+            </div>
+          )}
+
+          {dominantTraitNames.length > 0 && (
+            <div style={{ marginTop: '10px' }}>
+              <span className="profile-mini-label">Dominant traits</span>
+              <div className="profile-pill-row">
+                {dominantTraitNames.map((name) => (
+                  <span key={name} className="profile-tag profile-tag-red">
+                    {name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {behavioralSummary && (
+            <div style={{ marginTop: '10px' }}>
+              <span className="profile-mini-label">Behavioral signals</span>
+              <div className="profile-mini-value">{behavioralSummary}</div>
+            </div>
+          )}
+
+          {careerAlignmentExplanation && (
+            <div style={{ marginTop: '10px' }}>
+              <span className="profile-mini-label">Career alignment explanation</span>
+              <div className="profile-mini-value">
+                {careerAlignmentExplanation}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

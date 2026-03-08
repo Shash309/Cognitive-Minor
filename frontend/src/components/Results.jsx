@@ -7,6 +7,14 @@ const Results = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [data, setData] = useState(null);
+  const [processingIndex, setProcessingIndex] = useState(0);
+
+  const processingSteps = [
+    'Analyzing psychological traits',
+    'Analyzing voice patterns',
+    'Evaluating academic preferences',
+    'Generating career recommendations',
+  ];
 
   useEffect(() => {
     const load = async () => {
@@ -37,6 +45,14 @@ const Results = () => {
     load();
   }, [user?.email]);
 
+  useEffect(() => {
+    if (!loading) return;
+    const id = setInterval(() => {
+      setProcessingIndex((i) => (i + 1) % processingSteps.length);
+    }, 1400);
+    return () => clearInterval(id);
+  }, [loading, processingSteps.length]);
+
   const handleRestart = async () => {
     if (!user?.email) return;
     try {
@@ -54,10 +70,22 @@ const Results = () => {
   };
 
   if (loading) {
+    const pct = Math.round(((processingIndex + 1) / processingSteps.length) * 100);
     return (
       <div className="career-quiz-container">
         <div className="quiz-main-content">
-          <p>Loading unified results…</p>
+          <div className="ai-processing" role="status" aria-live="polite">
+            <div className="ai-processing-title">
+              <i className="fas fa-robot" aria-hidden="true" /> AI is processing your career intelligence
+            </div>
+            <div className="ai-processing-step">
+              {processingSteps[processingIndex]}
+              <span className="ai-dots" aria-hidden="true" />
+            </div>
+            <div className="ai-processing-bar" aria-hidden="true">
+              <div className="ai-processing-fill" style={{ width: `${pct}%` }} />
+            </div>
+          </div>
         </div>
       </div>
     );

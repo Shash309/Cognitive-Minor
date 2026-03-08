@@ -1,22 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-
-const THEME_KEY = 'user_theme_preference';
-
-const ThemeContext = createContext({
-  theme: 'auto',
-  resolvedTheme: 'light',
-  setTheme: () => {},
-});
-
-const getAutoTheme = () => {
-  const now = new Date();
-  const hour = now.getHours();
-  // 07:00–18:59 → light, otherwise dark
-  if (hour >= 7 && hour < 19) {
-    return 'light';
-  }
-  return 'dark';
-};
+import React, { useEffect, useState } from 'react';
+import { THEME_KEY, ThemeContext, getAutoTheme } from './themeContextBase';
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setThemeState] = useState('auto');
@@ -57,6 +40,4 @@ export const ThemeProvider = ({ children }) => {
     </ThemeContext.Provider>
   );
 };
-
-export const useTheme = () => useContext(ThemeContext);
 

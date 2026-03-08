@@ -4,7 +4,10 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Header from './Header';
 import Sidebar from './Sidebar';
+import EvaluationJourney from './EvaluationJourney';
 import './Dashboard.css';
+
+const MotionDiv = motion.div;
 
 const Notifications = ({ notifications, onClear }) => (
   <div className="notifications-panel">
@@ -37,6 +40,17 @@ const Dashboard = ({ user, onLogout }) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const location = useLocation();
   const [progress, setProgress] = useState(null);
+
+  const journeyStep = (() => {
+    const path = location.pathname || '';
+    if (path.includes('/dashboard/psychology')) return 'psych';
+    if (path.includes('/dashboard/voice')) return 'voice';
+    if (path.includes('/dashboard/quiz')) return 'quiz';
+    if (path.includes('/dashboard/results') || path.includes('/dashboard/profile')) return 'results';
+    return null;
+  })();
+
+  const showJourney = Boolean(journeyStep);
 
   const fetchNotifications = useCallback(() => {
     const eventsData = [
@@ -100,7 +114,7 @@ const Dashboard = ({ user, onLogout }) => {
 
         <div className="content-shell">
           <AnimatePresence mode="wait">
-            <motion.div
+            <MotionDiv
               key={location.pathname}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -108,8 +122,11 @@ const Dashboard = ({ user, onLogout }) => {
               transition={{ duration: 0.25, ease: "easeOut" }}
               style={{ minHeight: '100%', padding: '2.5rem' }}
             >
+              {showJourney && (
+                <EvaluationJourney currentStep={journeyStep} progress={progress} />
+              )}
               <Outlet context={{ user, progress, refreshProgress }} />
-            </motion.div>
+            </MotionDiv>
           </AnimatePresence>
         </div>
       </div>

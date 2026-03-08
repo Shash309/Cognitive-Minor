@@ -73,7 +73,7 @@ const getEventStatus = (date, t) => {
 };
 
 const TimeLeft = ({ date }) => {
-  const { i18n } = useTranslation();
+  useTranslation();
   const calculateTimeLeft = useCallback(() => {
     const difference = +new Date(date) - +new Date();
     if (difference <= 0) return {};
@@ -108,7 +108,7 @@ const TimeLeft = ({ date }) => {
 
 // --- Main TimelineTracker Component ---
 const TimelineTracker = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -127,7 +127,7 @@ const TimelineTracker = () => {
       }));
       setEvents(dataWithStatus);
 
-    } catch (err) {
+    } catch {
       setError(t('timeline.errorFetch'));
     } finally {
       setLoading(false);

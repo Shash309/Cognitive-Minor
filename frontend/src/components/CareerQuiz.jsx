@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CareerQuiz.css';
 import { useTranslation } from 'react-i18next';
 import { useOutletContext, useNavigate } from 'react-router-dom';
@@ -61,6 +61,22 @@ const questions = [
         options: ['Artist', 'Civil Servant', 'Data Scientist', 'Designer', 'Doctor', 'Engineer', 'Entrepreneur', 'Lawyer', 'Manager', 'Scientist', 'Teacher'],
     },
 ];
+
+const subjectIcons = {
+    'Accountancy': '📊',
+    'Biology': '🧬',
+    'Business Studies': '💼',
+    'Chemistry': '⚗️',
+    'Computer Science': '💻',
+    'Design': '🎨',
+    'Economics': '📈',
+    'Fine Arts': '🖌',
+    'History': '📜',
+    'Maths': '➗',
+    'Physics': '⚡',
+    'Political Science': '🏛️',
+    'Psychology': '🧠',
+};
 
 
 const optionKeyMap = {
@@ -128,6 +144,11 @@ const CareerQuiz = () => {
     const translateOption = (option) => {
         const key = optionKeyMap[option];
         return key ? t(`quiz.options.${key}`, option) : option;
+    };
+
+    const getOptionIcon = (questionId, option) => {
+        if (questionId !== 'Q1') return null;
+        return subjectIcons[option] || null;
     };
 
     const handleSelectionChange = (questionId, option, selectionType) => {
@@ -269,7 +290,6 @@ const CareerQuiz = () => {
     };
 
     if (psychRequiredMessage) {
-        const apiBase = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000';
         // Redirect handled by Dashboard routing; here we simply show the guard message.
         return (
             <div className="career-quiz-container">
@@ -487,9 +507,13 @@ const CareerQuiz = () => {
                                 )}
                                 <div className="options-grid">
                                     {currentQuestion.options.map(option => (
+                                        (() => {
+                                            const selected = answers[currentQuestion.id]?.includes(option);
+                                            const icon = getOptionIcon(currentQuestion.id, option);
+                                            return (
                                         <button
                                             key={option}
-                                            className={`option-card ${answers[currentQuestion.id]?.includes(option) ? 'selected' : ''}`}
+                                            className={`option-card ${selected ? 'selected' : ''}`}
                                             onClick={() =>
                                                 handleSelectionChange(
                                                     currentQuestion.id,
@@ -498,8 +522,18 @@ const CareerQuiz = () => {
                                                 )
                                             }
                                         >
-                                            {translateOption(option)}
+                                            {icon && (
+                                                <span className="option-icon" aria-hidden="true">
+                                                    {icon}
+                                                </span>
+                                            )}
+                                            <span className="option-label">{translateOption(option)}</span>
+                                            {selected && (
+                                                <i className="fas fa-check option-check" aria-hidden="true" />
+                                            )}
                                         </button>
+                                            );
+                                        })()
                                     ))}
                                 </div>
                             </>
@@ -525,7 +559,10 @@ const CareerQuiz = () => {
                                                     )
                                                 }
                                             >
-                                                {option}
+                                                <span className="option-label">{option}</span>
+                                                {stream === option && (
+                                                    <i className="fas fa-check option-check" aria-hidden="true" />
+                                                )}
                                             </button>
                                         ))}
                                     </div>

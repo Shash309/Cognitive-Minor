@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { changeLanguage } from '../features/i18n';
-import { useTheme } from '../features/theme/ThemeContext.jsx';
+import { useTheme } from '../features/theme/useTheme';
 
 const formatUsername = (user) => {
   if (!user) return 'User';

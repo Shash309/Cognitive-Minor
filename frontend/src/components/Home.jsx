@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
+import { useOutletContext } from 'react-router-dom';
+
+const MotionDiv = motion.div;
 
 const Home = ({ user }) => {
     const { t } = useTranslation();
+    const { progress } = useOutletContext() || {};
+
+    const psychDone = Boolean(progress?.psych_completed);
+    const voiceDone = Boolean(progress?.voice_completed);
+    const quizDone = Boolean(progress?.quiz_completed);
+
+    const progressPct = useMemo(() => {
+        const total = 3;
+        const completed = [psychDone, voiceDone, quizDone].filter(Boolean).length;
+        return Math.round((completed / total) * 100);
+    }, [psychDone, voiceDone, quizDone]);
 
     const features = [
         {
@@ -71,24 +85,83 @@ const Home = ({ user }) => {
     };
 
     return (
-        <motion.div
+        <MotionDiv
             className="home-view"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
         >
-            <header className="home-header">
-                <h1>{t('dashboard.welcomeBackUser', { name: user?.name || 'Explorer' })}</h1>
-                <p>{t('dashboard.welcomeSub', 'Your journey to a successful career continues here. What would you like to do today?')}</p>
-            </header>
+            <div className="career-overview">
+                <div className="career-overview-hero">
+                    <div className="career-overview-title">
+                        Career Intelligence Overview
+                    </div>
+                    <div className="career-overview-subtitle">
+                        Welcome back, {user?.name || 'Explorer'}. Track your progress and use AI-powered insights to complete your career evaluation journey.
+                    </div>
+                    <div className="career-overview-badges">
+                        <span className="pill-badge">
+                            <i className="fas fa-bolt accent" aria-hidden="true" /> Progress <span className="accent">{progressPct}%</span>
+                        </span>
+                        <span className="pill-badge">
+                            <i className="fas fa-shield-alt accent" aria-hidden="true" /> Onboarding status{' '}
+                            <span className="accent">{quizDone ? 'Complete' : 'In progress'}</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div className="career-overview-side">
+                    <div className="overview-card">
+                        <div className="overview-card-header">
+                            <div className="overview-card-title">
+                                <i className="fas fa-route" aria-hidden="true" />
+                                Career Intelligence Progress
+                            </div>
+                            <div className="overview-progress-meta">{progressPct}%</div>
+                        </div>
+                        <div className="overview-progress-bar" aria-hidden="true">
+                            <div className="overview-progress-fill" style={{ width: `${progressPct}%` }} />
+                        </div>
+
+                        <div className="overview-checklist">
+                            <div className="overview-check-item">
+                                <div className="overview-check-left">
+                                    <span className={`overview-check-dot ${psychDone ? 'done' : ''}`} />
+                                    Psychological Analysis
+                                </div>
+                                <div className={`overview-check-status ${psychDone ? 'done' : ''}`}>
+                                    {psychDone ? 'Completed' : 'Pending'}
+                                </div>
+                            </div>
+                            <div className="overview-check-item">
+                                <div className="overview-check-left">
+                                    <span className={`overview-check-dot ${voiceDone ? 'done' : ''}`} />
+                                    Voice Insight
+                                </div>
+                                <div className={`overview-check-status ${voiceDone ? 'done' : ''}`}>
+                                    {voiceDone ? 'Completed' : 'Pending'}
+                                </div>
+                            </div>
+                            <div className="overview-check-item">
+                                <div className="overview-check-left">
+                                    <span className={`overview-check-dot ${quizDone ? 'done' : ''}`} />
+                                    AI Career Quiz
+                                </div>
+                                <div className={`overview-check-status ${quizDone ? 'done' : ''}`}>
+                                    {quizDone ? 'Completed' : 'Pending'}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div className="feature-cards-container">
                 {features.map((feature) => (
                     <motion.div
                         key={feature.key}
                         variants={itemVariants}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        whileTap={{ scale: 0.98 }}
                     >
                         <Link to={feature.path} className="feature-card" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
                             <div className="card-icon"><i className={feature.icon}></i></div>
@@ -101,7 +174,7 @@ const Home = ({ user }) => {
                     </motion.div>
                 ))}
             </div>
-        </motion.div>
+        </MotionDiv>
     );
 };
 

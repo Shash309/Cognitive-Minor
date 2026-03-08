@@ -7,7 +7,6 @@ const Sidebar = ({ progress }) => {
 
   const psychDone = progress?.psych_completed;
   const voiceDone = progress?.voice_completed;
-  const quizDone = progress?.quiz_completed;
 
   const lockVoice = !psychDone;
   const lockQuiz = !psychDone || !voiceDone;

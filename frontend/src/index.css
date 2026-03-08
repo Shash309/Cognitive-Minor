@@ -4,18 +4,21 @@
   /* Theme tokens (light by default) */
   --bg-primary: #ffffff;
   --bg-secondary: #f5f6fa;
-  --text-primary: #1e1e1e;
-  --text-secondary-core: #555555;
-  --accent: #c5161d;
+  --text-primary: #1f2937; /* Gray 800 (avoid pure black) */
+  --text-secondary-core: #6b7280; /* Gray 500 */
+  --accent: #dc2626; /* Red 600 */
+
+  /* Page backgrounds (applied to main content, not sidebar) */
+  --page-gradient: linear-gradient(135deg, #f8fafc, #eef2f7);
 
   /* Derived tokens used across app */
   --bg-core: var(--bg-secondary);
   --bg-deeper: var(--bg-primary);
 
   /* Brand Colors */
-  --primary: #b91c1c;        /* Red 700 */
-  --primary-hover: #991b1b;  /* Red 800 */
-  --secondary: #ef4444;      /* Red 500 */
+  --primary: #dc2626;        /* Red 600 (primary accent) */
+  --primary-hover: #b91c1c;  /* Red 700 */
+  --secondary: #ef4444;      /* Red 500 (gradient pair) */
   --success: #10b981;        /* Emerald 500 */
   --warning: #f59e0b;        /* Amber 500 */
   --error: #dc2626;          /* Red 600 */
@@ -40,7 +43,9 @@
   --bg-secondary: #1e1e1e;
   --text-primary: #f5f5f5;
   --text-secondary-core: #aaaaaa;
-  --accent: #ff4d4d;
+  --accent: #dc2626;
+
+  --page-gradient: linear-gradient(135deg, #111827, #1f2937);
 
   --bg-core: var(--bg-secondary);
   --bg-deeper: #111111;
@@ -71,8 +76,8 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
   /* subtle mesh gradient background */
   background-image: 
-    radial-gradient(circle at 15% 50%, rgba(185, 28, 28, 0.05), transparent 25%),
-    radial-gradient(circle at 85% 30%, rgba(239, 68, 68, 0.05), transparent 25%);
+    radial-gradient(circle at 15% 50%, rgba(220, 38, 38, 0.06), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(239, 68, 68, 0.06), transparent 25%);
   background-attachment: fixed;
 }
 

@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import './SkillBuilder.css';
 
+const MotionDiv = motion.div;
+
 // Curated content for each skill
 const skillDetails = {
   problemSolving: {
@@ -132,14 +134,14 @@ const SkillBuilder = () => {
       {/* Modal Overlay */}
       <AnimatePresence>
         {selectedSkill && (
-          <motion.div
+          <MotionDiv
             className="skill-modal-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeModal}
           >
-            <motion.div
+            <MotionDiv
               className="skill-modal-content"
               initial={{ y: 50, opacity: 0, scale: 0.95 }}
               animate={{ y: 0, opacity: 1, scale: 1 }}
@@ -193,8 +195,8 @@ const SkillBuilder = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
         )}
       </AnimatePresence>
     </div>

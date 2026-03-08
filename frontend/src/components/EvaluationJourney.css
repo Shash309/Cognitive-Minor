@@ -1,0 +1,125 @@
+.eval-journey {
+  margin: 0 0 1.25rem 0;
+  padding: 1rem 1.25rem;
+  border-radius: 18px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.06);
+}
+
+.theme-dark .eval-journey {
+  background: rgba(17, 24, 39, 0.55);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45);
+}
+
+.eval-journey-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 0.9rem;
+}
+
+.eval-journey-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+.eval-journey-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.eval-journey-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+@media (max-width: 900px) {
+  .eval-journey-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.eval-step {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 14px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.55);
+  transition: all 0.25s ease;
+}
+
+.theme-dark .eval-step {
+  background: rgba(31, 41, 55, 0.55);
+}
+
+.eval-step:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+}
+
+.eval-step-index {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  background: rgba(31, 41, 55, 0.04);
+  border: 1px solid rgba(31, 41, 55, 0.06);
+  flex-shrink: 0;
+}
+
+.theme-dark .eval-step-index {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.eval-step.active {
+  border-color: rgba(220, 38, 38, 0.35);
+  box-shadow: 0 12px 26px rgba(220, 38, 38, 0.12);
+}
+
+.eval-step.active .eval-step-index {
+  background: rgba(220, 38, 38, 0.12);
+  border-color: rgba(220, 38, 38, 0.22);
+  color: var(--primary);
+}
+
+.eval-step.done .eval-step-index {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.2);
+  color: #059669;
+}
+
+.eval-step-label {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.eval-step-label i {
+  color: var(--primary);
+}
+
+.eval-step.done .eval-step-label i {
+  color: #059669;
+}
+
