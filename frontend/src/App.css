@@ -1,20 +1,217 @@
-/* Main App Structure */
+/* ══════════════════════════════════════════
+   App Shell — Apple Liquid Glass System
+   ══════════════════════════════════════════ */
+
+/* Layer 0 — Background Atmosphere */
 .App {
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--bg-core);
+  background: var(--bg-gradient);
+  background-attachment: fixed;
   overflow: hidden;
+  position: relative;
+  isolation: isolate;
 }
 
-/* Utility classes for glass effects */
+/* Ambient light orbs — Layer 0 atmosphere */
+.App::before {
+  content: '';
+  position: fixed;
+  top: -20%;
+  right: -15%;
+  width: 55vw;
+  height: 55vw;
+  background: radial-gradient(circle, rgba(220, 38, 38, 0.045) 0%, transparent 65%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbDrift 25s ease-in-out infinite;
+}
+
+.App::after {
+  content: '';
+  position: fixed;
+  bottom: -25%;
+  left: -15%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.03) 0%, transparent 65%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbDrift 30s ease-in-out infinite reverse;
+}
+
+@keyframes orbDrift {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+
+  33% {
+    transform: translate(20px, -15px) scale(1.04);
+    opacity: 0.9;
+  }
+
+  66% {
+    transform: translate(-10px, 20px) scale(1.02);
+    opacity: 1;
+  }
+}
+
+/* ══════════════════════════════════════════
+   Liquid Glass Utility Classes
+   Layer 1 — Glass Surfaces
+   ══════════════════════════════════════════ */
+
 .glass-panel {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
-  border-radius: 16px;
+  border-radius: 18px;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--transition-glass), border-color var(--transition-glass);
+}
+
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  background: var(--glass-inner-highlight);
+  pointer-events: none;
+  border-radius: 18px 18px 0 0;
+  z-index: 0;
+}
+
+/* Glass card — Layer 1 with hover lift to Layer 2 */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform var(--transition-spring),
+    box-shadow var(--transition-glass),
+    border-color var(--transition-glass),
+    background var(--transition-glass);
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: var(--glass-inner-highlight);
+  pointer-events: none;
+  border-radius: 20px 20px 0 0;
+  z-index: 0;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px) scale(1.008);
+  box-shadow: var(--glass-hover-glow);
+  border-color: var(--glass-specular);
+  background: var(--glass-bg-elevated);
+}
+
+/* Solid glass — heavier blur for dropdowns/modals */
+.glass-surface {
+  background: var(--glass-bg-solid);
+  backdrop-filter: blur(var(--glass-blur-heavy));
+  -webkit-backdrop-filter: blur(var(--glass-blur-heavy));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-elevated-shadow);
+  border-radius: 22px;
+}
+
+/* ══════════════════════════════════════════
+   Global Animations
+   ══════════════════════════════════════════ */
+
+@keyframes glassSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes glassScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes glassFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes glassDropIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Stagger delay utility */
+.glass-card:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.glass-card:nth-child(2) {
+  animation-delay: 0.06s;
+}
+
+.glass-card:nth-child(3) {
+  animation-delay: 0.12s;
+}
+
+.glass-card:nth-child(4) {
+  animation-delay: 0.18s;
+}
+
+.glass-card:nth-child(5) {
+  animation-delay: 0.24s;
+}
+
+.glass-card:nth-child(6) {
+  animation-delay: 0.30s;
 }

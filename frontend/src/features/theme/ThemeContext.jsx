@@ -23,6 +23,7 @@ export const ThemeProvider = ({ children }) => {
     const root = document.documentElement;
     root.classList.remove('theme-light', 'theme-dark');
     root.classList.add(effective === 'dark' ? 'theme-dark' : 'theme-light');
+    root.setAttribute('data-theme', effective);
   }, [theme]);
 
   const setTheme = (next) => {
