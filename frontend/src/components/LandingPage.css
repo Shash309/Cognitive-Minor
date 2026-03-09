@@ -54,8 +54,8 @@
 /* Auth Card — Central Glass Panel */
 .auth-card-wrapper {
   position: relative;
-  width: 900px;
-  height: 600px;
+  width: 920px;
+  min-height: 620px;
   background: var(--glass-bg-solid);
   backdrop-filter: blur(var(--glass-blur-heavy));
   -webkit-backdrop-filter: blur(var(--glass-blur-heavy));
@@ -102,6 +102,7 @@
   align-items: center;
   justify-content: center;
   width: 50%;
+  overflow-y: auto;
 }
 
 .sign-in-container {
@@ -142,34 +143,160 @@
   }
 }
 
-form {
+.landing-container form {
   background: transparent;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0 50px;
+  padding: 24px 40px;
   height: 100%;
   text-align: center;
   width: 100%;
 }
 
-h1 {
+.landing-container h1 {
   font-weight: 700;
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  margin-bottom: 0.4rem;
   color: var(--text-main);
 }
 
-span {
+.landing-container form > span {
   font-size: 0.85rem;
   color: var(--text-secondary);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   display: block;
 }
 
+/* ── Role Selector Cards ── */
+.role-selector {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.role-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border-radius: 14px;
+  border: 1.5px solid var(--glass-border);
+  background: var(--glass-highlight);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-spring);
+  position: relative;
+  overflow: hidden;
+  margin-top: 0;
+  font-family: var(--font-body);
+  color: var(--text-main);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.role-card::before {
+  display: none;
+}
+
+.role-card:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  background: var(--glass-bg-elevated);
+}
+
+.role-card:active {
+  transform: scale(0.97);
+}
+
+.role-card.selected {
+  border-color: var(--primary);
+  background: rgba(220, 38, 38, 0.06);
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.15), 0 8px 28px rgba(220, 38, 38, 0.08);
+}
+
+[data-theme="dark"] .role-card.selected {
+  background: rgba(239, 68, 68, 0.1);
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2), 0 8px 28px rgba(239, 68, 68, 0.1);
+}
+
+.role-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.role-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0;
+  display: block;
+}
+
+.role-desc {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+  margin: 0;
+  display: block;
+}
+
+/* ── Counselor Extra Fields ── */
+.counselor-fields {
+  width: 100%;
+  animation: slideDown 0.3s var(--ease-out-expo);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 200px;
+  }
+}
+
+.counselor-fields input,
+.counselor-fields select {
+  width: 100%;
+}
+
+.specialization-select {
+  background: var(--glass-highlight);
+  border: 1px solid var(--glass-border);
+  padding: 11px 15px;
+  margin: 7px 0;
+  width: 100%;
+  border-radius: 12px;
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  transition: all 0.3s var(--ease-apple);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  appearance: none;
+  cursor: pointer;
+}
+
+.specialization-select:focus {
+  outline: none;
+  border-color: rgba(220, 38, 38, 0.3);
+  background: var(--glass-bg);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.06), 0 4px 16px rgba(220, 38, 38, 0.04);
+}
+
+/* ── Existing styles ── */
 .social-container {
-  margin: 1.5rem 0;
+  margin: 1rem 0;
 }
 
 .social {
@@ -200,7 +327,7 @@ span {
   transform: translateY(0) scale(0.95);
 }
 
-input {
+.landing-container input {
   background: var(--glass-highlight);
   border: 1px solid var(--glass-border);
   padding: 11px 15px;
@@ -215,14 +342,14 @@ input {
   -webkit-backdrop-filter: blur(8px);
 }
 
-input:focus {
+.landing-container input:focus {
   outline: none;
   border-color: rgba(220, 38, 38, 0.3);
   background: var(--glass-bg);
   box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.06), 0 4px 16px rgba(220, 38, 38, 0.04);
 }
 
-button {
+.landing-container form > button[type="submit"] {
   border-radius: 12px;
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: white;
@@ -239,7 +366,7 @@ button {
   overflow: hidden;
 }
 
-button::before {
+.landing-container form > button[type="submit"]::before {
   content: '';
   position: absolute;
   top: 0;
@@ -251,12 +378,12 @@ button::before {
   border-radius: 12px 12px 0 0;
 }
 
-button:hover {
+.landing-container form > button[type="submit"]:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 28px rgba(220, 38, 38, 0.25);
 }
 
-button:active {
+.landing-container form > button[type="submit"]:active {
   transform: scale(0.97);
 }
 

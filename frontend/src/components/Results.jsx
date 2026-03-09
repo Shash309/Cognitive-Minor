@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
+import './CounselorDashboard.css';
 
 const Results = () => {
   const { user } = useOutletContext() || {};
@@ -8,6 +9,8 @@ const Results = () => {
   const [error, setError] = useState('');
   const [data, setData] = useState(null);
   const [processingIndex, setProcessingIndex] = useState(0);
+  const [counselorRequested, setCounselorRequested] = useState(false);
+  const [requestingCounselor, setRequestingCounselor] = useState(false);
 
   const processingSteps = [
     'Analyzing psychological traits',
@@ -66,6 +69,26 @@ const Results = () => {
     } catch {
       // soft-fail
       navigate('/dashboard/psychology', { replace: true });
+    }
+  };
+
+  const handleCounselorRequest = async () => {
+    if (!user?.email || requestingCounselor) return;
+    setRequestingCounselor(true);
+    try {
+      const apiBase = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000';
+      const res = await fetch(`${apiBase}/api/counseling/request`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ student_email: user.email }),
+      });
+      if (res.ok) {
+        setCounselorRequested(true);
+      }
+    } catch {
+      // soft fail
+    } finally {
+      setRequestingCounselor(false);
     }
   };
 
@@ -193,6 +216,29 @@ const Results = () => {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Talk to a Counselor */}
+          <div className="talk-to-counselor">
+            <div className="ttc-icon">🧠</div>
+            <div className="ttc-title">Talk to a Counselor</div>
+            <div className="ttc-desc">
+              Get personalized guidance from an expert career counselor who can interpret your AI results and provide real-world advice.
+            </div>
+            {counselorRequested ? (
+              <div className="ttc-success">
+                <i className="fas fa-check-circle" /> Request sent! A counselor will review your profile.
+              </div>
+            ) : (
+              <button
+                className="ttc-btn"
+                onClick={handleCounselorRequest}
+                disabled={requestingCounselor}
+              >
+                <i className="fas fa-hand-paper" />
+                {requestingCounselor ? 'Sending...' : 'Request Counselor Help'}
+              </button>
+            )}
           </div>
 
           <button

@@ -4,18 +4,64 @@ import { useTranslation } from 'react-i18next';
 
 const LandingPage = ({ onLogin }) => {
   const [isSignInActive, setIsSignInActive] = useState(true);
+  const [selectedRole, setSelectedRole] = useState('student');
   const { t } = useTranslation();
 
-  const handleAuth = (e, type) => {
+  // Counselor extra fields
+  const [experience, setExperience] = useState('');
+  const [specialization, setSpecialization] = useState('');
+  const [linkedin, setLinkedin] = useState('');
+
+  const handleAuth = async (e, type) => {
     e.preventDefault();
     const form = e.target;
-    
-    // Auth logic using localStorage user registry
+
     const email = form.email.value;
     const password = form.password.value;
     const name = form.name ? form.name.value : 'User';
 
-    // Fetch existing users from localStorage
+    if (selectedRole === 'counselor') {
+      const apiBase = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000';
+      try {
+        if (type === 'register') {
+          const res = await fetch(`${apiBase}/api/counselor/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name,
+              email,
+              password,
+              years_of_experience: experience,
+              specialization,
+              linkedin,
+            }),
+          });
+          const data = await res.json();
+          if (!res.ok) {
+            alert(data.error || 'Registration failed.');
+            return;
+          }
+          onLogin({ ...data, role: 'counselor' });
+        } else {
+          const res = await fetch(`${apiBase}/api/counselor/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+          });
+          const data = await res.json();
+          if (!res.ok) {
+            alert(data.error || 'Invalid credentials.');
+            return;
+          }
+          onLogin({ ...data, role: 'counselor' });
+        }
+      } catch {
+        alert('Server error. Please try again.');
+      }
+      return;
+    }
+
+    // Student auth — existing localStorage logic
     const users = JSON.parse(localStorage.getItem('career_app_users') || '{}');
 
     if (type === 'register') {
@@ -25,54 +71,117 @@ const LandingPage = ({ onLogin }) => {
       }
       users[email] = { name, email, password };
       localStorage.setItem('career_app_users', JSON.stringify(users));
-      onLogin({ email, name });
-    } else { // login
+      onLogin({ email, name, role: 'student' });
+    } else {
       const user = users[email];
       if (!user || user.password !== password) {
         alert(t('Invalid credentials. Please try again.'));
         return;
       }
-      onLogin({ email, name: user.name });
+      onLogin({ email, name: user.name, role: 'student' });
     }
   };
 
   return (
     <div className="landing-container">
       <div className={`auth-card-wrapper ${isSignInActive ? '' : 'right-panel-active'}`}>
+        {/* ─── Sign Up Form ─── */}
         <div className="form-container sign-up-container">
           <form onSubmit={(e) => handleAuth(e, 'register')}>
             <h1>{t('landing.createAccount')}</h1>
-            <div className="social-container">
-              <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-              <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-              <a href="#" className="social"><i className="fab fa-github"></i></a>
-              <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
+
+            {/* Role Selector */}
+            <div className="role-selector">
+              <button
+                type="button"
+                className={`role-card ${selectedRole === 'student' ? 'selected' : ''}`}
+                onClick={() => setSelectedRole('student')}
+              >
+                <span className="role-icon">🎓</span>
+                <span className="role-label">Student</span>
+                <span className="role-desc">AI-powered career recommendations</span>
+              </button>
+              <button
+                type="button"
+                className={`role-card ${selectedRole === 'counselor' ? 'selected' : ''}`}
+                onClick={() => setSelectedRole('counselor')}
+              >
+                <span className="role-icon">🧠</span>
+                <span className="role-label">Counselor</span>
+                <span className="role-desc">Guide students with AI insights</span>
+              </button>
             </div>
-            <span>{t('landing.orUseEmail')}</span>
+
             <input type="text" name="name" placeholder={t('landing.name')} required />
             <input type="email" name="email" placeholder={t('landing.email')} required />
             <input type="password" name="password" placeholder={t('landing.password')} required />
+
+            {selectedRole === 'counselor' && (
+              <div className="counselor-fields">
+                <input
+                  type="number"
+                  min="0"
+                  max="50"
+                  placeholder="Years of Experience"
+                  value={experience}
+                  onChange={(e) => setExperience(e.target.value)}
+                />
+                <select
+                  value={specialization}
+                  onChange={(e) => setSpecialization(e.target.value)}
+                  className="specialization-select"
+                >
+                  <option value="">Select Specialization</option>
+                  <option value="Career Counseling">Career Counseling</option>
+                  <option value="Psychology">Psychology</option>
+                  <option value="Academic Guidance">Academic Guidance</option>
+                  <option value="University Admissions">University Admissions</option>
+                </select>
+                <input
+                  type="url"
+                  placeholder="LinkedIn Profile (optional)"
+                  value={linkedin}
+                  onChange={(e) => setLinkedin(e.target.value)}
+                />
+              </div>
+            )}
+
             <button type="submit">{t('landing.signUp')}</button>
           </form>
         </div>
 
+        {/* ─── Sign In Form ─── */}
         <div className="form-container sign-in-container">
           <form onSubmit={(e) => handleAuth(e, 'login')}>
             <h1>{t('landing.signInTitle')}</h1>
-            <div className="social-container">
-              <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-              <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-              <a href="#" className="social"><i className="fab fa-github"></i></a>
-              <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
+
+            {/* Role Selector */}
+            <div className="role-selector">
+              <button
+                type="button"
+                className={`role-card ${selectedRole === 'student' ? 'selected' : ''}`}
+                onClick={() => setSelectedRole('student')}
+              >
+                <span className="role-icon">🎓</span>
+                <span className="role-label">Student</span>
+              </button>
+              <button
+                type="button"
+                className={`role-card ${selectedRole === 'counselor' ? 'selected' : ''}`}
+                onClick={() => setSelectedRole('counselor')}
+              >
+                <span className="role-icon">🧠</span>
+                <span className="role-label">Counselor</span>
+              </button>
             </div>
-            <span>{t('landing.orUseAccount')}</span>
+
             <input type="email" name="email" placeholder={t('landing.email')} required />
             <input type="password" name="password" placeholder={t('landing.password')} required />
-            <a href="#" style={{ fontSize: '0.8rem', marginTop: '8px', color: 'var(--text-muted)' }}>{t('landing.forgotPassword')}</a>
             <button type="submit">{t('landing.signIn')}</button>
           </form>
         </div>
 
+        {/* ─── Overlay ─── */}
         <div className="overlay-container">
           <div className="overlay">
             <div className="overlay-panel overlay-left">

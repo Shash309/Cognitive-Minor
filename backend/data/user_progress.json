@@ -10,5 +10,11 @@
     "voice_completed": false,
     "quiz_completed": false,
     "last_completed_step": null
+  },
+  "test12@gmail.com": {
+    "psych_completed": false,
+    "voice_completed": false,
+    "quiz_completed": false,
+    "last_completed_step": null
   }
 }

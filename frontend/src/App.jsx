@@ -14,6 +14,10 @@ import QuizResultDetails from './components/QuizResultDetails';
 import Results from './components/Results';
 import ProtectedRoute from './components/ProtectedRoute';
 import VoiceInsight from './components/VoiceInsight';
+import CounselorDashboard from './components/CounselorDashboard';
+import CounselorHome from './components/CounselorHome';
+import StudentReport from './components/StudentReport';
+import CounselorChat from './components/CounselorChat';
 import './App.css';
 
 function App() {
@@ -42,14 +46,18 @@ function App() {
     setUser(null);
   };
 
+  const isCounselor = user?.role === 'counselor';
+  const defaultRoute = isCounselor ? '/counselor' : '/dashboard/psychology';
+
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={!isLoggedIn ? <LandingPage onLogin={handleLogin} /> : <Navigate to="/dashboard/psychology" replace />} />
-          <Route path="/login" element={!isLoggedIn ? <LandingPage onLogin={handleLogin} /> : <Navigate to="/dashboard/psychology" replace />} />
+          <Route path="/" element={!isLoggedIn ? <LandingPage onLogin={handleLogin} /> : <Navigate to={defaultRoute} replace />} />
+          <Route path="/login" element={!isLoggedIn ? <LandingPage onLogin={handleLogin} /> : <Navigate to={defaultRoute} replace />} />
 
-          <Route path="/dashboard" element={isLoggedIn ? <Dashboard user={user} onLogout={handleLogout} /> : <Navigate to="/" replace />}>
+          {/* ─── Student Routes ─── */}
+          <Route path="/dashboard" element={isLoggedIn && !isCounselor ? <Dashboard user={user} onLogout={handleLogout} /> : <Navigate to="/" replace />}>
             <Route index element={<Home user={user} />} />
             <Route path="colleges" element={<CollegeExplorer />} />
             <Route
@@ -82,6 +90,13 @@ function App() {
             <Route path="skills" element={<SkillBuilder />} />
             <Route path="visualizer" element={<CareerPathVisualizer />} />
             <Route path="timeline" element={<TimelineTracker />} />
+          </Route>
+
+          {/* ─── Counselor Routes ─── */}
+          <Route path="/counselor" element={isLoggedIn && isCounselor ? <CounselorDashboard user={user} onLogout={handleLogout} /> : <Navigate to="/" replace />}>
+            <Route index element={<CounselorHome />} />
+            <Route path="student/:studentEmail" element={<StudentReport />} />
+            <Route path="chat/:studentEmail" element={<CounselorChat />} />
           </Route>
         </Routes>
       </BrowserRouter>

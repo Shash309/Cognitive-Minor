@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useOutletContext, useNavigate, useLocation } from 'react-router-dom';
 import './Profile.css';
+import './CounselorDashboard.css';
 
 const toTitleCase = (value) => {
   if (!value || typeof value !== 'string') return '';
@@ -24,6 +25,7 @@ const Profile = () => {
   const [sessionHistory, setSessionHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [feedbackData, setFeedbackData] = useState([]);
   const [showResultBanner, setShowResultBanner] = useState(
     Boolean(location.state && location.state.highlightLatestResult)
   );
@@ -71,6 +73,19 @@ const Profile = () => {
         }
         if (!fusedData.error && Array.isArray(fusedData.career_rankings)) {
           setCareerSnapshot(fusedData);
+        }
+
+        // Fetch counselor feedback
+        try {
+          const fbRes = await fetch(
+            `${apiBase}/api/counseling/feedback?student_email=${encodeURIComponent(user.email)}`
+          );
+          const fbData = await fbRes.json();
+          if (Array.isArray(fbData.feedback)) {
+            setFeedbackData(fbData.feedback);
+          }
+        } catch {
+          // non-fatal
         }
       } catch (err) {
         setError(err.message || 'Something went wrong while loading profile.');
@@ -564,6 +579,29 @@ const Profile = () => {
               </div>
             </div>
           )}
+        </div>
+      )}
+
+      {/* Card 7 – Counselor Feedback */}
+      {feedbackData.length > 0 && (
+        <div className="profile-card-full">
+          <div className="profile-card-title">
+            <i className="fas fa-user-tie" style={{ marginRight: '0.4rem' }} /> Counselor Feedback
+          </div>
+          <div className="profile-card-accent" />
+          <div className="counselor-feedback-section">
+            {feedbackData.map((fb, idx) => (
+              <div key={idx} className="feedback-card">
+                <div className="feedback-counselor">🧠 {fb.counselor_name}</div>
+                <div className="feedback-text">{fb.text}</div>
+                {fb.timestamp && (
+                  <div className="feedback-time">
+                    {new Date(fb.timestamp).toLocaleString()}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

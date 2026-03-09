@@ -29,6 +29,9 @@ USERS_PATH = os.path.join(DATA_DIR, "users.json")
 VOICE_HISTORY_PATH = os.path.join(DATA_DIR, "voice_history.json")
 USER_PROGRESS_PATH = os.path.join(DATA_DIR, "user_progress.json")
 CAREER_SESSIONS_PATH = os.path.join(DATA_DIR, "career_sessions.json")
+COUNSELORS_PATH = os.path.join(DATA_DIR, "counselors.json")
+COUNSELING_REQUESTS_PATH = os.path.join(DATA_DIR, "counseling_requests.json")
+COUNSELOR_MESSAGES_PATH = os.path.join(DATA_DIR, "counselor_messages.json")
 
 
 def _load_json_db(path):
@@ -54,6 +57,9 @@ users_db = _load_json_db(USERS_PATH)
 voice_db = _load_json_db(VOICE_HISTORY_PATH)
 user_progress_db = _load_json_db(USER_PROGRESS_PATH)
 career_sessions_db = _load_json_db(CAREER_SESSIONS_PATH)
+counselors_db = _load_json_db(COUNSELORS_PATH)
+counseling_requests_db = _load_json_db(COUNSELING_REQUESTS_PATH)
+counselor_messages_db = _load_json_db(COUNSELOR_MESSAGES_PATH)
 
 # Unified decision engine
 from career_intelligence_engine import compute_final_decision
@@ -2120,6 +2126,233 @@ def reset_progress():
         return jsonify({"error": "user_email is required"}), 400
     _reset_progress(user_email)
     return jsonify({"ok": True}), 200
+
+# ================== Counselor Routes ==================
+
+@app.route("/api/counselor/register", methods=["POST"])
+def counselor_register():
+    data = request.json or {}
+    email = (data.get("email") or "").strip().lower()
+    password = data.get("password", "")
+    name = data.get("name", "")
+    if not email or not password or not name:
+        return jsonify({"error": "name, email, and password are required"}), 400
+    if email in counselors_db:
+        return jsonify({"error": "Counselor already registered. Please sign in."}), 409
+    now = datetime.utcnow().isoformat() + "Z"
+    counselors_db[email] = {
+        "name": name,
+        "email": email,
+        "password": password,
+        "years_of_experience": data.get("years_of_experience", ""),
+        "specialization": data.get("specialization", ""),
+        "linkedin": data.get("linkedin", ""),
+        "created_at": now,
+        "last_login": now,
+    }
+    _save_json_db(COUNSELORS_PATH, counselors_db)
+    return jsonify({
+        "email": email,
+        "name": name,
+        "role": "counselor",
+        "specialization": data.get("specialization", ""),
+        "years_of_experience": data.get("years_of_experience", ""),
+    }), 201
+
+
+@app.route("/api/counselor/login", methods=["POST"])
+def counselor_login():
+    data = request.json or {}
+    email = (data.get("email") or "").strip().lower()
+    password = data.get("password", "")
+    if not email or not password:
+        return jsonify({"error": "email and password are required"}), 400
+    counselor = counselors_db.get(email)
+    if not counselor or counselor.get("password") != password:
+        return jsonify({"error": "Invalid credentials"}), 401
+    counselor["last_login"] = datetime.utcnow().isoformat() + "Z"
+    _save_json_db(COUNSELORS_PATH, counselors_db)
+    return jsonify({
+        "email": email,
+        "name": counselor.get("name", ""),
+        "role": "counselor",
+        "specialization": counselor.get("specialization", ""),
+        "years_of_experience": counselor.get("years_of_experience", ""),
+    }), 200
+
+
+@app.route("/api/counselor/students", methods=["GET"])
+def counselor_students():
+    """Return list of students who requested counseling, with summary data."""
+    students = []
+    for student_email, req in counseling_requests_db.items():
+        # Gather student data
+        user_info = users_db.get(student_email) or {}
+        fused = fused_results_db.get(student_email) or {}
+        final_scores = fused.get("final_scores") or {}
+        top_career = max(final_scores, key=final_scores.get) if final_scores else None
+        top_score = round(final_scores.get(top_career, 0)) if top_career else None
+
+        # Psych traits
+        psych_history = psych_db.get(student_email) or []
+        latest_psych = psych_history[0] if psych_history else {}
+        dominant_traits = []
+        if isinstance(latest_psych.get("dominant_traits"), list):
+            dominant_traits = [
+                t.get("display_name") or t.get("name", "")
+                for t in latest_psych["dominant_traits"][:3]
+            ]
+
+        # Voice mood
+        voice_history = voice_db.get(student_email) or []
+        latest_voice = voice_history[0] if voice_history else {}
+        confidence = latest_voice.get("confidence_score")
+
+        students.append({
+            "email": student_email,
+            "name": user_info.get("name", student_email.split("@")[0]),
+            "top_career": top_career,
+            "confidence_score": round(confidence) if confidence else None,
+            "top_score": top_score,
+            "dominant_traits": dominant_traits,
+            "requested_at": req.get("requested_at"),
+            "status": req.get("status", "pending"),
+        })
+    return jsonify({"students": students}), 200
+
+
+@app.route("/api/counselor/student-report", methods=["GET"])
+def counselor_student_report():
+    """Return detailed career intelligence report for a student."""
+    student_email = request.args.get("student_email", "").strip().lower()
+    if not student_email:
+        return jsonify({"error": "student_email is required"}), 400
+
+    user_info = users_db.get(student_email) or {}
+
+    # Psychological profile
+    psych_history = psych_db.get(student_email) or []
+    latest_psych = psych_history[0] if psych_history else {}
+    psych_profile = latest_psych.get("profile") or {}
+    dominant_traits = latest_psych.get("dominant_traits") or []
+    decision_style = latest_psych.get("decision_style") or ""
+
+    # Voice insight
+    voice_history = voice_db.get(student_email) or []
+    latest_voice = voice_history[0] if voice_history else {}
+
+    # Quiz
+    quiz_history_list = quiz_db.get(student_email)
+    latest_quiz = None
+    if isinstance(quiz_history_list, list) and quiz_history_list:
+        latest_quiz = quiz_history_list[0]
+    elif isinstance(quiz_history_list, dict):
+        latest_quiz = quiz_history_list
+
+    # Fused results
+    fused = fused_results_db.get(student_email) or {}
+    final_scores = fused.get("final_scores") or {}
+    sorted_careers = sorted(final_scores.items(), key=lambda x: x[1], reverse=True)
+
+    # Career sessions for explanations
+    sessions = career_sessions_db.get(student_email) or []
+    latest_session = sessions[0] if sessions else {}
+
+    return jsonify({
+        "student": {
+            "name": user_info.get("name", student_email.split("@")[0]),
+            "email": student_email,
+        },
+        "psych_profile": psych_profile,
+        "dominant_traits": dominant_traits[:5],
+        "decision_style": decision_style,
+        "voice_insight": {
+            "transcript": latest_voice.get("transcript", ""),
+            "confidence_score": latest_voice.get("confidence_score"),
+            "motivation_score": latest_voice.get("motivation_score"),
+            "sentiment": latest_voice.get("sentiment"),
+        },
+        "quiz": {
+            "quiz_scores": (latest_quiz or {}).get("quiz_scores") or {},
+            "top_career": (latest_quiz or {}).get("top_career"),
+            "stream": (latest_quiz or {}).get("stream"),
+        },
+        "career_rankings": [
+            {"career": c, "score": round(s, 1)} for c, s in sorted_careers[:6]
+        ],
+        "confidence_score": latest_session.get("confidence_score"),
+        "explanation": latest_session.get("explanation", ""),
+    }), 200
+
+
+@app.route("/api/counseling/request", methods=["POST"])
+def counseling_request():
+    """Student requests counseling help."""
+    data = request.json or {}
+    student_email = (data.get("student_email") or "").strip().lower()
+    if not student_email:
+        return jsonify({"error": "student_email is required"}), 400
+    now = datetime.utcnow().isoformat() + "Z"
+    counseling_requests_db[student_email] = {
+        "requested_at": now,
+        "status": "pending",
+        "message": data.get("message", ""),
+    }
+    _save_json_db(COUNSELING_REQUESTS_PATH, counseling_requests_db)
+    return jsonify({"ok": True, "requested_at": now}), 201
+
+
+@app.route("/api/counseling/messages", methods=["GET"])
+def get_counseling_messages():
+    """Get chat messages for a student."""
+    student_email = request.args.get("student_email", "").strip().lower()
+    if not student_email:
+        return jsonify({"error": "student_email is required"}), 400
+    messages = counselor_messages_db.get(student_email) or []
+    return jsonify({"messages": messages}), 200
+
+
+@app.route("/api/counseling/messages", methods=["POST"])
+def post_counseling_message():
+    """Send a chat message (from student or counselor)."""
+    data = request.json or {}
+    student_email = (data.get("student_email") or "").strip().lower()
+    sender_role = data.get("sender_role", "student")
+    sender_name = data.get("sender_name", "")
+    text = (data.get("text") or "").strip()
+    if not student_email or not text:
+        return jsonify({"error": "student_email and text are required"}), 400
+    now = datetime.utcnow().isoformat() + "Z"
+    messages = counselor_messages_db.get(student_email) or []
+    messages.append({
+        "timestamp": now,
+        "sender_role": sender_role,
+        "sender_name": sender_name,
+        "text": text,
+    })
+    counselor_messages_db[student_email] = messages
+    _save_json_db(COUNSELOR_MESSAGES_PATH, counselor_messages_db)
+    return jsonify({"ok": True, "timestamp": now}), 201
+
+
+@app.route("/api/counseling/feedback", methods=["GET"])
+def get_counseling_feedback():
+    """Get counselor messages visible to a student (feedback view)."""
+    student_email = request.args.get("student_email", "").strip().lower()
+    if not student_email:
+        return jsonify({"error": "student_email is required"}), 400
+    messages = counselor_messages_db.get(student_email) or []
+    feedback = [
+        {
+            "counselor_name": m.get("sender_name", "Counselor"),
+            "text": m.get("text", ""),
+            "timestamp": m.get("timestamp"),
+        }
+        for m in messages
+        if m.get("sender_role") == "counselor"
+    ]
+    return jsonify({"feedback": feedback}), 200
+
 
 # ================== Run ==================
 if __name__ == "__main__":
