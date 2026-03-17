@@ -1,3 +1,7 @@
+import time
+START_TIME = time.time()
+print(f"[TIME] Start of app.py execution: 0.00s")
+
 import os
 import json
 import warnings
@@ -5,16 +9,21 @@ import math
 from datetime import datetime
 from uuid import uuid4
 
-import joblib
-import pandas as pd
-import numpy as np
+print(f"[TIME] Stdlib imports loaded: {time.time() - START_TIME:.2f}s")
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from sklearn.exceptions import InconsistentVersionWarning
-from sentence_transformers import SentenceTransformer
 
-# ================== Setup Flask ==================
-warnings.filterwarnings("ignore", category=InconsistentVersionWarning)
+# Configure Flask dynamically
+def ignore_warnings_lazy():
+    import warnings
+    try:
+        from sklearn.exceptions import InconsistentVersionWarning
+        warnings.filterwarnings("ignore", category=InconsistentVersionWarning)
+    except ImportError:
+        pass
+
+ignore_warnings_lazy()
 
 app = Flask(__name__)
 CORS(app)  # allow frontend access
@@ -50,6 +59,7 @@ def _save_json_db(path, data):
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
+t0 = time.time()
 psych_db = _load_json_db(PSYCH_PATH)
 quiz_db = _load_json_db(QUIZ_HISTORY_PATH)
 fused_results_db = _load_json_db(CAREER_FUSED_RESULTS_PATH)
@@ -63,6 +73,7 @@ counselor_messages_db = _load_json_db(COUNSELOR_MESSAGES_PATH)
 
 # Unified decision engine
 from career_intelligence_engine import compute_final_decision
+print(f"[TIME] Database connections (JSON) and engine load: {time.time() - t0:.2f}s")
 
 
 def _default_progress_state():
@@ -163,28 +174,56 @@ def _safe_number(val, default=None):
         return default
     return f
 
-# ================== Load Quiz ML Model ==================
-try:
-    quiz_model = joblib.load(os.path.join(BASE, "models", "career_1200_model.pkl"))
-    quiz_vectorizer = joblib.load(os.path.join(BASE, "models", "quiz_vectorizer.pkl"))
-    quiz_encoder = joblib.load(os.path.join(BASE, "models", "quiz_label_encoder.pkl"))
-    print("✅ Quiz model loaded")
-except Exception as e:
-    print("⚠️ Could not load quiz model:", e)
-    quiz_model = quiz_vectorizer = quiz_encoder = None
+# ================== LAZY LOADING OF ML MODELS AND DATASETS ==================
+_quiz_model = None
+_quiz_vectorizer = None
+_quiz_encoder = None
 
-print("Loading sentence-transformer (may download model first time)...")
-emb_model = SentenceTransformer("all-MiniLM-L6-v2")
-print("Embedding model loaded. Embedding dim:", emb_model.get_sentence_embedding_dimension())
+def get_quiz_assets():
+    global _quiz_model, _quiz_vectorizer, _quiz_encoder
+    if _quiz_model is None:
+        import time
+        import joblib
+        t0 = time.time()
+        try:
+            _quiz_model = joblib.load(os.path.join(BASE, "models", "career_1200_model.pkl"))
+            _quiz_vectorizer = joblib.load(os.path.join(BASE, "models", "quiz_vectorizer.pkl"))
+            _quiz_encoder = joblib.load(os.path.join(BASE, "models", "quiz_label_encoder.pkl"))
+            print(f"[TIME] Loaded Quiz Model lazily: {time.time() - t0:.2f}s")
+        except Exception as e:
+            print("⚠️ Could not load quiz model:", e)
+            _quiz_model = _quiz_vectorizer = _quiz_encoder = False
+    return _quiz_model, _quiz_vectorizer, _quiz_encoder
 
-# ================== Load Colleges Dataset ==================
-try:
-    colleges = pd.read_csv(os.path.join(DATA_DIR, "colleges.csv"))
-    colleges.columns = [c.strip().lower() for c in colleges.columns]  # normalize headers
-    print("✅ Colleges dataset loaded with", len(colleges), "rows")
-except Exception as e:
-    print("⚠️ Could not load colleges dataset:", e)
-    colleges = pd.DataFrame()
+_emb_model = None
+def get_emb_model():
+    global _emb_model
+    if _emb_model is None:
+        import time
+        t0 = time.time()
+        print("Loading sentence-transformer lazily...")
+        from sentence_transformers import SentenceTransformer
+        _emb_model = SentenceTransformer("all-MiniLM-L6-v2")
+        print(f"[TIME] Loaded Sentence-BERT lazily: {time.time() - t0:.2f}s")
+    return _emb_model
+
+_colleges_df = None
+def get_colleges_df():
+    global _colleges_df
+    if _colleges_df is None:
+        import time
+        import pandas as pd
+        t0 = time.time()
+        try:
+            _colleges_df = pd.read_csv(os.path.join(DATA_DIR, "colleges.csv"))
+            _colleges_df.columns = [c.strip().lower() for c in _colleges_df.columns]
+            print(f"[TIME] Loaded Colleges Dataset lazily: {time.time() - t0:.2f}s")
+        except Exception as e:
+            print("⚠️ Could not load colleges dataset:", e)
+            _colleges_df = pd.DataFrame()
+    return _colleges_df
+
+print(f"[TIME] Total app initialization (optimized): {time.time() - START_TIME:.2f}s")
 
 PSYCH_QUESTION_META = {
     # Openness / creativity
@@ -605,6 +644,7 @@ def _compute_stability(prev_profile: dict | None, current_profile: dict | None):
     if not keys:
         return None, "Insufficient data"
 
+    import numpy as np
     v1 = np.array([float(prev_profile.get(k, 0.0)) for k in keys], dtype=float)
     v2 = np.array([float(current_profile.get(k, 0.0)) for k in keys], dtype=float)
 
@@ -1409,7 +1449,10 @@ def post_psych_assessment():
 
 
 def _predict_career_from_text(text_input: str):
-    if quiz_model is None or quiz_vectorizer is None or quiz_encoder is None or emb_model is None:
+    import numpy as np
+    quiz_model, quiz_vectorizer, quiz_encoder = get_quiz_assets()
+    emb_model = get_emb_model()
+    if not quiz_model or not quiz_vectorizer or not quiz_encoder or not emb_model:
         raise RuntimeError("Model or required assets not available")
 
     # Embedding + TF-IDF features
@@ -1434,7 +1477,10 @@ def _compute_quiz_career_scores(text_input: str) -> dict:
     Use the ML quiz model to produce a probability-style score (0–100)
     for every career label instead of a single prediction.
     """
-    if quiz_model is None or quiz_vectorizer is None or quiz_encoder is None or emb_model is None:
+    import numpy as np
+    quiz_model, quiz_vectorizer, quiz_encoder = get_quiz_assets()
+    emb_model = get_emb_model()
+    if not quiz_model or not quiz_vectorizer or not quiz_encoder or not emb_model:
         raise RuntimeError("Model or required assets not available")
 
     emb = emb_model.encode([text_input], convert_to_numpy=True)
@@ -2018,6 +2064,7 @@ def get_profile():
 # ================== Basic Colleges Route ==================
 @app.route("/colleges", methods=["POST"])
 def get_colleges():
+    colleges = get_colleges_df()
     if colleges.empty:
         return jsonify({"error": "Colleges dataset not available"}), 500
 
@@ -2046,6 +2093,7 @@ def get_colleges():
 @app.route("/api/states", methods=["GET"])
 def get_states():
     """Return list of unique states from colleges dataset"""
+    colleges = get_colleges_df()
     if colleges.empty or "state" not in colleges.columns:
         return jsonify([]), 200
     states = sorted(colleges["state"].dropna().unique().tolist())
@@ -2055,6 +2103,9 @@ def get_states():
 @app.route("/api/recommend", methods=["POST"])
 def recommend():
     """Return college recommendations for a given state"""
+    import pandas as pd
+    import numpy as np
+    colleges = get_colleges_df()
     if colleges.empty:
         return jsonify({"error": "No college data available"}), 500
 
