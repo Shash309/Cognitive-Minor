@@ -1,17 +1,5 @@
 {
-  "test@gmail.com": {
-    "psych_completed": true,
-    "voice_completed": true,
-    "quiz_completed": true,
-    "last_completed_step": "quiz"
-  },
-  "swastik3370@gmail.com": {
-    "psych_completed": false,
-    "voice_completed": false,
-    "quiz_completed": false,
-    "last_completed_step": null
-  },
-  "test12@gmail.com": {
+  "babbu@gmail.com": {
     "psych_completed": false,
     "voice_completed": false,
     "quiz_completed": false,

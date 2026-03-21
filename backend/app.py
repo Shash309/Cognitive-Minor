@@ -28,9 +28,20 @@ ignore_warnings_lazy()
 app = Flask(__name__)
 CORS(app)  # allow frontend access
 
-BASE = os.path.dirname(__file__)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE = BASE_DIR
 
-DATA_DIR = os.path.join(BASE, "data")
+DATA_DIR = os.path.join(BASE_DIR, "data")
+os.makedirs(DATA_DIR, exist_ok=True)
+
+CSV_PATH = os.path.join(DATA_DIR, "users.csv")
+# Auto-create CSV with headers if it doesn't exist
+if not os.path.exists(CSV_PATH):
+    import csv
+    with open(CSV_PATH, mode="w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["name", "email", "phone", "age", "gender", "location"])
+
 PSYCH_PATH = os.path.join(DATA_DIR, "psych_profiles.json")
 QUIZ_HISTORY_PATH = os.path.join(DATA_DIR, "quiz_history.json")
 CAREER_FUSED_RESULTS_PATH = os.path.join(DATA_DIR, "career_fused_results.json")
@@ -48,8 +59,21 @@ def _load_json_db(path):
         return {}
     try:
         with open(path, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except Exception:
+            data = json.load(f)
+            
+        # Dynamically detect JSON format and convert to dict if necessary
+        from utils.data_handler import convert_list_to_dict
+        if isinstance(data, list):
+            data = convert_list_to_dict(data, key="email")
+            # Always save in DICTIONARY format going forward
+            _save_json_db(path, data)
+            
+        if not isinstance(data, dict):
+            return {}
+            
+        return data
+    except Exception as e:
+        print(f"Error loading {path}: {e}")
         return {}
 
 
@@ -175,52 +199,65 @@ def _safe_number(val, default=None):
     return f
 
 # ================== LAZY LOADING OF ML MODELS AND DATASETS ==================
+from threading import Lock
+
 _quiz_model = None
 _quiz_vectorizer = None
 _quiz_encoder = None
+_quiz_lock = Lock()
 
 def get_quiz_assets():
     global _quiz_model, _quiz_vectorizer, _quiz_encoder
     if _quiz_model is None:
-        import time
-        import joblib
-        t0 = time.time()
-        try:
-            _quiz_model = joblib.load(os.path.join(BASE, "models", "career_1200_model.pkl"))
-            _quiz_vectorizer = joblib.load(os.path.join(BASE, "models", "quiz_vectorizer.pkl"))
-            _quiz_encoder = joblib.load(os.path.join(BASE, "models", "quiz_label_encoder.pkl"))
-            print(f"[TIME] Loaded Quiz Model lazily: {time.time() - t0:.2f}s")
-        except Exception as e:
-            print("⚠️ Could not load quiz model:", e)
-            _quiz_model = _quiz_vectorizer = _quiz_encoder = False
+        with _quiz_lock:
+            if _quiz_model is None:
+                import time
+                import joblib
+                t0 = time.time()
+                try:
+                    _quiz_model = joblib.load(os.path.join(BASE, "models", "career_1200_model.pkl"))
+                    _quiz_vectorizer = joblib.load(os.path.join(BASE, "models", "quiz_vectorizer.pkl"))
+                    _quiz_encoder = joblib.load(os.path.join(BASE, "models", "quiz_label_encoder.pkl"))
+                    print(f"[TIME] Loaded Quiz Model lazily: {time.time() - t0:.2f}s")
+                except Exception as e:
+                    print("⚠️ Could not load quiz model:", e)
+                    _quiz_model = _quiz_vectorizer = _quiz_encoder = False
     return _quiz_model, _quiz_vectorizer, _quiz_encoder
 
 _emb_model = None
+_emb_lock = Lock()
+
 def get_emb_model():
     global _emb_model
     if _emb_model is None:
-        import time
-        t0 = time.time()
-        print("Loading sentence-transformer lazily...")
-        from sentence_transformers import SentenceTransformer
-        _emb_model = SentenceTransformer("all-MiniLM-L6-v2")
-        print(f"[TIME] Loaded Sentence-BERT lazily: {time.time() - t0:.2f}s")
+        with _emb_lock:
+            if _emb_model is None:
+                import time
+                t0 = time.time()
+                print("Loading sentence-transformer lazily...")
+                from sentence_transformers import SentenceTransformer
+                _emb_model = SentenceTransformer("all-MiniLM-L6-v2")
+                print(f"[TIME] Loaded Sentence-BERT lazily: {time.time() - t0:.2f}s")
     return _emb_model
 
 _colleges_df = None
+_colleges_lock = Lock()
+
 def get_colleges_df():
     global _colleges_df
     if _colleges_df is None:
-        import time
-        import pandas as pd
-        t0 = time.time()
-        try:
-            _colleges_df = pd.read_csv(os.path.join(DATA_DIR, "colleges.csv"))
-            _colleges_df.columns = [c.strip().lower() for c in _colleges_df.columns]
-            print(f"[TIME] Loaded Colleges Dataset lazily: {time.time() - t0:.2f}s")
-        except Exception as e:
-            print("⚠️ Could not load colleges dataset:", e)
-            _colleges_df = pd.DataFrame()
+        with _colleges_lock:
+            if _colleges_df is None:
+                import time
+                import pandas as pd
+                t0 = time.time()
+                try:
+                    _colleges_df = pd.read_csv(os.path.join(DATA_DIR, "colleges.csv"))
+                    _colleges_df.columns = [c.strip().lower() for c in _colleges_df.columns]
+                    print(f"[TIME] Loaded Colleges Dataset lazily: {time.time() - t0:.2f}s")
+                except Exception as e:
+                    print("⚠️ Could not load colleges dataset:", e)
+                    _colleges_df = pd.DataFrame()
     return _colleges_df
 
 print(f"[TIME] Total app initialization (optimized): {time.time() - START_TIME:.2f}s")
@@ -2405,6 +2442,67 @@ def get_counseling_feedback():
     return jsonify({"feedback": feedback}), 200
 
 
+# ================== REGISTRATION ==================
+@app.route("/register", methods=["POST"])
+def register():
+    try:
+        data = request.get_json()
+        print(f"[DEBUG] Incoming registration request data: {data}")
+
+        if not data:
+            return jsonify({"error": "No JSON payload provided"}), 400
+
+        required_fields = ["name", "email", "phone", "age", "gender", "location"]
+        
+        # Validation rules
+        for field in required_fields:
+            if field not in data:
+                return jsonify({"error": f"Missing required field: {field}"}), 400
+            if not str(data[field]).strip():
+                return jsonify({"error": f"Field '{field}' cannot be empty"}), 400
+
+        email = str(data["email"]).strip()
+        if "@" not in email or "." not in email:
+            return jsonify({"error": "Email is in an invalid format"}), 400
+
+        try:
+            age = float(data["age"])
+        except ValueError:
+            return jsonify({"error": "Age must be numeric"}), 400
+
+        name = str(data["name"]).strip()
+        phone = str(data["phone"]).strip()
+        gender = str(data["gender"]).strip()
+        location = str(data["location"]).strip()
+        
+        # Append safe record to CSV 
+        import csv
+        with open(CSV_PATH, mode="a", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow([name, email, phone, age, gender, location])
+            
+        print(f"[INFO] User {email} successfully saved to {CSV_PATH}")
+
+        # Also store to users_db context to keep integrated existing logic un-broken
+        now_ts = datetime.utcnow().isoformat() + "Z"
+        if email not in users_db:
+            users_db[email] = {
+                "name": name,
+                "email": email,
+                "phone": phone,
+                "age": age,
+                "gender": gender,
+                "location": location,
+                "created_at": now_ts
+            }
+            _save_json_db(USERS_PATH, users_db)
+
+        return jsonify({"message": "User successfully registered!"}), 201
+
+    except Exception as e:
+        print(f"[ERROR] Exception during registration: {str(e)}")
+        return jsonify({"error": "Internal server error"}), 500
+
 # ================== Run ==================
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(debug=False, use_reloader=False)

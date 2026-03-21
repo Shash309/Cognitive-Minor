@@ -247,9 +247,12 @@
 }
 
 /* ── Counselor Extra Fields ── */
-.counselor-fields {
+.counselor-fields,
+.student-fields-grid {
   width: 100%;
   animation: slideDown 0.3s var(--ease-out-expo);
+  display: flex;
+  flex-direction: column;
 }
 
 @keyframes slideDown {
@@ -261,12 +264,14 @@
   to {
     opacity: 1;
     transform: translateY(0);
-    max-height: 200px;
+    max-height: 250px;
   }
 }
 
 .counselor-fields input,
-.counselor-fields select {
+.counselor-fields select,
+.student-fields-grid input,
+.student-fields-grid select {
   width: 100%;
 }
 

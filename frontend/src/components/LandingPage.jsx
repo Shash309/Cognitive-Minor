@@ -17,8 +17,10 @@ const LandingPage = ({ onLogin }) => {
     const form = e.target;
 
     const email = form.email.value;
-    const password = form.password.value;
     const name = form.name ? form.name.value : 'User';
+
+    // We only strictly require password if the form actually has it displayed
+    const password = form.password ? form.password.value : '';
 
     if (selectedRole === 'counselor') {
       const apiBase = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000';
@@ -61,21 +63,49 @@ const LandingPage = ({ onLogin }) => {
       return;
     }
 
-    // Student auth — existing localStorage logic
-    const users = JSON.parse(localStorage.getItem('career_app_users') || '{}');
-
+    // Student auth
     if (type === 'register') {
-      if (users[email]) {
-        alert(t('User already exists. Please sign in.'));
-        return;
+      const phone = form.phone ? form.phone.value : '';
+      const age = form.age ? form.age.value : '';
+      const gender = form.gender ? form.gender.value : '';
+      const location = form.location ? form.location.value : '';
+
+      const apiBase = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000';
+
+      try {
+        const res = await fetch(`${apiBase}/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, phone, age, gender, location })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          console.error("Backend Error Response:", data);
+          alert(data.error || 'Server validation failed for Registration');
+          return;
+        }
+
+        console.log("Registration Success Response:", data);
+
+        // Keep local cache up to date for backwards UI compatibility
+        const users = JSON.parse(localStorage.getItem('career_app_users') || '{}');
+        users[email] = { name, email, role: 'student' };
+        localStorage.setItem('career_app_users', JSON.stringify(users));
+
+        onLogin({ email, name, role: 'student' });
+
+      } catch (err) {
+        console.error("Registration fetch error:", err);
+        alert("Failed to reach the backend server. Make sure Flask is running!");
       }
-      users[email] = { name, email, password };
-      localStorage.setItem('career_app_users', JSON.stringify(users));
-      onLogin({ email, name, role: 'student' });
     } else {
+      // Student Login uses local storage sync temporarily
+      const users = JSON.parse(localStorage.getItem('career_app_users') || '{}');
       const user = users[email];
-      if (!user || user.password !== password) {
-        alert(t('Invalid credentials. Please try again.'));
+      if (!user) {
+        alert(t('User not found. Please register first.'));
         return;
       }
       onLogin({ email, name: user.name, role: 'student' });
@@ -112,9 +142,29 @@ const LandingPage = ({ onLogin }) => {
               </button>
             </div>
 
-            <input type="text" name="name" placeholder={t('landing.name')} required />
-            <input type="email" name="email" placeholder={t('landing.email')} required />
-            <input type="password" name="password" placeholder={t('landing.password')} required />
+            <input type="text" name="name" placeholder={t('landing.name') || 'Name'} required />
+            <input type="email" name="email" placeholder={t('landing.email') || 'Email'} required />
+
+            {/* Render password strictly for counselor so as not to demand it from students */}
+            {selectedRole === 'counselor' && (
+              <input type="password" name="password" placeholder={t('landing.password') || 'Password'} required />
+            )}
+
+            {selectedRole === 'student' && (
+              <div className="student-fields-grid">
+                <input type="text" name="phone" placeholder="Phone Number" required />
+                <input type="number" name="age" placeholder="Age" min="10" max="100" required />
+
+                <select name="gender" className="specialization-select" required>
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+
+                <input type="text" name="location" placeholder="Location (City)" required />
+              </div>
+            )}
 
             {selectedRole === 'counselor' && (
               <div className="counselor-fields">
