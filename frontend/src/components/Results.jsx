@@ -11,6 +11,7 @@ const Results = () => {
   const [processingIndex, setProcessingIndex] = useState(0);
   const [counselorRequested, setCounselorRequested] = useState(false);
   const [requestingCounselor, setRequestingCounselor] = useState(false);
+  const isCounselorEnabled = import.meta.env.VITE_ENABLE_COUNSELLOR_FEATURE === "true";
 
   const processingSteps = [
     'Analyzing psychological traits',
@@ -219,27 +220,29 @@ const Results = () => {
           </div>
 
           {/* Talk to a Counselor */}
-          <div className="talk-to-counselor">
-            <div className="ttc-icon">🧠</div>
-            <div className="ttc-title">Talk to a Counselor</div>
-            <div className="ttc-desc">
-              Get personalized guidance from an expert career counselor who can interpret your AI results and provide real-world advice.
-            </div>
-            {counselorRequested ? (
-              <div className="ttc-success">
-                <i className="fas fa-check-circle" /> Request sent! A counselor will review your profile.
+          {isCounselorEnabled && (
+            <div className="talk-to-counselor">
+              <div className="ttc-icon">🧠</div>
+              <div className="ttc-title">Talk to a Counselor</div>
+              <div className="ttc-desc">
+                Get personalized guidance from an expert career counselor who can interpret your AI results and provide real-world advice.
               </div>
-            ) : (
-              <button
-                className="ttc-btn"
-                onClick={handleCounselorRequest}
-                disabled={requestingCounselor}
-              >
-                <i className="fas fa-hand-paper" />
-                {requestingCounselor ? 'Sending...' : 'Request Counselor Help'}
-              </button>
-            )}
-          </div>
+              {counselorRequested ? (
+                <div className="ttc-success">
+                  <i className="fas fa-check-circle" /> Request sent! A counselor will review your profile.
+                </div>
+              ) : (
+                <button
+                  className="ttc-btn"
+                  onClick={handleCounselorRequest}
+                  disabled={requestingCounselor}
+                >
+                  <i className="fas fa-hand-paper" />
+                  {requestingCounselor ? 'Sending...' : 'Request Counselor Help'}
+                </button>
+              )}
+            </div>
+          )}
 
           <button
             type="button"

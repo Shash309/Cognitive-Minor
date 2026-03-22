@@ -11,6 +11,13 @@ from uuid import uuid4
 
 print(f"[TIME] Stdlib imports loaded: {time.time() - START_TIME:.2f}s")
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+COUNSELLOR_FEATURE_ENABLED = os.environ.get("ENABLE_COUNSELLOR_FEATURE", "false").lower() == "true"
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
@@ -2219,6 +2226,7 @@ def reset_progress():
 
 @app.route("/api/counselor/register", methods=["POST"])
 def counselor_register():
+    if not COUNSELLOR_FEATURE_ENABLED: return jsonify({"error": "Feature disabled"}), 404
     data = request.json or {}
     email = (data.get("email") or "").strip().lower()
     password = data.get("password", "")
@@ -2250,6 +2258,7 @@ def counselor_register():
 
 @app.route("/api/counselor/login", methods=["POST"])
 def counselor_login():
+    if not COUNSELLOR_FEATURE_ENABLED: return jsonify({"error": "Feature disabled"}), 404
     data = request.json or {}
     email = (data.get("email") or "").strip().lower()
     password = data.get("password", "")
@@ -2272,6 +2281,7 @@ def counselor_login():
 @app.route("/api/counselor/students", methods=["GET"])
 def counselor_students():
     """Return list of students who requested counseling, with summary data."""
+    if not COUNSELLOR_FEATURE_ENABLED: return jsonify({"error": "Feature disabled"}), 404
     students = []
     for student_email, req in counseling_requests_db.items():
         # Gather student data
@@ -2312,6 +2322,7 @@ def counselor_students():
 @app.route("/api/counselor/student-report", methods=["GET"])
 def counselor_student_report():
     """Return detailed career intelligence report for a student."""
+    if not COUNSELLOR_FEATURE_ENABLED: return jsonify({"error": "Feature disabled"}), 404
     student_email = request.args.get("student_email", "").strip().lower()
     if not student_email:
         return jsonify({"error": "student_email is required"}), 400
@@ -2376,6 +2387,7 @@ def counselor_student_report():
 @app.route("/api/counseling/request", methods=["POST"])
 def counseling_request():
     """Student requests counseling help."""
+    if not COUNSELLOR_FEATURE_ENABLED: return jsonify({"error": "Feature disabled"}), 404
     data = request.json or {}
     student_email = (data.get("student_email") or "").strip().lower()
     if not student_email:
@@ -2393,6 +2405,7 @@ def counseling_request():
 @app.route("/api/counseling/messages", methods=["GET"])
 def get_counseling_messages():
     """Get chat messages for a student."""
+    if not COUNSELLOR_FEATURE_ENABLED: return jsonify({"error": "Feature disabled"}), 404
     student_email = request.args.get("student_email", "").strip().lower()
     if not student_email:
         return jsonify({"error": "student_email is required"}), 400
@@ -2403,6 +2416,7 @@ def get_counseling_messages():
 @app.route("/api/counseling/messages", methods=["POST"])
 def post_counseling_message():
     """Send a chat message (from student or counselor)."""
+    if not COUNSELLOR_FEATURE_ENABLED: return jsonify({"error": "Feature disabled"}), 404
     data = request.json or {}
     student_email = (data.get("student_email") or "").strip().lower()
     sender_role = data.get("sender_role", "student")
@@ -2426,6 +2440,7 @@ def post_counseling_message():
 @app.route("/api/counseling/feedback", methods=["GET"])
 def get_counseling_feedback():
     """Get counselor messages visible to a student (feedback view)."""
+    if not COUNSELLOR_FEATURE_ENABLED: return jsonify({"error": "Feature disabled"}), 404
     student_email = request.args.get("student_email", "").strip().lower()
     if not student_email:
         return jsonify({"error": "student_email is required"}), 400

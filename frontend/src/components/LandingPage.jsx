@@ -7,6 +7,8 @@ const LandingPage = ({ onLogin }) => {
   const [selectedRole, setSelectedRole] = useState('student');
   const { t } = useTranslation();
 
+  const isCounselorEnabled = import.meta.env.VITE_ENABLE_COUNSELLOR_FEATURE === "true";
+
   // Counselor extra fields
   const [experience, setExperience] = useState('');
   const [specialization, setSpecialization] = useState('');
@@ -131,15 +133,17 @@ const LandingPage = ({ onLogin }) => {
                 <span className="role-label">Student</span>
                 <span className="role-desc">AI-powered career recommendations</span>
               </button>
-              <button
-                type="button"
-                className={`role-card ${selectedRole === 'counselor' ? 'selected' : ''}`}
-                onClick={() => setSelectedRole('counselor')}
-              >
-                <span className="role-icon">🧠</span>
-                <span className="role-label">Counselor</span>
-                <span className="role-desc">Guide students with AI insights</span>
-              </button>
+              {isCounselorEnabled && (
+                <button
+                  type="button"
+                  className={`role-card ${selectedRole === 'counselor' ? 'selected' : ''}`}
+                  onClick={() => setSelectedRole('counselor')}
+                >
+                  <span className="role-icon">🧠</span>
+                  <span className="role-label">Counselor</span>
+                  <span className="role-desc">Guide students with AI insights</span>
+                </button>
+              )}
             </div>
 
             <input type="text" name="name" placeholder={t('landing.name') || 'Name'} required />
@@ -215,14 +219,16 @@ const LandingPage = ({ onLogin }) => {
                 <span className="role-icon">🎓</span>
                 <span className="role-label">Student</span>
               </button>
-              <button
-                type="button"
-                className={`role-card ${selectedRole === 'counselor' ? 'selected' : ''}`}
-                onClick={() => setSelectedRole('counselor')}
-              >
-                <span className="role-icon">🧠</span>
-                <span className="role-label">Counselor</span>
-              </button>
+              {isCounselorEnabled && (
+                <button
+                  type="button"
+                  className={`role-card ${selectedRole === 'counselor' ? 'selected' : ''}`}
+                  onClick={() => setSelectedRole('counselor')}
+                >
+                  <span className="role-icon">🧠</span>
+                  <span className="role-label">Counselor</span>
+                </button>
+              )}
             </div>
 
             <input type="email" name="email" placeholder={t('landing.email')} required />

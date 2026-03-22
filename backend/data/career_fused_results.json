@@ -95,5 +95,38 @@
     "academic_percent": null,
     "skills_vector": {},
     "last_updated": "2026-03-22T19:12:29.269283Z"
+  },
+  "trump44@gmail.com": {
+    "quiz_scores": {},
+    "psych_scores": {
+      "Data Scientist": 97,
+      "Researcher": 95,
+      "Software Engineer": 100,
+      "Manager": 100,
+      "Entrepreneur": 89,
+      "Designer": 100,
+      "Psychologist": 100,
+      "Civil Servant": 100,
+      "Doctor": 100,
+      "Teacher": 100,
+      "Artist": 100
+    },
+    "voice_scores": {},
+    "final_scores": {
+      "Artist": 100.0,
+      "Civil Servant": 100.0,
+      "Designer": 100.0,
+      "Doctor": 100.0,
+      "Manager": 100.0,
+      "Psychologist": 100.0,
+      "Software Engineer": 100.0,
+      "Teacher": 100.0,
+      "Data Scientist": 97.0,
+      "Researcher": 95.0,
+      "Entrepreneur": 89.0
+    },
+    "academic_percent": null,
+    "skills_vector": {},
+    "last_updated": "2026-03-22T19:50:27.343275Z"
   }
 }

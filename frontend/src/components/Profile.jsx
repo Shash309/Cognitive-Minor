@@ -29,6 +29,7 @@ const Profile = () => {
   const [showResultBanner, setShowResultBanner] = useState(
     Boolean(location.state && location.state.highlightLatestResult)
   );
+  const isCounselorEnabled = import.meta.env.VITE_ENABLE_COUNSELLOR_FEATURE === "true";
   const latestSessionRef = useRef(null);
 
   useEffect(() => {
@@ -583,7 +584,7 @@ const Profile = () => {
       )}
 
       {/* Card 7 – Counselor Feedback */}
-      {feedbackData.length > 0 && (
+      {isCounselorEnabled && feedbackData.length > 0 && (
         <div className="profile-card-full">
           <div className="profile-card-title">
             <i className="fas fa-user-tie" style={{ marginRight: '0.4rem' }} /> Counselor Feedback

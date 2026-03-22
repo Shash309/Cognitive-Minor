@@ -46,7 +46,8 @@ function App() {
     setUser(null);
   };
 
-  const isCounselor = user?.role === 'counselor';
+  const isCounselorEnabled = import.meta.env.VITE_ENABLE_COUNSELLOR_FEATURE === "true";
+  const isCounselor = user?.role === 'counselor' && isCounselorEnabled;
   const defaultRoute = isCounselor ? '/counselor' : '/dashboard/psychology';
 
   return (
@@ -93,11 +94,13 @@ function App() {
           </Route>
 
           {/* ─── Counselor Routes ─── */}
-          <Route path="/counselor" element={isLoggedIn && isCounselor ? <CounselorDashboard user={user} onLogout={handleLogout} /> : <Navigate to="/" replace />}>
-            <Route index element={<CounselorHome />} />
-            <Route path="student/:studentEmail" element={<StudentReport />} />
-            <Route path="chat/:studentEmail" element={<CounselorChat />} />
-          </Route>
+          {isCounselorEnabled && (
+            <Route path="/counselor" element={isLoggedIn && isCounselor ? <CounselorDashboard user={user} onLogout={handleLogout} /> : <Navigate to="/" replace />}>
+              <Route index element={<CounselorHome />} />
+              <Route path="student/:studentEmail" element={<StudentReport />} />
+              <Route path="chat/:studentEmail" element={<CounselorChat />} />
+            </Route>
+          )}
         </Routes>
       </BrowserRouter>
     </div>
