@@ -2475,11 +2475,22 @@ def register():
         gender = str(data["gender"]).strip()
         location = str(data["location"]).strip()
         
+        # Compute new user ID
+        max_id = 0
+        for user_data in users_db.values():
+            uid = user_data.get("id")
+            if uid:
+                try:
+                    max_id = max(max_id, int(uid))
+                except ValueError:
+                    pass
+        new_id = max_id + 1
+
         # Append safe record to CSV 
         import csv
         with open(CSV_PATH, mode="a", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
-            writer.writerow([name, email, phone, age, gender, location])
+            writer.writerow([new_id, name, email, phone, age, gender, location])
             
         print(f"[INFO] User {email} successfully saved to {CSV_PATH}")
 
@@ -2487,6 +2498,7 @@ def register():
         now_ts = datetime.utcnow().isoformat() + "Z"
         if email not in users_db:
             users_db[email] = {
+                "id": new_id,
                 "name": name,
                 "email": email,
                 "phone": phone,

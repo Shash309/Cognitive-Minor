@@ -79,15 +79,12 @@ def sync_users_to_csv():
     if not users:
         return
     csv_filepath = get_file_path('users.csv')
-    fields = ['id', 'name', 'email', 'phone', 'age', 'gender', 'location', 'traits', 'personality_type', 'created_at']
+    fields = ['id', 'name', 'email', 'phone', 'age', 'gender', 'location']
     with open(csv_filepath, 'w', newline='', encoding='utf-8') as f:
         writer = csv.DictWriter(f, fieldnames=fields)
         writer.writeheader()
         for user in users:
             row = {}
             for k in fields:
-                if k == 'traits':
-                    row[k] = ",".join(user.get('traits', []))
-                else:
-                    row[k] = user.get(k, '')
+                row[k] = user.get(k, '')
             writer.writerow(row)
