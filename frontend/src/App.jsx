@@ -18,6 +18,8 @@ import CounselorDashboard from './components/CounselorDashboard';
 import CounselorHome from './components/CounselorHome';
 import StudentReport from './components/StudentReport';
 import CounselorChat from './components/CounselorChat';
+import AdminLogin from './components/AdminLogin';
+import AdminDashboard from './components/AdminDashboard';
 import './App.css';
 
 function App() {
@@ -55,6 +57,11 @@ function App() {
         <Routes>
           <Route path="/" element={!isLoggedIn ? <LandingPage onLogin={handleLogin} /> : <Navigate to={defaultRoute} replace />} />
           <Route path="/login" element={!isLoggedIn ? <LandingPage onLogin={handleLogin} /> : <Navigate to={defaultRoute} replace />} />
+          
+          {/* ─── Admin Routes ─── */}
+          <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
+          <Route path="/admin/login" element={<AdminLogin onLogin={handleLogin} />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard user={user} onLogout={handleLogout} />} />
 
           {/* ─── Student Routes ─── */}
           <Route path="/dashboard" element={isLoggedIn && !isCounselor ? <Dashboard user={user} onLogout={handleLogout} /> : <Navigate to="/" replace />}>

@@ -62,5 +62,38 @@
         "voice": 0.24991531067535053
       }
     }
+  ],
+  "swastik3370@gmail.com": [
+    {
+      "timestamp": "2026-03-23T21:32:01.323745Z",
+      "psych_id": "2026-03-23T21:27:36.287862Z",
+      "voice_id": "2026-03-23T21:29:23.684706Z",
+      "quiz_id": "03327ad2-2e95-4f52-a9fd-0d8490196289",
+      "final_scores": {
+        "Software Engineer": 69.02163436572079,
+        "Designer": 63.50209120345599,
+        "Engineering": 58.66289203304453,
+        "Teacher": 58.233436366748684,
+        "Artist": 57.982548041191194,
+        "Manager": 57.982548041191194,
+        "Psychologist": 57.982548041191194,
+        "Civil Servant": 55.222776460058796,
+        "Doctor": 55.222776460058796,
+        "Data Scientist": 54.15674489578279,
+        "Entrepreneur": 54.07376563884586,
+        "Researcher": 53.44605718626546,
+        "Design & Creative": 35.82435849138166,
+        "Healthcare": 32.674215933910915,
+        "Business & Finance": 32.28044811422708,
+        "Research & Academics": 31.09914465517555
+      },
+      "top_career": "Software Engineer",
+      "confidence_score": 36.82975646108675,
+      "weights": {
+        "quiz": 0.3937678196838426,
+        "psych": 0.35534385475866664,
+        "voice": 0.25088832555749063
+      }
+    }
   ]
 }

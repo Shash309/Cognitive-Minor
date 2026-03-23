@@ -2503,6 +2503,9 @@ def register():
         print(f"[ERROR] Exception during registration: {str(e)}")
         return jsonify({"error": "Internal server error"}), 500
 
+from routes.admin import admin_bp
+app.register_blueprint(admin_bp, url_prefix="/api/admin")
+
 # ================== Run ==================
 if __name__ == "__main__":
     app.run(debug=False, use_reloader=False)

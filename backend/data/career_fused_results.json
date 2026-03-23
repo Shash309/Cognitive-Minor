@@ -77,5 +77,139 @@
     "academic_percent": null,
     "skills_vector": {},
     "last_updated": "2026-03-21T20:39:54.478593Z"
+  },
+  "mashallah@gmail.com": {
+    "quiz_scores": {},
+    "psych_scores": {},
+    "voice_scores": {},
+    "final_scores": {},
+    "academic_percent": null,
+    "skills_vector": {},
+    "last_updated": "2026-03-21T22:47:09.397862Z"
+  },
+  "test@gmail.com": {
+    "quiz_scores": {},
+    "psych_scores": {},
+    "voice_scores": {},
+    "final_scores": {},
+    "academic_percent": null,
+    "skills_vector": {},
+    "last_updated": "2026-03-22T19:12:29.269283Z"
+  },
+  "trump44@gmail.com": {
+    "quiz_scores": {},
+    "psych_scores": {
+      "Data Scientist": 97,
+      "Researcher": 95,
+      "Software Engineer": 100,
+      "Manager": 100,
+      "Entrepreneur": 89,
+      "Designer": 100,
+      "Psychologist": 100,
+      "Civil Servant": 100,
+      "Doctor": 100,
+      "Teacher": 100,
+      "Artist": 100
+    },
+    "voice_scores": {},
+    "final_scores": {
+      "Artist": 100.0,
+      "Civil Servant": 100.0,
+      "Designer": 100.0,
+      "Doctor": 100.0,
+      "Manager": 100.0,
+      "Psychologist": 100.0,
+      "Software Engineer": 100.0,
+      "Teacher": 100.0,
+      "Data Scientist": 97.0,
+      "Researcher": 95.0,
+      "Entrepreneur": 89.0
+    },
+    "academic_percent": null,
+    "skills_vector": {},
+    "last_updated": "2026-03-22T19:50:27.343275Z"
+  },
+  "swastik3370@gmail.com": {
+    "quiz_scores": {
+      "Business & Finance": 5,
+      "Design & Creative": 14,
+      "Engineering": 72,
+      "Healthcare": 6,
+      "Research & Academics": 2
+    },
+    "psych_scores": {
+      "Data Scientist": 97,
+      "Researcher": 95,
+      "Software Engineer": 100,
+      "Manager": 100,
+      "Entrepreneur": 89,
+      "Designer": 100,
+      "Psychologist": 100,
+      "Civil Servant": 100,
+      "Doctor": 100,
+      "Teacher": 100,
+      "Artist": 100
+    },
+    "voice_scores": {
+      "Data Scientist": 0,
+      "Researcher": 0,
+      "Software Engineer": 55,
+      "Manager": 11,
+      "Entrepreneur": 11,
+      "Designer": 33,
+      "Psychologist": 11,
+      "Civil Servant": 0,
+      "Doctor": 0,
+      "Teacher": 12,
+      "Artist": 11
+    },
+    "final_scores": {
+      "Software Engineer": 69.02163436572079,
+      "Designer": 63.50209120345599,
+      "Engineering": 58.66289203304453,
+      "Teacher": 58.233436366748684,
+      "Artist": 57.982548041191194,
+      "Manager": 57.982548041191194,
+      "Psychologist": 57.982548041191194,
+      "Civil Servant": 55.222776460058796,
+      "Doctor": 55.222776460058796,
+      "Data Scientist": 54.15674489578279,
+      "Entrepreneur": 54.07376563884586,
+      "Researcher": 53.44605718626546,
+      "Design & Creative": 35.82435849138166,
+      "Healthcare": 32.674215933910915,
+      "Business & Finance": 32.28044811422708,
+      "Research & Academics": 31.09914465517555
+    },
+    "academic_percent": 90.0,
+    "skills_vector": {
+      "Computer Science": 0.5,
+      "Maths": 0.5,
+      "Coding": 0.5,
+      "Public Speaking": 0.5,
+      "Leadership": 0.5,
+      "Programming": 0.5,
+      "Problem Solving": 0.5,
+      "Creativity": 0.5,
+      "Communication": 0.5,
+      "Analysis": 0.5,
+      "Both": 0.5,
+      "Classroom": 0.5,
+      "Corporate Office": 0.5,
+      "Yes": 0.5,
+      "Flexible": 0.5,
+      "Balanced": 0.5,
+      "Engineer": 0.5
+    },
+    "last_updated": "2026-03-23T21:34:36.697487Z"
+  },
+  "admin@cognitive.com": {
+    "quiz_scores": {},
+    "psych_scores": {},
+    "voice_scores": {},
+    "final_scores": {},
+    "academic_percent": null,
+    "skills_vector": {},
+    "last_updated": "2026-03-23T21:29:48.590523Z"
   }
 }

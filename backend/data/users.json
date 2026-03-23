@@ -1062,5 +1062,46 @@
     "email": "cheppu21@gmail.com",
     "created_at": "2026-03-21T20:12:39.039012Z",
     "last_login": "2026-03-21T20:16:33.003776Z"
+  },
+  "trump44@gmail.com": {
+    "name": "Doland Trump",
+    "email": "trump44@gmail.com",
+    "phone": "+91 8976589731",
+    "age": 22.0,
+    "gender": "Male",
+    "location": "Delhi",
+    "created_at": "2026-03-21T22:39:39.550309Z"
+  },
+  "mashallah@gmail.com": {
+    "name": "Nadeem",
+    "email": "mashallah@gmail.com",
+    "phone": "+91 6398909669",
+    "age": 20.0,
+    "gender": "Male",
+    "location": "Dehradun",
+    "created_at": "2026-03-21T22:45:06.803240Z"
+  },
+  "admin@cognitive.com": {
+    "id": 999999,
+    "name": "System Administrator",
+    "email": "admin@cognitive.com",
+    "password": "scrypt:32768:8:1$2uG5bRSrbePhtoU4$914d916853fcf237ec2f5a83c832106ca52ef8a1a532529ce361fd38605e2123403715c11d1539bba657e7baca448ac7fdaaac45964759ac6ac1fec6c6ade679",
+    "role": "admin",
+    "phone": "-",
+    "age": 0,
+    "gender": "Other",
+    "location": "System",
+    "created_at": "2026-03-23T21:15:03.889616Z"
+  },
+  "swastik3370@gmail.com": {
+    "id": 1000000,
+    "name": "Swastik Pandey",
+    "email": "swastik3370@gmail.com",
+    "phone": "+91 7974488418",
+    "age": 21.0,
+    "gender": "Male",
+    "location": "Chennai",
+    "created_at": "2026-03-23T21:25:40.600763Z",
+    "last_login": "2026-03-23T21:32:01.317021Z"
   }
 }

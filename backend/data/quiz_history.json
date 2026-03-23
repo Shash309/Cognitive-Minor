@@ -72,5 +72,72 @@
         "confidence": 80.0
       }
     ]
+  },
+  "swastik3370@gmail.com": {
+    "last_taken": "2026-03-23T21:32:01.320595Z",
+    "academic_percent": 90.0,
+    "skills": {
+      "Computer Science": 0.5,
+      "Maths": 0.5,
+      "Coding": 0.5,
+      "Public Speaking": 0.5,
+      "Leadership": 0.5,
+      "Programming": 0.5,
+      "Problem Solving": 0.5,
+      "Creativity": 0.5,
+      "Communication": 0.5,
+      "Analysis": 0.5,
+      "Both": 0.5,
+      "Classroom": 0.5,
+      "Corporate Office": 0.5,
+      "Yes": 0.5,
+      "Flexible": 0.5,
+      "Balanced": 0.5,
+      "Engineer": 0.5
+    },
+    "skills_vector": {
+      "Computer Science": 0.5,
+      "Maths": 0.5,
+      "Coding": 0.5,
+      "Public Speaking": 0.5,
+      "Leadership": 0.5,
+      "Programming": 0.5,
+      "Problem Solving": 0.5,
+      "Creativity": 0.5,
+      "Communication": 0.5,
+      "Analysis": 0.5,
+      "Both": 0.5,
+      "Classroom": 0.5,
+      "Corporate Office": 0.5,
+      "Yes": 0.5,
+      "Flexible": 0.5,
+      "Balanced": 0.5,
+      "Engineer": 0.5
+    },
+    "quiz_scores": {
+      "Business & Finance": 5,
+      "Design & Creative": 14,
+      "Engineering": 72,
+      "Healthcare": 6,
+      "Research & Academics": 2
+    },
+    "stream": "Science",
+    "attempts": [
+      {
+        "id": "03327ad2-2e95-4f52-a9fd-0d8490196289",
+        "timestamp": "2026-03-23T21:32:01.320595Z",
+        "quiz_scores": {
+          "Business & Finance": 5,
+          "Design & Creative": 14,
+          "Engineering": 72,
+          "Healthcare": 6,
+          "Research & Academics": 2
+        },
+        "academic_percent": 90.0,
+        "stream": "Science",
+        "top_career": "Engineering",
+        "confidence": 72.0
+      }
+    ]
   }
 }
