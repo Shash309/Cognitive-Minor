@@ -247,6 +247,52 @@ def get_emb_model():
                 print(f"[TIME] Loaded Sentence-BERT lazily: {time.time() - t0:.2f}s")
     return _emb_model
 
+_voice_model = None
+_voice_encoder = None
+_voice_lock = Lock()
+
+def get_voice_assets():
+    global _voice_model, _voice_encoder
+    if _voice_model is None:
+        with _voice_lock:
+            if _voice_model is None:
+                import time
+                import joblib
+                t0 = time.time()
+                print("[VOICE MODEL] Loading model...")
+                try:
+                    _voice_model = joblib.load(os.path.join(BASE, "models", "voice_model_v2.pkl"))
+                    _voice_encoder = joblib.load(os.path.join(BASE, "models", "voice_label_encoder_v2.pkl"))
+                    print(f"[TIME] Loaded Voice Model lazily: {time.time() - t0:.2f}s")
+                except Exception as e:
+                    print("⚠️ Could not load voice model:", e)
+                    _voice_model = _voice_encoder = False
+    return _voice_model, _voice_encoder
+
+
+_psych_model = None
+_psych_encoder = None
+_psych_lock = Lock()
+
+def get_psych_assets():
+    global _psych_model, _psych_encoder
+    if _psych_model is None:
+        with _psych_lock:
+            if _psych_model is None:
+                import time
+                import joblib
+                t0 = time.time()
+                print("[PSYCH MODEL] Loading model...")
+                try:
+                    _psych_model = joblib.load(os.path.join(BASE, "models", "psych_model.pkl"))
+                    _psych_encoder = joblib.load(os.path.join(BASE, "models", "psych_label_encoder.pkl"))
+                    print(f"[TIME] Loaded Psych Model lazily: {time.time() - t0:.2f}s")
+                except Exception as e:
+                    print("⚠️ Could not load psych model:", e)
+                    _psych_model = _psych_encoder = False
+    return _psych_model, _psych_encoder
+
+
 _colleges_df = None
 _colleges_lock = Lock()
 
@@ -381,21 +427,7 @@ CAREER_TRAIT_WEIGHTS = {
     },
 }
 
-# ================== Voice Insight: Career Keyword Map ==================
-# Keys must match CAREER_TRAIT_WEIGHTS for fusion alignment
-CAREER_KEYWORD_MAP = {
-    "Data Scientist": ["data", "analytics", "machine learning", "python", "statistics", "research", "algorithm", "coding", "programming", "analysis", "science"],
-    "Researcher": ["research", "study", "academic", "papers", "discovery", "experiments", "science", "reading", "analysis", "investigate"],
-    "Software Engineer": ["software", "coding", "programming", "developer", "engineer", "tech", "computer", "build", "code", "apps", "technology"],
-    "Manager": ["manage", "lead", "team", "business", "leadership", "organize", "strategy", "corporate", "people"],
-    "Entrepreneur": ["startup", "business", "own", "found", "entrepreneur", "risk", "innovate", "create", "venture"],
-    "Designer": ["design", "creative", "art", "visual", "ui", "ux", "creativity", "aesthetic", "drawing"],
-    "Psychologist": ["psychology", "help", "people", "mental", "counsel", "understand", "therapy", "behavior", "mind"],
-    "Civil Servant": ["government", "public", "service", "policy", "civil", "administration", "society", "law"],
-    "Doctor": ["doctor", "medical", "health", "patient", "medicine", "hospital", "clinical", "biology", "heal"],
-    "Teacher": ["teach", "education", "students", "learning", "school", "share", "explain", "classroom"],
-    "Artist": ["art", "creative", "paint", "music", "draw", "express", "artist", "design", "imagination"],
-}
+# (Removed keyword map to use ML model for voice scoring)
 
 # Motivation / intent words (strong positive)
 MOTIVATION_WORDS = [
@@ -544,20 +576,51 @@ def _analyze_voice_text(text: str) -> dict:
 
 
 def _compute_voice_career_scores(transcribed_text: str, sentiment: float, confidence: float) -> dict:
-    """Compute 0–100 career alignment scores from voice transcript."""
-    text_lower = (transcribed_text or "").lower()
-    words = set(text_lower.split())
+    """Compute 0-100 career alignment scores from voice transcript using ML model."""
+    
+    if not transcribed_text or not str(transcribed_text).strip():
+        return {}
 
-    scores = {}
-    for career, keywords in CAREER_KEYWORD_MAP.items():
-        matches = sum(1 for kw in keywords if kw in text_lower)
-        raw = min(100.0, (matches / max(len(keywords), 1)) * 100) if keywords else 50.0
-        factor = 0.7 + 0.3 * max(0, min(1, sentiment))
-        factor *= 0.9 + 0.1 * (confidence / 100.0)
-        scores[career] = round(max(0.0, min(100.0, _safe_number(raw * factor, 50.0))))
+    voice_model, voice_encoder = get_voice_assets()
+    if not voice_model or not voice_encoder:
+        return {}
 
-    return scores
+    emb_model = get_emb_model()
+    if not emb_model:
+        return {}
 
+    try:
+        print("[VOICE INPUT]:", transcribed_text)
+
+        # Generate embeddings
+        embedding = emb_model.encode([str(transcribed_text).strip()])
+        
+        # Predict probabilities
+        probas = voice_model.predict_proba(embedding)[0]
+        
+        # Get labels
+        labels = voice_encoder.classes_
+        
+        scores = {
+            labels[i]: round(float(probas[i] * 100.0), 2)
+            for i in range(len(labels))
+        }
+
+        # 🔥 Debug output AFTER scores exist
+        print("[VOICE OUTPUT]:", scores)
+
+        # 🔥 Uncertainty detection
+        top_career = max(scores, key=scores.get)
+        top_score = scores[top_career]
+
+        if top_career == "Uncertain" or top_score < 35:
+            print("[VOICE] Uncertain input detected")
+
+        return scores
+
+    except Exception as e:
+        print("Voice scoring ML error:", e)
+        return {}
 
 def _get_latest_voice_scores(email: str | None):
     """Return latest voice career scores for a user."""
@@ -803,15 +866,45 @@ def _psych_alignment_for_career(profile: dict, career: str) -> float:
 
 def _compute_psych_career_scores(profile: dict) -> dict:
     """
-    Return pure psychological alignment scores (0–100) for all careers.
+    Compute psychological alignment scores (0–100) using ML model.
+    Falls back to pure trait weights if model fails.
     """
+    psych_model, psych_encoder = get_psych_assets()
+    if psych_model and psych_encoder:
+        try:
+            # Extract features in correct order: openness, conscientiousness, extraversion, agreeableness, neuroticism
+            features = [
+                _safe_number(profile.get("openness", 50.0), 50.0),
+                _safe_number(profile.get("conscientiousness", 50.0), 50.0),
+                _safe_number(profile.get("extraversion", 50.0), 50.0),
+                _safe_number(profile.get("agreeableness", 50.0), 50.0),
+                _safe_number(profile.get("neuroticism", 50.0), 50.0)
+            ]
+            import numpy as np
+            feature_array = np.array([features])
+            
+            probas = psych_model.predict_proba(feature_array)[0]
+            decoded_classes = psych_encoder.inverse_transform(psych_model.classes_)
+            
+            scores: dict[str, float] = {}
+            for idx, cls in enumerate(decoded_classes):
+                prob_score = float(probas[idx] * 100.0)
+                scores[str(cls)] = round(max(0.0, min(100.0, prob_score)))
+            
+            sample = {k: scores[k] for k in list(scores.keys())[:3]}
+            print("[ML] DEBUG_PSYCH_SCORES_SAMPLE", sample)
+            return scores
+        except Exception as e:
+            print("⚠️ Psych scoring ML error:", e)
+
+    # Fallback to rule-based pure trait weights
     scores: dict[str, float] = {}
     for career in CAREER_TRAIT_WEIGHTS.keys():
         val = _psych_alignment_for_career(profile, career)
         scores[career] = round(max(0.0, min(100.0, _safe_number(val, 50.0))))
-    # Temporary debug: show a small sample in logs for verification
+    
     sample = {k: scores[k] for k in list(scores.keys())[:3]}
-    print("DEBUG_PSYCH_SCORES_SAMPLE", sample)
+    print("[FALLBACK] DEBUG_PSYCH_SCORES_SAMPLE", sample)
     return scores
 
 

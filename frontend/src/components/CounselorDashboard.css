@@ -195,7 +195,7 @@
     font-size: 0.72rem;
     padding: 3px 10px;
     border-radius: 20px;
-    background: rgba(220, 38, 38, 0.08);
+    background: rgba(139, 92, 246, 0.08);
     color: var(--primary);
     font-weight: 500;
 }
@@ -478,7 +478,7 @@
 
 .sr-consult-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(220, 38, 38, 0.25);
+    box-shadow: 0 8px 28px rgba(139, 92, 246, 0.25);
 }
 
 /* ── Chat Page ── */
@@ -612,7 +612,7 @@
 
 .chat-input-area input:focus {
     outline: none;
-    border-color: rgba(220, 38, 38, 0.3);
+    border-color: rgba(139, 92, 246, 0.3);
 }
 
 .chat-send-btn {
@@ -636,7 +636,7 @@
 
 .chat-send-btn:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.25);
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.25);
 }
 
 .chat-empty {
@@ -728,7 +728,7 @@
 
 .ttc-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(220, 38, 38, 0.25);
+    box-shadow: 0 8px 28px rgba(139, 92, 246, 0.25);
 }
 
 .ttc-btn:disabled {

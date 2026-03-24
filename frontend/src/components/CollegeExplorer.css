@@ -71,8 +71,8 @@
 
 .state-dropdown:focus {
   outline: none;
-  border-color: rgba(220, 38, 38, 0.25);
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.06);
+  border-color: rgba(139, 92, 246, 0.25);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.06);
 }
 
 .results-container {

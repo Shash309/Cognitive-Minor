@@ -128,5 +128,59 @@
     "academic_percent": null,
     "skills_vector": {},
     "last_updated": "2026-03-22T19:50:27.343275Z"
+  },
+  "sherlock221b@gmail.com": {
+    "quiz_scores": {},
+    "psych_scores": {
+      "Athlete": 0,
+      "Data Scientist": 0,
+      "Designer": 0,
+      "Doctor": 0,
+      "Entrepreneur": 0,
+      "Lawyer": 0,
+      "Manager": 0,
+      "Psychologist": 2,
+      "Software Engineer": 0,
+      "Teacher": 98
+    },
+    "voice_scores": {
+      "Actor": 0.87,
+      "Artist": 0.25,
+      "Athlete": 0.2,
+      "Civil Servant": 0.73,
+      "Content Creator": 0.4,
+      "Data Scientist": 3.0,
+      "Designer": 2.89,
+      "Doctor": 0.38,
+      "Entrepreneur": 1.14,
+      "Lawyer": 0.95,
+      "Manager": 2.0,
+      "Musician": 0.43,
+      "Psychologist": 1.2,
+      "Software Engineer": 83.96,
+      "Teacher": 0.88,
+      "Uncertain": 0.73
+    },
+    "final_scores": {
+      "Teacher": 60.68131196514426,
+      "Software Engineer": 32.261913585322155,
+      "Actor": 31.121631557326378,
+      "Civil Servant": 31.067836084459,
+      "Uncertain": 31.067836084459,
+      "Musician": 30.95256007117176,
+      "Content Creator": 30.941032469843034,
+      "Artist": 30.883394463199416,
+      "Psychologist": 1.692597297900694,
+      "Data Scientist": 1.1527601328723973,
+      "Designer": 1.1104922613337427,
+      "Manager": 0.7685067552482648,
+      "Entrepreneur": 0.43804885049151093,
+      "Lawyer": 0.36504070874292577,
+      "Doctor": 0.14601628349717033,
+      "Athlete": 0.0768506755248265
+    },
+    "academic_percent": null,
+    "skills_vector": {},
+    "last_updated": "2026-03-24T18:49:45.503851Z"
   }
 }

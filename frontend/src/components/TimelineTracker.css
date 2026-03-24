@@ -69,8 +69,8 @@
 }
 
 .search-box:focus {
-    border-color: rgba(220, 38, 38, 0.25);
-    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.05);
+    border-color: rgba(139, 92, 246, 0.25);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.05);
 }
 
 .search-box-container i {
@@ -122,12 +122,12 @@
     top: 22px;
     border-radius: 50%;
     z-index: 2;
-    box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.08);
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.08);
     transition: box-shadow 0.3s var(--ease-apple);
 }
 
 .timeline-dot:hover {
-    box-shadow: 0 0 0 6px rgba(220, 38, 38, 0.12);
+    box-shadow: 0 0 0 6px rgba(139, 92, 246, 0.12);
 }
 
 .timeline-item.left .timeline-dot {
@@ -195,10 +195,10 @@
     font-weight: 600;
     letter-spacing: 0.03em;
     text-transform: uppercase;
-    background: rgba(220, 38, 38, 0.04);
+    background: rgba(139, 92, 246, 0.04);
     color: var(--primary);
     margin-bottom: 0.3rem;
-    border: 1px solid rgba(220, 38, 38, 0.08);
+    border: 1px solid rgba(139, 92, 246, 0.08);
     position: relative;
     z-index: 1;
 }
@@ -317,7 +317,7 @@
 .btn-apply:hover {
     background: var(--primary-hover);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
 }
 
 .btn-apply:active {

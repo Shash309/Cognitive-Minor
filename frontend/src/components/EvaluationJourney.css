@@ -97,13 +97,13 @@
 }
 
 .eval-step.active {
-  border-color: rgba(220, 38, 38, 0.2);
-  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.06);
+  border-color: rgba(139, 92, 246, 0.2);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.06);
 }
 
 .eval-step.active .eval-step-index {
-  background: rgba(220, 38, 38, 0.08);
-  border-color: rgba(220, 38, 38, 0.18);
+  background: rgba(139, 92, 246, 0.08);
+  border-color: rgba(139, 92, 246, 0.18);
   color: var(--primary);
 }
 

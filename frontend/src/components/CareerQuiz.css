@@ -64,7 +64,7 @@
   height: 100%;
   border-radius: 999px;
   transition: width 0.8s var(--ease-out-expo);
-  box-shadow: 0 0 10px rgba(220, 38, 38, 0.15);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.15);
 }
 
 .quiz-top-nav {
@@ -97,14 +97,14 @@
   color: white;
   border-color: var(--primary);
   transform: scale(1.18);
-  box-shadow: 0 0 16px rgba(220, 38, 38, 0.2);
+  box-shadow: 0 0 16px rgba(139, 92, 246, 0.2);
   z-index: 2;
 }
 
 .nav-item-top.answered {
-  background: rgba(220, 38, 38, 0.07);
+  background: rgba(139, 92, 246, 0.07);
   color: var(--primary);
-  border-color: rgba(220, 38, 38, 0.15);
+  border-color: rgba(139, 92, 246, 0.15);
 }
 
 .question-content {
@@ -184,7 +184,7 @@
 .option-card.selected {
   background: rgba(248, 113, 113, 0.1);
   border: 2px solid var(--accent-primary);
-  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.08), 0 8px 20px rgba(220, 38, 38, 0.08);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.08), 0 8px 20px rgba(139, 92, 246, 0.08);
 }
 
 .option-icon {
@@ -261,7 +261,7 @@
 .btn-submit {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: white;
-  box-shadow: 0 4px 16px rgba(220, 38, 38, 0.18);
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.18);
 }
 
 .btn-next::before,
@@ -280,7 +280,7 @@
 .btn-next:hover,
 .btn-submit:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(220, 38, 38, 0.25);
+  box-shadow: 0 8px 28px rgba(139, 92, 246, 0.25);
 }
 
 .btn-next:active,
@@ -351,9 +351,9 @@
 }
 
 .quiz-badge.trait {
-  border-color: rgba(220, 38, 38, 0.12);
+  border-color: rgba(139, 92, 246, 0.12);
   color: var(--primary);
-  background: rgba(220, 38, 38, 0.04);
+  background: rgba(139, 92, 246, 0.04);
 }
 
 .quiz-badge.skill {
@@ -404,7 +404,7 @@
 }
 
 .btn-retake:hover {
-  background: rgba(220, 38, 38, 0.05);
+  background: rgba(139, 92, 246, 0.05);
   transform: translateY(-2px);
 }
 
@@ -565,12 +565,12 @@
 }
 
 .career-components .fill.voice {
-  background: #dc2626;
+  background: var(--primary);
 }
 
 .voice-insight-section {
-  background: rgba(220, 38, 38, 0.03);
-  border: 1px solid rgba(220, 38, 38, 0.1);
+  background: rgba(139, 92, 246, 0.03);
+  border: 1px solid rgba(139, 92, 246, 0.1);
   border-radius: 14px;
   padding: 0.9rem 1.1rem;
   margin: 1.25rem 0;
@@ -587,7 +587,7 @@
 
 .voice-insight-section h4 i {
   margin-right: 0.4rem;
-  color: #dc2626;
+  color: var(--primary);
 }
 
 .voice-transcript-preview {
@@ -610,5 +610,5 @@
 
 .voice-insight-metrics .quiz-explanation-highlight,
 .quiz-explanation-highlight.voice-highlight {
-  color: #dc2626;
+  color: var(--primary);
 }
