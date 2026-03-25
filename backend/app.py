@@ -35,6 +35,23 @@ ignore_warnings_lazy()
 app = Flask(__name__)
 CORS(app)  # allow frontend access
 
+from routes.auth import auth_bp
+app.register_blueprint(auth_bp)
+
+@app.errorhandler(404)
+def not_found(e):
+    return jsonify({"error": "Route not found"}), 404
+
+@app.errorhandler(500)
+def server_error(e):
+    return jsonify({"error": str(e)}), 500
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    import traceback
+    traceback.print_exc()
+    return jsonify({"error": str(e)}), 500
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE = BASE_DIR
 
@@ -68,16 +85,6 @@ def _load_json_db(path):
         with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
             
-        # Dynamically detect JSON format and convert to dict if necessary
-        from utils.data_handler import convert_list_to_dict
-        if isinstance(data, list):
-            data = convert_list_to_dict(data, key="email")
-            # Always save in DICTIONARY format going forward
-            _save_json_db(path, data)
-            
-        if not isinstance(data, dict):
-            return {}
-            
         return data
     except Exception as e:
         print(f"Error loading {path}: {e}")
@@ -104,6 +111,7 @@ counselor_messages_db = _load_json_db(COUNSELOR_MESSAGES_PATH)
 
 # Unified decision engine
 from career_intelligence_engine import compute_final_decision
+from career_quiz_engine import get_static_questions, get_adaptive_questions, process_career_recommendation
 print(f"[TIME] Database connections (JSON) and engine load: {time.time() - t0:.2f}s")
 
 
@@ -119,18 +127,22 @@ def _default_progress_state():
 def _get_or_init_progress(email: str | None):
     if not email:
         return _default_progress_state()
-    progress = user_progress_db.get(email)
+        
+    progress_data = _load_json_db(USER_PROGRESS_PATH)
+    progress = progress_data.get(email)
+    
     if not isinstance(progress, dict):
         progress = _default_progress_state()
-        user_progress_db[email] = progress
-        _save_json_db(USER_PROGRESS_PATH, user_progress_db)
+        progress_data[email] = progress
+        _save_json_db(USER_PROGRESS_PATH, progress_data)
     else:
         # ensure all keys exist
         base = _default_progress_state()
         base.update({k: progress.get(k, base[k]) for k in base.keys()})
         progress = base
-        user_progress_db[email] = progress
-        _save_json_db(USER_PROGRESS_PATH, user_progress_db)
+        progress_data[email] = progress
+        _save_json_db(USER_PROGRESS_PATH, progress_data)
+        
     return progress
 
 
@@ -145,8 +157,10 @@ def _mark_step_completed(email: str | None, step: str):
     elif step == "quiz":
         progress["quiz_completed"] = True
     progress["last_completed_step"] = step
-    user_progress_db[email] = progress
-    _save_json_db(USER_PROGRESS_PATH, user_progress_db)
+    
+    progress_data = _load_json_db(USER_PROGRESS_PATH)
+    progress_data[email] = progress
+    _save_json_db(USER_PROGRESS_PATH, progress_data)
     try:
         print("[user-progress] updated", email, progress)
     except Exception:
@@ -156,9 +170,40 @@ def _mark_step_completed(email: str | None, step: str):
 def _reset_progress(email: str | None):
     if not email:
         return
-    progress = _default_progress_state()
-    user_progress_db[email] = progress
-    _save_json_db(USER_PROGRESS_PATH, user_progress_db)
+    progress_data = _load_json_db(USER_PROGRESS_PATH)
+    progress_data[email] = _default_progress_state()
+    _save_json_db(USER_PROGRESS_PATH, progress_data)
+
+
+@app.route("/api/user-progress", methods=["GET"])
+def get_user_progress():
+    user_email = request.args.get("user_email")
+    if not user_email:
+        return jsonify({"error": "user_email required"}), 400
+        
+    progress_data = _load_json_db(USER_PROGRESS_PATH)
+    
+    return jsonify(progress_data.get(user_email, _default_progress_state()))
+
+
+@app.route("/api/profile/<email>", methods=["GET"])
+def get_profile_by_email(email):
+    from utils.data_handler import load_json
+    users = load_json('users.json', default_value=[])
+    if isinstance(users, dict):
+        users = list(users.values())
+
+    user = next((u for u in users if isinstance(u, dict) and u.get("email") == email), None)
+
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    progress_data = _load_json_db(USER_PROGRESS_PATH)
+    
+    return jsonify({
+        "user": user,
+        "progress": progress_data.get(email, _default_progress_state())
+    })
 
 
 def _record_career_session(
@@ -314,6 +359,25 @@ def get_colleges_df():
     return _colleges_df
 
 print(f"[TIME] Total app initialization (optimized): {time.time() - START_TIME:.2f}s")
+
+def _preload_ml_models_in_background():
+    import threading
+    def loader():
+        print("[ML PRELOAD] Starting background preloading of models...")
+        try:
+            get_emb_model()
+            get_voice_assets()
+            get_psych_assets()
+            get_quiz_assets()
+            print("[ML PRELOAD] Background preloading completed.")
+        except Exception as e:
+            print(f"[ML PRELOAD] Error during preloading: {e}")
+            
+    t = threading.Thread(target=loader, daemon=True)
+    t.start()
+
+_preload_ml_models_in_background()
+
 
 PSYCH_QUESTION_META = {
     # Openness / creativity
@@ -488,18 +552,40 @@ def _touch_user_profile(email: str | None, name: str | None = None):
     if not email:
         return
 
+    from utils.data_handler import load_json, save_json
+    
+    users = load_json('users.json', default_value=[])
+    if isinstance(users, dict):
+        users = list(users.values())
+
     now = datetime.utcnow().isoformat() + "Z"
-    profile = users_db.get(email) or {
-        "email": email,
-        "created_at": now,
-    }
+    
+    profile = None
+    profile_idx = -1
+    for i, u in enumerate(users):
+        if isinstance(u, dict) and u.get("email") == email:
+            profile = u
+            profile_idx = i
+            break
+            
+    if not profile:
+        profile = {
+            "email": email,
+            "created_at": now,
+        }
+        users.append(profile)
+        profile_idx = len(users) - 1
+    
     if name:
         profile["name"] = name
     profile.setdefault("created_at", now)
     profile["last_login"] = now
 
-    users_db[email] = profile
-    _save_json_db(USERS_PATH, users_db)
+    users[profile_idx] = profile
+    save_json('users.json', users)
+    
+    print("TYPE:", type(users))
+    print("DATA SAVED: Updated users.json locally avoiding cache")
 
 
 # ================== Voice Insight: Speech-to-Text & NLP ==================
@@ -791,6 +877,34 @@ def _get_quiz_context(email: str):
 
     quiz_scores = snapshot.get("quiz_scores")
 
+    # Backfill: if quiz_scores is empty but attempts exist, recompute from engine
+    if not quiz_scores:
+        attempts = snapshot.get("attempts") or []
+        if attempts:
+            latest = attempts[0]
+            top_career = latest.get("top_career")
+            if top_career:
+                try:
+                    from career_quiz_engine import match_careers
+                    # Build a rough profile from the top career to recompute scores
+                    dummy_scores = {"logical": 0.5, "creativity": 0.5, "social": 0.5,
+                                    "leadership": 0.5, "risk": 0.5, "stability": 0.5}
+                    career_list = match_careers(dummy_scores)
+                    quiz_scores = {cr["career"]: round(cr["probability"] * 100) for cr in career_list}
+                    # Boost the recorded top career so it's properly reflected
+                    if top_career in quiz_scores:
+                        quiz_scores[top_career] = max(quiz_scores[top_career], 85)
+                    else:
+                        quiz_scores[top_career] = 85
+                    # Persist for future calls
+                    snapshot["quiz_scores"] = quiz_scores
+                    latest["quiz_scores"] = quiz_scores
+                    quiz_db[email] = snapshot
+                    _save_json_db(QUIZ_HISTORY_PATH, quiz_db)
+                    print(f"[FIX] Backfilled quiz_scores for {email}: top={top_career}")
+                except Exception as e:
+                    print(f"[WARN] Could not backfill quiz_scores: {e}")
+
     academic_percent = snapshot.get("academic_percent")
     if academic_percent is not None:
         try:
@@ -803,6 +917,23 @@ def _get_quiz_context(email: str):
     return quiz_scores, academic_percent, skills_vector
 
 
+KNOWN_TRAIT_NAMES = {
+    "openness", "conscientiousness", "extraversion", "agreeableness",
+    "neuroticism", "creativity_preference", "structure_preference",
+    "individual_contributor", "leadership_index", "stress_tolerance",
+    "analytical_thinking", "intuitive_preference", "risk_tolerance",
+    "intrinsic_motivation", "extrinsic_motivation",
+}
+
+def _is_trait_profile_not_career_scores(scores: dict) -> bool:
+    """Return True if the dict keys look like raw trait names rather than career names."""
+    if not scores:
+        return False
+    keys = set(scores.keys())
+    # If more than half the keys are known trait names, it's a raw profile
+    overlap = keys & KNOWN_TRAIT_NAMES
+    return len(overlap) > len(keys) * 0.5
+
 def _get_latest_psych_scores(email: str | None):
     if not email:
         return None
@@ -811,6 +942,10 @@ def _get_latest_psych_scores(email: str | None):
     if not latest:
         return None
     scores = latest.get("psych_scores")
+    # Validate: if scores exist but are raw trait profiles (not career scores), recompute
+    if isinstance(scores, dict) and _is_trait_profile_not_career_scores(scores):
+        print(f"[FIX] psych_scores for {email} contains raw traits, recomputing career scores...")
+        scores = None  # force recomputation below
     # Backwards compatibility: compute and persist psych_scores if missing
     if scores is None:
         profile = latest.get("profile")
@@ -908,6 +1043,13 @@ def _compute_psych_career_scores(profile: dict) -> dict:
     return scores
 
 
+# Non-career keys that should be stripped from fusion results
+_NON_CAREER_KEYS = {
+    "Uncertain", "Unknown",
+    "Business & Finance", "Design & Creative", "Engineering",
+    "Healthcare", "Research & Academics",
+}
+
 def _fuse_career_scores(quiz_scores, psych_scores, academic_percent=None, skills_vector=None, voice_scores=None):
     """
     Backwards-compatible wrapper around the unified career_intelligence_engine.
@@ -915,13 +1057,25 @@ def _fuse_career_scores(quiz_scores, psych_scores, academic_percent=None, skills
     All backend routes should go through this helper so that quiz / psych / voice
     are always combined by a single mathematically-structured engine.
     """
-    # academic_percent and skills_vector are currently handled outside the engine
-    # (e.g., via _quiz_signals_for_career). They are passed through unchanged.
+    # Sanitize: remove non-career keys from all signals before fusion
+    def _clean(scores):
+        if not scores:
+            return scores
+        return {k: v for k, v in scores.items() if k not in _NON_CAREER_KEYS}
+
     engine_result = compute_final_decision(
-        quiz_scores=quiz_scores,
-        psych_scores=psych_scores,
-        voice_scores=voice_scores,
+        quiz_scores=_clean(quiz_scores),
+        psych_scores=_clean(psych_scores),
+        voice_scores=_clean(voice_scores),
     )
+
+    # Strip any remaining non-career entries from the output rankings
+    if engine_result.get("career_rankings"):
+        engine_result["career_rankings"] = [
+            r for r in engine_result["career_rankings"]
+            if r.get("career") not in _NON_CAREER_KEYS
+        ]
+
     return engine_result
 
 
@@ -1659,179 +1813,100 @@ def predict():
         traceback.print_exc()
         return jsonify({"error": str(e)}), 500
 
+def _get_latest_voice_metadata(email):
+    if not email: return {}
+    attempts = voice_db.get(email)
+    if not isinstance(attempts, list) or not attempts: 
+        return {}
+    return attempts[0]
+
+@app.route("/api/career/predict-initial", methods=["POST"])
+def predict_initial():
+    data = request.json or {}
+    user_email = data.get("user_email")
+    psych_scores = data.get("psych_scores")
+    voice_scores = data.get("voice_scores")
+    
+    if user_email:
+        if not psych_scores:
+            psych_scores = _get_latest_psych_profile(user_email) or {}
+        if not voice_scores:
+            voice_scores = _get_latest_voice_metadata(user_email) or {}
+            
+    context = {"phase1_answers": {}, "voice_analysis": voice_scores or {}, "psychological_traits": psych_scores or {}}
+    res = process_career_recommendation(context, {})
+    return jsonify({"top_careers": res.get("top_careers", [])[:3]})
+
+@app.route("/api/quiz/static", methods=["GET"])
+def quiz_static():
+    return jsonify(get_static_questions())
+
+@app.route("/api/quiz/adaptive", methods=["POST"])
+def quiz_adaptive():
+    data = request.json or {}
+    user_email = data.get("user_email")
+    static_answers = data.get("static_answers", {})
+    
+    psych_scores = _get_latest_psych_profile(user_email) or {} if user_email else {}
+    voice_scores = _get_latest_voice_metadata(user_email) or {} if user_email else {}
+    
+    context = {"phase1_answers": static_answers, "voice_analysis": voice_scores, "psychological_traits": psych_scores}
+    return jsonify(get_adaptive_questions(context))
+
 
 @app.route("/api/quiz/submit", methods=["POST"])
 def quiz_submit():
-    """Store structured quiz data and return ML-based career score vector (no final decision)."""
     data = request.json or {}
-    text_input = data.get("answers_text") or data.get("features")
-    if not text_input:
-        return jsonify({"error": "No quiz text provided"}), 400
-
+    
+    static_answers = data.get("static_answers", {})
+    adaptive_answers = data.get("adaptive_answers", {})
     user_email = data.get("user_email")
-    structured_answers = data.get("structured_answers") or {}
-    academic_percent = data.get("academic_percent")
-    stream = data.get("stream")
-    user_name = data.get("user_name")
-
-    # Enforce onboarding order: psych + voice must be completed before quiz
-    if user_email:
-        progress = _get_or_init_progress(user_email)
-        if not progress.get("psych_completed") or not progress.get("voice_completed"):
-            return (
-                jsonify(
-                    {
-                        "error": "Quiz is locked. Please complete the Psychological Assessment and Voice Insight first.",
-                    }
-                ),
-                403,
-            )
-
+    
+    psych_scores = data.get("psych_scores", _get_latest_psych_profile(user_email) or {} if user_email else {})
+    voice_scores = data.get("voice_scores", _get_latest_voice_metadata(user_email) or {} if user_email else {})
+    
+    context = {"phase1_answers": static_answers, "voice_analysis": voice_scores, "psychological_traits": psych_scores}
+    
     try:
-        quiz_scores = _compute_quiz_career_scores(text_input)
-    except RuntimeError as e:
-        return jsonify({"error": str(e)}), 500
+        res = process_career_recommendation(context, adaptive_answers)
     except Exception as e:
         import traceback
         traceback.print_exc()
         return jsonify({"error": str(e)}), 500
-
-    # Build a lightweight skills vector from structured answers for later integration
-    skills_vector = {}
-    if isinstance(structured_answers, dict):
-        # Flatten multi-select answers into simple presence counts
-        for qid, value in structured_answers.items():
-            if isinstance(value, list):
-                for v in value:
-                    key = str(v)
-                    skills_vector[key] = min(1.0, skills_vector.get(key, 0.0) + 0.5)
-            else:
-                key = str(value)
-                skills_vector[key] = min(1.0, skills_vector.get(key, 0.0) + 0.5)
-
-    # Validate and normalise academic percentage if provided
-    if academic_percent is not None:
-        try:
-            academic_percent = float(academic_percent)
-        except (TypeError, ValueError):
-            return jsonify({"error": "academic_percent must be a number between 0 and 100"}), 400
-        if not (0.0 <= academic_percent <= 100.0):
-            return jsonify({"error": "academic_percent must be between 0 and 100"}), 400
-
-    # Apply optional, subtle stream-based boost to quiz scores
-    quiz_scores = _apply_stream_boost(quiz_scores, stream)
-
-    # Persist per-user quiz snapshot & history
-    if user_email:
-        _touch_user_profile(user_email, user_name)
-
-        existing = quiz_db.get(user_email) or {}
-        attempts = existing.get("attempts") or []
-
-        # If we had a legacy single-snapshot structure, convert it into an initial attempt
-        if not attempts and existing.get("quiz_scores"):
-            legacy_quiz_scores = existing.get("quiz_scores") or {}
-            legacy_ts = existing.get("last_taken") or datetime.utcnow().isoformat() + "Z"
-            # derive top career from legacy quiz scores if available
-            top_career_legacy = None
-            if isinstance(legacy_quiz_scores, dict) and legacy_quiz_scores:
-                top_career_legacy = max(
-                    legacy_quiz_scores.items(), key=lambda kv: float(kv[1])
-                )[0]
-            attempts.append(
-                {
-                    "id": existing.get("id") or legacy_ts,
-                    "timestamp": legacy_ts,
-                    "quiz_scores": legacy_quiz_scores,
-                    "academic_percent": existing.get("academic_percent"),
-                    "stream": existing.get("stream"),
-                    "top_career": top_career_legacy,
-                }
-            )
-
-        # New attempt based on current submission
-        top_career = None
-        if isinstance(quiz_scores, dict) and quiz_scores:
-            top_career = max(quiz_scores.items(), key=lambda kv: float(kv[1]))[0]
-
-        attempt_id = str(uuid4())
-        now_ts = datetime.utcnow().isoformat() + "Z"
-        # Confidence: best quiz score in this attempt (0–100)
-        confidence = None
-        if isinstance(quiz_scores, dict) and quiz_scores:
-            try:
-                confidence = max(float(v) for v in quiz_scores.values())
-            except (TypeError, ValueError):
-                confidence = None
-
-        attempts.insert(
-            0,
-            {
-                "id": attempt_id,
-                "timestamp": now_ts,
-                "quiz_scores": quiz_scores,
-                "academic_percent": academic_percent,
-                "stream": stream,
-                "top_career": top_career,
-                "confidence": confidence,
-            },
-        )
-
-        # keep recent N attempts
-        attempts = attempts[:20]
-
-        snapshot = {
-            "last_taken": attempts[0]["timestamp"],
-            "academic_percent": academic_percent,
-            "skills": skills_vector,
-            "skills_vector": skills_vector,
-            "quiz_scores": quiz_scores,
-            "stream": stream,
-            "attempts": attempts,
-        }
-        quiz_db[user_email] = snapshot
-        _save_json_db(QUIZ_HISTORY_PATH, quiz_db)
-
-    psych_scores = _get_latest_psych_scores(user_email)
-    voice_scores = _get_latest_voice_scores(user_email)
-    fusion_result = _fuse_career_scores(
-        quiz_scores, psych_scores, academic_percent, skills_vector, voice_scores
-    )
-    _update_fused_results(
-        user_email,
-        quiz_scores=quiz_scores,
-        psych_scores=psych_scores,
-        fusion_result=fusion_result,
-        academic_percent=academic_percent,
-        skills_vector=skills_vector,
-        voice_scores=voice_scores,
-    )
-
+        
+    actual_quiz_scores = {}
+    if res.get("career_recommendations"):
+        for cr in res["career_recommendations"]:
+            actual_quiz_scores[cr["career"]] = round(cr["probability"] * 100)
+            
     if user_email:
         _mark_step_completed(user_email, "quiz")
-        # Link latest psych / voice / quiz artefacts into a career session
-        psych_history = psych_db.get(user_email) or []
-        voice_history = voice_db.get(user_email) or []
-        latest_psych_id = psych_history[0].get("completed_at") if psych_history else None
-        latest_voice_id = voice_history[0].get("timestamp") if voice_history else None
-        latest_quiz_id = attempts[0].get("id") if attempts else None
-        _record_career_session(
-            user_email,
-            fusion_result=fusion_result,
-            psych_id=latest_psych_id,
-            voice_id=latest_voice_id,
-            quiz_id=latest_quiz_id,
-        )
-
-    return jsonify(
-        {
-            "stored": bool(user_email),
-            "academic_percent": academic_percent,
-            "quiz_scores": quiz_scores,
-            "psych_scores": psych_scores,
-            "career_rankings": fusion_result.get("career_rankings"),
+        # Save minimal snapshot so Dashboard progress knows it's done
+        snapshot = quiz_db.get(user_email) or {}
+        attempts = snapshot.get("attempts") or []
+        attempt_id = str(uuid4())
+        now_ts = datetime.utcnow().isoformat() + "Z"
+        attempts.insert(0, {
+            "id": attempt_id,
+            "timestamp": now_ts,
+            "quiz_scores": actual_quiz_scores,
+            "top_career": res["top_careers"][0]["name"] if res.get("top_careers") else None
+        })
+        snapshot["attempts"] = attempts[:20]
+        snapshot["quiz_scores"] = actual_quiz_scores
+        quiz_db[user_email] = snapshot
+        _save_json_db(QUIZ_HISTORY_PATH, quiz_db)
+        
+    # Return formatted final output as requested
+    return jsonify({
+        "career_rankings": [{"career": c["name"], "final_score": c["score"]} for c in res.get("top_careers", [])],
+        "top_recommendation": {
+            "career": res["top_careers"][0]["name"] if res.get("top_careers") else "Unknown",
+            "confidence_level": res.get("confidence_level"),
+            "confidence_score": (res.get("confidence", 0) * 100),
+            "explanation": " ".join(res.get("reasoning", []))
         }
-    )
+    })
 
 
 @app.route("/api/career-results", methods=["GET"])
@@ -2128,7 +2203,12 @@ def get_profile():
     if not user_email:
         return jsonify({"error": "user_email is required"}), 400
 
-    user = users_db.get(user_email) or {
+    from utils.data_handler import load_json
+    users = load_json('users.json', default_value=[])
+    if isinstance(users, dict):
+        users = list(users.values())
+
+    user = next((u for u in users if isinstance(u, dict) and u.get("email") == user_email), None) or {
         "email": user_email,
     }
 
@@ -2293,17 +2373,6 @@ def recommend():
 
     return jsonify(colleges_list), 200
 
-
-@app.route("/api/user-progress", methods=["GET"])
-def get_user_progress():
-    user_email = request.args.get("user_email")
-    if not user_email:
-        return jsonify({"error": "user_email is required"}), 400
-    # Always reload from disk to avoid stale state in long-lived processes
-    global user_progress_db
-    user_progress_db = _load_json_db(USER_PROGRESS_PATH)
-    progress = _get_or_init_progress(user_email)
-    return jsonify(progress), 200
 
 
 @app.route("/api/reset-progress", methods=["POST"])

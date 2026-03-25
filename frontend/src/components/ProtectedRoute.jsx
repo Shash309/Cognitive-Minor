@@ -2,46 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation, useOutletContext } from 'react-router-dom';
 
 const ProtectedRoute = ({ children, requirePsych = false, requireVoice = false, requireQuiz = false }) => {
-  const { user } = useOutletContext() || {};
+  const { user, progress } = useOutletContext() || {};
   const location = useLocation();
-  const [progress, setProgress] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
 
-  useEffect(() => {
-    const load = async () => {
-      if (!user?.email) {
-        setLoading(false);
-        setError('Please sign in to continue.');
-        return;
-      }
-      try {
-        const apiBase = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000';
-        const res = await fetch(
-          `${apiBase}/api/user-progress?user_email=${encodeURIComponent(user.email)}`
-        );
-        const json = await res.json();
-        if (!res.ok || json.error) {
-          throw new Error(json.error || 'Unable to read onboarding progress.');
-        }
-        setProgress(json);
-        setError('');
-      } catch (err) {
-        setError(err.message || 'Unable to read onboarding progress.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    load();
-  }, [user?.email]);
-
-  if (loading) {
-    return null;
+  if (!user?.email) {
+    return <Navigate to="/dashboard" replace />;
   }
 
-  if (error || !progress) {
-    return <Navigate to="/dashboard" replace />;
+  if (!progress) {
+    return null;
   }
 
   // Route‑level enforcement

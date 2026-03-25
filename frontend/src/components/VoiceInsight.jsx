@@ -3,7 +3,7 @@ import { useOutletContext } from 'react-router-dom';
 import './VoiceInsight.css';
 
 const VoiceInsight = () => {
-  const { user } = useOutletContext() || {};
+  const { user, refreshProgress } = useOutletContext() || {};
   const [isRecording, setIsRecording] = useState(false);
   const [isRecognizing, setIsRecognizing] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
@@ -12,6 +12,7 @@ const VoiceInsight = () => {
   const [editableTranscript, setEditableTranscript] = useState('');
   const [elapsedSec, setElapsedSec] = useState(0);
   const [result, setResult] = useState(null);
+  const [preliminarySuggestions, setPreliminarySuggestions] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [recognitionWarning, setRecognitionWarning] = useState('');
@@ -66,6 +67,7 @@ const VoiceInsight = () => {
   const startRecording = useCallback(async () => {
     setError('');
     setResult(null);
+    setPreliminarySuggestions(null);
     setAudioBlob(null);
     setLiveTranscript('');
     setEditableTranscript('');
@@ -226,6 +228,7 @@ const VoiceInsight = () => {
       setAudioUrl(null);
     }
     setResult(null);
+    setPreliminarySuggestions(null);
     setError('');
     setRecognitionWarning('');
     setLiveTranscript('');
@@ -265,6 +268,22 @@ const VoiceInsight = () => {
         throw new Error(data.error || 'Voice analysis failed.');
       }
       setResult(data);
+
+      try {
+        const initialRes = await fetch(`${apiBase}/api/career/predict-initial`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ user_email: user.email, voice_scores: data.voice_scores })
+        });
+        const initialData = await initialRes.json();
+        if (initialData.top_careers) {
+          setPreliminarySuggestions(initialData.top_careers);
+        }
+      } catch (err) {
+        console.error("Failed to fetch preliminary suggestions:", err);
+      }
+
+      if (refreshProgress) await refreshProgress();
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.');
     } finally {
@@ -305,6 +324,22 @@ const VoiceInsight = () => {
         throw new Error(data.error || 'Voice analysis failed.');
       }
       setResult(data);
+
+      try {
+        const initialRes = await fetch(`${apiBase}/api/career/predict-initial`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ user_email: user.email, voice_scores: data.voice_scores })
+        });
+        const initialData = await initialRes.json();
+        if (initialData.top_careers) {
+          setPreliminarySuggestions(initialData.top_careers);
+        }
+      } catch (err) {
+        console.error("Failed to fetch preliminary suggestions:", err);
+      }
+
+      if (refreshProgress) await refreshProgress();
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.');
     } finally {
@@ -484,8 +519,22 @@ const VoiceInsight = () => {
                 </div>
               )}
             </div>
-            <p className="voice-success-msg">
-              Your voice insight has been saved and will influence your career recommendations.
+            
+            {preliminarySuggestions && preliminarySuggestions.length > 0 && (
+              <div className="voice-insight-preliminary" style={{ marginTop: '1.5rem', padding: '1rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '12px' }}>
+                <h4>Based on your personality & communication, you may fit:</h4>
+                <ul style={{ listStyle: 'none', padding: 0, marginTop: '1rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                  {preliminarySuggestions.map((item, idx) => (
+                    <li key={idx} style={{ background: 'var(--brand-gradient)', padding: '0.5rem 1rem', borderRadius: '100px', fontWeight: 'bold' }}>
+                      {item.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            
+            <p className="voice-success-msg" style={{ marginTop: '1.5rem' }}>
+              Your voice insight has been saved. The AI Career Quiz is now unlocked!
             </p>
             <button
               type="button"

@@ -78,7 +78,7 @@ const LandingPage = ({ onLogin }) => {
         const res = await fetch(`${apiBase}/register`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, phone, age, gender, location })
+          body: JSON.stringify({ name, email, password, phone, age, gender, location })
         });
 
         const data = await res.json();
@@ -103,14 +103,27 @@ const LandingPage = ({ onLogin }) => {
         alert("Failed to reach the backend server. Make sure Flask is running!");
       }
     } else {
-      // Student Login uses local storage sync temporarily
-      const users = JSON.parse(localStorage.getItem('career_app_users') || '{}');
-      const user = users[email];
-      if (!user) {
-        alert(t('User not found. Please register first.'));
-        return;
+      // Student Login
+      const apiBase = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000';
+      try {
+        const res = await fetch(`${apiBase}/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        
+        const data = await res.json();
+        
+        if (!res.ok) {
+          alert(data.error || 'Invalid credentials.');
+          return;
+        }
+        
+        onLogin({ email: data.user.email, name: data.user.name, role: 'student' });
+      } catch (err) {
+        console.error("Login fetch error:", err);
+        alert("Failed to reach the backend server. Make sure Flask is running!");
       }
-      onLogin({ email, name: user.name, role: 'student' });
     }
   };
 
@@ -149,10 +162,8 @@ const LandingPage = ({ onLogin }) => {
             <input type="text" name="name" placeholder={t('landing.name') || 'Name'} required />
             <input type="email" name="email" placeholder={t('landing.email') || 'Email'} required />
 
-            {/* Render password strictly for counselor so as not to demand it from students */}
-            {selectedRole === 'counselor' && (
-              <input type="password" name="password" placeholder={t('landing.password') || 'Password'} required />
-            )}
+            {/* Render password strictly for all users */}
+            <input type="password" name="password" placeholder={t('landing.password') || 'Password'} required />
 
             {selectedRole === 'student' && (
               <div className="student-fields-grid">

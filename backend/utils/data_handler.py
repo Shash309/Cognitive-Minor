@@ -72,12 +72,13 @@ def append_entry(filename, entry):
     save_json(filename, data)
 
 def sync_users_to_csv():
-    users_data = load_json('users.json', default_value={})
-    users_data = convert_list_to_dict(users_data, key='email')
-    users = list(users_data.values())
-    
+    users = load_json('users.json', default_value=[])
+    if isinstance(users, dict):
+        users = list(users.values())
+        
     if not users:
         return
+        
     csv_filepath = get_file_path('users.csv')
     fields = ['id', 'name', 'email', 'phone', 'age', 'gender', 'location']
     with open(csv_filepath, 'w', newline='', encoding='utf-8') as f:
@@ -86,5 +87,5 @@ def sync_users_to_csv():
         for user in users:
             row = {}
             for k in fields:
-                row[k] = user.get(k, '')
+                row[k] = user.get(k, '') if isinstance(user, dict) else ''
             writer.writerow(row)

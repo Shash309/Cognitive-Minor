@@ -72,5 +72,139 @@
         "confidence": 80.0
       }
     ]
+  },
+  "shubh66@gmail.com": {
+    "last_taken": "2026-03-24T20:06:28.368662Z",
+    "academic_percent": 55.0,
+    "skills": {
+      "Computer Science": 0.5,
+      "Public Speaking": 0.5,
+      "Helping Others": 0.5,
+      "Design Thinking": 0.5,
+      "Both": 0.5,
+      "Corporate Office": 0.5,
+      "No": 0.5,
+      "Flexible": 0.5,
+      "Job Security": 0.5,
+      "Doctor": 0.5
+    },
+    "skills_vector": {
+      "Computer Science": 0.5,
+      "Public Speaking": 0.5,
+      "Helping Others": 0.5,
+      "Design Thinking": 0.5,
+      "Both": 0.5,
+      "Corporate Office": 0.5,
+      "No": 0.5,
+      "Flexible": 0.5,
+      "Job Security": 0.5,
+      "Doctor": 0.5
+    },
+    "quiz_scores": {
+      "Business & Finance": 4,
+      "Design & Creative": 17,
+      "Engineering": 68,
+      "Healthcare": 2,
+      "Research & Academics": 8
+    },
+    "stream": "Science",
+    "attempts": [
+      {
+        "id": "2c25c310-ae6e-4596-9d74-8914b6c95df5",
+        "timestamp": "2026-03-24T20:06:28.368662Z",
+        "quiz_scores": {
+          "Business & Finance": 4,
+          "Design & Creative": 17,
+          "Engineering": 68,
+          "Healthcare": 2,
+          "Research & Academics": 8
+        },
+        "academic_percent": 55.0,
+        "stream": "Science",
+        "top_career": "Engineering",
+        "confidence": 68.0
+      }
+    ]
+  },
+  "ashoksing@gmail.com": {
+    "attempts": [
+      {
+        "id": "7091a5cf-ec0c-4a03-a04f-c23b474fb127",
+        "timestamp": "2026-03-25T17:38:00.233023Z",
+        "quiz_scores": {},
+        "top_career": "Consultant"
+      },
+      {
+        "id": "45d7ee50-7f2a-4354-9785-3f0b777f4bfd",
+        "timestamp": "2026-03-24T21:23:48.852525Z",
+        "quiz_scores": {},
+        "top_career": "Data Scientist"
+      },
+      {
+        "id": "6af70722-c2ec-478f-af5e-a5ec08eb8d2e",
+        "timestamp": "2026-03-24T21:22:08.196929Z",
+        "quiz_scores": {},
+        "top_career": "Designer"
+      },
+      {
+        "id": "cdba2151-b7e4-4462-93f9-6ca1c21534be",
+        "timestamp": "2026-03-24T21:21:06.778826Z",
+        "quiz_scores": {},
+        "top_career": "Consultant"
+      },
+      {
+        "id": "30163367-12e2-4543-8066-0e0671daddc9",
+        "timestamp": "2026-03-24T20:33:17.507425Z",
+        "quiz_scores": {},
+        "top_career": "Product Manager"
+      }
+    ]
+  },
+  "aarohi21@gmail.com": {
+    "attempts": [
+      {
+        "id": "88f686a1-65b5-4b38-97c1-2757523d928d",
+        "timestamp": "2026-03-24T22:09:32.056055Z",
+        "quiz_scores": {},
+        "top_career": "Data Scientist"
+      }
+    ]
+  },
+  "sherlock221b@gmail.com": {
+    "attempts": [
+      {
+        "id": "579c141d-30db-4b34-ae98-69ca34ca66b3",
+        "timestamp": "2026-03-25T17:13:47.135523Z",
+        "quiz_scores": {},
+        "top_career": "Designer"
+      }
+    ]
+  },
+  "bot@yahoo.com": {
+    "attempts": [
+      {
+        "id": "c32ca7e0-505a-431a-b77d-efdb65aecceb",
+        "timestamp": "2026-03-25T18:57:06.366929Z",
+        "quiz_scores": {
+          "Designer": 87,
+          "Consultant": 78,
+          "Product Manager": 77,
+          "Data Scientist": 76,
+          "Entrepreneur": 72,
+          "Software Engineer": 70,
+          "Researcher": 69
+        },
+        "top_career": "Designer"
+      }
+    ],
+    "quiz_scores": {
+      "Designer": 87,
+      "Consultant": 78,
+      "Product Manager": 77,
+      "Data Scientist": 76,
+      "Entrepreneur": 72,
+      "Software Engineer": 70,
+      "Researcher": 69
+    }
   }
 }

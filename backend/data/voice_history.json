@@ -23,6 +23,31 @@
   ],
   "sherlock221b@gmail.com": [
     {
+      "timestamp": "2026-03-25T17:12:24.241142Z",
+      "transcript": "I am still fingering out my exact dream career I am I do have some interests I am exploring I am per take the interested in technology especially areas like AI and software development because I like solving problems and building things",
+      "voice_scores": {
+        "Actor": 1.2,
+        "Artist": 2.17,
+        "Athlete": 3.37,
+        "Civil Servant": 2.91,
+        "Content Creator": 1.25,
+        "Data Scientist": 4.97,
+        "Designer": 5.84,
+        "Doctor": 1.73,
+        "Entrepreneur": 5.83,
+        "Lawyer": 1.01,
+        "Manager": 1.05,
+        "Musician": 2.54,
+        "Psychologist": 1.6,
+        "Software Engineer": 54.4,
+        "Teacher": 1.55,
+        "Uncertain": 8.58
+      },
+      "sentiment": 0.5,
+      "motivation_score": 32.38095238095238,
+      "confidence_score": 83.85714285714286
+    },
+    {
       "timestamp": "2026-03-24T18:49:45.499781Z",
       "transcript": "aur bhai kaisa hai logic structure and problem solving which is voice software engineering fields like the right path for me I enjoy breaking down Complex problem into smaller manageable parts and then building efficient solutions step by step",
       "voice_scores": {
@@ -46,6 +71,139 @@
       "sentiment": 1.0,
       "motivation_score": 30.0,
       "confidence_score": 87.1923076923077
+    }
+  ],
+  "shubh66@gmail.com": [
+    {
+      "timestamp": "2026-03-24T20:04:58.210695Z",
+      "transcript": "I see myself as someone who naturally used towards logic structure and problem solving which is why software engineering fees like the right path for me I enjoy breaking down contrix problems into smaller manageable parts in them building efficient solutions step by step",
+      "voice_scores": {
+        "Actor": 0.47,
+        "Artist": 0.46,
+        "Athlete": 0.35,
+        "Civil Servant": 0.75,
+        "Content Creator": 1.06,
+        "Data Scientist": 6.73,
+        "Designer": 5.74,
+        "Doctor": 1.58,
+        "Entrepreneur": 7.6,
+        "Lawyer": 3.63,
+        "Manager": 3.17,
+        "Musician": 0.38,
+        "Psychologist": 1.18,
+        "Software Engineer": 63.32,
+        "Teacher": 2.13,
+        "Uncertain": 1.46
+      },
+      "sentiment": 1.0,
+      "motivation_score": 30.0,
+      "confidence_score": 90.63636363636364
+    }
+  ],
+  "ashoksing@gmail.com": [
+    {
+      "timestamp": "2026-03-25T17:37:02.852535Z",
+      "transcript": "I am still fingering out my exact career path but I am interested in finance and analytics rules I like working with numbers and understanding how decisions impact outcomes I am exploring this area more to see if it's the right fit for me I want a for your where I can keep learning and take on challenges instead of doing reproductive work for now I am focusing on breathing my knowledge and gaining clarity through experience",
+      "voice_scores": {
+        "Actor": 0.64,
+        "Artist": 0.32,
+        "Athlete": 3.19,
+        "Civil Servant": 1.61,
+        "Content Creator": 0.83,
+        "Data Scientist": 51.23,
+        "Designer": 1.6,
+        "Doctor": 1.31,
+        "Entrepreneur": 9.95,
+        "Lawyer": 8.15,
+        "Manager": 4.17,
+        "Musician": 0.41,
+        "Psychologist": 2.0,
+        "Software Engineer": 4.36,
+        "Teacher": 2.33,
+        "Uncertain": 7.9
+      },
+      "sentiment": 0.5,
+      "motivation_score": 32.5974025974026,
+      "confidence_score": 100.0
+    },
+    {
+      "timestamp": "2026-03-24T20:28:38.473848Z",
+      "transcript": "I am still figureing out exactly what I want to do in the future but I have notice that I am really Drone toward understanding how people think and behave I find topics related to psychology and human emotions pretty interested interesting especially when it comes to I people make certain decisions or atom certain ways",
+      "voice_scores": {
+        "Actor": 0.5,
+        "Artist": 0.73,
+        "Athlete": 0.85,
+        "Civil Servant": 0.88,
+        "Content Creator": 1.07,
+        "Data Scientist": 4.35,
+        "Designer": 2.1,
+        "Doctor": 0.91,
+        "Entrepreneur": 0.76,
+        "Lawyer": 0.72,
+        "Manager": 0.91,
+        "Musician": 0.67,
+        "Psychologist": 77.77,
+        "Software Engineer": 1.38,
+        "Teacher": 4.05,
+        "Uncertain": 2.36
+      },
+      "sentiment": 0.5,
+      "motivation_score": 31.785714285714285,
+      "confidence_score": 92.10714285714286
+    }
+  ],
+  "aarohi21@gmail.com": [
+    {
+      "timestamp": "2026-03-24T22:08:14.724499Z",
+      "transcript": "I exactly don't know what I want to do but I like problem solving and Finance belated works I am too much interested in finance related news and I like you do stocks",
+      "voice_scores": {
+        "Actor": 0.89,
+        "Artist": 0.69,
+        "Athlete": 3.12,
+        "Civil Servant": 2.95,
+        "Content Creator": 3.81,
+        "Data Scientist": 8.18,
+        "Designer": 2.64,
+        "Doctor": 2.2,
+        "Entrepreneur": 36.54,
+        "Lawyer": 2.31,
+        "Manager": 4.16,
+        "Musician": 1.33,
+        "Psychologist": 1.34,
+        "Software Engineer": 16.44,
+        "Teacher": 3.37,
+        "Uncertain": 10.04
+      },
+      "sentiment": 0.5,
+      "motivation_score": 33.03030303030303,
+      "confidence_score": 79.22727272727272
+    }
+  ],
+  "bot@yahoo.com": [
+    {
+      "timestamp": "2026-03-25T18:56:25.674735Z",
+      "transcript": "I am still fingering out my dream career but I am interested in creative feeds like designing content creation enjoy working on ideas and turning them into something visual or meaningful I am trying to improve my skills and understand where I should rest I don't want to routine job I want something where I can be creative and key",
+      "voice_scores": {
+        "Actor": 1.02,
+        "Artist": 7.34,
+        "Athlete": 1.82,
+        "Civil Servant": 1.99,
+        "Content Creator": 37.76,
+        "Data Scientist": 2.8,
+        "Designer": 20.57,
+        "Doctor": 1.1,
+        "Entrepreneur": 11.36,
+        "Lawyer": 0.71,
+        "Manager": 3.53,
+        "Musician": 1.13,
+        "Psychologist": 1.02,
+        "Software Engineer": 4.08,
+        "Teacher": 2.14,
+        "Uncertain": 1.59
+      },
+      "sentiment": 1.0,
+      "motivation_score": 35.0,
+      "confidence_score": 92.0
     }
   ]
 }
