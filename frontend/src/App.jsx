@@ -18,6 +18,15 @@ import CounselorDashboard from './components/CounselorDashboard';
 import CounselorHome from './components/CounselorHome';
 import StudentReport from './components/StudentReport';
 import CounselorChat from './components/CounselorChat';
+
+// ─── Admin Components (Isolated System) ───
+import AdminLogin from './components/AdminLogin';
+import AdminDashboard from './components/AdminDashboard';
+import AdminHome from './components/AdminHome';
+import AdminUsers from './components/AdminUsers';
+import AdminUserDetail from './components/AdminUserDetail';
+import AdminActivity from './components/AdminActivity';
+
 import './App.css';
 
 function App() {
@@ -44,6 +53,29 @@ function App() {
     localStorage.removeItem('career_app_user');
     setIsLoggedIn(false);
     setUser(null);
+  };
+
+  // ─── Admin State (Isolated from user state) ───
+  const [admin, setAdmin] = useState(() => {
+    const saved = localStorage.getItem('admin_user');
+    return saved ? JSON.parse(saved) : null;
+  });
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(() => {
+    return !!localStorage.getItem('admin_token');
+  });
+
+  const handleAdminLogin = (adminData, token) => {
+    localStorage.setItem('admin_user', JSON.stringify(adminData));
+    localStorage.setItem('admin_token', token);
+    setAdmin(adminData);
+    setIsAdminLoggedIn(true);
+  };
+
+  const handleAdminLogout = () => {
+    localStorage.removeItem('admin_token');
+    localStorage.removeItem('admin_user');
+    setAdmin(null);
+    setIsAdminLoggedIn(false);
   };
 
   const isCounselorEnabled = import.meta.env.VITE_ENABLE_COUNSELLOR_FEATURE === "true";
@@ -101,6 +133,21 @@ function App() {
               <Route path="chat/:studentEmail" element={<CounselorChat />} />
             </Route>
           )}
+
+          {/* ─── Admin Routes (Completely Isolated) ─── */}
+          <Route
+            path="/admin/login"
+            element={!isAdminLoggedIn ? <AdminLogin onAdminLogin={handleAdminLogin} /> : <Navigate to="/admin/dashboard" replace />}
+          />
+          <Route
+            path="/admin/dashboard"
+            element={isAdminLoggedIn ? <AdminDashboard admin={admin} onLogout={handleAdminLogout} /> : <Navigate to="/admin/login" replace />}
+          >
+            <Route index element={<AdminHome />} />
+            <Route path="users" element={<AdminUsers />} />
+            <Route path="user/:id" element={<AdminUserDetail />} />
+            <Route path="activity" element={<AdminActivity />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

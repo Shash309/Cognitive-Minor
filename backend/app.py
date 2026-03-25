@@ -38,6 +38,9 @@ CORS(app)  # allow frontend access
 from routes.auth import auth_bp
 app.register_blueprint(auth_bp)
 
+from routes.admin import admin_bp
+app.register_blueprint(admin_bp)
+
 @app.errorhandler(404)
 def not_found(e):
     return jsonify({"error": "Route not found"}), 404

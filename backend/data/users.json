@@ -1137,5 +1137,17 @@
         "traits": [],
         "personality_type": "Unknown",
         "created_at": "2026-03-25T18:54:25.757312Z"
+    },
+    {
+        "id": 66,
+        "name": "Platform Admin",
+        "email": "admin@cognitive.ai",
+        "password": "scrypt:32768:8:1$0lch5LTJ7h8HuD35$038332115ad7d315b382e59a882a4d8d7c1ba83b566c32530eeb42ba95cea2ce249be3b62333b423c1d1441dcc4bea0e4dfa98781525deba2c13b30aa4f5b802",
+        "phone": "",
+        "age": 0,
+        "gender": "",
+        "location": "",
+        "role": "admin",
+        "created_at": "2026-03-25T19:53:10.848364Z"
     }
 ]

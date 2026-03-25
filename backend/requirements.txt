@@ -11,6 +11,7 @@ datasets>=2.0.0
 joblib>=1.2
 flask>=2.2
 flask-cors>=3.0
+itsdangerous>=2.1
 SpeechRecognition>=3.10
 pydub>=0.25
 matplotlib>=3.5
