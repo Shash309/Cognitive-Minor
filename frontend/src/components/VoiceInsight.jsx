@@ -255,14 +255,30 @@ const VoiceInsight = () => {
     setError('');
     try {
       const apiBase = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000';
-      const res = await fetch(`${apiBase}/api/voice-analysis`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          user_email: user.email,
-          transcript: transcriptToSend,
-        }),
-      });
+
+      let res;
+      if (audioBlob) {
+        // Send both transcript + audio so backend can save the recording
+        const formData = new FormData();
+        formData.append('user_email', user.email);
+        formData.append('transcript', transcriptToSend);
+        formData.append('audio', audioBlob, 'recording.webm');
+        res = await fetch(`${apiBase}/api/voice-analysis`, {
+          method: 'POST',
+          body: formData,
+        });
+      } else {
+        // No audio blob available — send transcript only
+        res = await fetch(`${apiBase}/api/voice-analysis`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            user_email: user.email,
+            transcript: transcriptToSend,
+          }),
+        });
+      }
+
       const data = await res.json();
       if (!res.ok || data.error) {
         throw new Error(data.error || 'Voice analysis failed.');

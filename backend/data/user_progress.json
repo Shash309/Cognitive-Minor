@@ -28,5 +28,17 @@
     "voice_completed": false,
     "quiz_completed": false,
     "last_completed_step": null
+  },
+  "ss3247@yahoo.com": {
+    "psych_completed": false,
+    "voice_completed": false,
+    "quiz_completed": false,
+    "last_completed_step": null
+  },
+  "shashwatsh3028@gmail.com": {
+    "psych_completed": true,
+    "voice_completed": true,
+    "quiz_completed": false,
+    "last_completed_step": "voice"
   }
 }

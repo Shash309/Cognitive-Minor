@@ -1149,5 +1149,18 @@
         "location": "",
         "role": "admin",
         "created_at": "2026-03-25T19:53:10.848364Z"
+    },
+    {
+        "id": 67,
+        "name": "Soubhu",
+        "email": "ss3247@yahoo.com",
+        "password": "scrypt:32768:8:1$oQGJQhyF177GKusI$ba1b336c6abbdc4a8a0da703b920af75e8577bb9f3d2a5859f6edddec1f25dbb44ed8bc89480175259ad65f07ab1182f91a8088cbc8b34de570b4a7ed16cebe2",
+        "phone": "6574839254",
+        "age": 20,
+        "gender": "Male",
+        "location": "Kolkata",
+        "traits": [],
+        "personality_type": "Unknown",
+        "created_at": "2026-03-28T04:00:30.121679Z"
     }
 ]

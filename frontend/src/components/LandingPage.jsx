@@ -23,6 +23,7 @@ const LandingPage = ({ onLogin }) => {
 
     // We only strictly require password if the form actually has it displayed
     const password = form.password ? form.password.value : '';
+    const confirmPassword = form.confirmPassword ? form.confirmPassword.value : '';
 
     if (selectedRole === 'counselor') {
       const apiBase = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000';
@@ -67,6 +68,10 @@ const LandingPage = ({ onLogin }) => {
 
     // Student auth
     if (type === 'register') {
+      if (confirmPassword && password !== confirmPassword) {
+        alert('Passwords do not match');
+        return;
+      }
       const phone = form.phone ? form.phone.value : '';
       const age = form.age ? form.age.value : '';
       const gender = form.gender ? form.gender.value : '';
@@ -162,12 +167,21 @@ const LandingPage = ({ onLogin }) => {
             <input type="text" name="name" placeholder={t('landing.name') || 'Name'} required />
             <input type="email" name="email" placeholder={t('landing.email') || 'Email'} required />
 
-            {/* Render password strictly for all users */}
-            <input type="password" name="password" placeholder={t('landing.password') || 'Password'} required />
-
             {selectedRole === 'student' && (
               <div className="student-fields-grid">
-                <input type="text" name="phone" placeholder="Phone Number" required />
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, width: '100%' }}>
+                  <span style={{ whiteSpace: 'nowrap', opacity: 0.9 }}>+91</span>
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="10-digit number"
+                    required
+                    inputMode="numeric"
+                    pattern="^[0-9]{10}$"
+                    maxLength={10}
+                    style={{ width: 'auto', flex: 1 }}
+                  />
+                </div>
                 <input type="number" name="age" placeholder="Age" min="10" max="100" required />
 
                 <select name="gender" className="specialization-select" required>
@@ -210,6 +224,15 @@ const LandingPage = ({ onLogin }) => {
                 />
               </div>
             )}
+
+            {/* Render password strictly for all users (must be filled before confirm password) */}
+            <input type="password" name="password" placeholder={t('landing.password') || 'Password'} required />
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              required
+            />
 
             <button type="submit">{t('landing.signUp')}</button>
           </form>

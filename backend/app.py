@@ -80,6 +80,9 @@ COUNSELORS_PATH = os.path.join(DATA_DIR, "counselors.json")
 COUNSELING_REQUESTS_PATH = os.path.join(DATA_DIR, "counseling_requests.json")
 COUNSELOR_MESSAGES_PATH = os.path.join(DATA_DIR, "counselor_messages.json")
 
+VOICE_RECORDINGS_DIR = os.path.join(DATA_DIR, "voice_recordings")
+os.makedirs(VOICE_RECORDINGS_DIR, exist_ok=True)
+
 
 def _load_json_db(path):
     if not os.path.exists(path):
@@ -720,6 +723,25 @@ def _get_latest_voice_scores(email: str | None):
     if not latest:
         return None
     return latest.get("voice_scores")
+
+
+def _save_voice_audio_file(email: str, audio_bytes: bytes, ext: str = "webm") -> str:
+    """Save raw audio bytes to disk and return the relative file path."""
+    if not audio_bytes:
+        return ""
+    # Sanitize email for filename (replace @ and dots)
+    safe_email = email.replace("@", "_at_").replace(".", "_")
+    ts = datetime.utcnow().strftime("%Y-%m-%dT%H-%M-%S")
+    filename = f"{safe_email}_{ts}.{ext}"
+    filepath = os.path.join(VOICE_RECORDINGS_DIR, filename)
+    try:
+        with open(filepath, "wb") as f:
+            f.write(audio_bytes)
+        print(f"[voice-recording] Saved {len(audio_bytes)} bytes -> {filepath}")
+        return filepath
+    except Exception as e:
+        print(f"[voice-recording] Failed to save: {e}")
+        return ""
 
 
 def _save_voice_entry(email: str, transcript: str, voice_scores: dict, metadata: dict):
@@ -1507,14 +1529,22 @@ def voice_analysis():
 
     transcribed_text = None
     stt_used = False
+    audio_bytes_to_save = None  # raw audio for disk storage
 
     if transcript_in and isinstance(transcript_in, str) and transcript_in.strip():
         transcribed_text = transcript_in.strip()
+        # Still read audio for disk storage even when transcript is provided
+        if audio_file and audio_file.filename:
+            try:
+                audio_bytes_to_save = audio_file.read() or b""
+            except Exception:
+                pass
     else:
         if not audio_file or audio_file.filename == "":
             return jsonify({"error": "Either transcript or audio file is required"}), 400
 
         audio_bytes = audio_file.read() or b""
+        audio_bytes_to_save = audio_bytes  # keep a copy for saving to disk
         try:
             print(
                 "[voice-analysis] audio_size_bytes=",
@@ -1593,6 +1623,11 @@ def voice_analysis():
     if voice_scores:
         top_voice_career = max(voice_scores.items(), key=lambda kv: kv[1])[0]
 
+    # Save the raw audio file to disk if we have it
+    audio_file_path = ""
+    if audio_bytes_to_save and len(audio_bytes_to_save) > 0:
+        audio_file_path = _save_voice_audio_file(user_email, audio_bytes_to_save, ext="webm")
+
     _save_voice_entry(
         user_email,
         transcript=transcribed_text,
@@ -1601,6 +1636,7 @@ def voice_analysis():
             "sentiment": sentiment,
             "motivation_score": analysis.get("motivation_score"),
             "confidence_score": confidence,
+            "audio_file": audio_file_path,
         },
     )
 
