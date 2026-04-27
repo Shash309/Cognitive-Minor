@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo, useRef, useState, useCallback } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 import './VoiceInsight.css';
 
 const VoiceInsight = () => {
   const { user, refreshProgress } = useOutletContext() || {};
+  const navigate = useNavigate();
   const [isRecording, setIsRecording] = useState(false);
   const [isRecognizing, setIsRecognizing] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
@@ -300,6 +301,7 @@ const VoiceInsight = () => {
       }
 
       if (refreshProgress) await refreshProgress();
+      navigate('/dashboard/quiz');
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.');
     } finally {
@@ -356,6 +358,7 @@ const VoiceInsight = () => {
       }
 
       if (refreshProgress) await refreshProgress();
+      navigate('/dashboard/quiz');
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.');
     } finally {

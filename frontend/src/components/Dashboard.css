@@ -16,7 +16,7 @@
 
 /* ── Layer 1 — Sidebar: Frosted Glass Panel ── */
 .sidebar-shell {
-  width: 272px;
+  width: 78px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -25,8 +25,14 @@
   -webkit-backdrop-filter: blur(var(--glass-blur-heavy));
   border-right: 1px solid var(--glass-border);
   flex-shrink: 0;
-  z-index: 20;
+  z-index: 100;
   position: relative;
+  transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow: hidden;
+}
+
+.sidebar-shell:hover {
+  width: 272px;
 }
 
 /* Subtle gradient light wash on sidebar top */
@@ -65,6 +71,7 @@
   border-bottom: 1px solid var(--glass-border);
   position: relative;
   z-index: 1;
+  width: 272px; /* Fixed width to prevent jumping */
 }
 
 .sidebar-logo-icon {
@@ -78,6 +85,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .sidebar-header h3 {
@@ -86,6 +94,15 @@
   letter-spacing: -0.5px;
   color: var(--text-main);
   white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.sidebar-shell:hover .sidebar-header h3 {
+  opacity: 1;
+  transition: opacity 0.3s ease 0.1s;
+  pointer-events: auto;
 }
 
 /* ── Sidebar Nav — Layer 2 Interactive ── */
@@ -93,8 +110,10 @@
   padding: 1.25rem 1rem;
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   position: relative;
   z-index: 1;
+  width: 272px; /* Fixed width */
 }
 
 .sidebar-nav ul {
@@ -105,7 +124,7 @@
   margin-bottom: 2px;
 }
 
-.sidebar-nav a {
+.sidebar-nav a, .sidebar-item-locked {
   display: flex;
   align-items: center;
   gap: 0.85rem;
@@ -122,6 +141,7 @@
     box-shadow var(--transition-glass);
   position: relative;
   border: 1px solid transparent;
+  white-space: nowrap;
 }
 
 .sidebar-nav a:hover {
@@ -141,27 +161,41 @@
   box-shadow: 0 2px 12px rgba(139, 92, 246, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.sidebar-nav a i {
+.sidebar-nav a i:not(.lock-icon), .sidebar-item-locked i:not(.lock-icon) {
   width: 18px;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.sidebar-text {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.sidebar-shell:hover .sidebar-text {
+  opacity: 1;
+  transition: opacity 0.3s ease 0.1s;
+  pointer-events: auto;
 }
 
 .sidebar-item-locked {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  padding: 10px 14px;
-  border-radius: 12px;
-  font-size: 0.92rem;
   color: var(--text-muted);
   opacity: 0.45;
   cursor: default;
 }
 
-.sidebar-item-locked i.fa-lock {
-  margin-left: 0.25rem;
+.sidebar-item-locked i.lock-icon {
+  margin-left: auto;
   font-size: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.sidebar-shell:hover .sidebar-item-locked i.lock-icon {
+  opacity: 1;
+  transition: opacity 0.3s ease 0.1s;
 }
 
 /* ── Main Content ── */
@@ -984,4 +1018,94 @@
 .ai-insight-quote strong {
   color: var(--primary);
   font-weight: 800;
+}
+
+/* ══════════════════════════════════════
+   New Aesthetic CTA Button
+   ══════════════════════════════════════ */
+.overview-action-centered {
+  margin-top: 1.8rem;
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  z-index: 10;
+}
+
+.discover-direction-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2.2rem;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
+  border: 1px solid rgba(139, 92, 246, 0.6);
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-main);
+  transition: transform var(--transition-spring), border-color var(--transition-fast), background var(--transition-fast);
+}
+
+/* Intense Back Glow Effect */
+.discover-direction-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6, #ec4899);
+  z-index: -1;
+  filter: blur(14px);
+  opacity: 0.65;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+  animation: pulseGlow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% { opacity: 0.5; filter: blur(12px); transform: scale(1); }
+  100% { opacity: 0.85; filter: blur(18px); transform: scale(1.04); }
+}
+
+.discover-direction-btn .btn-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #ffffff, #e9d5ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(255,255,255,0.1);
+  letter-spacing: 0.5px;
+}
+
+.discover-direction-btn i {
+  color: #e9d5ff;
+  transition: transform 0.3s ease;
+  font-size: 1.1rem;
+}
+
+.discover-direction-btn:hover {
+  transform: translateY(-3px);
+  border-color: rgba(236, 72, 153, 0.8);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(236, 72, 153, 0.3));
+}
+
+.discover-direction-btn:hover::before {
+  opacity: 1;
+  filter: blur(20px);
+  background: linear-gradient(135deg, #ec4899, #8b5cf6, #3b82f6);
+}
+
+.discover-direction-btn:hover i {
+  transform: translateX(5px);
+}
+
+.discover-direction-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Remove old sweep effect if any */
+.discover-direction-btn .btn-glow-effect {
+  display: none;
 }

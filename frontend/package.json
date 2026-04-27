@@ -12,7 +12,9 @@
   "dependencies": {
     "elkjs": "^0.11.0",
     "framer-motion": "^12.34.2",
+    "html2canvas": "^1.4.1",
     "i18next": "^25.5.2",
+    "jspdf": "^4.2.1",
     "prop-types": "^15.8.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

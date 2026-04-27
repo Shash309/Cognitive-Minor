@@ -298,13 +298,12 @@ const Profile = () => {
 
       {showAiInsight && (
         <div className="ultimate-reveal-container">
-           <button 
-             className="ultimate-reveal-btn" 
-             onClick={() => setShowUltimateModal(true)}
-           >
-             <i className="fas fa-magic" style={{marginRight: '8px'}} />
-             View Ultimate Career Recommendations
-           </button>
+          <button
+            className="ultimate-reveal-btn"
+            onClick={() => setShowUltimateModal(true)}
+          >
+            Discover your direction <span className="btn-arrow">→</span>
+          </button>
         </div>
       )}
 
@@ -623,16 +622,16 @@ const Profile = () => {
       {showUltimateModal && (() => {
         const EXCLUDED_NAMES = new Set([
           // Raw psych trait names
-          'openness','conscientiousness','extraversion','agreeableness',
-          'neuroticism','creativity_preference','structure_preference',
-          'individual_contributor','leadership_index','stress_tolerance',
-          'analytical_thinking','intuitive_preference','risk_tolerance',
-          'intrinsic_motivation','extrinsic_motivation',
+          'openness', 'conscientiousness', 'extraversion', 'agreeableness',
+          'neuroticism', 'creativity_preference', 'structure_preference',
+          'individual_contributor', 'leadership_index', 'stress_tolerance',
+          'analytical_thinking', 'intuitive_preference', 'risk_tolerance',
+          'intrinsic_motivation', 'extrinsic_motivation',
           // Non-career entries
-          'Uncertain','Unknown',
+          'Uncertain', 'Unknown',
           // Quiz category names (not actual careers)
-          'Business & Finance','Design & Creative','Engineering',
-          'Healthcare','Research & Academics',
+          'Business & Finance', 'Design & Creative', 'Engineering',
+          'Healthcare', 'Research & Academics',
         ]);
         const filteredRankings = (careerSnapshot?.career_rankings || []).filter(
           (item) => !EXCLUDED_NAMES.has(item.career)
@@ -647,7 +646,7 @@ const Profile = () => {
               </div>
               <div className="ultimate-modal-body">
                 {filteredRankings.length === 0 ? (
-                  <p style={{textAlign:'center', color:'var(--text-secondary)', padding: '20px'}}>Career data is being recalculated. Please refresh the page.</p>
+                  <p style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: '20px' }}>Career data is being recalculated. Please refresh the page.</p>
                 ) : (
                   filteredRankings.map((item, index) => {
                     const isExpanded = expandedCareer === item.career;
@@ -661,15 +660,15 @@ const Profile = () => {
                           <div className="ultimate-career-info">
                             <h4>{item.career}</h4>
                             <div className="ultimate-career-bar-bg">
-                              <div 
-                                className="ultimate-career-bar-fill" 
-                                style={{ width: `${Math.round(item.final_score)}%` }} 
+                              <div
+                                className="ultimate-career-bar-fill"
+                                style={{ width: `${Math.round(item.final_score)}%` }}
                               />
                             </div>
                           </div>
                           <div className="ultimate-career-score">{Math.round(item.final_score)}%</div>
-                          <button 
-                            className="ultimate-details-btn" 
+                          <button
+                            className="ultimate-details-btn"
                             onClick={() => setExpandedCareer(isExpanded ? null : item.career)}
                           >
                             {isExpanded ? 'Hide' : 'Details'}
@@ -680,28 +679,28 @@ const Profile = () => {
                             <div className="ultimate-detail-row">
                               <span className="ultimate-detail-label">Quiz Signal</span>
                               <div className="ultimate-detail-bar-bg">
-                                <div className="ultimate-detail-bar-fill ultimate-bar-quiz" style={{width: `${quizComp ?? 0}%`}} />
+                                <div className="ultimate-detail-bar-fill ultimate-bar-quiz" style={{ width: `${quizComp ?? 0}%` }} />
                               </div>
                               <span className="ultimate-detail-val">{quizComp != null ? `${quizComp}%` : '—'}</span>
                             </div>
                             <div className="ultimate-detail-row">
                               <span className="ultimate-detail-label">Psych Match</span>
                               <div className="ultimate-detail-bar-bg">
-                                <div className="ultimate-detail-bar-fill ultimate-bar-psych" style={{width: `${psychComp ?? 0}%`}} />
+                                <div className="ultimate-detail-bar-fill ultimate-bar-psych" style={{ width: `${psychComp ?? 0}%` }} />
                               </div>
                               <span className="ultimate-detail-val">{psychComp != null ? `${psychComp}%` : '—'}</span>
                             </div>
                             <div className="ultimate-detail-row">
                               <span className="ultimate-detail-label">Voice Signal</span>
                               <div className="ultimate-detail-bar-bg">
-                                <div className="ultimate-detail-bar-fill ultimate-bar-voice" style={{width: `${voiceComp ?? 0}%`}} />
+                                <div className="ultimate-detail-bar-fill ultimate-bar-voice" style={{ width: `${voiceComp ?? 0}%` }} />
                               </div>
                               <span className="ultimate-detail-val">{voiceComp != null ? `${voiceComp}%` : '—'}</span>
                             </div>
                             <div className="ultimate-detail-reason">
-                              This career scored <strong>{Math.round(item.final_score)}%</strong> alignment based on your 
-                              psychological profile{psychComp != null ? ` (${psychComp}% match)` : ''}, 
-                              quiz responses{quizComp != null ? ` (${quizComp}% match)` : ''}, 
+                              This career scored <strong>{Math.round(item.final_score)}%</strong> alignment based on your
+                              psychological profile{psychComp != null ? ` (${psychComp}% match)` : ''},
+                              quiz responses{quizComp != null ? ` (${quizComp}% match)` : ''},
                               and voice analysis{voiceComp != null ? ` (${voiceComp}% match)` : ''}.
                             </div>
                           </div>

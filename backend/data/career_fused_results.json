@@ -426,7 +426,7 @@
     },
     "academic_percent": null,
     "skills_vector": {},
-    "last_updated": "2026-04-26T10:20:46.162969Z"
+    "last_updated": "2026-04-27T21:04:33.733365Z"
   },
   "ss3247@yahoo.com": {
     "result": null
@@ -483,5 +483,78 @@
     "academic_percent": null,
     "skills_vector": {},
     "last_updated": "2026-04-26T14:13:22.577062Z"
+  },
+  "adnan22@outlook.com": {
+    "quiz_scores": {
+      "Data Scientist": 85,
+      "Researcher": 83,
+      "Software Engineer": 82,
+      "Designer": 74,
+      "Consultant": 73,
+      "Product Manager": 71,
+      "Entrepreneur": 56
+    },
+    "psych_scores": {
+      "Athlete": 54,
+      "Data Scientist": 0,
+      "Designer": 0,
+      "Doctor": 0,
+      "Entrepreneur": 0,
+      "Lawyer": 0,
+      "Manager": 5,
+      "Psychologist": 0,
+      "Software Engineer": 0,
+      "Teacher": 41
+    },
+    "voice_scores": {
+      "Actor": 10.96,
+      "Artist": 1.92,
+      "Athlete": 4.3,
+      "Civil Servant": 7.79,
+      "Content Creator": 3.55,
+      "Data Scientist": 1.77,
+      "Designer": 3.97,
+      "Doctor": 4.8,
+      "Entrepreneur": 7.55,
+      "Lawyer": 4.87,
+      "Manager": 4.17,
+      "Musician": 4.78,
+      "Psychologist": 16.77,
+      "Software Engineer": 5.41,
+      "Teacher": 5.1,
+      "Uncertain": 12.28
+    },
+    "final_scores": {
+      "Researcher": 62.28962366020208,
+      "Consultant": 58.56549527832266,
+      "Product Manager": 57.820669601946776,
+      "Actor": 40.42875042940672,
+      "Athlete": 40.325638000258316,
+      "Civil Servant": 39.65157673220434,
+      "Musician": 38.913629467668336,
+      "Content Creator": 38.61207626654564,
+      "Artist": 38.21245698375704,
+      "Teacher": 35.55028471417562,
+      "Data Scientist": 32.08903365734673,
+      "Software Engineer": 31.86419648594273,
+      "Designer": 28.531855886441903,
+      "Psychologist": 22.732062383240574,
+      "Entrepreneur": 22.706116229968888,
+      "Manager": 21.555090599000614,
+      "Lawyer": 19.814596453679606,
+      "Doctor": 19.79743488938807
+    },
+    "academic_percent": null,
+    "skills_vector": {},
+    "last_updated": "2026-04-27T21:41:19.294225Z"
+  },
+  "cp334@rediffmail.com": {
+    "quiz_scores": {},
+    "psych_scores": {},
+    "voice_scores": {},
+    "final_scores": {},
+    "academic_percent": null,
+    "skills_vector": {},
+    "last_updated": "2026-04-27T21:41:00.973721Z"
   }
 }

@@ -75,6 +75,11 @@
   box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.06);
 }
 
+.state-dropdown option {
+  background-color: var(--bg-main, #0a0a0a);
+  color: var(--text-main, #ffffff);
+}
+
 .results-container {
   display: flex;
   flex-direction: column;

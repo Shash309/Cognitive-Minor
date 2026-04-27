@@ -80,7 +80,7 @@ function App() {
 
   const isCounselorEnabled = import.meta.env.VITE_ENABLE_COUNSELLOR_FEATURE === "true";
   const isCounselor = user?.role === 'counselor' && isCounselorEnabled;
-  const defaultRoute = isCounselor ? '/counselor' : '/dashboard/psychology';
+  const defaultRoute = isCounselor ? '/counselor' : '/dashboard';
 
   return (
     <div className="App">

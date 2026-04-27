@@ -1162,5 +1162,31 @@
         "traits": [],
         "personality_type": "Unknown",
         "created_at": "2026-03-28T04:00:30.121679Z"
+    },
+    {
+        "id": 68,
+        "name": "Adnan",
+        "email": "adnan22@outlook.com",
+        "password": "scrypt:32768:8:1$lNav8dwHBiVfzbvW$5551065fdfbded00a7669924e7987ed323da2f5c48af3ff77b8caf28834e076447b37fd41d84f023c992d3e0b1df7898457c03fb6e9e1dbdbe1d53297eb669e5",
+        "phone": "7538273877",
+        "age": 21,
+        "gender": "Male",
+        "location": "Chennai",
+        "traits": [],
+        "personality_type": "Unknown",
+        "created_at": "2026-04-27T21:13:54.400185Z"
+    },
+    {
+        "id": 69,
+        "name": "CP",
+        "email": "cp334@rediffmail.com",
+        "password": "scrypt:32768:8:1$DZvgyYg7HXthmb1K$752923b7d4962e5ab07006929d33bf888db1f56c515b044d08855515fd9029df73528d5761a34e341a32289378504ddde35ff18ba43303802fc0a44672660deb",
+        "phone": "6789876438",
+        "age": 19,
+        "gender": "Male",
+        "location": "Bikaner",
+        "traits": [],
+        "personality_type": "Unknown",
+        "created_at": "2026-04-27T21:29:30.014599Z"
     }
 ]

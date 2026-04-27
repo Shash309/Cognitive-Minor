@@ -123,35 +123,44 @@ const Home = ({ user }) => {
                             <div className="overview-progress-fill" style={{ width: `${progressPct}%` }} />
                         </div>
 
-                        <div className="overview-checklist">
-                            <div className="overview-check-item">
-                                <div className="overview-check-left">
-                                    <span className={`overview-check-dot ${psychDone ? 'done' : ''}`} />
-                                    Psychological Analysis
+                        {progressPct === 100 ? (
+                            <div className="overview-checklist">
+                                <div className="overview-check-item">
+                                    <div className="overview-check-left">
+                                        <span className={`overview-check-dot ${psychDone ? 'done' : ''}`} />
+                                        Psychological Analysis
+                                    </div>
+                                    <div className={`overview-check-status ${psychDone ? 'done' : ''}`}>
+                                        {psychDone ? 'Completed' : 'Pending'}
+                                    </div>
                                 </div>
-                                <div className={`overview-check-status ${psychDone ? 'done' : ''}`}>
-                                    {psychDone ? 'Completed' : 'Pending'}
+                                <div className="overview-check-item">
+                                    <div className="overview-check-left">
+                                        <span className={`overview-check-dot ${voiceDone ? 'done' : ''}`} />
+                                        Voice Insight
+                                    </div>
+                                    <div className={`overview-check-status ${voiceDone ? 'done' : ''}`}>
+                                        {voiceDone ? 'Completed' : 'Pending'}
+                                    </div>
+                                </div>
+                                <div className="overview-check-item">
+                                    <div className="overview-check-left">
+                                        <span className={`overview-check-dot ${quizDone ? 'done' : ''}`} />
+                                        AI Career Quiz
+                                    </div>
+                                    <div className={`overview-check-status ${quizDone ? 'done' : ''}`}>
+                                        {quizDone ? 'Completed' : 'Pending'}
+                                    </div>
                                 </div>
                             </div>
-                            <div className="overview-check-item">
-                                <div className="overview-check-left">
-                                    <span className={`overview-check-dot ${voiceDone ? 'done' : ''}`} />
-                                    Voice Insight
-                                </div>
-                                <div className={`overview-check-status ${voiceDone ? 'done' : ''}`}>
-                                    {voiceDone ? 'Completed' : 'Pending'}
-                                </div>
+                        ) : (
+                            <div className="overview-action-centered">
+                                <Link to="/dashboard/psychology" className="discover-direction-btn">
+                                    <span className="btn-glow-effect"></span>
+                                    <span className="btn-content">Discover your direction <i className="fas fa-arrow-right"></i></span>
+                                </Link>
                             </div>
-                            <div className="overview-check-item">
-                                <div className="overview-check-left">
-                                    <span className={`overview-check-dot ${quizDone ? 'done' : ''}`} />
-                                    AI Career Quiz
-                                </div>
-                                <div className={`overview-check-status ${quizDone ? 'done' : ''}`}>
-                                    {quizDone ? 'Completed' : 'Pending'}
-                                </div>
-                            </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </div>

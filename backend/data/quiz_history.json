@@ -226,5 +226,35 @@
     },
     "ss3247@yahoo.com": {
         "attempts": []
+    },
+    "adnan22@outlook.com": {
+        "attempts": [
+            {
+                "id": "be2b9a6c-328a-4e9d-a304-65545ab2bb84",
+                "timestamp": "2026-04-27T21:18:54.121117Z",
+                "quiz_scores": {
+                    "Data Scientist": 85,
+                    "Researcher": 83,
+                    "Software Engineer": 82,
+                    "Designer": 74,
+                    "Consultant": 73,
+                    "Product Manager": 71,
+                    "Entrepreneur": 56
+                },
+                "top_career": "Data Scientist"
+            }
+        ],
+        "quiz_scores": {
+            "Data Scientist": 85,
+            "Researcher": 83,
+            "Software Engineer": 82,
+            "Designer": 74,
+            "Consultant": 73,
+            "Product Manager": 71,
+            "Entrepreneur": 56
+        }
+    },
+    "cp334@rediffmail.com": {
+        "attempts": []
     }
 }
