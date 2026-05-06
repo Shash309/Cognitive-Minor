@@ -1188,5 +1188,31 @@
         "traits": [],
         "personality_type": "Unknown",
         "created_at": "2026-04-27T21:29:30.014599Z"
+    },
+    {
+        "id": 70,
+        "name": "supervisor",
+        "email": "super@yahoo.com",
+        "password": "scrypt:32768:8:1$hFOntdmo71TYyFva$744483ff5e6384f556369aae7a46264dfd5d0fa9621b2cb67f044c94ca99cef1fd887c2d70455e78d3b0fbcd5fb17727713ef30cfe5b7391f3fb5aefaead8870",
+        "phone": "7642898756",
+        "age": 22,
+        "gender": "Male",
+        "location": "Pune",
+        "traits": [],
+        "personality_type": "Unknown",
+        "created_at": "2026-04-28T10:24:09.260328Z"
+    },
+    {
+        "id": 71,
+        "name": "Review",
+        "email": "review@gmail.com",
+        "password": "scrypt:32768:8:1$35VQAVbMJOvRdDRG$a1b59167163cfd890ff3661cea38e218839d6e0b09f56cf73842a16d2c56cabd1d551352e2560ebf557b581184fb8b2362a1b70b7be684bcf7134c344079fc8c",
+        "phone": "6754321890",
+        "age": 18,
+        "gender": "Male",
+        "location": "Gulmarg",
+        "traits": [],
+        "personality_type": "Unknown",
+        "created_at": "2026-04-28T10:43:09.379723Z"
     }
 ]

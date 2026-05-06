@@ -52,5 +52,17 @@
     "voice_completed": false,
     "quiz_completed": false,
     "last_completed_step": null
+  },
+  "super@yahoo.com": {
+    "psych_completed": true,
+    "voice_completed": true,
+    "quiz_completed": true,
+    "last_completed_step": "quiz"
+  },
+  "review@gmail.com": {
+    "psych_completed": false,
+    "voice_completed": false,
+    "quiz_completed": false,
+    "last_completed_step": null
   }
 }

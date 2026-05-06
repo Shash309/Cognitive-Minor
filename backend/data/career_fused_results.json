@@ -546,7 +546,7 @@
     },
     "academic_percent": null,
     "skills_vector": {},
-    "last_updated": "2026-04-27T21:41:19.294225Z"
+    "last_updated": "2026-04-28T12:00:49.457800Z"
   },
   "cp334@rediffmail.com": {
     "quiz_scores": {},
@@ -556,5 +556,69 @@
     "academic_percent": null,
     "skills_vector": {},
     "last_updated": "2026-04-27T21:41:00.973721Z"
+  },
+  "super@yahoo.com": {
+    "quiz_scores": {
+      "Designer": 83,
+      "Data Scientist": 80,
+      "Consultant": 79,
+      "Product Manager": 77,
+      "Software Engineer": 75,
+      "Researcher": 71,
+      "Entrepreneur": 68
+    },
+    "psych_scores": {
+      "Athlete": 66,
+      "Data Scientist": 0,
+      "Designer": 1,
+      "Doctor": 0,
+      "Entrepreneur": 0,
+      "Lawyer": 0,
+      "Manager": 2,
+      "Psychologist": 0,
+      "Software Engineer": 0,
+      "Teacher": 32
+    },
+    "voice_scores": {
+      "Actor": 0.71,
+      "Artist": 1.21,
+      "Athlete": 0.95,
+      "Civil Servant": 1.75,
+      "Content Creator": 4.28,
+      "Data Scientist": 10.25,
+      "Designer": 7.47,
+      "Doctor": 0.83,
+      "Entrepreneur": 1.96,
+      "Lawyer": 1.03,
+      "Manager": 1.4,
+      "Musician": 0.54,
+      "Psychologist": 5.36,
+      "Software Engineer": 52.78,
+      "Teacher": 2.89,
+      "Uncertain": 6.58
+    },
+    "final_scores": {
+      "Consultant": 60.59692447905937,
+      "Product Manager": 59.866102101193206,
+      "Researcher": 57.67363496759472,
+      "Athlete": 43.66446894155138,
+      "Software Engineer": 40.78457688611809,
+      "Content Creator": 38.4108395532061,
+      "Civil Servant": 37.76953211815823,
+      "Artist": 37.632652270361454,
+      "Actor": 37.50591167054962,
+      "Musician": 37.4628198666136,
+      "Designer": 32.6037408540778,
+      "Data Scientist": 31.831077410789085,
+      "Teacher": 31.198563679750624,
+      "Entrepreneur": 25.344783998711932,
+      "Psychologist": 19.62921867663692,
+      "Manager": 19.387648349013723,
+      "Lawyer": 18.531645082266458,
+      "Doctor": 18.480948842341725
+    },
+    "academic_percent": null,
+    "skills_vector": {},
+    "last_updated": "2026-04-28T10:26:20.445401Z"
   }
 }
